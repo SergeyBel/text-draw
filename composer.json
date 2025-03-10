@@ -1,0 +1,18 @@
+{
+    "autoload": {
+        "psr-4": {
+            "ConsoleDraw\\": "./src"
+
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ConsoleDraw\\Tests\\": "./tests"
+        }
+    },
+
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.71",
+        "phpstan/phpstan": "^2.1"
+    }
+}

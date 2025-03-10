@@ -1,0 +1,14 @@
+all: fix static test
+
+
+fix:
+	docker-compose exec console-draw vendor/bin/php-cs-fixer fix
+
+static:
+	docker-compose exec console-draw vendor/bin/phpstan analyze src -c phpstan.neon
+
+test:
+	docker-compose exec console-draw vendor/bin/phpunit tests
+
+
+
