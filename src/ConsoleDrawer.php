@@ -1,8 +1,7 @@
 <?php
 
-namespace src;
+namespace ConsoleDraw;
 
 class ConsoleDrawer
 {
-
 }
