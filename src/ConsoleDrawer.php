@@ -48,7 +48,7 @@ class ConsoleDrawer
     {
         for ($y = 0; $y < $this->height; $y++) {
             for ($x = 0; $x < $this->width; $x++) {
-                $this->points[$y][$x] = new Point($x, $y);
+                $this->points[$y][$x] = new Point($x, $y, ' ');
             }
         }
     }

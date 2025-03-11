@@ -25,7 +25,7 @@ class Line implements FigureInterface
         $y1 = $this->y1;
 
         if (abs($y1 - $y0) < abs($x1 - $x0)) {
-            if ($x1 > $x0) {
+            if ($x0 > $x1) {
                 return $this->plotLineLow($x1, $y1, $x0, $y0);
             } else {
                 return $this->plotLineLow($x0, $y0, $x1, $y1);
