@@ -12,7 +12,7 @@ class Circle implements FigureInterface
     ) {
     }
 
-    public function getPoints(): array
+    public function getPixels(): array
     {
         $points = [];
 
@@ -24,14 +24,14 @@ class Circle implements FigureInterface
         $delta = 1 - 2 * $this->radius;
 
         while ($y >= $x) {
-            $points[] = new Point($x1 + $x, $y1 + $y, $this->char);
-            $points[] = new Point($x1 + $x, $y1 - $y, $this->char);
-            $points[] = new Point($x1 - $x, $y1 + $y, $this->char);
-            $points[] = new Point($x1 - $x, $y1 - $y, $this->char);
-            $points[] = new Point($x1 + $y, $y1 + $x, $this->char);
-            $points[] = new Point($x1 + $y, $y1 - $x, $this->char);
-            $points[] = new Point($x1 - $y, $y1 + $x, $this->char);
-            $points[] = new Point($x1 - $y, $y1 - $x, $this->char);
+            $points[] = new Pixel($x1 + $x, $y1 + $y, $this->char);
+            $points[] = new Pixel($x1 + $x, $y1 - $y, $this->char);
+            $points[] = new Pixel($x1 - $x, $y1 + $y, $this->char);
+            $points[] = new Pixel($x1 - $x, $y1 - $y, $this->char);
+            $points[] = new Pixel($x1 + $y, $y1 + $x, $this->char);
+            $points[] = new Pixel($x1 + $y, $y1 - $x, $this->char);
+            $points[] = new Pixel($x1 - $y, $y1 + $x, $this->char);
+            $points[] = new Pixel($x1 - $y, $y1 - $x, $this->char);
             $error = 2 * ($delta + $y) - 1;
 
             if ($delta < 0 && $error <= 0) {

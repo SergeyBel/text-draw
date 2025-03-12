@@ -2,35 +2,32 @@
 
 namespace ConsoleDraw;
 
-class Rectangle implements FigureInterface
+class Rectangle extends BaseFigure
 {
-
     public function __construct(
         private int $x,
         private int $y,
         private int $width,
         private int $height,
         private string $char
-    )
-    {
+    ) {
     }
 
-    public function getPoints(): array
+    public function getPixels(): array
     {
-        $points = [];
         $x = $this->x;
         $y = $this->y;
         $width = $this->width - 1;
         $height = $this->height - 1;
         $char = $this->char;
 
-        $points = array_merge($points, (new Line($x, $y, $x + $width, $y, $char))->getPoints());
-        $points = array_merge($points, (new Line($x, $y, $x, $y + $height, $char))->getPoints());
-        $points = array_merge($points, (new Line($x + $width, $y, $x + $width, $y + $height, $char))->getPoints());
-        $points = array_merge($points, (new Line($x, $y + $height, $x + $width, $y + $height, $char))->getPoints());
+        $this
+            ->addFigure(new Line($x, $y, $x + $width, $y, $char))
+            ->addFigure(new Line($x, $y, $x, $y + $height, $char))
+            ->addFigure(new Line($x + $width, $y, $x + $width, $y + $height, $char))
+            ->addFigure(new Line($x, $y + $height, $x + $width, $y + $height, $char));
 
-
-        return $points;
+        return parent::getPixels();
     }
 
 

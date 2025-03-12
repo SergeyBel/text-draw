@@ -17,7 +17,7 @@ class Line implements FigureInterface
 
     }
 
-    public function getPoints(): array
+    public function getPixels(): array
     {
         $x0 = $this->x0;
         $x1 = $this->x1;
@@ -54,7 +54,7 @@ class Line implements FigureInterface
 
         $points = [];
         for ($x = $x0; $x <= $x1; $x++) {
-            $points[] = new Point($x, $y, $this->char);
+            $points[] = new Pixel($x, $y, $this->char);
             if ($delta > 0) {
                 $y += $yi;
                 $delta = $delta + (2 * ($dy - $dx));
@@ -82,7 +82,7 @@ class Line implements FigureInterface
 
         $points = [];
         for ($y = $y0; $y <= $y1; $y++) {
-            $points[] = new Point($x, $y, $this->char);
+            $points[] = new Pixel($x, $y, $this->char);
             if ($delta > 0) {
                 $x += $xi;
                 $delta = $delta + (2 * ($dx - $dy));

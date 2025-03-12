@@ -5,8 +5,8 @@ namespace ConsoleDraw;
 interface FigureInterface
 {
     /**
-     * @return array<Point>
+     * @return array<Pixel>
      */
-    public function getPoints(): array;
+    public function getPixels(): array;
 
 }

@@ -4,7 +4,7 @@ namespace ConsoleDraw;
 
 class ConsoleDrawer
 {
-    private array $points;
+    private array $pixels;
 
     public function __construct(
         private int $width,
@@ -18,7 +18,7 @@ class ConsoleDrawer
         $text = '';
         for ($y = 0; $y < $this->height; $y++) {
             for ($x = 0; $x < $this->width; $x++) {
-                $text .= $this->points[$y][$x]->getChar();
+                $text .= $this->pixels[$y][$x]->getChar();
             }
             $text .= "\n";
         }
@@ -26,21 +26,21 @@ class ConsoleDrawer
         return $text;
     }
 
-    public function setPoint(Point $point)
+    public function setPixel(Pixel $point)
     {
-        $this->points[$point->getY()][$point->getX()] = $point;
+        $this->pixels[$point->getY()][$point->getX()] = $point;
     }
 
-    public function setPoints(array $points)
+    public function setPixels(array $pixels)
     {
-        foreach ($points as $point) {
-            $this->setPoint($point);
+        foreach ($pixels as $point) {
+            $this->setPixel($point);
         }
     }
 
     public function addFigure(FigureInterface $figure)
     {
-        $this->setPoints($figure->getPoints());
+        $this->setPixels($figure->getPixels());
 
     }
 
@@ -48,7 +48,7 @@ class ConsoleDrawer
     {
         for ($y = 0; $y < $this->height; $y++) {
             for ($x = 0; $x < $this->width; $x++) {
-                $this->points[$y][$x] = new Point($x, $y, ' ');
+                $this->pixels[$y][$x] = new Pixel($x, $y, ' ');
             }
         }
     }

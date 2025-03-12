@@ -5,5 +5,5 @@ use ConsoleDraw\ConsoleDrawer;
 use ConsoleDraw\Pixel;
 
 $drawer = new ConsoleDrawer(17, 16);
-$drawer->addFigure(new \ConsoleDraw\Rectangle(1,1,10,10,'*'));
+$drawer->addFigure(new \ConsoleDraw\Triangle(1, 1, 12, 1, 12, 15,'*'));
 echo $drawer->draw();

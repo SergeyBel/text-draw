@@ -2,7 +2,7 @@
 
 namespace ConsoleDraw;
 
-class Point implements FigureInterface
+class Pixel implements FigureInterface
 {
     public function __construct(
         private int $x,
@@ -11,7 +11,7 @@ class Point implements FigureInterface
     ) {
     }
 
-    public function getPoints(): array
+    public function getPixels(): array
     {
         return [$this];
     }
