@@ -1,6 +1,9 @@
 <?php
 
-namespace ConsoleDraw;
+namespace ConsoleDraw\Figure\Geometry\Circle;
+
+use ConsoleDraw\Figure\FigureInterface;
+use ConsoleDraw\Pixel;
 
 class Circle implements FigureInterface
 {
@@ -12,7 +15,7 @@ class Circle implements FigureInterface
     ) {
     }
 
-    public function getPixels(): array
+    public function draw(): array
     {
         $points = [];
 

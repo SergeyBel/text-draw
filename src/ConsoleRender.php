@@ -2,7 +2,9 @@
 
 namespace ConsoleDraw;
 
-class ConsoleDrawer
+use ConsoleDraw\Figure\FigureInterface;
+
+class ConsoleRender
 {
     private array $pixels;
 
@@ -13,7 +15,7 @@ class ConsoleDrawer
         $this->clear();
     }
 
-    public function draw(): string
+    public function render(): string
     {
         $text = '';
         for ($y = 0; $y < $this->height; $y++) {
@@ -40,7 +42,7 @@ class ConsoleDrawer
 
     public function addFigure(FigureInterface $figure)
     {
-        $this->setPixels($figure->getPixels());
+        $this->setPixels($figure->draw());
 
     }
 

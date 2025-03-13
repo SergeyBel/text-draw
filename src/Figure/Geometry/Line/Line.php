@@ -1,6 +1,9 @@
 <?php
 
-namespace ConsoleDraw;
+namespace ConsoleDraw\Figure\Geometry\Line;
+
+use ConsoleDraw\Figure\FigureInterface;
+use ConsoleDraw\Pixel;
 
 /**
  * @see https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
@@ -17,7 +20,7 @@ class Line implements FigureInterface
 
     }
 
-    public function getPixels(): array
+    public function draw(): array
     {
         $x0 = $this->x0;
         $x1 = $this->x1;

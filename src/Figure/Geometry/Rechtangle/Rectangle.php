@@ -1,6 +1,9 @@
 <?php
 
-namespace ConsoleDraw;
+namespace ConsoleDraw\Figure\Geometry\Rechtangle;
+
+use ConsoleDraw\Figure\BaseFigure;
+use ConsoleDraw\Figure\Geometry\Line\Line;
 
 class Rectangle extends BaseFigure
 {
@@ -13,7 +16,7 @@ class Rectangle extends BaseFigure
     ) {
     }
 
-    public function getPixels(): array
+    public function draw(): array
     {
         $x = $this->x;
         $y = $this->y;
@@ -27,7 +30,7 @@ class Rectangle extends BaseFigure
             ->addFigure(new Line($x + $width, $y, $x + $width, $y + $height, $char))
             ->addFigure(new Line($x, $y + $height, $x + $width, $y + $height, $char));
 
-        return parent::getPixels();
+        return parent::draw();
     }
 
 

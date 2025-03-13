@@ -2,6 +2,8 @@
 
 namespace ConsoleDraw;
 
+use ConsoleDraw\Figure\FigureInterface;
+
 class Pixel implements FigureInterface
 {
     public function __construct(
@@ -11,7 +13,7 @@ class Pixel implements FigureInterface
     ) {
     }
 
-    public function getPixels(): array
+    public function draw(): array
     {
         return [$this];
     }

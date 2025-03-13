@@ -1,6 +1,9 @@
 <?php
 
-namespace ConsoleDraw;
+namespace ConsoleDraw\Figure\Geometry\Triangle;
+
+use ConsoleDraw\Figure\BaseFigure;
+use ConsoleDraw\Figure\Geometry\Line\Line;
 
 class Triangle extends BaseFigure
 {
@@ -15,13 +18,13 @@ class Triangle extends BaseFigure
     ) {
     }
 
-    public function getPixels(): array
+    public function draw(): array
     {
         $this
             ->addFigure(new Line($this->x1, $this->y1, $this->x2, $this->y2, $this->char))
             ->addFigure(new Line($this->x2, $this->y2, $this->x3, $this->y3, $this->char))
             ->addFigure(new Line($this->x3, $this->y3, $this->x1, $this->y1, $this->char));
 
-        return parent::getPixels();
+        return parent::draw();
     }
 }

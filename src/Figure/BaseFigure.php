@@ -1,19 +1,19 @@
 <?php
 
-namespace ConsoleDraw;
+namespace ConsoleDraw\Figure;
 
 class BaseFigure implements FigureInterface
 {
     protected array $pixels = [];
 
-    public function getPixels(): array
+    public function draw(): array
     {
         return $this->pixels;
     }
 
     protected function addFigure(FigureInterface $figure): self
     {
-        $this->pixels = array_merge($this->pixels, $figure->getPixels());
+        $this->pixels = array_merge($this->pixels, $figure->draw());
         return $this;
     }
 
