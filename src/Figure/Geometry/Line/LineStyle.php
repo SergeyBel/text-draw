@@ -24,7 +24,7 @@ class LineStyle
         return $this->excludeStart;
     }
 
-    public function excludeStart(): LineStyle
+    public function setExcludeStart(): LineStyle
     {
         $this->excludeStart = true;
         return $this;
@@ -35,7 +35,7 @@ class LineStyle
         return $this->excludeFinish;
     }
 
-    public function excludeFinish(): LineStyle
+    public function setExcludeFinish(): LineStyle
     {
         $this->excludeFinish = true;
         return $this;

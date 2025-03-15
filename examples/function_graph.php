@@ -2,10 +2,10 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use ConsoleDraw\ConsoleRender;
+use ConsoleDraw\Console;
 use ConsoleDraw\Figure\FunctionGraph\FunctionGraph;
 
-$drawer = new ConsoleRender(60, 20);
+$drawer = new Console(60, 20);
 $function = new FunctionGraph(60, 20);
 
 $values = [];

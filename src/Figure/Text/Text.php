@@ -4,12 +4,12 @@ namespace ConsoleDraw\Figure\Text;
 
 use ConsoleDraw\Figure\FigureInterface;
 use ConsoleDraw\Figure\Pixel;
+use ConsoleDraw\Plane\Point;
 
 class Text implements FigureInterface
 {
     public function __construct(
-        private int $x,
-        private int $y,
+        Point $start,
         private string $str
     ) {
     }
@@ -19,9 +19,9 @@ class Text implements FigureInterface
         $chars = str_split($this->str);
 
         $pixels = [];
-        $x = $this->x;
+        $x = $this->start->getX();
         foreach ($chars as $char) {
-            $pixels[] = new Pixel($x, $this->y, $char);
+            $pixels[] = new Pixel($x, $this->start->getY(), $char);
             $x++;
         }
 

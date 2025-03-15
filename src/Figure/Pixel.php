@@ -5,9 +5,9 @@ namespace ConsoleDraw\Figure;
 class Pixel implements FigureInterface
 {
     public function __construct(
-        private int $x,
-        private int $y,
-        private string $char,
+        private int    $x,
+        private int    $y,
+        private string $symbol,
     ) {
     }
 
@@ -37,14 +37,14 @@ class Pixel implements FigureInterface
         $this->y = $y;
     }
 
-    public function getChar(): string
+    public function getSymbol(): string
     {
-        return $this->char;
+        return $this->symbol;
     }
 
-    public function setChar(string $char): void
+    public function setSymbol(string $symbol): void
     {
-        $this->char = $char;
+        $this->symbol = $symbol;
     }
 
 

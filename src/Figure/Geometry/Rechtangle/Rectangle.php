@@ -5,32 +5,36 @@ namespace ConsoleDraw\Figure\Geometry\Rechtangle;
 use ConsoleDraw\Figure\BaseFigure;
 use ConsoleDraw\Figure\Geometry\Line\Line;
 use ConsoleDraw\Figure\Geometry\Line\LineStyle;
+use ConsoleDraw\Plane\Point;
+use ConsoleDraw\Plane\Size;
 
 class Rectangle extends BaseFigure
 {
     private RectangleStyle $style;
 
     public function __construct(
-        private int $x,
-        private int $y,
-        private int $width,
-        private int $height,
+        private Point $leftUpperCorner,
+        private Size $size,
+
     ) {
+        $this->style = new RectangleStyle();
     }
 
     public function draw(): array
     {
-        $x = $this->x;
-        $y = $this->y;
-        $width = $this->width - 1;
-        $height = $this->height - 1;
+
         $lineStyle = (new LineStyle())->setSymbol($this->style->getSymbol());
 
+        $rightUpperCorner = $this->leftUpperCorner->addToX($this->size->getWidth());
+        $leftBottomCorner = $this->leftUpperCorner->addToY($this->size->getHeight());
+        $rightBottomCorner = $rightUpperCorner->addToY($this->size->getHeight());
+
+
         $this
-            ->addFigure((new Line($x, $y, $x + $width, $y))->setStyle($lineStyle))
-            ->addFigure((new Line($x, $y, $x, $y + $height))->setStyle($lineStyle))
-            ->addFigure((new Line($x + $width, $y, $x + $width, $y + $height))->setStyle($lineStyle))
-            ->addFigure((new Line($x, $y + $height, $x + $width, $y + $height))->setStyle($lineStyle));
+            ->addFigure((new Line($this->leftUpperCorner, $rightUpperCorner))->setStyle($lineStyle))
+            ->addFigure((new Line($rightUpperCorner, $rightBottomCorner))->setStyle($lineStyle))
+            ->addFigure((new Line($rightBottomCorner, $leftBottomCorner))->setStyle($lineStyle))
+            ->addFigure((new Line($leftBottomCorner, $this->leftUpperCorner))->setStyle($lineStyle));
 
         return parent::draw();
     }
@@ -45,8 +49,4 @@ class Rectangle extends BaseFigure
         $this->style = $style;
         return $this;
     }
-
-
-
-
 }

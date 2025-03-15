@@ -4,32 +4,28 @@ namespace ConsoleDraw\Figure\Geometry\Line;
 
 use ConsoleDraw\Figure\FigureInterface;
 use ConsoleDraw\Figure\Pixel;
+use ConsoleDraw\Plane\Point;
 
 /**
  * @see https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
  */
 class Line implements FigureInterface
 {
-    private ?LineStyle $style = null;
+    private LineStyle $style;
 
     public function __construct(
-        private int $x0,
-        private int $y0,
-        private int $x1,
-        private int $y1,
+        private Point $start,
+        private Point $end,
     ) {
-        if (is_null($this->style)) {
             $this->style = new LineStyle();
-        }
-
     }
 
     public function draw(): array
     {
-        $x0 = $this->x0;
-        $x1 = $this->x1;
-        $y0 = $this->y0;
-        $y1 = $this->y1;
+        $x0 = $this->start->getX();
+        $x1 = $this->end->getX();
+        $y0 = $this->start->getY();
+        $y1 = $this->end->getY();
         $symbol = $this->style->getSymbol();
 
         if (abs($y1 - $y0) < abs($x1 - $x0)) {
@@ -46,11 +42,11 @@ class Line implements FigureInterface
             }
         }
 
-        if ($this->style->excludeStart()) {
+        if ($this->style->isExcludeStart()) {
             array_shift($pixels);
         }
 
-        if ($this->style->excludeFinish()) {
+        if ($this->style->isExcludeFinish()) {
             array_pop($pixels);
         }
 
@@ -122,10 +118,4 @@ class Line implements FigureInterface
         $this->style = $style;
         return $this;
     }
-
-
-
-
-
-
 }

@@ -2,8 +2,11 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use ConsoleDraw\ConsoleRender;
+use ConsoleDraw\Console;
+use ConsoleDraw\Figure\Geometry\Rechtangle\Rectangle;
+use ConsoleDraw\Plane\Point;
+use ConsoleDraw\Plane\Size;
 
-$drawer = new ConsoleRender(17, 16);
-$drawer->addFigure(new \ConsoleDraw\Figure\Geometry\Rechtangle\Rectangle(1,1,10,10,'*'));
+$drawer = new Console(16, 16);
+$drawer->addFigure(new Rectangle(new Point(0, 0), new Size(10, 10)));
 echo $drawer->render();

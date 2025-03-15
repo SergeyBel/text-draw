@@ -2,8 +2,10 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use ConsoleDraw\ConsoleRender;
+use ConsoleDraw\Console;
+use \ConsoleDraw\Plane\Point;
+use \ConsoleDraw\Figure\Geometry\Line\Line;
 
-$drawer = new ConsoleRender(10, 10);
-$drawer->addFigure(new \ConsoleDraw\Figure\Geometry\Line\Line(0, 0, 8, 8));
+$drawer = new Console(10, 10);
+$drawer->addFigure(new Line(new Point(0, 0), new Point(8, 8)));
 echo $drawer->render();

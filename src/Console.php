@@ -8,16 +8,19 @@ use ConsoleDraw\Figure\Pixel;
 use ConsoleDraw\Plane\Point;
 use ConsoleDraw\Plane\Size;
 
-class ConsoleRender
+class Console
 {
+
     private array $pixels;
     private Size $size;
+    private ConsoleStyle $style;
 
     public function __construct(
         int $width,
-        $height,
+        int $height,
     ) {
         $this->size = new Size($width, $height);
+        $this->style = new ConsoleStyle();
         $this->clear();
     }
 
@@ -26,7 +29,7 @@ class ConsoleRender
         $text = '';
         for ($y = 0; $y < $this->getSize()->getHeight(); $y++) {
             for ($x = 0; $x < $this->getSize()->getHeight(); $x++) {
-                $text .= $this->pixels[$y][$x]->getChar();
+                $text .= $this->pixels[$y][$x]->getSymbol();
             }
             $text .= "\n";
         }
@@ -67,7 +70,7 @@ class ConsoleRender
     {
         for ($y = 0; $y < $this->getSize()->getHeight(); $y++) {
             for ($x = 0; $x < $this->getSize()->getWidth(); $x++) {
-                $this->pixels[$y][$x] = new Pixel($x, $y, ' ');
+                $this->pixels[$y][$x] = new Pixel($x, $y, $this->style->getEmptySymbol());
             }
         }
     }
@@ -77,11 +80,25 @@ class ConsoleRender
         return $this->size;
     }
 
-    public function setSize(Size $size): ConsoleRender
+    public function setSize(Size $size): Console
     {
         $this->size = $size;
         return $this;
     }
+
+    public function getStyle(): ConsoleStyle
+    {
+        return $this->style;
+    }
+
+    public function setStyle(ConsoleStyle $style): Console
+    {
+        $this->style = $style;
+        $this->clear();
+        return $this;
+    }
+
+
 
 
 

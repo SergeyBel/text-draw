@@ -4,12 +4,26 @@ namespace ConsoleDraw\Plane;
 
 class Point
 {
-
     public function __construct(
         private int $x,
-        private int $y)
+        private int $y
+    )
     {
 
+    }
+
+    public function addToX(int $value): Point
+    {
+        $that = clone $this;
+        $that->x += $value - 1;
+        return $that;
+    }
+
+    public function addToY(int $value): Point
+    {
+        $that = clone $this;
+        $that->y += $value - 1;
+        return $that;
     }
 
     public function getX(): int
@@ -33,7 +47,6 @@ class Point
         $this->y = $y;
         return $this;
     }
-
 
 
 }
