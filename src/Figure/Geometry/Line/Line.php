@@ -68,7 +68,7 @@ class Line implements FigureInterface
 
         $points = [];
         for ($x = $x0; $x <= $x1; $x++) {
-            $points[] = new Pixel($x, $y, $symbol);
+            $points[] = new Pixel(new Point($x, $y), $symbol);
             if ($delta > 0) {
                 $y += $yi;
                 $delta = $delta + (2 * ($dy - $dx));
@@ -96,7 +96,7 @@ class Line implements FigureInterface
 
         $points = [];
         for ($y = $y0; $y <= $y1; $y++) {
-            $points[] = new Pixel($x, $y, $symbol);
+            $points[] = new Pixel(new Point($x, $y), $symbol);
             if ($delta > 0) {
                 $x += $xi;
                 $delta = $delta + (2 * ($dx - $dy));

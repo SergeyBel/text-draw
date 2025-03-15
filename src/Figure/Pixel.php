@@ -2,11 +2,12 @@
 
 namespace ConsoleDraw\Figure;
 
+use ConsoleDraw\Plane\Point;
+
 class Pixel implements FigureInterface
 {
     public function __construct(
-        private int    $x,
-        private int    $y,
+        private Point $point,
         private string $symbol,
     ) {
     }
@@ -16,25 +17,15 @@ class Pixel implements FigureInterface
         return [$this];
     }
 
-
-    public function getX(): int
+    public function getPoint(): Point
     {
-        return $this->x;
+        return $this->point;
     }
 
-    public function setX(int $x): void
+    public function setPoint(Point $point): Pixel
     {
-        $this->x = $x;
-    }
-
-    public function getY(): int
-    {
-        return $this->y;
-    }
-
-    public function setY(int $y): void
-    {
-        $this->y = $y;
+        $this->point = $point;
+        return $this;
     }
 
     public function getSymbol(): string

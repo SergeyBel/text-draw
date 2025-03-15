@@ -37,9 +37,9 @@ class Console
         return $text;
     }
 
-    public function setPixel(Pixel $point)
+    public function setPixel(Pixel $pixel)
     {
-        $this->pixels[$point->getY()][$point->getX()] = $point;
+        $this->pixels[$pixel->getPoint()->getY()][$pixel->getPoint()->getX()] = $pixel;
     }
 
     public function setPixels(array $pixels)
@@ -70,7 +70,7 @@ class Console
     {
         for ($y = 0; $y < $this->getSize()->getHeight(); $y++) {
             for ($x = 0; $x < $this->getSize()->getWidth(); $x++) {
-                $this->pixels[$y][$x] = new Pixel($x, $y, $this->style->getEmptySymbol());
+                $this->pixels[$y][$x] = new Pixel(new Point($x, $y), $this->style->getEmptySymbol());
             }
         }
     }
