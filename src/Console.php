@@ -28,7 +28,7 @@ class Console
     {
         $text = '';
         for ($y = 0; $y < $this->getSize()->getHeight(); $y++) {
-            for ($x = 0; $x < $this->getSize()->getHeight(); $x++) {
+            for ($x = 0; $x < $this->getSize()->getWidth(); $x++) {
                 $text .= $this->pixels[$y][$x]->getSymbol();
             }
             $text .= "\n";

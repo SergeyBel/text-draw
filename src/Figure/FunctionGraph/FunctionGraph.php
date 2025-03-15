@@ -3,12 +3,14 @@
 namespace ConsoleDraw\Figure\FunctionGraph;
 
 use ConsoleDraw\Figure\BaseFigure;
+use ConsoleDraw\Figure\FrameFigure;
 use ConsoleDraw\Figure\Geometry\Line\Line;
 use ConsoleDraw\Figure\Geometry\Line\LineStyle;
 use ConsoleDraw\Figure\Pixel;
 use ConsoleDraw\Figure\Text\Text;
+use ConsoleDraw\Plane\Point;
 
-class FunctionGraph extends BaseFigure
+class FunctionGraph extends FrameFigure
 {
     /**
      * @var array<FunctionValue>
@@ -18,8 +20,6 @@ class FunctionGraph extends BaseFigure
     private FunctionGraphStyle $style;
 
     public function __construct(
-        private int $width,
-        private int $height,
     ) {
         $this->style = new FunctionGraphStyle();
     }
@@ -45,31 +45,36 @@ class FunctionGraph extends BaseFigure
 
     private function drawAxes()
     {
+        $width = $this->getSize()->getWidth();
+        $height = $this->getSize()->getHeight();
+        $zeroPoint = $this->getLeftUpperCorner()->addHeight($height);
+        $highYPoint = clone $this->leftUpperCorner;
+        $highXPoint = $zeroPoint->addWidth($width);
+
         $this
             ->addFigure(
-                (new Line(0, 0, 0, $this->height - 1))->setStyle(
+                (new Line($zeroPoint, $highYPoint))->setStyle(
                     (new LineStyle())->setSymbol($this->style->getXAxeSymbol())
                 )
             )
             ->addFigure(
-                (new Line(0, $this->height - 1, $this->width, $this->height - 1))
+                (new Line($zeroPoint, $highXPoint))
                     ->setStyle(
                         (new LineStyle())->setSymbol($this->style->getYAxeSymbol())
                     )
             )
-            ->addFigure(new Pixel(0, $this->height - 1, $this->style->getZeroSymbol()))
-            ->addFigure(new Text(0, 0, $this->style->getYLabel()))
-            ->addFigure(new Text($this->width - 1, $this->height - 1, $this->style->getXLabel()))
+            ->addFigure(new Pixel($zeroPoint, $this->style->getZeroSymbol()))
+            ->addFigure(new Text($highYPoint, $this->style->getYLabel()))
+            ->addFigure(new Text($highXPoint, $this->style->getXLabel()))
         ;
     }
 
     private function drawFunction()
     {
-
         foreach ($this->values as $value) {
             $x = $value->getX();
-            $y = $this->height - 1 - $value->getY();
-            $value = new Pixel($x, $y, $this->style->getPointSymbol());
+            $y = $this->getSize()->getHeight()- 1 - $value->getY();
+            $value = new Pixel(new Point($x, $y), $this->style->getPointSymbol());
             $this->addFigure($value);
         }
     }

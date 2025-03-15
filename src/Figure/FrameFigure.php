@@ -7,8 +7,8 @@ use ConsoleDraw\Plane\Size;
 
 class FrameFigure extends BaseFigure
 {
-    protected ?Size $size;
-    protected ?Point $leftUpperCorner;
+    protected ?Size $size = null;
+    protected ?Point $leftUpperCorner = null;
 
     public function getSize(): ?Size
     {

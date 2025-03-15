@@ -25,9 +25,9 @@ class Rectangle extends BaseFigure
 
         $lineStyle = (new LineStyle())->setSymbol($this->style->getSymbol());
 
-        $rightUpperCorner = $this->leftUpperCorner->addToX($this->size->getWidth());
-        $leftBottomCorner = $this->leftUpperCorner->addToY($this->size->getHeight());
-        $rightBottomCorner = $rightUpperCorner->addToY($this->size->getHeight());
+        $rightUpperCorner = $this->leftUpperCorner->addWidth($this->size->getWidth());
+        $leftBottomCorner = $this->leftUpperCorner->addHeight($this->size->getHeight());
+        $rightBottomCorner = $rightUpperCorner->addHeight($this->size->getHeight());
 
 
         $this

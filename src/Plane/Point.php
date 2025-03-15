@@ -12,17 +12,45 @@ class Point
 
     }
 
-    public function addToX(int $value): Point
+    public function addWidth(int $value): Point
     {
         $that = clone $this;
         $that->x += $value - 1;
         return $that;
     }
 
-    public function addToY(int $value): Point
+    public function addHeight(int $value): Point
     {
         $that = clone $this;
         $that->y += $value - 1;
+        return $that;
+    }
+
+    public function addY(int $value): Point
+    {
+        $that = clone $this;
+        $that->y += $value;
+        return $that;
+    }
+
+    public function subY(int $value): Point
+    {
+        $that = clone $this;
+        $that->y -= $value;
+        return $that;
+    }
+
+    public function addX(int $value): Point
+    {
+        $that = clone $this;
+        $that->x += $value;
+        return $that;
+    }
+
+    public function subX(int $value): Point
+    {
+        $that = clone $this;
+        $that->x -= $value;
         return $that;
     }
 

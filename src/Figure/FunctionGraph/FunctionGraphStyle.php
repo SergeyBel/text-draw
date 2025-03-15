@@ -8,8 +8,8 @@ class FunctionGraphStyle
     private string $yAxeSymbol = '-';
     private string $pointSymbol = '*';
     private string $zeroSymbol = '0';
-    private string $xLabel = 'cows';
-    private string $yLabel = 'rows';
+    private string $xLabel = 'X';
+    private string $yLabel = 'Y';
 
     public function getXAxeSymbol(): string
     {
