@@ -2,7 +2,6 @@
 
 namespace ConsoleDraw\Figure\FunctionGraph;
 
-use ConsoleDraw\Figure\BaseFigure;
 use ConsoleDraw\Figure\FrameFigure;
 use ConsoleDraw\Figure\Geometry\Line\Line;
 use ConsoleDraw\Figure\Geometry\Line\LineStyle;
@@ -32,23 +31,31 @@ class FunctionGraph extends FrameFigure
         return parent::draw();
     }
 
+    /**
+     * @return FunctionValue[]
+     */
     public function getValues(): array
     {
         return $this->values;
     }
 
+    /**
+     * @param array<FunctionValue> $values
+     * @return $this
+     */
     public function setValues(array $values): FunctionGraph
     {
         $this->values = $values;
         return $this;
     }
 
-    private function drawAxes()
+
+    private function drawAxes(): void
     {
-        $width = $this->getSize()->getWidth();
-        $height = $this->getSize()->getHeight();
-        $zeroPoint = $this->getLeftUpperCorner()->addHeight($height);
-        $highYPoint = clone $this->leftUpperCorner;
+        $width = $this->getDefinedSize()->getWidth();
+        $height = $this->getDefinedSize()->getHeight();
+        $zeroPoint = $this->getDefinedLeftUpperCorner()->addHeight($height);
+        $highYPoint = clone $this->getDefinedLeftUpperCorner();
         $highXPoint = $zeroPoint->addWidth($width);
 
         $this
@@ -69,11 +76,11 @@ class FunctionGraph extends FrameFigure
         ;
     }
 
-    private function drawFunction()
+    private function drawFunction(): void
     {
         foreach ($this->values as $value) {
             $x = $value->getX();
-            $y = $this->getSize()->getHeight()- 1 - $value->getY();
+            $y = $this->getDefinedSize()->getHeight() - 1 - $value->getY();
             $value = new Pixel(new Point($x, $y), $this->style->getPointSymbol());
             $this->addFigure($value);
         }
@@ -84,10 +91,6 @@ class FunctionGraph extends FrameFigure
         return $this->style;
     }
 
-    public function setStyle(FunctionGraphStyle $style): FunctionGraph
-    {
-        $this->style = $style;
-        return $this;
-    }
+
 
 }

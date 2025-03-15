@@ -16,7 +16,4 @@ class ConsoleStyle
         $this->emptySymbol = $emptySymbol;
         return $this;
     }
-
-
-
 }

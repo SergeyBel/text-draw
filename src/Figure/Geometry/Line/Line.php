@@ -17,7 +17,7 @@ class Line implements FigureInterface
         private Point $start,
         private Point $end,
     ) {
-            $this->style = new LineStyle();
+        $this->style = new LineStyle();
     }
 
     public function draw(): array
@@ -53,6 +53,9 @@ class Line implements FigureInterface
         return $pixels;
     }
 
+    /**
+     * @return array<Pixel>
+     */
     private function plotLineLow(int $x0, int $y0, int $x1, int $y1, string $symbol): array
     {
         $dx = $x1 - $x0;
@@ -66,9 +69,9 @@ class Line implements FigureInterface
         $delta = 2 * $dy - $dx;
         $y = $y0;
 
-        $points = [];
+        $pixels = [];
         for ($x = $x0; $x <= $x1; $x++) {
-            $points[] = new Pixel(new Point($x, $y), $symbol);
+            $pixels[] = new Pixel(new Point($x, $y), $symbol);
             if ($delta > 0) {
                 $y += $yi;
                 $delta = $delta + (2 * ($dy - $dx));
@@ -78,9 +81,12 @@ class Line implements FigureInterface
 
         }
 
-        return $points;
+        return $pixels;
     }
 
+    /**
+     * @return array<Pixel>
+     */
     private function plotLineHigh(int $x0, int $y0, int $x1, int $y1, string $symbol): array
     {
         $dx = $x1 - $x0;
@@ -94,9 +100,9 @@ class Line implements FigureInterface
         $delta = 2 * $dx - $dy;
         $x = $x0;
 
-        $points = [];
+        $pixels = [];
         for ($y = $y0; $y <= $y1; $y++) {
-            $points[] = new Pixel(new Point($x, $y), $symbol);
+            $pixels[] = new Pixel(new Point($x, $y), $symbol);
             if ($delta > 0) {
                 $x += $xi;
                 $delta = $delta + (2 * ($dx - $dy));
@@ -105,7 +111,7 @@ class Line implements FigureInterface
             }
         }
 
-        return $points;
+        return $pixels;
     }
 
     public function getStyle(): ?LineStyle
@@ -113,7 +119,7 @@ class Line implements FigureInterface
         return $this->style;
     }
 
-    public function setStyle(?LineStyle $style): Line
+    public function setStyle(LineStyle $style): Line
     {
         $this->style = $style;
         return $this;

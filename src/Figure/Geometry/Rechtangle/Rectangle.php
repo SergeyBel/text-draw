@@ -15,7 +15,6 @@ class Rectangle extends BaseFigure
     public function __construct(
         private Point $leftUpperCorner,
         private Size $size,
-
     ) {
         $this->style = new RectangleStyle();
     }

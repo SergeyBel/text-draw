@@ -10,7 +10,9 @@ use ConsoleDraw\Plane\Size;
 
 class Console
 {
-
+    /**
+     * @var Pixel[][]
+     */
     private array $pixels;
     private Size $size;
     private ConsoleStyle $style;
@@ -37,22 +39,26 @@ class Console
         return $text;
     }
 
-    public function setPixel(Pixel $pixel)
+    public function setPixel(Pixel $pixel): Console
     {
         $this->pixels[$pixel->getPoint()->getY()][$pixel->getPoint()->getX()] = $pixel;
+        return $this;
     }
 
-    public function setPixels(array $pixels)
+    /**
+     * @param array<Pixel> $pixels
+     */
+    public function setPixels(array $pixels): Console
     {
         foreach ($pixels as $point) {
             $this->setPixel($point);
         }
+        return $this;
     }
 
-    public function addFigure(FigureInterface $figure)
+    public function addFigure(FigureInterface $figure): Console
     {
-        if ($figure instanceof FrameFigure)
-        {
+        if ($figure instanceof FrameFigure) {
             if (is_null($figure->getSize())) {
                 $figure->setSize($this->getSize());
             }
@@ -62,17 +68,18 @@ class Console
             }
 
         }
-        $this->setPixels($figure->draw());
+        return $this->setPixels($figure->draw());
 
     }
 
-    public function clear()
+    public function clear(): Console
     {
         for ($y = 0; $y < $this->getSize()->getHeight(); $y++) {
             for ($x = 0; $x < $this->getSize()->getWidth(); $x++) {
                 $this->pixels[$y][$x] = new Pixel(new Point($x, $y), $this->style->getEmptySymbol());
             }
         }
+        return $this;
     }
 
     public function getSize(): Size
@@ -97,13 +104,4 @@ class Console
         $this->clear();
         return $this;
     }
-
-
-
-
-
-
-
-
-
 }

@@ -30,14 +30,14 @@ class Circle implements FigureInterface
         $delta = 1 - 2 * $this->radius;
 
         while ($y >= $x) {
-            $points[] = new Pixel($x1 + $x, $y1 + $y, $symbol);
-            $points[] = new Pixel($x1 + $x, $y1 - $y, $symbol);
-            $points[] = new Pixel($x1 - $x, $y1 + $y, $symbol);
-            $points[] = new Pixel($x1 - $x, $y1 - $y, $symbol);
-            $points[] = new Pixel($x1 + $y, $y1 + $x, $symbol);
-            $points[] = new Pixel($x1 + $y, $y1 - $x, $symbol);
-            $points[] = new Pixel($x1 - $y, $y1 + $x, $symbol);
-            $points[] = new Pixel($x1 - $y, $y1 - $x, $symbol);
+            $points[] = new Pixel(new Point($x1 + $x, $y1 + $y), $symbol);
+            $points[] = new Pixel(new Point($x1 + $x, $y1 - $y), $symbol);
+            $points[] = new Pixel(new Point($x1 - $x, $y1 + $y), $symbol);
+            $points[] = new Pixel(new Point($x1 - $x, $y1 - $y), $symbol);
+            $points[] = new Pixel(new Point($x1 + $y, $y1 + $x), $symbol);
+            $points[] = new Pixel(new Point($x1 + $y, $y1 - $x), $symbol);
+            $points[] = new Pixel(new Point($x1 - $y, $y1 + $x), $symbol);
+            $points[] = new Pixel(new Point($x1 - $y, $y1 - $x), $symbol);
             $error = 2 * ($delta + $y) - 1;
 
             if ($delta < 0 && $error <= 0) {
