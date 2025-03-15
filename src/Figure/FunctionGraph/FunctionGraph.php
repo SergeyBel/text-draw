@@ -5,8 +5,8 @@ namespace ConsoleDraw\Figure\FunctionGraph;
 use ConsoleDraw\Figure\BaseFigure;
 use ConsoleDraw\Figure\Geometry\Line\Line;
 use ConsoleDraw\Figure\Geometry\Line\LineStyle;
+use ConsoleDraw\Figure\Pixel;
 use ConsoleDraw\Figure\Text\Text;
-use ConsoleDraw\Pixel;
 
 class FunctionGraph extends BaseFigure
 {

@@ -3,7 +3,7 @@
 namespace ConsoleDraw\Figure\Text;
 
 use ConsoleDraw\Figure\FigureInterface;
-use ConsoleDraw\Pixel;
+use ConsoleDraw\Figure\Pixel;
 
 class Text implements FigureInterface
 {

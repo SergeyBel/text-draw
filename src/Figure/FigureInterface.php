@@ -2,8 +2,6 @@
 
 namespace ConsoleDraw\Figure;
 
-use ConsoleDraw\Pixel;
-
 interface FigureInterface
 {
     /**

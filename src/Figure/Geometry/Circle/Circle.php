@@ -3,7 +3,7 @@
 namespace ConsoleDraw\Figure\Geometry\Circle;
 
 use ConsoleDraw\Figure\FigureInterface;
-use ConsoleDraw\Pixel;
+use ConsoleDraw\Figure\Pixel;
 
 class Circle implements FigureInterface
 {

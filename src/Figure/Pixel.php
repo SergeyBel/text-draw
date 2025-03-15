@@ -1,8 +1,6 @@
 <?php
 
-namespace ConsoleDraw;
-
-use ConsoleDraw\Figure\FigureInterface;
+namespace ConsoleDraw\Figure;
 
 class Pixel implements FigureInterface
 {

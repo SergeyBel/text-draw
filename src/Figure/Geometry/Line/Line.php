@@ -3,7 +3,7 @@
 namespace ConsoleDraw\Figure\Geometry\Line;
 
 use ConsoleDraw\Figure\FigureInterface;
-use ConsoleDraw\Pixel;
+use ConsoleDraw\Figure\Pixel;
 
 /**
  * @see https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
