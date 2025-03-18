@@ -16,42 +16,81 @@ class Turtle extends BaseFigure
         $this->position = new Point(0, 0);
     }
 
-    public function moveRight(int $value): Turtle
+    public function moveRight(int $value = 1): Turtle
     {
         $this->position = $this->position->addX($value);
         return $this;
     }
-    public function moveLeft(int $value): Turtle
+    public function moveLeft(int $value = 1): Turtle
     {
         $this->position = $this->position->subX($value);
         return $this;
     }
 
-    public function moveUp(int $value): Turtle
+    public function moveUp(int $value = 1): Turtle
     {
         $this->position = $this->position->subY($value);
         return $this;
     }
 
-    public function moveDown(int $value): Turtle
+    public function moveDown(int $value = 1): Turtle
     {
         $this->position = $this->position->addY($value);
         return $this;
     }
 
-    public function moveTo(int $x, int $y): Turtle
+    public function moveTo(Point $point): Turtle
     {
-        $this->position = new Point($x, $y);
+        $this->position = $point;
         return $this;
     }
 
-    public function setSymbol(string $symbol): Turtle
+    public function paintRight(string $symbol, int $value = 1): Turtle
     {
-        $this->addFigure(new Pixel($this->position, $symbol));
-        return $this->moveRight(1);
+        for ($i = 0; $i < $value; $i++) {
+            $this
+                ->addFigure(new Pixel($this->position, $symbol))
+                ->moveRight();
+        }
+
+        return $this;
     }
 
-    public function setText(string $str): Turtle
+    public function paintLeft(string $symbol, int $value = 1): Turtle
+    {
+        for ($i = 0; $i < $value; $i++) {
+            $this
+                ->addFigure(new Pixel($this->position, $symbol))
+                ->moveLeft();
+        }
+
+        return $this;
+    }
+
+    public function paintUp(string $symbol, int $value = 1): Turtle
+    {
+        for ($i = 0; $i < $value; $i++) {
+            $this
+                ->addFigure(new Pixel($this->position, $symbol))
+                ->moveUp();
+        }
+
+        return $this;
+    }
+
+    public function paintDown(string $symbol, int $value = 1): Turtle
+    {
+        for ($i = 0; $i < $value; $i++) {
+            $this
+                ->addFigure(new Pixel($this->position, $symbol))
+                ->moveDown();
+        }
+
+        return $this;
+    }
+
+
+    public function paintText(string $str): Turtle
     {
         $text = new Text($this->position, $str);
         $this->addFigure($text);

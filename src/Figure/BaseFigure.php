@@ -14,7 +14,7 @@ class BaseFigure implements FigureInterface
         return $this->pixels;
     }
 
-    protected function addFigure(FigureInterface $figure): self
+    protected function addFigure(FigureInterface $figure): static
     {
         $this->pixels = array_merge($this->pixels, $figure->draw());
         return $this;

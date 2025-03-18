@@ -3,7 +3,10 @@
 namespace ConsoleDraw\Figure\Table;
 
 use ConsoleDraw\Figure\FrameFigure;
+use ConsoleDraw\Figure\Geometry\Line\Line;
+use ConsoleDraw\Figure\Pixel;
 use ConsoleDraw\Figure\Turtle\Turtle;
+use ConsoleDraw\Plane\Point;
 
 class Table extends FrameFigure
 {
@@ -13,6 +16,59 @@ class Table extends FrameFigure
     /** @var array<array<string>>  */
     private array $rows = [];
 
+    public function draw(): array
+    {
+        $cellWidth = $this->calculateCellWidth();
+        $cellCount = count($this->header);
+        $start = $this->getDefinedLeftUpperCorner();
+
+        $start = $this->drawHeader($start, $cellCount, $cellWidth);
+        $this->drawRows($start, $cellCount, $cellWidth);
+
+        return parent::draw();
+    }
+
+    private function drawHeader(Point $start, int $cellCount, int $cellWidth): Point
+    {
+        $this->drawSeparator($start, $cellCount, $cellWidth);
+        $start = $start->addY(1);
+        $this->drawRow($start, $this->header, $cellWidth);
+        $start = $start->addY(1);
+        $this->drawSeparator($start, $cellCount, $cellWidth);
+        $start = $start->addY(1);
+
+        return $start;
+    }
+
+    private function drawRows(Point $start, int $cellCount, int $cellWidth): void
+    {
+        foreach ($this->rows as $row) {
+            $this->drawRow($start, $row, $cellWidth);
+            $start = $start->addY(1);
+            $this->drawSeparator($start, $cellCount, $cellWidth);
+            $start = $start->addY(1);
+        }
+    }
+
+    /**
+     * @param array<string> $row
+     */
+    private function drawRow(Point $start, array $row, int $cellWidth): void
+    {
+        $turtle = (new Turtle())
+            ->moveTo($start)
+            ->paintRight('|');
+
+
+        foreach ($row as $cell) {
+            $text = str_pad($cell, $cellWidth, ' ');
+            $turtle
+                ->paintText($text)
+                ->paintRight('|');
+        }
+
+        $this->addFigure($turtle);
+    }
 
     /**
      * @return array<string>
@@ -50,14 +106,19 @@ class Table extends FrameFigure
         return $this;
     }
 
-    public function draw(): array
+    private function drawSeparator(Point $start, int $cellCount, int $cellWidth): void
     {
-        $cellWidth = $this->calculateCellWidth();
+        $turtle = (new Turtle())
+            ->moveTo($start)
+            ->paintRight('+');
 
-        foreach ($this->rows as $row) {
-            $this->drawRow(0, $row, $cellWidth);
+        for ($i = 0; $i < $cellCount; $i++) {
+            $turtle
+                ->paintRight('-', $cellWidth)
+                ->paintRight('+');
         }
-        return parent::draw();
+
+        $this->addFigure($turtle);
     }
 
     private function calculateCellWidth(): int
@@ -73,26 +134,6 @@ class Table extends FrameFigure
         }
 
         return $max;
-    }
-
-    /**
-     * @param array<string> $row
-     */
-    private function drawRow(int $y, array $row, int $cellWidth): void
-    {
-        $turtle = (new Turtle())
-            ->moveTo(0, $y)
-            ->setSymbol('|');
-
-
-        foreach ($row as $cell) {
-            $text = str_pad($cell, $cellWidth, ' ');
-            $turtle
-                ->setText($text)
-                ->setSymbol('|');
-        }
-
-        $this->addFigure($turtle);
     }
 
 
