@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ConsoleDraw\Figure\Geometry\Line;
 
 use ConsoleDraw\Figure\FigureInterface;

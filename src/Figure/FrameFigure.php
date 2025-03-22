@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ConsoleDraw\Figure;
 
 use ConsoleDraw\Plane\Point;

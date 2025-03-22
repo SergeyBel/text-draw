@@ -1,10 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ConsoleDraw\Figure\Table;
 
 use ConsoleDraw\Figure\FrameFigure;
-use ConsoleDraw\Figure\Geometry\Line\Line;
-use ConsoleDraw\Figure\Pixel;
 use ConsoleDraw\Figure\Turtle\Turtle;
 use ConsoleDraw\Plane\Point;
 

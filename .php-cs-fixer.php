@@ -2,6 +2,7 @@
 
 $finder = (new PhpCsFixer\Finder())
     ->in([__DIR__.'/src'])
+    ->in([__DIR__.'/tests'])
 ;
 
 $config = new PhpCsFixer\Config();
@@ -20,6 +21,8 @@ return $config->setRules([
     'no_unused_imports' => true,
     'linebreak_after_opening_tag' => true,
     'array_syntax' => ['syntax' => 'short'],
+    'declare_strict_types' => true
 
 ])
-    ->setFinder($finder);
+    ->setFinder($finder)
+    ->setRiskyAllowed(true);
