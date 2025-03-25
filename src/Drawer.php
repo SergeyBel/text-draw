@@ -10,21 +10,21 @@ use ConsoleDraw\Figure\Pixel;
 use ConsoleDraw\Plane\Point;
 use ConsoleDraw\Plane\Size;
 
-class Console
+class Drawer
 {
     /**
      * @var Pixel[][]
      */
     private array $pixels;
     private Size $size;
-    private ConsoleStyle $style;
+    private DrawerStyle $style;
 
     public function __construct(
         int $width,
         int $height,
     ) {
         $this->size = new Size($width, $height);
-        $this->style = new ConsoleStyle();
+        $this->style = new DrawerStyle();
         $this->clear();
     }
 
@@ -41,7 +41,7 @@ class Console
         return $text;
     }
 
-    public function setPixel(Pixel $pixel): Console
+    public function setPixel(Pixel $pixel): Drawer
     {
         $this->pixels[$pixel->getPoint()->getY()][$pixel->getPoint()->getX()] = $pixel;
         return $this;
@@ -50,7 +50,7 @@ class Console
     /**
      * @param array<Pixel> $pixels
      */
-    public function setPixels(array $pixels): Console
+    public function setPixels(array $pixels): Drawer
     {
         foreach ($pixels as $point) {
             $this->setPixel($point);
@@ -58,7 +58,7 @@ class Console
         return $this;
     }
 
-    public function addFigure(FigureInterface $figure): Console
+    public function addFigure(FigureInterface $figure): Drawer
     {
         if ($figure instanceof FrameFigure) {
             if (is_null($figure->getSize())) {
@@ -74,7 +74,7 @@ class Console
 
     }
 
-    public function clear(): Console
+    public function clear(): Drawer
     {
         for ($y = 0; $y < $this->getSize()->getHeight(); $y++) {
             for ($x = 0; $x < $this->getSize()->getWidth(); $x++) {
@@ -89,18 +89,18 @@ class Console
         return $this->size;
     }
 
-    public function setSize(Size $size): Console
+    public function setSize(Size $size): Drawer
     {
         $this->size = $size;
         return $this;
     }
 
-    public function getStyle(): ConsoleStyle
+    public function getStyle(): DrawerStyle
     {
         return $this->style;
     }
 
-    public function setStyle(ConsoleStyle $style): Console
+    public function setStyle(DrawerStyle $style): Drawer
     {
         $this->style = $style;
         $this->clear();

@@ -1,7 +1,7 @@
 all: fix static test
 
 
-fix:
+style:
 	docker-compose exec console-draw vendor/bin/php-cs-fixer fix
 
 static:

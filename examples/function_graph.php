@@ -2,11 +2,11 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use ConsoleDraw\Console;
+use ConsoleDraw\Drawer;
 use ConsoleDraw\Figure\FunctionGraph\FunctionGraph;
 use ConsoleDraw\Figure\FunctionGraph\FunctionValue;
 
-$drawer = new Console(60, 20);
+$drawer = new Drawer(60, 20);
 $function = new FunctionGraph();
 
 $values = [];

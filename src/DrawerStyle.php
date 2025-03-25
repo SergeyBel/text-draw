@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ConsoleDraw;
 
-class ConsoleStyle
+class DrawerStyle
 {
     private string $emptySymbol = ' ';
 
@@ -13,7 +13,7 @@ class ConsoleStyle
         return $this->emptySymbol;
     }
 
-    public function setEmptySymbol(string $emptySymbol): ConsoleStyle
+    public function setEmptySymbol(string $emptySymbol): DrawerStyle
     {
         $this->emptySymbol = $emptySymbol;
         return $this;

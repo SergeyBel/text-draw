@@ -2,12 +2,12 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use ConsoleDraw\Console;
+use ConsoleDraw\Drawer;
 use ConsoleDraw\Figure\Table\Table;
 use \ConsoleDraw\Plane\Point;
 use \ConsoleDraw\Figure\Geometry\Line\Line;
 
-$drawer = new Console(80, 20);
+$drawer = new Drawer(80, 20);
 $table = (new Table())
     ->setHeader(['ISBN', 'Title', 'Author'])
     ->setRows([
