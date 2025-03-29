@@ -12,12 +12,12 @@ class FigureTestCase extends TestCase
 {
     protected Drawer $drawer;
 
-    protected function createDrawer(int $width = 5, int $height = 5): void
+    protected function createDrawer(int $width, int $height, string $emptySymbol = '.'): void
     {
         $this->drawer = (new Drawer($width, $height))
             ->setStyle(
                 (new DrawerStyle())
-                    ->setEmptySymbol('.')
+                    ->setEmptySymbol($emptySymbol)
             );
     }
 
