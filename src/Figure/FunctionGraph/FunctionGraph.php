@@ -51,6 +51,12 @@ class FunctionGraph extends FrameFigure
         return $this;
     }
 
+    public function addValue(FunctionValue $value): FunctionGraph
+    {
+        $this->values[] = $value;
+        return $this;
+    }
+
 
     private function drawAxes(): void
     {
