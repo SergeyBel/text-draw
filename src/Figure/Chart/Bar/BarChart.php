@@ -26,22 +26,14 @@ class BarChart extends FrameFigure
 
     public function draw(): array
     {
-        if (count($this->bars) === 0) {
-            return [];
-        }
 
-        $size = $this->getDefinedSize();
 
-        $barCount = count($this->bars);
-        $barWidth = (int)floor($size->getWidth() / $barCount) - 1;
+        $barWidth = $this->calculateBarWidth();
+        $unitHeight = $this->calculateUnitValueHeight();
 
-        $heightWithoutLabel = $size->getHeight() - 1;
-
-        $unitBarHeight = (int) floor($heightWithoutLabel / max(array_map(fn (Bar $bar) => $bar->getValue(), $this->bars)));
-
-        $start = new Point(1, $size->getHeight() - 1);
+        $start = new Point(1, $this->getDefinedSize()->getHeight() - 1);
         foreach ($this->bars as $bar) {
-            $barHeight = $unitBarHeight * $bar->getValue();
+            $barHeight = $unitHeight * $bar->getValue();
             $this->drawBar($start, new Size($barWidth, $barHeight), $bar->getLabel());
             $start = $start->addX($barWidth + 1);
         }
@@ -58,6 +50,22 @@ class BarChart extends FrameFigure
             $leftDownCorner->subY($size->getHeight()),
             $size
         ));
+    }
+
+    private function calculateBarWidth(): int
+    {
+        return (int)floor($this->getDefinedSize()->getWidth() / count($this->bars)) - 1;
+    }
+
+    private function calculateUnitValueHeight(): int
+    {
+        if (count($this->bars) === 0) {
+            return 0;
+        }
+
+        $heightWithoutLabel = $this->getDefinedSize()->getHeight() - 1;
+        return (int) floor($heightWithoutLabel / max(array_map(fn (Bar $bar) => $bar->getValue(), $this->bars)));
+
     }
 
 }
