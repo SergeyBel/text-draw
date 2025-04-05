@@ -2,12 +2,11 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use ConsoleDraw\Drawer;
+use ConsoleDraw\Render\ConsoleRender\ConsoleRender;
+use ConsoleDraw\Render\TextRender\TextRender;
 use ConsoleDraw\Figure\Table\Table;
-use \ConsoleDraw\Plane\Point;
-use \ConsoleDraw\Figure\Geometry\Line\Line;
 
-$drawer = new Drawer(80, 20);
+$render = new ConsoleRender(80, 20);
 $table = (new Table())
     ->setHeader(['ISBN', 'Title', 'Author'])
     ->setRows([
@@ -16,5 +15,5 @@ $table = (new Table())
         ['960-425-059-0', 'The Lord of the Rings', 'J. R. R. Tolkien'],
         ['80-902734-1-6', 'And Then There Were None', 'Agatha Christie'],
     ]);
-$drawer->addFigure($table);
-echo $drawer->render();
+$render->addFigure($table);
+$render->render();

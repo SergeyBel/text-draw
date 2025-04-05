@@ -4,26 +4,26 @@ declare(strict_types=1);
 
 namespace ConsoleDraw\Tests\Figure;
 
-use ConsoleDraw\Drawer;
-use ConsoleDraw\DrawerStyle;
+use ConsoleDraw\Render\TextRender\TextRender;
+use ConsoleDraw\Render\TextRender\TextRenderStyle;
 use PHPUnit\Framework\TestCase;
 
 class FigureTestCase extends TestCase
 {
-    protected Drawer $drawer;
+    protected TextRender $drawer;
 
     protected function createDrawer(int $width, int $height, string $emptySymbol = '.'): void
     {
-        $this->drawer = (new Drawer($width, $height))
+        $this->drawer = (new TextRender($width, $height))
             ->setStyle(
-                (new DrawerStyle())
+                (new TextRenderStyle())
                     ->setEmptySymbol($emptySymbol)
             );
     }
 
     protected function assertRender(string $expected)
     {
-        $this->assertSame($expected."\n", $this->drawer->render());
+        $this->assertSame($expected, $this->drawer->render());
     }
 
 }

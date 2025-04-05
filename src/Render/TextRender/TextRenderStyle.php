@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw;
+namespace ConsoleDraw\Render\TextRender;
 
-class DrawerStyle
+class TextRenderStyle
 {
     private string $emptySymbol = ' ';
 
@@ -13,7 +13,7 @@ class DrawerStyle
         return $this->emptySymbol;
     }
 
-    public function setEmptySymbol(string $emptySymbol): DrawerStyle
+    public function setEmptySymbol(string $emptySymbol): TextRenderStyle
     {
         $this->emptySymbol = $emptySymbol;
         return $this;
