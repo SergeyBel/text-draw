@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace ConsoleDraw\Figure\FunctionGraph;
 
 use ConsoleDraw\Figure\FrameFigure;
-use ConsoleDraw\Figure\Geometry\Line\Line;
-use ConsoleDraw\Figure\Geometry\Line\LineStyle;
+use ConsoleDraw\Figure\Geometry\Arrow\Arrow;
 use ConsoleDraw\Figure\Pixel;
-use ConsoleDraw\Figure\Text\Text;
 use ConsoleDraw\Plane\Point;
 use ConsoleDraw\Plane\Size;
 
@@ -72,19 +70,12 @@ class FunctionGraph extends FrameFigure
 
         $this
             ->addFigure(
-                (new Line($zeroPoint, $highYPoint))->setStyle(
-                    (new LineStyle())->setSymbol($this->style->getXAxeSymbol())
-                )
+                new Arrow($zeroPoint, $highYPoint)
             )
             ->addFigure(
-                (new Line($zeroPoint, $highXPoint))
-                    ->setStyle(
-                        (new LineStyle())->setSymbol($this->style->getYAxeSymbol())
-                    )
+                new Arrow($zeroPoint, $highXPoint)
             )
             ->addFigure(new Pixel($zeroPoint, $this->style->getZeroSymbol()))
-            ->addFigure(new Text($highYPoint, $this->style->getYLabel()))
-            ->addFigure(new Text($highXPoint, $this->style->getXLabel()))
         ;
     }
 

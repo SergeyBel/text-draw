@@ -7,7 +7,6 @@ namespace ConsoleDraw\Figure\Geometry\Arrow;
 use ConsoleDraw\Figure\BaseFigure;
 use ConsoleDraw\Figure\Geometry\Line\Line;
 use ConsoleDraw\Figure\Geometry\Line\LineStyle;
-use ConsoleDraw\Figure\Pixel;
 use ConsoleDraw\Plane\Point;
 use Exception;
 
@@ -32,16 +31,28 @@ class Arrow extends BaseFigure
         $line = new Line($this->start, $this->end);
 
         if ($this->horizontal) {
-            $line->setStyle((new LineStyle())->setSymbol('-'));
-            $finish = new Pixel($this->end, '>');
+            $style = (new LineStyle())->setSymbol('-');
+
+            if ($this->start->getX() < $this->end->getX()) {
+                $style->setFinishSymbol('>');
+            } else {
+                $style->setStartSymbol('<');
+            }
+            $line->setStyle($style);
         } else {
-            $line->setStyle((new LineStyle())->setSymbol('|'));
-            $finish = new Pixel($this->end, 'v');
+            $style = (new LineStyle())->setSymbol('|');
+
+            if ($this->start->getY() < $this->end->getY()) {
+                $style->setFinishSymbol('v');
+            } else {
+                $style->setStartSymbol('^');
+            }
+
+            $line->setStyle($style);
         }
 
         $this
-            ->addFigure($line)
-            ->addFigure($finish);
+            ->addFigure($line);
 
         return $this->pixels;
     }
