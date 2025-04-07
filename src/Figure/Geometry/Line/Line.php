@@ -44,12 +44,12 @@ class Line implements FigureInterface
             }
         }
 
-        if ($this->style->isExcludeStart()) {
-            array_shift($pixels);
+        if (!is_null($this->style->getStartSymbol())) {
+            $pixels[0]->setSymbol($this->style->getStartSymbol());
         }
 
-        if ($this->style->isExcludeFinish()) {
-            array_pop($pixels);
+        if (!is_null($this->style->getFinishSymbol())) {
+            $pixels[count($pixels) - 1]->setSymbol($this->style->getFinishSymbol());
         }
 
         return $pixels;

@@ -8,6 +8,8 @@ class RectangleStyle
 {
     private string $symbol = '*';
 
+    private ?string $cornerSymbol = null;
+
     public function getSymbol(): string
     {
         return $this->symbol;
@@ -19,7 +21,14 @@ class RectangleStyle
         return $this;
     }
 
+    public function getCornerSymbol(): ?string
+    {
+        return $this->cornerSymbol;
+    }
 
-
-
+    public function setCornerSymbol(?string $cornerSymbol): RectangleStyle
+    {
+        $this->cornerSymbol = $cornerSymbol;
+        return $this;
+    }
 }

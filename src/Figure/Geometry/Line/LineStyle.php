@@ -7,8 +7,8 @@ namespace ConsoleDraw\Figure\Geometry\Line;
 class LineStyle
 {
     private string $symbol = '*';
-    private bool $excludeStart = false;
-    private bool $excludeFinish = false;
+    private ?string $startSymbol = null;
+    private ?string $finishSymbol = null;
 
     public function getSymbol(): string
     {
@@ -21,29 +21,26 @@ class LineStyle
         return $this;
     }
 
-    public function isExcludeStart(): bool
+    public function getStartSymbol(): ?string
     {
-        return $this->excludeStart;
+        return $this->startSymbol;
     }
 
-    public function setExcludeStart(): LineStyle
+    public function setStartSymbol(?string $startSymbol): LineStyle
     {
-        $this->excludeStart = true;
+        $this->startSymbol = $startSymbol;
         return $this;
     }
 
-    public function isExcludeFinish(): bool
+    public function getFinishSymbol(): ?string
     {
-        return $this->excludeFinish;
+        return $this->finishSymbol;
     }
 
-    public function setExcludeFinish(): LineStyle
+    public function setFinishSymbol(?string $finishSymbol): LineStyle
     {
-        $this->excludeFinish = true;
+        $this->finishSymbol = $finishSymbol;
         return $this;
     }
-
-
-
 
 }

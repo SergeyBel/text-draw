@@ -31,9 +31,9 @@ class TextRender implements RenderInterface
     public function render(): string
     {
         $lines = [];
-        for ($y = 0; $y < $this->getMatrixSize()->getHeight(); $y++) {
+        for ($y = 0; $y < $this->getSize()->getHeight(); $y++) {
             $line = '';
-            for ($x = 0; $x < $this->getMatrixSize()->getWidth(); $x++) {
+            for ($x = 0; $x < $this->getSize()->getWidth(); $x++) {
                 $line .= $this->matrix[$y][$x]->getSymbol();
             }
             $lines[] = $line;
@@ -68,15 +68,15 @@ class TextRender implements RenderInterface
 
     public function clear(): void
     {
-        for ($y = 0; $y < $this->getMatrixSize()->getHeight(); $y++) {
-            for ($x = 0; $x < $this->getMatrixSize()->getWidth(); $x++) {
+        for ($y = 0; $y < $this->getSize()->getHeight(); $y++) {
+            for ($x = 0; $x < $this->getSize()->getWidth(); $x++) {
                 $this->matrix[$y][$x] = new Pixel(new Point($x, $y), $this->style->getEmptySymbol());
             }
         }
 
     }
 
-    public function getMatrixSize(): Size
+    public function getSize(): Size
     {
         return $this->size;
     }

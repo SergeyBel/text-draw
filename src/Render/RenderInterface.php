@@ -18,6 +18,6 @@ interface RenderInterface
 
     public function addFigure(FigureInterface $figure): static;
 
-    public function getMatrixSize(): Size;
+    public function getSize(): Size;
 
 }

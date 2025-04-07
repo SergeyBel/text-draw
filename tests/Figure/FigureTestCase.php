@@ -24,7 +24,7 @@ class FigureTestCase extends TestCase
 
     protected function getSize(): Size
     {
-        return $this->render->getMatrixSize();
+        return $this->render->getSize();
     }
 
     protected function assertRender(string $expected)
