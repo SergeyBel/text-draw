@@ -13,7 +13,7 @@ class LineTest extends FigureTestCase
     public function testHorizontalLine(): void
     {
         $this->createDrawer(5, 5);
-        $this->drawer->addFigure(new Line(new Point(0, 0), new Point(2, 0)));
+        $this->render->addFigure(new Line(new Point(0, 0), new Point(2, 0)));
         $expected = <<<EOD
         ***..
         .....
@@ -28,7 +28,7 @@ class LineTest extends FigureTestCase
     public function testVerticalLine(): void
     {
         $this->createDrawer(5, 5);
-        $this->drawer->addFigure(new Line(new Point(0, 0), new Point(0, 2)));
+        $this->render->addFigure(new Line(new Point(0, 0), new Point(0, 2)));
         $expected = <<<EOD
         *....
         *....

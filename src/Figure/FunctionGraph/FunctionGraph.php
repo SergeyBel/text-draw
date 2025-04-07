@@ -10,6 +10,7 @@ use ConsoleDraw\Figure\Geometry\Line\LineStyle;
 use ConsoleDraw\Figure\Pixel;
 use ConsoleDraw\Figure\Text\Text;
 use ConsoleDraw\Plane\Point;
+use ConsoleDraw\Plane\Size;
 
 class FunctionGraph extends FrameFigure
 {
@@ -21,8 +22,11 @@ class FunctionGraph extends FrameFigure
     private FunctionGraphStyle $style;
 
     public function __construct(
+        Size $size,
+        ?Point $leftUpperCorner = null
     ) {
         $this->style = new FunctionGraphStyle();
+        parent::__construct($size, $leftUpperCorner);
     }
 
     public function draw(): array
@@ -60,10 +64,10 @@ class FunctionGraph extends FrameFigure
 
     private function drawAxes(): void
     {
-        $width = $this->getDefinedSize()->getWidth();
-        $height = $this->getDefinedSize()->getHeight();
-        $zeroPoint = $this->getDefinedLeftUpperCorner()->addHeight($height);
-        $highYPoint = clone $this->getDefinedLeftUpperCorner();
+        $width = $this->getSize()->getWidth();
+        $height = $this->getSize()->getHeight();
+        $zeroPoint = $this->getLeftUpperCorner()->addHeight($height);
+        $highYPoint = clone $this->getLeftUpperCorner();
         $highXPoint = $zeroPoint->addWidth($width);
 
         $this
@@ -88,17 +92,9 @@ class FunctionGraph extends FrameFigure
     {
         foreach ($this->values as $value) {
             $x = $value->getX();
-            $y = $this->getDefinedSize()->getHeight() - 1 - $value->getY();
+            $y = $this->getSize()->getHeight() - 1 - $value->getY();
             $value = new Pixel(new Point($x, $y), $this->style->getPointSymbol());
             $this->addFigure($value);
         }
     }
-
-    public function getStyle(): FunctionGraphStyle
-    {
-        return $this->style;
-    }
-
-
-
 }

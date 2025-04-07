@@ -13,7 +13,7 @@ class ArrowTest extends FigureTestCase
     public function testHorizontalArrow(): void
     {
         $this->createDrawer(5, 3);
-        $this->drawer->addFigure(new Arrow(
+        $this->render->addFigure(new Arrow(
             new Point(1, 1),
             new Point(3, 1)
         ));
@@ -29,7 +29,7 @@ class ArrowTest extends FigureTestCase
     public function testVerticalArrow(): void
     {
         $this->createDrawer(3, 4);
-        $this->drawer->addFigure(new Arrow(
+        $this->render->addFigure(new Arrow(
             new Point(1, 1),
             new Point(1, 3)
         ));

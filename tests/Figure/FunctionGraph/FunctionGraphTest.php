@@ -12,13 +12,15 @@ class FunctionGraphTest extends FigureTestCase
 {
     public function testAbsFunction(): void
     {
-        $graph = new FunctionGraph();
+        $this->createDrawer(10, 10);
+
+        $graph = new FunctionGraph($this->getSize());
         for ($x = 0; $x < 10; $x++) {
             $graph->addValue(new FunctionValue($x, abs($x - 4)));
         }
 
-        $this->createDrawer(10, 10);
-        $this->drawer->addFigure($graph);
+
+        $this->render->addFigure($graph);
 
 
         $expected = <<<EOD

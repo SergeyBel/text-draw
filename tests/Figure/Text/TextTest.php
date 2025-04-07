@@ -13,7 +13,7 @@ class TextTest extends FigureTestCase
     public function testRectangle(): void
     {
         $this->createDrawer(7, 3);
-        $this->drawer->addFigure(new Text(
+        $this->render->addFigure(new Text(
             new Point(1, 2),
             'hello'
         ));

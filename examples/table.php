@@ -7,7 +7,7 @@ use ConsoleDraw\Render\TextRender\TextRender;
 use ConsoleDraw\Figure\Table\Table;
 
 $render = new ConsoleRender(80, 20);
-$table = (new Table())
+$table = (new Table($render->getSize()))
     ->setHeader(['ISBN', 'Title', 'Author'])
     ->setRows([
         ['99921-58-10-7', 'Divine Comedy', 'Dante Alighieri'],

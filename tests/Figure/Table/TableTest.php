@@ -11,9 +11,9 @@ class TableTest extends FigureTestCase
 {
     public function testTable(): void
     {
-
         $this->createDrawer(76, 11);
-        $table = (new Table())
+
+        $table = (new Table($this->getSize()))
             ->setHeader(['ISBN', 'Title', 'Author'])
             ->setRows([
                 ['99921-58-10-7', 'Divine Comedy', 'Dante Alighieri'],
@@ -21,7 +21,7 @@ class TableTest extends FigureTestCase
                 ['960-425-059-0', 'The Lord of the Rings', 'J. R. R. Tolkien'],
                 ['80-902734-1-6', 'And Then There Were None', 'Agatha Christie'],
             ]);
-        $this->drawer->addFigure($table);
+        $this->render->addFigure($table);
 
 
         $expected = <<<EOD

@@ -12,7 +12,9 @@ class BarChartTest extends FigureTestCase
 {
     public function testBarChart(): void
     {
-        $barChart = new BarChart();
+        $this->createDrawer(10, 11);
+
+        $barChart = new BarChart($this->getSize());
         $barChart->addBar(
             new Bar('a', 2)
         )
@@ -20,9 +22,7 @@ class BarChartTest extends FigureTestCase
                 new Bar('b', 5)
             );
 
-
-        $this->createDrawer(10, 11);
-        $this->drawer->addFigure($barChart);
+        $this->render->addFigure($barChart);
 
 
         $expected = <<<EOD

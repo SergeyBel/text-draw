@@ -2,13 +2,14 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+use ConsoleDraw\Plane\Size;
 use ConsoleDraw\Render\ConsoleRender\ConsoleRender;
 use ConsoleDraw\Render\TextRender\TextRender;
 use ConsoleDraw\Figure\FunctionGraph\FunctionGraph;
 use ConsoleDraw\Figure\FunctionGraph\FunctionValue;
 
 $render = new ConsoleRender(61, 20);
-$function = new FunctionGraph();
+$function = new FunctionGraph($render->getSize());
 
 $values = [];
 for ($x = 0; $x <= 60; $x++) {

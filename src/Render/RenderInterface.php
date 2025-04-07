@@ -6,6 +6,7 @@ namespace ConsoleDraw\Render;
 
 use ConsoleDraw\Figure\FigureInterface;
 use ConsoleDraw\Figure\Pixel;
+use ConsoleDraw\Plane\Size;
 
 interface RenderInterface
 {
@@ -16,5 +17,7 @@ interface RenderInterface
     public function setPixels(array $pixels): static;
 
     public function addFigure(FigureInterface $figure): static;
+
+    public function getSize(): Size;
 
 }

@@ -7,6 +7,7 @@ namespace ConsoleDraw\Figure\Table;
 use ConsoleDraw\Figure\FrameFigure;
 use ConsoleDraw\Figure\Turtle\Turtle;
 use ConsoleDraw\Plane\Point;
+use ConsoleDraw\Plane\Size;
 
 class Table extends FrameFigure
 {
@@ -16,11 +17,19 @@ class Table extends FrameFigure
     /** @var array<array<string>>  */
     private array $rows = [];
 
+    public function __construct(
+        Size $size,
+        ?Point $leftUpperCorner = null
+    ) {
+        parent::__construct($size, $leftUpperCorner);
+    }
+
+
     public function draw(): array
     {
         $cellWidth = $this->calculateCellWidth();
         $cellCount = count($this->header);
-        $start = $this->getDefinedLeftUpperCorner();
+        $start = $this->getLeftUpperCorner();
 
         $start = $this->drawHeader($start, $cellCount, $cellWidth);
         $this->drawRows($start, $cellCount, $cellWidth);

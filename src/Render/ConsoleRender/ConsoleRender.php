@@ -6,6 +6,7 @@ namespace ConsoleDraw\Render\ConsoleRender;
 
 use ConsoleDraw\Figure\FigureInterface;
 use ConsoleDraw\Figure\Pixel;
+use ConsoleDraw\Plane\Size;
 use ConsoleDraw\Render\RenderInterface;
 use ConsoleDraw\Render\TextRender\TextRender;
 use Exception;
@@ -82,6 +83,11 @@ class ConsoleRender implements RenderInterface
         } else {
             return (int)exec('tput rows');
         }
+    }
+
+    public function getSize(): Size
+    {
+        return $this->textRender->getSize();
     }
 
 }
