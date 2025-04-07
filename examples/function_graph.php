@@ -9,7 +9,7 @@ use ConsoleDraw\Figure\FunctionGraph\FunctionGraph;
 use ConsoleDraw\Figure\FunctionGraph\FunctionValue;
 
 $render = new ConsoleRender(61, 20);
-$function = new FunctionGraph($render->getSize());
+$function = new FunctionGraph($render->getMatrixSize());
 
 $values = [];
 for ($x = 0; $x <= 60; $x++) {

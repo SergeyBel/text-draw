@@ -85,9 +85,9 @@ class ConsoleRender implements RenderInterface
         }
     }
 
-    public function getSize(): Size
+    public function getMatrixSize(): Size
     {
-        return $this->textRender->getSize();
+        return $this->textRender->getMatrixSize();
     }
 
 }

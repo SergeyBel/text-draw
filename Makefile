@@ -1,4 +1,4 @@
-all: fix static test
+all: style static test
 
 
 style:
