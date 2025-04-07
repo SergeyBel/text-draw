@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use ConsoleDraw\Render\ConsoleRender\ConsoleRender;
-use ConsoleDraw\Render\TextRender\TextRender;
 use ConsoleDraw\Figure\Table\Table;
 
 $render = new ConsoleRender(80, 20);

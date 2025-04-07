@@ -1,10 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use ConsoleDraw\Plane\Size;
 use ConsoleDraw\Render\ConsoleRender\ConsoleRender;
-use ConsoleDraw\Render\TextRender\TextRender;
 use ConsoleDraw\Figure\FunctionGraph\FunctionGraph;
 use ConsoleDraw\Figure\FunctionGraph\FunctionValue;
 
