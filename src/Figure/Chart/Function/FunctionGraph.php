@@ -64,6 +64,7 @@ class FunctionGraph extends FrameFigure
     {
         $width = $this->getSize()->getWidth();
         $height = $this->getSize()->getHeight();
+
         $zeroPoint = $this->getLeftUpperCorner()->addHeight($height);
         $highYPoint = clone $this->getLeftUpperCorner();
         $highXPoint = $zeroPoint->addWidth($width);

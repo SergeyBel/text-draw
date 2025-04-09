@@ -54,17 +54,15 @@ class BarChart extends FrameFigure
 
     private function drawAxes(): void
     {
-        $height = $this->size->getHeight() - 1;
-        $width = $this->size->getWidth() - 1;
         $this->addFigure(
             (new Line(
                 $this->leftUpperCorner,
-                $this->leftUpperCorner->addY($height)
+                $this->leftUpperCorner->addHeight($this->size->getHeight())
             ))->setStyle((new LineStyle())->setSymbol('|'))
         )->addFigure(
             (new Line(
-                $this->leftUpperCorner->addY($height)->addX(1),
-                $this->leftUpperCorner->addY($height)->addX($width)
+                $this->leftUpperCorner->addHeight($this->size->getHeight())->addX(1),
+                $this->leftUpperCorner->addHeight($this->size->getHeight())->addWidth($this->size->getWidth())
             ))->setStyle((new LineStyle())->setSymbol('_'))
         )
         ;
