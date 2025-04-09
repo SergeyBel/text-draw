@@ -12,7 +12,7 @@ class BarChartTest extends FigureTestCase
 {
     public function testBarChart(): void
     {
-        $this->createDrawer(10, 11);
+        $this->createDrawer(11, 11);
 
         $barChart = new BarChart($this->getSize());
         $barChart->addBar(
@@ -26,17 +26,17 @@ class BarChartTest extends FigureTestCase
 
 
         $expected = <<<EOD
-        ......****
-        ......*..*
-        ......*..*
-        ......*..*
-        ......*..*
-        ......*..*
-        .****.*..*
-        .*..*.*..*
-        .*..*.*..*
-        .****.****
-        .a....b...
+        |......****
+        |......*..*
+        |......*..*
+        |......*..*
+        |......*..*
+        |......*..*
+        |.****.*..*
+        |.*..*.*..*
+        |.*..*.*..*
+        |.****.****
+        |_a____b___
         EOD;
 
         $this->assertRender($expected);

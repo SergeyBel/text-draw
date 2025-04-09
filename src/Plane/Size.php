@@ -34,5 +34,33 @@ class Size
         return $this;
     }
 
+    public function addWidth(int $value): self
+    {
+        $that = clone $this;
+        $that->width += $value;
+        return $that;
+    }
+
+    public function subWidth(int $value): self
+    {
+        $that = clone $this;
+        $that->width -= $value;
+        return $that;
+    }
+
+    public function addHeight(int $value): self
+    {
+        $that = clone $this;
+        $that->height += $value;
+        return $that;
+    }
+
+    public function subHeight(int $value): self
+    {
+        $that = clone $this;
+        $that->height -= $value;
+        return $that;
+    }
+
 
 }
