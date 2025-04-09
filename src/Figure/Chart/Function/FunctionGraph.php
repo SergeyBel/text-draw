@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Figure\FunctionGraph;
+namespace ConsoleDraw\Figure\Chart\Function;
 
 use ConsoleDraw\Figure\FrameFigure;
 use ConsoleDraw\Figure\Geometry\Arrow\Arrow;

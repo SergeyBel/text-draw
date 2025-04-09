@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Tests\Figure\FunctionGraph;
+namespace ConsoleDraw\Tests\Figure\Chart\Function;
 
-use ConsoleDraw\Figure\FunctionGraph\FunctionGraph;
-use ConsoleDraw\Figure\FunctionGraph\FunctionValue;
+use ConsoleDraw\Figure\Chart\Function\FunctionGraph;
+use ConsoleDraw\Figure\Chart\Function\FunctionValue;
 use ConsoleDraw\Tests\Figure\FigureTestCase;
 
 class FunctionGraphTest extends FigureTestCase
