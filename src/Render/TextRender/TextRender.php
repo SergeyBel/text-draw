@@ -5,17 +5,15 @@ declare(strict_types=1);
 namespace ConsoleDraw\Render\TextRender;
 
 use ConsoleDraw\Figure\FigureInterface;
-use ConsoleDraw\Figure\Pixel;
+use ConsoleDraw\Figure\Pixel\Pixel;
+use ConsoleDraw\Figure\Pixel\PixelMatrix;
 use ConsoleDraw\Plane\Point;
 use ConsoleDraw\Plane\Size;
 use ConsoleDraw\Render\RenderInterface;
 
 class TextRender implements RenderInterface
 {
-    /**
-     * @var Pixel[][]
-     */
-    private array $matrix;
+    private PixelMatrix $matrix;
     private TextRenderStyle $style;
     private Size $size;
 
@@ -25,6 +23,7 @@ class TextRender implements RenderInterface
     ) {
         $this->style = new TextRenderStyle();
         $this->size = new Size($width, $height);
+        $this->matrix = new PixelMatrix();
 
         $this->clear();
     }
@@ -34,7 +33,7 @@ class TextRender implements RenderInterface
         for ($y = 0; $y < $this->getSize()->getHeight(); $y++) {
             $line = '';
             for ($x = 0; $x < $this->getSize()->getWidth(); $x++) {
-                $line .= $this->matrix[$y][$x]->getSymbol();
+                $line .= $this->matrix->getPixel($x, $y)->getSymbol();
             }
             $lines[] = $line;
 
@@ -44,33 +43,19 @@ class TextRender implements RenderInterface
     }
 
 
-    public function setPixel(Pixel $pixel): static
-    {
-        $this->matrix[$pixel->getPoint()->getY()][$pixel->getPoint()->getX()] = $pixel;
-        return $this;
-    }
-
-    /**
-     * @param array<Pixel> $pixels
-     */
-    public function setPixels(array $pixels): static
-    {
-        foreach ($pixels as $pixel) {
-            $this->setPixel($pixel);
-        }
-        return $this;
-    }
 
     public function addFigure(FigureInterface $figure): static
     {
-        return $this->setPixels($figure->draw());
+        $this->matrix->merge($figure->draw());
+        return $this;
     }
 
     public function clear(): void
     {
+        $this->matrix->clear();
         for ($y = 0; $y < $this->getSize()->getHeight(); $y++) {
             for ($x = 0; $x < $this->getSize()->getWidth(); $x++) {
-                $this->matrix[$y][$x] = new Pixel(new Point($x, $y), $this->style->getEmptySymbol());
+                $this->matrix->setPixel(new Pixel(new Point($x, $y), $this->style->getEmptySymbol()));
             }
         }
 

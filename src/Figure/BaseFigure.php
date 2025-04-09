@@ -4,21 +4,27 @@ declare(strict_types=1);
 
 namespace ConsoleDraw\Figure;
 
+use ConsoleDraw\Figure\Pixel\PixelMatrix;
+
 class BaseFigure implements FigureInterface
 {
-    /**
-     * @var array<Pixel>
-     */
-    protected array $pixels = [];
+    protected PixelMatrix $pixels;
 
-    public function draw(): array
+
+    public function __construct()
+    {
+        $this->pixels = new PixelMatrix();
+    }
+
+
+    public function draw(): PixelMatrix
     {
         return $this->pixels;
     }
 
     protected function addFigure(FigureInterface $figure): static
     {
-        $this->pixels = array_merge($this->pixels, $figure->draw());
+        $this->pixels->merge($figure->draw());
         return $this;
     }
 

@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace ConsoleDraw\Figure\Geometry\Circle;
 
 use ConsoleDraw\Figure\FigureInterface;
-use ConsoleDraw\Figure\Pixel;
+use ConsoleDraw\Figure\Pixel\Pixel;
+use ConsoleDraw\Figure\Pixel\PixelMatrix;
 use ConsoleDraw\Plane\Point;
 
 class Circle implements FigureInterface
@@ -19,7 +20,7 @@ class Circle implements FigureInterface
         $this->style = new CircleStyle();
     }
 
-    public function draw(): array
+    public function draw(): PixelMatrix
     {
         $points = [];
 
@@ -53,7 +54,7 @@ class Circle implements FigureInterface
             }
             $delta += 2 * (++$x - --$y);
         }
-        return $points;
+        return new PixelMatrix($points);
 
     }
 }

@@ -23,6 +23,8 @@ class FrameFigure extends BaseFigure
         } else {
             $this->leftUpperCorner = new Point(0, 0);
         }
+
+        parent::__construct();
     }
 
     public function getSize(): Size

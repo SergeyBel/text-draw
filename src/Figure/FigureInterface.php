@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace ConsoleDraw\Figure;
 
+use ConsoleDraw\Figure\Pixel\PixelMatrix;
+
 interface FigureInterface
 {
-    /**
-     * @return array<Pixel>
-     */
-    public function draw(): array;
+    public function draw(): PixelMatrix;
 
 }

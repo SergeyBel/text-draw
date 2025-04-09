@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace ConsoleDraw\Render\ConsoleRender;
 
 use ConsoleDraw\Figure\FigureInterface;
-use ConsoleDraw\Figure\Pixel;
 use ConsoleDraw\Plane\Size;
 use ConsoleDraw\Render\RenderInterface;
 use ConsoleDraw\Render\TextRender\TextRender;
@@ -35,18 +34,6 @@ class ConsoleRender implements RenderInterface
         $text = $this->textRender->render();
         echo $text;
 
-    }
-
-    public function setPixel(Pixel $pixel): static
-    {
-        $this->textRender->setPixel($pixel);
-        return $this;
-    }
-
-    public function setPixels(array $pixels): static
-    {
-        $this->textRender->setPixels($pixels);
-        return $this;
     }
 
     public function addFigure(FigureInterface $figure): static

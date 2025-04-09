@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace ConsoleDraw\Figure\Turtle;
 
 use ConsoleDraw\Figure\BaseFigure;
-use ConsoleDraw\Figure\Pixel;
+use ConsoleDraw\Figure\Pixel\Pixel;
 use ConsoleDraw\Figure\Text\Text;
 use ConsoleDraw\Plane\Point;
 
@@ -16,6 +16,7 @@ class Turtle extends BaseFigure
     public function __construct()
     {
         $this->position = new Point(0, 0);
+        parent::__construct();
     }
 
     public function moveRight(int $value = 1): Turtle

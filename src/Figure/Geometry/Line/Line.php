@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace ConsoleDraw\Figure\Geometry\Line;
 
 use ConsoleDraw\Figure\FigureInterface;
-use ConsoleDraw\Figure\Pixel;
+use ConsoleDraw\Figure\Pixel\Pixel;
+use ConsoleDraw\Figure\Pixel\PixelMatrix;
 use ConsoleDraw\Plane\Point;
 
 /**
@@ -22,7 +23,7 @@ class Line implements FigureInterface
         $this->style = new LineStyle();
     }
 
-    public function draw(): array
+    public function draw(): PixelMatrix
     {
         $x0 = $this->start->getX();
         $x1 = $this->end->getX();
@@ -52,7 +53,7 @@ class Line implements FigureInterface
             $pixels[count($pixels) - 1]->setSymbol($this->style->getFinishSymbol());
         }
 
-        return $pixels;
+        return new PixelMatrix($pixels);
     }
 
     /**

@@ -7,6 +7,7 @@ namespace ConsoleDraw\Figure\Geometry\Arrow;
 use ConsoleDraw\Figure\BaseFigure;
 use ConsoleDraw\Figure\Geometry\Line\Line;
 use ConsoleDraw\Figure\Geometry\Line\LineStyle;
+use ConsoleDraw\Figure\Pixel\PixelMatrix;
 use ConsoleDraw\Plane\Point;
 use Exception;
 
@@ -24,9 +25,11 @@ class Arrow extends BaseFigure
         } else {
             throw new Exception('Arrow must be straight');
         }
+
+        parent::__construct();
     }
 
-    public function draw(): array
+    public function draw(): PixelMatrix
     {
         $line = new Line($this->start, $this->end);
 
@@ -54,7 +57,7 @@ class Arrow extends BaseFigure
         $this
             ->addFigure($line);
 
-        return $this->pixels;
+        return parent::draw();
     }
 
 

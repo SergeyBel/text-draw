@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ConsoleDraw\Figure\Table;
 
 use ConsoleDraw\Figure\FrameFigure;
+use ConsoleDraw\Figure\Pixel\PixelMatrix;
 use ConsoleDraw\Figure\Turtle\Turtle;
 use ConsoleDraw\Plane\Point;
 use ConsoleDraw\Plane\Size;
@@ -25,7 +26,7 @@ class Table extends FrameFigure
     }
 
 
-    public function draw(): array
+    public function draw(): PixelMatrix
     {
         $cellWidth = $this->calculateCellWidth();
         $cellCount = count($this->header);

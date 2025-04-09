@@ -7,6 +7,7 @@ namespace ConsoleDraw\Figure\Geometry\Rechtangle;
 use ConsoleDraw\Figure\BaseFigure;
 use ConsoleDraw\Figure\Geometry\Line\Line;
 use ConsoleDraw\Figure\Geometry\Line\LineStyle;
+use ConsoleDraw\Figure\Pixel\PixelMatrix;
 use ConsoleDraw\Plane\Point;
 use ConsoleDraw\Plane\Size;
 
@@ -19,9 +20,11 @@ class Rectangle extends BaseFigure
         private Size $size,
     ) {
         $this->style = new RectangleStyle();
+
+        parent::__construct();
     }
 
-    public function draw(): array
+    public function draw(): PixelMatrix
     {
 
         $lineStyle = (new LineStyle())->setSymbol($this->style->getSymbol());

@@ -8,6 +8,7 @@ use ConsoleDraw\Figure\FrameFigure;
 use ConsoleDraw\Figure\Geometry\Line\Line;
 use ConsoleDraw\Figure\Geometry\Line\LineStyle;
 use ConsoleDraw\Figure\Geometry\Rechtangle\Rectangle;
+use ConsoleDraw\Figure\Pixel\PixelMatrix;
 use ConsoleDraw\Figure\Text\Text;
 use ConsoleDraw\Plane\Point;
 use ConsoleDraw\Plane\Size;
@@ -34,7 +35,7 @@ class BarChart extends FrameFigure
 
     }
 
-    public function draw(): array
+    public function draw(): PixelMatrix
     {
         $this->drawAxes();
         $area = $this->size

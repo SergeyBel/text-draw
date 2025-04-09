@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Figure;
+namespace ConsoleDraw\Figure\Pixel;
 
+use ConsoleDraw\Figure\FigureInterface;
 use ConsoleDraw\Plane\Point;
 
 class Pixel implements FigureInterface
@@ -14,9 +15,9 @@ class Pixel implements FigureInterface
     ) {
     }
 
-    public function draw(): array
+    public function draw(): PixelMatrix
     {
-        return [$this];
+        return new PixelMatrix([$this]);
     }
 
     public function getPoint(): Point

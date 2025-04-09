@@ -6,7 +6,8 @@ namespace ConsoleDraw\Figure\Chart\Function;
 
 use ConsoleDraw\Figure\FrameFigure;
 use ConsoleDraw\Figure\Geometry\Arrow\Arrow;
-use ConsoleDraw\Figure\Pixel;
+use ConsoleDraw\Figure\Pixel\Pixel;
+use ConsoleDraw\Figure\Pixel\PixelMatrix;
 use ConsoleDraw\Plane\Point;
 use ConsoleDraw\Plane\Size;
 
@@ -27,7 +28,7 @@ class FunctionGraph extends FrameFigure
         parent::__construct($size, $leftUpperCorner);
     }
 
-    public function draw(): array
+    public function draw(): PixelMatrix
     {
         $this->drawAxes();
         $this->drawFunction();
