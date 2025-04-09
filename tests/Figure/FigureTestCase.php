@@ -7,6 +7,7 @@ namespace ConsoleDraw\Tests\Figure;
 use ConsoleDraw\Plane\Size;
 use ConsoleDraw\Render\TextRender\TextRender;
 use ConsoleDraw\Render\TextRender\TextRenderStyle;
+use ConsoleDraw\Tests\RenderConstraint;
 use PHPUnit\Framework\TestCase;
 
 class FigureTestCase extends TestCase
@@ -29,7 +30,10 @@ class FigureTestCase extends TestCase
 
     protected function assertRender(string $expected)
     {
-        $this->assertSame($expected, $this->render->render());
+        $actual = $this->render->render();
+        $message = "Expected:\n".$expected."\n\nActual:\n".$actual;
+
+        $this->assertThat($actual, new RenderConstraint($expected), $message);
     }
 
 }
