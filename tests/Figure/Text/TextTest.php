@@ -10,15 +10,14 @@ use ConsoleDraw\Tests\Figure\FigureTestCase;
 
 class TextTest extends FigureTestCase
 {
-    public function testRectangle(): void
+    public function testText(): void
     {
-        $this->createDrawer(7, 3);
+        $this->createDrawer(7, 2);
         $this->render->addFigure(new Text(
-            new Point(1, 2),
+            new Point(1, 1),
             'hello'
         ));
         $expected = <<<EOD
-        .......
         .......
         .hello.
         EOD;
