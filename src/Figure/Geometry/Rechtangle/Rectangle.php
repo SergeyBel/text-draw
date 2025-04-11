@@ -29,22 +29,34 @@ class Rectangle extends BaseFigure
 
         $lineStyle = (new LineStyle())->setSymbol($this->style->getSymbol());
 
-        if (!is_null($this->style->getCornerSymbol())) {
-            $lineStyle
-                ->setStartSymbol($this->style->getCornerSymbol())
-                ->setFinishSymbol($this->style->getCornerSymbol());
-        }
 
         $rightUpperCorner = $this->leftUpperCorner->addWidth($this->size->getWidth());
         $leftBottomCorner = $this->leftUpperCorner->addHeight($this->size->getHeight());
         $rightBottomCorner = $rightUpperCorner->addHeight($this->size->getHeight());
 
 
+        $top = (new Line($this->leftUpperCorner, $rightUpperCorner))->setStyle($lineStyle);
+        $right = (new Line($rightUpperCorner, $rightBottomCorner))->setStyle($lineStyle);
+        $bottom = (new Line($rightBottomCorner, $leftBottomCorner))->setStyle($lineStyle);
+        $left = (new Line($leftBottomCorner, $this->leftUpperCorner))->setStyle($lineStyle);
+
         $this
-            ->addFigure((new Line($this->leftUpperCorner, $rightUpperCorner))->setStyle($lineStyle))
-            ->addFigure((new Line($rightUpperCorner, $rightBottomCorner))->setStyle($lineStyle))
-            ->addFigure((new Line($rightBottomCorner, $leftBottomCorner))->setStyle($lineStyle))
-            ->addFigure((new Line($leftBottomCorner, $this->leftUpperCorner))->setStyle($lineStyle));
+            ->addFigure($top)
+            ->addFigure($bottom)
+            ->addFigure($left)
+            ->addFigure($right);
+
+        foreach ($this->style->getSideStyles() as $sideValue => $style) {
+            $side = RectangleSide::from($sideValue);
+
+            match ($side) {
+                RectangleSide::Top => $this->addFigure($top->setStyle($style)),
+                RectangleSide::Bottom => $this->addFigure($bottom->setStyle($style)),
+                RectangleSide::Left => $this->addFigure($left->setStyle($style)),
+                RectangleSide::Right => $this->addFigure($right->setStyle($style)),
+            };
+        }
+
 
         return parent::draw();
     }
@@ -59,4 +71,5 @@ class Rectangle extends BaseFigure
         $this->style = $style;
         return $this;
     }
+
 }

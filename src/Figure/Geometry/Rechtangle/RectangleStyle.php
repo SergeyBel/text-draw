@@ -4,11 +4,16 @@ declare(strict_types=1);
 
 namespace ConsoleDraw\Figure\Geometry\Rechtangle;
 
+use ConsoleDraw\Figure\Geometry\Line\LineStyle;
+
 class RectangleStyle
 {
     private string $symbol = '*';
 
-    private ?string $cornerSymbol = null;
+    /**
+     * @var array<string, LineStyle>
+     */
+    private array $styleOrder = [];
 
     public function getSymbol(): string
     {
@@ -21,14 +26,18 @@ class RectangleStyle
         return $this;
     }
 
-    public function getCornerSymbol(): ?string
+    /**
+     * @return array<string, LineStyle>
+     */
+    public function getSideStyles(): array
     {
-        return $this->cornerSymbol;
+        return $this->styleOrder;
     }
 
-    public function setCornerSymbol(?string $cornerSymbol): RectangleStyle
+    public function setSideStyle(RectangleSide $side, LineStyle $sideStyle): self
     {
-        $this->cornerSymbol = $cornerSymbol;
+        $this->styleOrder[$side->value] = $sideStyle;
         return $this;
     }
+
 }
