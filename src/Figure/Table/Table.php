@@ -15,13 +15,16 @@ class Table extends FrameFigure
     /** @var array<string>  */
     private array $header = [];
 
-    /** @var array<array<string>>  */
+    /** @var array<array<string|TableCell>>  */
     private array $rows = [];
+
+    private TableStyle $style;
 
     public function __construct(
         Size $size,
         ?Point $leftUpperCorner = null
     ) {
+        $this->style = new TableStyle();
         parent::__construct($size, $leftUpperCorner);
     }
 
@@ -29,7 +32,7 @@ class Table extends FrameFigure
     public function draw(): PixelMatrix
     {
         $cellWidth = $this->calculateCellWidth();
-        $cellCount = count($this->header);
+        $cellCount = $this->calculateCellCount();
         $start = $this->getLeftUpperCorner();
 
         $start = $this->drawHeader($start, $cellCount, $cellWidth);
@@ -42,6 +45,10 @@ class Table extends FrameFigure
     {
         $this->drawSeparator($start, $cellCount, $cellWidth);
         $start = $start->addY(1);
+
+        if (count($this->header) === 0) {
+            return $start;
+        }
         $this->drawRow($start, $this->header, $cellWidth);
         $start = $start->addY(1);
         $this->drawSeparator($start, $cellCount, $cellWidth);
@@ -67,14 +74,15 @@ class Table extends FrameFigure
     {
         $turtle = (new Turtle())
             ->moveTo($start)
-            ->paintRight('|');
+            ->paintRight($this->style->getVerticalSymbol());
 
 
         foreach ($row as $cell) {
-            $text = str_pad($cell, $cellWidth, ' ');
+            $str = $this->getCellText($cell);
+            $text = str_pad($str, $cellWidth, $this->style->getPaddingSymbol());
             $turtle
                 ->paintText($text)
-                ->paintRight('|');
+                ->paintRight($this->style->getVerticalSymbol());
         }
 
         $this->addFigure($turtle);
@@ -107,7 +115,7 @@ class Table extends FrameFigure
     }
 
     /**
-     * @param array<array<string>> $rows
+     * @param array<array<string|TableCell>> $rows
      * @return $this
      */
     public function setRows(array $rows): Table
@@ -120,23 +128,36 @@ class Table extends FrameFigure
     {
         $turtle = (new Turtle())
             ->moveTo($start)
-            ->paintRight('+');
+            ->paintRight($this->style->getCrossingSymbol());
 
         for ($i = 0; $i < $cellCount; $i++) {
             $turtle
-                ->paintRight('-', $cellWidth)
-                ->paintRight('+');
+                ->paintRight($this->style->getHorizontalSymbol(), $cellWidth)
+                ->paintRight($this->style->getCrossingSymbol());
         }
 
         $this->addFigure($turtle);
     }
 
+    private function calculateCellCount(): int
+    {
+        if (count($this->header) > 0) {
+            return count($this->header);
+        }
+
+        return max(array_map(fn ($row) => count($row), $this->rows));
+    }
+
     private function calculateCellWidth(): int
     {
+        if (!is_null($this->style->getColumnWidth())) {
+            return $this->style->getColumnWidth();
+        }
+
         $max = 0;
         foreach ($this->rows as $row) {
             foreach ($row as $cell) {
-                $length = mb_strlen($cell);
+                $length = mb_strlen($this->getCellText($cell));
                 if ($length > $max) {
                     $max = $length;
                 }
@@ -144,6 +165,15 @@ class Table extends FrameFigure
         }
 
         return $max;
+    }
+
+    private function getCellText(string | TableCell $cell): string
+    {
+        if ($cell instanceof TableCell) {
+            return $cell->text;
+        } else {
+            return $cell;
+        }
     }
 
 
