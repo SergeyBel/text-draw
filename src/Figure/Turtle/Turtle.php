@@ -48,6 +48,12 @@ class Turtle extends BaseFigure
         return $this;
     }
 
+    public function paint(string $symbol): Turtle
+    {
+        $this->addFigure(new Pixel($this->position, $symbol));
+        return $this;
+    }
+
     public function paintRight(string $symbol, int $value = 1): Turtle
     {
         for ($i = 0; $i < $value; $i++) {
@@ -91,6 +97,8 @@ class Turtle extends BaseFigure
 
         return $this;
     }
+
+
 
 
     public function paintText(string $str): Turtle

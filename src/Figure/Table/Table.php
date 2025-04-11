@@ -12,13 +12,15 @@ use ConsoleDraw\Plane\Size;
 
 class Table extends FrameFigure
 {
-    /** @var array<string>  */
-    private array $header = [];
-
     /** @var array<array<string|TableCell>>  */
     private array $rows = [];
 
     private TableStyle $style;
+
+    /**
+     * @var array<int>
+     */
+    private array $cellWidths = [];
 
     public function __construct(
         Size $size,
@@ -31,69 +33,69 @@ class Table extends FrameFigure
 
     public function draw(): PixelMatrix
     {
-        $cellWidth = $this->calculateCellWidth();
-        $cellCount = $this->calculateCellCount();
-        $start = $this->getLeftUpperCorner();
+        $this->calculateCellWidths();
 
-        $start = $this->drawHeader($start, $cellCount, $cellWidth);
-        $this->drawRows($start, $cellCount, $cellWidth);
+        $start = $this->getLeftUpperCorner();
+        $this->drawRows($start);
 
         return parent::draw();
     }
 
-    private function drawHeader(Point $start, int $cellCount, int $cellWidth): Point
-    {
-        $this->drawSeparator($start, $cellCount, $cellWidth);
-        $start = $start->addY(1);
 
-        if (count($this->header) === 0) {
-            return $start;
-        }
-        $this->drawRow($start, $this->header, $cellWidth);
-        $start = $start->addY(1);
-        $this->drawSeparator($start, $cellCount, $cellWidth);
-        $start = $start->addY(1);
 
-        return $start;
-    }
-
-    private function drawRows(Point $start, int $cellCount, int $cellWidth): void
+    private function drawRows(Point $start): void
     {
         foreach ($this->rows as $row) {
-            $this->drawRow($start, $row, $cellWidth);
-            $start = $start->addY(1);
-            $this->drawSeparator($start, $cellCount, $cellWidth);
-            $start = $start->addY(1);
+            $this->drawRow($start, $row);
+            $start = $start->addY(2);
         }
     }
 
     /**
-     * @param array<string> $row
+     * @param array<string|TableCell> $row
      */
-    private function drawRow(Point $start, array $row, int $cellWidth): void
+    private function drawRow(Point $start, array $row): void
+    {
+        foreach ($row as $index => $cell) {
+            $this->drawCell($start, $cell, $this->cellWidths[$index]);
+            $start = $start->addX($this->cellWidths[$index] + 1);
+        }
+    }
+
+    private function drawCell(Point $start, string|TableCell $cell, int $cellWidth): void
     {
         $turtle = (new Turtle())
-            ->moveTo($start)
-            ->paintRight($this->style->getVerticalSymbol());
+            ->moveTo($start);
 
-
-        foreach ($row as $cell) {
-            $str = $this->getCellText($cell);
-            $text = str_pad($str, $cellWidth, $this->style->getPaddingSymbol());
-            $turtle
-                ->paintText($text)
-                ->paintRight($this->style->getVerticalSymbol());
-        }
+        $turtle = $this->drawCellBorder($turtle, $cellWidth);
+        $turtle->moveTo($start)->moveDown(1);
+        $turtle = $this->drawCellText($turtle, $this->getCellText($cell), $cellWidth);
+        $turtle->moveTo($start)->moveDown(2);
+        $turtle = $this->drawCellBorder($turtle, $cellWidth);
 
         $this->addFigure($turtle);
     }
 
-    /**
-     * @return array<string>
-     */
-    public function getHeader(): array
+    private function drawCellBorder(Turtle $turtle, int $cellWidth): Turtle
     {
-        return $this->header;
+        $turtle
+            ->paintRight($this->style->getCrossingSymbol())
+            ->paintRight($this->style->getHorizontalSymbol(), $cellWidth)
+            ->paint($this->style->getCrossingSymbol())
+        ;
+
+        return $turtle;
+    }
+
+    private function drawCellText(Turtle $turtle, string $str, int $cellWidth): Turtle
+    {
+        $text = str_pad($str, $cellWidth, $this->style->getPaddingSymbol());
+        $turtle
+            ->paintRight($this->style->getVerticalSymbol())
+            ->paintText($text)
+            ->paint($this->style->getVerticalSymbol());
+
+        return $turtle;
     }
 
     /**
@@ -102,69 +104,33 @@ class Table extends FrameFigure
      */
     public function setHeader(array $header): Table
     {
-        $this->header = $header;
+        $this->rows[] = $header;
         return $this;
-    }
-
-    /**
-     * @return array<array<string>>
-     */
-    public function getRows(): array
-    {
-        return $this->rows;
     }
 
     /**
      * @param array<array<string|TableCell>> $rows
      * @return $this
      */
-    public function setRows(array $rows): Table
+    public function addRows(array $rows): Table
     {
-        $this->rows = $rows;
+        $this->rows = array_merge($this->rows, $rows);
         return $this;
     }
 
-    private function drawSeparator(Point $start, int $cellCount, int $cellWidth): void
+    private function calculateCellWidths(): void
     {
-        $turtle = (new Turtle())
-            ->moveTo($start)
-            ->paintRight($this->style->getCrossingSymbol());
-
-        for ($i = 0; $i < $cellCount; $i++) {
-            $turtle
-                ->paintRight($this->style->getHorizontalSymbol(), $cellWidth)
-                ->paintRight($this->style->getCrossingSymbol());
-        }
-
-        $this->addFigure($turtle);
-    }
-
-    private function calculateCellCount(): int
-    {
-        if (count($this->header) > 0) {
-            return count($this->header);
-        }
-
-        return max(array_map(fn ($row) => count($row), $this->rows));
-    }
-
-    private function calculateCellWidth(): int
-    {
-        if (!is_null($this->style->getColumnWidth())) {
-            return $this->style->getColumnWidth();
-        }
-
-        $max = 0;
+        $columns = [];
         foreach ($this->rows as $row) {
-            foreach ($row as $cell) {
-                $length = mb_strlen($this->getCellText($cell));
-                if ($length > $max) {
-                    $max = $length;
-                }
+            foreach ($row as $index => $cell) {
+                $columns[$index][] = mb_strlen($this->getCellText($cell));
             }
         }
 
-        return $max;
+        foreach ($columns as $index => $column) {
+            $this->cellWidths[$index] = max($column);
+        }
+
     }
 
     private function getCellText(string | TableCell $cell): string
@@ -175,6 +141,4 @@ class Table extends FrameFigure
             return $cell;
         }
     }
-
-
 }

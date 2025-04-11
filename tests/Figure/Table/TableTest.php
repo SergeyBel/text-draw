@@ -16,7 +16,7 @@ class TableTest extends FigureTestCase
 
         $table = (new Table($this->getSize()))
             ->setHeader(['City', 'Value'])
-            ->setRows([
+            ->addRows([
                 ['London', '12000'],
                 ['New York', '540'],
             ]);
@@ -41,7 +41,7 @@ class TableTest extends FigureTestCase
         $this->createDrawer(14, 3);
 
         $table = (new Table($this->getSize()))
-            ->setRows([
+            ->addRows([
                 ['London', new TableCell('12000')],
             ]);
         $this->render->addFigure($table);
