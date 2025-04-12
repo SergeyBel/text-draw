@@ -57,6 +57,29 @@ class TableTest extends FigureTestCase
         $this->assertRender($expected);
     }
 
+    public function testTableColspan(): void
+    {
+        $this->createDrawer(14, 5);
+
+        $table = (new Table($this->getSize()))
+            ->addRows([
+                ['London', '12000'],
+                [new TableCell('Boston', 2)],
+            ]);
+        $this->render->addFigure($table);
+
+
+        $expected = <<<EOD
+        +------+-----+
+        |London|12000|
+        +------+-----+
+        |Boston      |
+        +------+-----+
+        EOD;
+
+        $this->assertRender($expected);
+    }
+
     public function testTableCellMaxWidth(): void
     {
         $this->createDrawer(13, 3);

@@ -12,7 +12,7 @@ use ConsoleDraw\Plane\Size;
 
 class Table extends FrameFigure
 {
-    /** @var array<array<string|TableCell>>  */
+    /** @var array<array<TableCell>>  */
     private array $rows = [];
 
     private TableStyle $style;
@@ -20,7 +20,7 @@ class Table extends FrameFigure
     /**
      * @var array<int>
      */
-    private array $cellWidths = [];
+    private array $columnsWidth = [];
 
     public function __construct(
         Size $size,
@@ -33,7 +33,8 @@ class Table extends FrameFigure
 
     public function draw(): PixelMatrix
     {
-        $this->calculateCellWidths();
+        //$this->fillRows();
+        $this->calculateColumnsWidth();
 
         $start = $this->getLeftUpperCorner();
         $this->drawRows($start);
@@ -52,24 +53,26 @@ class Table extends FrameFigure
     }
 
     /**
-     * @param array<string|TableCell> $row
+     * @param array<TableCell> $row
      */
     private function drawRow(Point $start, array $row): void
     {
-        foreach ($row as $index => $cell) {
-            $this->drawCell($start, $cell, $this->cellWidths[$index]);
-            $start = $start->addX($this->cellWidths[$index] + 1);
+        foreach ($row as $columnIndex => $cell) {
+            $this->drawCell($start, $cell, $columnIndex);
+            $start = $start->addX($this->columnsWidth[$columnIndex] + 1);
         }
     }
 
-    private function drawCell(Point $start, string|TableCell $cell, int $cellWidth): void
+    private function drawCell(Point $start, TableCell $cell, int $columnIndex): void
     {
+        $cellWidth = $this->columnsWidth[$columnIndex];
+
         $turtle = (new Turtle())
             ->moveTo($start);
 
         $turtle = $this->drawCellBorder($turtle, $cellWidth);
         $turtle->moveTo($start)->moveDown(1);
-        $turtle = $this->drawCellText($turtle, $this->getCellText($cell), $cellWidth);
+        $turtle = $this->drawCellText($turtle, $cell, $cellWidth);
         $turtle->moveTo($start)->moveDown(2);
         $turtle = $this->drawCellBorder($turtle, $cellWidth);
 
@@ -87,11 +90,11 @@ class Table extends FrameFigure
         return $turtle;
     }
 
-    private function drawCellText(Turtle $turtle, string $str, int $cellWidth): Turtle
+    private function drawCellText(Turtle $turtle, TableCell $cell, int $cellWidth): Turtle
     {
-        $text = str_pad($str, $cellWidth, $this->style->getPaddingSymbol());
+        $text = str_pad($cell->getText(), $cellWidth, $this->style->getPaddingSymbol());
         $turtle
-            ->paintRight($this->style->getVerticalSymbol())
+            ->paintRight($cell->getLeftChar() ?? $this->style->getVerticalSymbol())
             ->paintText($text)
             ->paint($this->style->getVerticalSymbol());
 
@@ -104,7 +107,7 @@ class Table extends FrameFigure
      */
     public function setHeader(array $header): Table
     {
-        $this->rows[] = $header;
+        $this->addRow($header);
         return $this;
     }
 
@@ -114,8 +117,39 @@ class Table extends FrameFigure
      */
     public function addRows(array $rows): Table
     {
-        $this->rows = array_merge($this->rows, $rows);
+        foreach ($rows as $row) {
+            $this->addRow($row);
+        }
+
         return $this;
+    }
+
+    /**
+     * @param array<string|TableCell> $row
+     */
+    public function addRow(array $row): self
+    {
+        $row = array_map(fn ($cell) => is_string($cell) ? new TableCell($cell) : $cell, $row);
+
+        $fullRow = [];
+        foreach ($row as $cell) {
+            if ($cell->getColspan() === 1) {
+                $fullRow[] = $cell;
+                continue;
+            }
+            $colspan = $cell->getColspan();
+
+            $fullRow[] = $cell->setColspan(1);
+            $emptyCell = (new TableCell($this->style->getPaddingSymbol()))->setLeftChar($this->style->getPaddingSymbol());
+            $fullRow = array_merge(
+                $fullRow,
+                array_fill(0, $colspan - 1, $emptyCell)
+            );
+
+        }
+        $this->rows[] = $fullRow;
+        return $this;
+
     }
 
     public function getStyle(): TableStyle
@@ -130,14 +164,12 @@ class Table extends FrameFigure
     }
 
 
-
-
-    private function calculateCellWidths(): void
+    private function calculateColumnsWidth(): void
     {
         $columns = [];
         foreach ($this->rows as $row) {
             foreach ($row as $index => $cell) {
-                $columns[$index][] = mb_strlen($this->getCellText($cell));
+                $columns[$index][] = mb_strlen($cell->getText());
             }
         }
 
@@ -146,17 +178,8 @@ class Table extends FrameFigure
             if (!is_null($this->style->getColumnMaxWidth())) {
                 $width = min($width, $this->style->getColumnMaxWidth());
             }
-            $this->cellWidths[$index] = $width;
+            $this->columnsWidth[$index] = $width;
         }
 
-    }
-
-    private function getCellText(string | TableCell $cell): string
-    {
-        if ($cell instanceof TableCell) {
-            return $cell->text;
-        } else {
-            return $cell;
-        }
     }
 }
