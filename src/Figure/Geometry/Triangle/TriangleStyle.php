@@ -6,16 +6,16 @@ namespace ConsoleDraw\Figure\Geometry\Triangle;
 
 class TriangleStyle
 {
-    private string $symbol = '*';
+    private string $char = '*';
 
-    public function getSymbol(): string
+    public function getChar(): string
     {
-        return $this->symbol;
+        return $this->char;
     }
 
-    public function setSymbol(string $symbol): TriangleStyle
+    public function setChar(string $char): TriangleStyle
     {
-        $this->symbol = $symbol;
+        $this->char = $char;
         return $this;
     }
 

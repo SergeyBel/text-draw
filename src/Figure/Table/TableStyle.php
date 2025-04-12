@@ -6,42 +6,42 @@ namespace ConsoleDraw\Figure\Table;
 
 class TableStyle
 {
-    private string $verticalSymbol = '|';
-    private string $horizontalSymbol = '-';
-    private string $crossingSymbol = '+';
-    private string $paddingSymbol = ' ';
+    private string $verticalChar = '|';
+    private string $horizontalChar = '-';
+    private string $crossingChar = '+';
+    private string $paddingChar = ' ';
     private ?int $columnMaxWidth = null;
 
-    public function getVerticalSymbol(): string
+    public function getVerticalChar(): string
     {
-        return $this->verticalSymbol;
+        return $this->verticalChar;
     }
 
-    public function setVerticalSymbol(string $verticalSymbol): TableStyle
+    public function setVerticalChar(string $verticalChar): TableStyle
     {
-        $this->verticalSymbol = $verticalSymbol;
+        $this->verticalChar = $verticalChar;
         return $this;
     }
 
-    public function getHorizontalSymbol(): string
+    public function getHorizontalChar(): string
     {
-        return $this->horizontalSymbol;
+        return $this->horizontalChar;
     }
 
-    public function setHorizontalSymbol(string $horizontalSymbol): TableStyle
+    public function setHorizontalChar(string $horizontalChar): TableStyle
     {
-        $this->horizontalSymbol = $horizontalSymbol;
+        $this->horizontalChar = $horizontalChar;
         return $this;
     }
 
-    public function getCrossingSymbol(): string
+    public function getCrossingChar(): string
     {
-        return $this->crossingSymbol;
+        return $this->crossingChar;
     }
 
-    public function setCrossingSymbol(string $crossingSymbol): TableStyle
+    public function setCrossingChar(string $crossingChar): TableStyle
     {
-        $this->crossingSymbol = $crossingSymbol;
+        $this->crossingChar = $crossingChar;
         return $this;
     }
 
@@ -56,14 +56,14 @@ class TableStyle
         return $this;
     }
 
-    public function getPaddingSymbol(): string
+    public function getPaddingChar(): string
     {
-        return $this->paddingSymbol;
+        return $this->paddingChar;
     }
 
-    public function setPaddingSymbol(string $paddingSymbol): TableStyle
+    public function setPaddingChar(string $paddingChar): TableStyle
     {
-        $this->paddingSymbol = $paddingSymbol;
+        $this->paddingChar = $paddingChar;
         return $this;
     }
 

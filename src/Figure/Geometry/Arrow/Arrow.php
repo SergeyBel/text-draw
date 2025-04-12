@@ -37,18 +37,18 @@ class Arrow extends BaseFigure
             $style = (new LineStyle())->setSymbol('-');
 
             if ($this->start->getX() < $this->end->getX()) {
-                $style->setFinishSymbol('>');
+                $style->setFinishChar('>');
             } else {
-                $style->setStartSymbol('<');
+                $style->setStartChar('<');
             }
             $line->setStyle($style);
         } else {
             $style = (new LineStyle())->setSymbol('|');
 
             if ($this->start->getY() < $this->end->getY()) {
-                $style->setFinishSymbol('v');
+                $style->setFinishChar('v');
             } else {
-                $style->setStartSymbol('^');
+                $style->setStartChar('^');
             }
 
             $line->setStyle($style);

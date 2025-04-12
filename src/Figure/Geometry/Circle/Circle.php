@@ -26,7 +26,7 @@ class Circle implements FigureInterface
 
         $x1 = $this->center->getX();
         $y1 = $this->center->getY();
-        $symbol = $this->style->getSymbol();
+        $symbol = $this->style->getChar();
 
         $x = 0;
         $y = $this->radius;

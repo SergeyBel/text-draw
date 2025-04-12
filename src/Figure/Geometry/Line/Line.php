@@ -45,12 +45,12 @@ class Line implements FigureInterface
             }
         }
 
-        if (!is_null($this->style->getStartSymbol())) {
-            $pixels[0]->setSymbol($this->style->getStartSymbol());
+        if (!is_null($this->style->getStartChar())) {
+            $pixels[0]->setChar($this->style->getStartChar());
         }
 
-        if (!is_null($this->style->getFinishSymbol())) {
-            $pixels[count($pixels) - 1]->setSymbol($this->style->getFinishSymbol());
+        if (!is_null($this->style->getFinishChar())) {
+            $pixels[count($pixels) - 1]->setChar($this->style->getFinishChar());
         }
 
         return new PixelMatrix($pixels);

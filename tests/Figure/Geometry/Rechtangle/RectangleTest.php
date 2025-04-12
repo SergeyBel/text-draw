@@ -28,7 +28,4 @@ class RectangleTest extends FigureTestCase
 
         $this->assertRender($expected);
     }
-
-
-
 }

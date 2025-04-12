@@ -29,14 +29,14 @@ class Rectangle extends BaseFigure
 
         $horizontalLineStyle = (new LineStyle())
                 ->setSymbol($this->style->getHorizontalChar())
-                ->setStartSymbol($this->style->getCrossingChar())
-                ->setFinishSymbol($this->style->getCrossingChar())
+                ->setStartChar($this->style->getCrossingChar())
+                ->setFinishChar($this->style->getCrossingChar())
         ;
 
         $verticalLineStyle = (new LineStyle())
             ->setSymbol($this->style->getVerticalChar())
-            ->setStartSymbol($this->style->getCrossingChar())
-            ->setFinishSymbol($this->style->getCrossingChar())
+            ->setStartChar($this->style->getCrossingChar())
+            ->setFinishChar($this->style->getCrossingChar())
         ;
 
 

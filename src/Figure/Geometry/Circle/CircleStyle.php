@@ -6,16 +6,16 @@ namespace ConsoleDraw\Figure\Geometry\Circle;
 
 class CircleStyle
 {
-    private string $symbol = '*';
+    private string $char = '*';
 
-    public function getSymbol(): string
+    public function getChar(): string
     {
-        return $this->symbol;
+        return $this->char;
     }
 
-    public function setSymbol(string $symbol): CircleStyle
+    public function setChar(string $char): CircleStyle
     {
-        $this->symbol = $symbol;
+        $this->char = $char;
         return $this;
     }
 

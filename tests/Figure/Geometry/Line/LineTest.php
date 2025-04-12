@@ -77,8 +77,8 @@ class LineTest extends FigureTestCase
         $this->createDrawer(3, 3);
 
         $style = (new LineStyle())
-            ->setStartSymbol('+')
-            ->setFinishSymbol('@');
+            ->setStartChar('+')
+            ->setFinishChar('@');
         $this->render->addFigure(
             (new Line(new Point(0, 0), new Point(2, 2)))
                 ->setStyle($style)

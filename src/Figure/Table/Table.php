@@ -84,9 +84,9 @@ class Table extends FrameFigure
     private function drawCellBorder(Turtle $turtle, int $cellWidth): Turtle
     {
         $turtle
-            ->paintRight($this->style->getCrossingSymbol())
-            ->paintRight($this->style->getHorizontalSymbol(), $cellWidth)
-            ->paint($this->style->getCrossingSymbol())
+            ->paintRight($this->style->getCrossingChar())
+            ->paintRight($this->style->getHorizontalChar(), $cellWidth)
+            ->paint($this->style->getCrossingChar())
         ;
 
         return $turtle;
@@ -95,19 +95,19 @@ class Table extends FrameFigure
     private function drawCellText(Turtle $turtle, TableCell $cell, int $cellWidth): Turtle
     {
         $turtle
-            ->paintRight($cell->getLeftChar() ?? $this->style->getVerticalSymbol());
+            ->paintRight($cell->getLeftChar() ?? $this->style->getVerticalChar());
 
         $text = new Text($turtle->getPosition(), $cell->getText());
         $text->setStyle(
             (new TextStyle())
                 ->setWidth($cellWidth)
-                ->setPaddingChar($this->style->getPaddingSymbol())
+                ->setPaddingChar($this->style->getPaddingChar())
         );
         $this->addFigure($text);
 
         $turtle
             ->moveRight($cellWidth)
-            ->paint($this->style->getVerticalSymbol());
+            ->paint($this->style->getVerticalChar());
 
         return $turtle;
     }
@@ -151,7 +151,7 @@ class Table extends FrameFigure
             $colspan = $cell->getColspan();
 
             $fullRow[] = $cell->setColspan(1);
-            $emptyCell = (new TableCell($this->style->getPaddingSymbol()))->setLeftChar($this->style->getPaddingSymbol());
+            $emptyCell = (new TableCell($this->style->getPaddingChar()))->setLeftChar($this->style->getPaddingChar());
             $fullRow = array_merge(
                 $fullRow,
                 array_fill(0, $colspan - 1, $emptyCell)

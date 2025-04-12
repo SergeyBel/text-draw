@@ -33,7 +33,7 @@ class TextRender implements RenderInterface
         for ($y = 0; $y < $this->getSize()->getHeight(); $y++) {
             $line = '';
             for ($x = 0; $x < $this->getSize()->getWidth(); $x++) {
-                $line .= $this->matrix->getPixel($x, $y)->getSymbol();
+                $line .= $this->matrix->getPixel($x, $y)->getChar();
             }
             $lines[] = $line;
 

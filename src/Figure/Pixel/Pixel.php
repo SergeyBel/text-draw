@@ -11,7 +11,7 @@ class Pixel implements FigureInterface
 {
     public function __construct(
         private Point $point,
-        private string $symbol,
+        private string $char,
     ) {
     }
 
@@ -31,14 +31,14 @@ class Pixel implements FigureInterface
         return $this;
     }
 
-    public function getSymbol(): string
+    public function getChar(): string
     {
-        return $this->symbol;
+        return $this->char;
     }
 
-    public function setSymbol(string $symbol): self
+    public function setChar(string $char): self
     {
-        $this->symbol = $symbol;
+        $this->char = $char;
         return $this;
     }
 
