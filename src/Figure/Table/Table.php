@@ -118,6 +118,20 @@ class Table extends FrameFigure
         return $this;
     }
 
+    public function getStyle(): TableStyle
+    {
+        return $this->style;
+    }
+
+    public function setStyle(TableStyle $style): Table
+    {
+        $this->style = $style;
+        return $this;
+    }
+
+
+
+
     private function calculateCellWidths(): void
     {
         $columns = [];
@@ -128,7 +142,11 @@ class Table extends FrameFigure
         }
 
         foreach ($columns as $index => $column) {
-            $this->cellWidths[$index] = max($column);
+            $width = max($column);
+            if (!is_null($this->style->getColumnMaxWidth())) {
+                $width = min($width, $this->style->getColumnMaxWidth());
+            }
+            $this->cellWidths[$index] = $width;
         }
 
     }

@@ -6,6 +6,7 @@ namespace ConsoleDraw\Tests\Figure\Table;
 
 use ConsoleDraw\Figure\Table\Table;
 use ConsoleDraw\Figure\Table\TableCell;
+use ConsoleDraw\Figure\Table\TableStyle;
 use ConsoleDraw\Tests\Figure\FigureTestCase;
 
 class TableTest extends FigureTestCase
@@ -51,6 +52,27 @@ class TableTest extends FigureTestCase
         +------+-----+
         |London|12000|
         +------+-----+
+        EOD;
+
+        $this->assertRender($expected);
+    }
+
+    public function testTableCellMaxWidth(): void
+    {
+        $this->createDrawer(13, 3);
+
+        $table = (new Table($this->getSize()))
+            ->addRows([
+                ['London', new TableCell('12000')],
+            ]);
+        $table->setStyle((new TableStyle())->setColumnMaxWidth(5));
+        $this->render->addFigure($table);
+
+
+        $expected = <<<EOD
+        +-----+-----+
+        |Londo|12000|
+        +-----+-----+
         EOD;
 
         $this->assertRender($expected);

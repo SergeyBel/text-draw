@@ -10,7 +10,7 @@ class TableStyle
     private string $horizontalSymbol = '-';
     private string $crossingSymbol = '+';
     private string $paddingSymbol = ' ';
-    private ?int $columnWidth = null;
+    private ?int $columnMaxWidth = null;
 
     public function getVerticalSymbol(): string
     {
@@ -45,14 +45,14 @@ class TableStyle
         return $this;
     }
 
-    public function getColumnWidth(): ?int
+    public function getColumnMaxWidth(): ?int
     {
-        return $this->columnWidth;
+        return $this->columnMaxWidth;
     }
 
-    public function setColumnWidth(?int $columnWidth): TableStyle
+    public function setColumnMaxWidth(?int $columnMaxWidth): TableStyle
     {
-        $this->columnWidth = $columnWidth;
+        $this->columnMaxWidth = $columnMaxWidth;
         return $this;
     }
 
