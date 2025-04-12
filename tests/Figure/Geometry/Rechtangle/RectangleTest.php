@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace ConsoleDraw\Tests\Figure\Geometry\Rechtangle;
 
-use ConsoleDraw\Figure\Geometry\Line\LineStyle;
 use ConsoleDraw\Figure\Geometry\Rechtangle\Rectangle;
-use ConsoleDraw\Figure\Geometry\Rechtangle\RectangleStyle;
-use ConsoleDraw\Figure\Geometry\Rechtangle\RectangleSide;
 use ConsoleDraw\Plane\Point;
 use ConsoleDraw\Plane\Size;
 use ConsoleDraw\Tests\Figure\FigureTestCase;
@@ -32,66 +29,6 @@ class RectangleTest extends FigureTestCase
         $this->assertRender($expected);
     }
 
-    public function testStyleSymbol(): void
-    {
-        $this->createDrawer(3, 3);
-        $style = (new RectangleStyle())->setSymbol('@');
-        $this->render->addFigure(
-            (new Rectangle(
-                new Point(0, 0),
-                new Size(3, 3)
-            ))->setStyle($style)
-        );
-        $expected = <<<EOD
-        @@@
-        @.@
-        @@@
-        EOD;
 
-        $this->assertRender($expected);
-    }
-
-    public function testUpStyle(): void
-    {
-        $this->createDrawer(3, 3);
-        $style = (new RectangleStyle())
-                ->setSideStyle(RectangleSide::Top, (new LineStyle())->setSymbol('u'))
-        ;
-        $this->render->addFigure(
-            (new Rectangle(
-                new Point(0, 0),
-                new Size(3, 3)
-            ))->setStyle($style)
-        );
-        $expected = <<<EOD
-        uuu
-        *.*
-        ***
-        EOD;
-
-        $this->assertRender($expected);
-    }
-
-    public function testStyleIntersection(): void
-    {
-        $this->createDrawer(3, 3);
-        $style = (new RectangleStyle())
-            ->setSideStyle(RectangleSide::Top, (new LineStyle())->setSymbol('u'))
-            ->setSideStyle(RectangleSide::Right, (new LineStyle())->setSymbol('r'))
-        ;
-        $this->render->addFigure(
-            (new Rectangle(
-                new Point(0, 0),
-                new Size(3, 3)
-            ))->setStyle($style)
-        );
-        $expected = <<<EOD
-        uur
-        *.r
-        **r
-        EOD;
-
-        $this->assertRender($expected);
-    }
 
 }

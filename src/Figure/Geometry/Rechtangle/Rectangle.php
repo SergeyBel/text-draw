@@ -27,7 +27,17 @@ class Rectangle extends BaseFigure
     public function draw(): PixelMatrix
     {
 
-        $lineStyle = (new LineStyle())->setSymbol($this->style->getSymbol());
+        $horizontalLineStyle = (new LineStyle())
+                ->setSymbol($this->style->getHorizontalChar())
+                ->setStartSymbol($this->style->getCrossingChar())
+                ->setFinishSymbol($this->style->getCrossingChar())
+        ;
+
+        $verticalLineStyle = (new LineStyle())
+            ->setSymbol($this->style->getVerticalChar())
+            ->setStartSymbol($this->style->getCrossingChar())
+            ->setFinishSymbol($this->style->getCrossingChar())
+        ;
 
 
         $rightUpperCorner = $this->leftUpperCorner->addWidth($this->size->getWidth());
@@ -35,27 +45,16 @@ class Rectangle extends BaseFigure
         $rightBottomCorner = $rightUpperCorner->addHeight($this->size->getHeight());
 
 
-        $top = (new Line($this->leftUpperCorner, $rightUpperCorner))->setStyle($lineStyle);
-        $right = (new Line($rightUpperCorner, $rightBottomCorner))->setStyle($lineStyle);
-        $bottom = (new Line($rightBottomCorner, $leftBottomCorner))->setStyle($lineStyle);
-        $left = (new Line($leftBottomCorner, $this->leftUpperCorner))->setStyle($lineStyle);
+        $top = (new Line($this->leftUpperCorner, $rightUpperCorner))->setStyle($horizontalLineStyle);
+        $right = (new Line($rightUpperCorner, $rightBottomCorner))->setStyle($verticalLineStyle);
+        $bottom = (new Line($rightBottomCorner, $leftBottomCorner))->setStyle($horizontalLineStyle);
+        $left = (new Line($leftBottomCorner, $this->leftUpperCorner))->setStyle($verticalLineStyle);
 
         $this
             ->addFigure($top)
             ->addFigure($bottom)
             ->addFigure($left)
             ->addFigure($right);
-
-        foreach ($this->style->getSideStyles() as $sideValue => $style) {
-            $side = RectangleSide::from($sideValue);
-
-            match ($side) {
-                RectangleSide::Top => $this->addFigure($top->setStyle($style)),
-                RectangleSide::Bottom => $this->addFigure($bottom->setStyle($style)),
-                RectangleSide::Left => $this->addFigure($left->setStyle($style)),
-                RectangleSide::Right => $this->addFigure($right->setStyle($style)),
-            };
-        }
 
 
         return parent::draw();

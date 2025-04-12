@@ -4,40 +4,45 @@ declare(strict_types=1);
 
 namespace ConsoleDraw\Figure\Geometry\Rechtangle;
 
-use ConsoleDraw\Figure\Geometry\Line\LineStyle;
-
 class RectangleStyle
 {
-    private string $symbol = '*';
+    private string $horizontalChar = '*';
+    private string $verticalChar = '*';
+    private string $crossingChar = '*';
 
-    /**
-     * @var array<string, LineStyle>
-     */
-    private array $styleOrder = [];
-
-    public function getSymbol(): string
+    public function getHorizontalChar(): string
     {
-        return $this->symbol;
+        return $this->horizontalChar;
     }
 
-    public function setSymbol(string $symbol): self
+    public function setHorizontalChar(string $horizontalChar): RectangleStyle
     {
-        $this->symbol = $symbol;
+        $this->horizontalChar = $horizontalChar;
         return $this;
     }
 
-    /**
-     * @return array<string, LineStyle>
-     */
-    public function getSideStyles(): array
+    public function getVerticalChar(): string
     {
-        return $this->styleOrder;
+        return $this->verticalChar;
     }
 
-    public function setSideStyle(RectangleSide $side, LineStyle $sideStyle): self
+    public function setVerticalChar(string $verticalChar): RectangleStyle
     {
-        $this->styleOrder[$side->value] = $sideStyle;
+        $this->verticalChar = $verticalChar;
         return $this;
     }
+
+    public function getCrossingChar(): string
+    {
+        return $this->crossingChar;
+    }
+
+    public function setCrossingChar(string $crossingChar): RectangleStyle
+    {
+        $this->crossingChar = $crossingChar;
+        return $this;
+    }
+
+
 
 }
