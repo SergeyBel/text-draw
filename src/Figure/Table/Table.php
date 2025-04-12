@@ -6,6 +6,8 @@ namespace ConsoleDraw\Figure\Table;
 
 use ConsoleDraw\Figure\FrameFigure;
 use ConsoleDraw\Figure\Pixel\PixelMatrix;
+use ConsoleDraw\Figure\Text\Text;
+use ConsoleDraw\Figure\Text\TextStyle;
 use ConsoleDraw\Figure\Turtle\Turtle;
 use ConsoleDraw\Plane\Point;
 use ConsoleDraw\Plane\Size;
@@ -92,10 +94,19 @@ class Table extends FrameFigure
 
     private function drawCellText(Turtle $turtle, TableCell $cell, int $cellWidth): Turtle
     {
-        $text = str_pad($cell->getText(), $cellWidth, $this->style->getPaddingSymbol());
         $turtle
-            ->paintRight($cell->getLeftChar() ?? $this->style->getVerticalSymbol())
-            ->paintText($text)
+            ->paintRight($cell->getLeftChar() ?? $this->style->getVerticalSymbol());
+
+        $text = new Text($turtle->getPosition(), $cell->getText());
+        $text->setStyle(
+            (new TextStyle())
+                ->setWidth($cellWidth)
+                ->setPaddingChar($this->style->getPaddingSymbol())
+        );
+        $this->addFigure($text);
+
+        $turtle
+            ->moveRight($cellWidth)
             ->paint($this->style->getVerticalSymbol());
 
         return $turtle;

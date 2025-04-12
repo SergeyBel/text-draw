@@ -11,24 +11,47 @@ use ConsoleDraw\Plane\Point;
 
 class Text implements FigureInterface
 {
+    private TextStyle $style;
     public function __construct(
         private Point $start,
-        private string $str
+        private string $text,
     ) {
+        $this->style = new TextStyle();
     }
 
     public function draw(): PixelMatrix
     {
-        $chars = str_split($this->str);
-
         $pixels = new PixelMatrix();
-        $length = 0;
 
-        foreach ($chars as $char) {
-            $pixels->setPixel(new Pixel($this->start->addX($length), $char));
-            $length++;
+        $start = clone $this->start;
+        $length = $this->style->getWidth() ?? mb_strlen($this->text);
+        $chars = str_split($this->text);
+
+        for ($i = 0; $i < $length; $i++) {
+            if ($i < count($chars)) {
+                $char = $chars[$i];
+            } else {
+                $char = $this->style->getPaddingChar();
+            }
+
+            $pixels->setPixel(new Pixel($start, $char));
+            $start = $start->addX(1);
+
         }
 
         return $pixels;
     }
+
+    public function getStyle(): TextStyle
+    {
+        return $this->style;
+    }
+
+    public function setStyle(TextStyle $style): Text
+    {
+        $this->style = $style;
+        return $this;
+    }
+
+
 }

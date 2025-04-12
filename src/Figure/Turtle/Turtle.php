@@ -6,7 +6,6 @@ namespace ConsoleDraw\Figure\Turtle;
 
 use ConsoleDraw\Figure\BaseFigure;
 use ConsoleDraw\Figure\Pixel\Pixel;
-use ConsoleDraw\Figure\Text\Text;
 use ConsoleDraw\Plane\Point;
 
 class Turtle extends BaseFigure
@@ -98,13 +97,9 @@ class Turtle extends BaseFigure
         return $this;
     }
 
-
-
-
-    public function paintText(string $str): Turtle
+    public function getPosition(): Point
     {
-        $text = new Text($this->position, $str);
-        $this->addFigure($text);
-        return $this->moveRight(mb_strlen($str));
+        return $this->position;
     }
+
 }
