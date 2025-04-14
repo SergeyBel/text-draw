@@ -58,4 +58,43 @@ class TextTest extends FigureTestCase
         $this->assertRender($expected);
     }
 
+    public function testAlignRight(): void
+    {
+        $this->createDrawer(9, 1);
+        $text = new Text(
+            new Point(1, 0),
+            'hello'
+        );
+        $text->setStyle(
+            (new TextStyle())
+                ->setWidth(7)
+                ->alignRight()
+        );
+        $this->render->addFigure($text);
+        $expected = <<<EOD
+        .  hello.
+        EOD;
+
+        $this->assertRender($expected);
+    }
+
+    public function testAlignCenter(): void
+    {
+        $this->createDrawer(9, 1);
+        $text = new Text(
+            new Point(1, 0),
+            'hello'
+        );
+        $text->setStyle(
+            (new TextStyle())
+                ->setWidth(7)
+                ->alignCenter()
+        );
+        $this->render->addFigure($text);
+        $expected = <<<EOD
+        . hello .
+        EOD;
+
+        $this->assertRender($expected);
+    }
 }

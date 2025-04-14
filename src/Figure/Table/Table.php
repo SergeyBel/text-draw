@@ -102,6 +102,7 @@ class Table extends FrameFigure
             (new TextStyle())
                 ->setWidth($cellWidth)
                 ->setPaddingChar($this->style->getPaddingChar())
+                ->setAlign($this->style->getAlign())
         );
         $this->addFigure($text);
 
