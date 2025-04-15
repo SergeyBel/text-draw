@@ -10,6 +10,7 @@ use ConsoleDraw\Figure\Geometry\Line\LineStyle;
 use ConsoleDraw\Figure\Geometry\Rechtangle\Rectangle;
 use ConsoleDraw\Figure\Pixel\PixelMatrix;
 use ConsoleDraw\Figure\Text\Text;
+use ConsoleDraw\Figure\Text\TextStyle;
 use ConsoleDraw\Plane\Point;
 use ConsoleDraw\Plane\Size;
 
@@ -27,20 +28,12 @@ class BarChart extends FrameFigure
         parent::__construct($size, $leftUpperCorner);
     }
 
-
-    public function addBar(Bar $bar): self
-    {
-        $this->bars[] = $bar;
-        return $this;
-
-    }
-
     public function draw(): PixelMatrix
     {
         $this->drawAxes();
         $area = $this->size
-                    ->subWidth(2)
-                    ->subHeight(1);
+            ->subWidth(2)
+            ->subHeight(1);
 
         $this->drawLabels($this->leftUpperCorner->addX(2)->addY($area->getHeight()), $area);
 
@@ -51,6 +44,13 @@ class BarChart extends FrameFigure
 
 
         return parent::draw();
+    }
+
+    public function addBar(Bar $bar): self
+    {
+        $this->bars[] = $bar;
+        return $this;
+
     }
 
     private function drawAxes(): void
@@ -72,9 +72,14 @@ class BarChart extends FrameFigure
     private function drawLabels(Point $start, Size $area): void
     {
         $barWidth = $this->calculateBarWidth($area);
+        $labelStyle = (new TextStyle())
+            ->setWidth($barWidth)
+            ->setPaddingChar('_')
+            ->alignCenter();
 
         foreach ($this->bars as $bar) {
-            $this->addFigure(new Text($start, $bar->getLabel()));
+            $label = (new Text($start, $bar->getLabel()))->setStyle($labelStyle);
+            $this->addFigure($label);
             $start = $start->addX($barWidth + 1);
         }
     }

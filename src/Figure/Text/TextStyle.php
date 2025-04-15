@@ -8,6 +8,8 @@ class TextStyle
 {
     private ?int $width = null;
     private string $paddingChar = ' ';
+    private TextAlign $align = TextAlign::Left;
+
 
     public function getWidth(): ?int
     {
@@ -30,6 +32,31 @@ class TextStyle
         $this->paddingChar = $paddingChar;
         return $this;
     }
+
+    public function getAlign(): TextAlign
+    {
+        return $this->align;
+    }
+
+    public function setAlign(TextAlign $align): TextStyle
+    {
+        $this->align = $align;
+        return $this;
+    }
+
+    public function alignCenter(): self
+    {
+        $this->align = TextAlign::Center;
+        return $this;
+    }
+
+    public function alignRight(): self
+    {
+        $this->align = TextAlign::Right;
+        return $this;
+    }
+
+
 
 
 
