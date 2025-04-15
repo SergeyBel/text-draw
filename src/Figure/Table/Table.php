@@ -14,8 +14,14 @@ use ConsoleDraw\Plane\Size;
 
 class Table extends FrameFigure
 {
-    /** @var array<array<TableCell>>  */
+    /** @var array<string|TableCell>  */
+    private array $header = [];
+
+    /** @var array<array<string|TableCell>>  */
     private array $rows = [];
+
+    /** @var array<array<TableCell>>  */
+    private array $table;
 
     private TableStyle $style;
 
@@ -35,20 +41,20 @@ class Table extends FrameFigure
 
     public function draw(): PixelMatrix
     {
-        //$this->fillRows();
+        $this->formTable();
         $this->calculateColumnsWidth();
 
         $start = $this->getLeftUpperCorner();
-        $this->drawRows($start);
+        $this->drawTable($start);
 
         return parent::draw();
     }
 
 
 
-    private function drawRows(Point $start): void
+    private function drawTable(Point $start): void
     {
-        foreach ($this->rows as $row) {
+        foreach ($this->table as $row) {
             $this->drawRow($start, $row);
             $start = $start->addY(2);
         }
@@ -102,6 +108,7 @@ class Table extends FrameFigure
             (new TextStyle())
                 ->setWidth($cellWidth)
                 ->setPaddingChar($this->style->getPaddingChar())
+                ->setAlign($cell->getAlign())
         );
         $this->addFigure($text);
 
@@ -112,35 +119,30 @@ class Table extends FrameFigure
         return $turtle;
     }
 
-    /**
-     * @param array<string> $header
-     * @return $this
-     */
-    public function setHeader(array $header): Table
+    private function formTable(): void
     {
-        $this->addRow($header);
-        return $this;
-    }
-
-    /**
-     * @param array<array<string|TableCell>> $rows
-     * @return $this
-     */
-    public function addRows(array $rows): Table
-    {
-        foreach ($rows as $row) {
-            $this->addRow($row);
+        if (count($this->header) > 0) {
+            $header = array_map(fn ($cell) =>
+            is_string($cell)
+                ? new TableCell($cell, align: $this->style->getHeaderAlign())
+                : $cell, $this->header);
+            $this->table[] = $header;
         }
 
-        return $this;
+
+
+        foreach ($this->rows as $row) {
+            $this->formTableRow($row);
+        }
     }
 
     /**
      * @param array<string|TableCell> $row
+     * @return $this
      */
-    public function addRow(array $row): self
+    public function formTableRow(array $row): self
     {
-        $row = array_map(fn ($cell) => is_string($cell) ? new TableCell($cell) : $cell, $row);
+        $row = array_map(fn ($cell) => is_string($cell) ? new TableCell($cell, align: $this->style->getAlign()) : $cell, $row);
 
         $fullRow = [];
         foreach ($row as $cell) {
@@ -158,9 +160,28 @@ class Table extends FrameFigure
             );
 
         }
-        $this->rows[] = $fullRow;
+        $this->table[] = $fullRow;
         return $this;
+    }
 
+    /**
+     * @param array<string|TableCell> $header
+     * @return $this
+     */
+    public function setHeader(array $header): self
+    {
+        $this->header = $header;
+        return $this;
+    }
+
+    /**
+     * @param array<array<string|TableCell>> $rows
+     * @return $this
+     */
+    public function addRows(array $rows): self
+    {
+        $this->rows = array_merge($this->rows, $rows);
+        return $this;
     }
 
     public function getStyle(): TableStyle
@@ -178,7 +199,7 @@ class Table extends FrameFigure
     private function calculateColumnsWidth(): void
     {
         $columns = [];
-        foreach ($this->rows as $row) {
+        foreach ($this->table as $row) {
             foreach ($row as $index => $cell) {
                 $columns[$index][] = mb_strlen($cell->getText());
             }

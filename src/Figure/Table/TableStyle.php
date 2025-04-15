@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace ConsoleDraw\Figure\Table;
 
+use ConsoleDraw\Figure\Text\TextAlign;
+
 class TableStyle
 {
     private string $verticalChar = '|';
@@ -11,6 +13,8 @@ class TableStyle
     private string $crossingChar = '+';
     private string $paddingChar = ' ';
     private ?int $columnMaxWidth = null;
+    private TextAlign $align = TextAlign::Left;
+    private TextAlign $headerAlign = TextAlign::Left;
 
     public function getVerticalChar(): string
     {
@@ -67,7 +71,38 @@ class TableStyle
         return $this;
     }
 
+    public function alignCenter(): self
+    {
+        $this->align = TextAlign::Center;
+        return $this;
+    }
 
+    public function alignRight(): self
+    {
+        $this->align = TextAlign::Right;
+        return $this;
+    }
 
+    public function alignHeaderCenter(): self
+    {
+        $this->headerAlign = TextAlign::Center;
+        return $this;
+    }
+
+    public function alignHeaderRight(): self
+    {
+        $this->headerAlign = TextAlign::Right;
+        return $this;
+    }
+
+    public function getAlign(): TextAlign
+    {
+        return $this->align;
+    }
+
+    public function getHeaderAlign(): TextAlign
+    {
+        return $this->headerAlign;
+    }
 
 }

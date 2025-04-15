@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 namespace ConsoleDraw\Figure\Table;
 
+use ConsoleDraw\Figure\Text\TextAlign;
+
 class TableCell
 {
     private ?string $leftChar = null;
+
     public function __construct(
         private string $text,
         private int $colspan = 1,
+        private TextAlign $align = TextAlign::Left,
     ) {
     }
 
@@ -45,6 +49,19 @@ class TableCell
         $this->leftChar = $leftChar;
         return $this;
     }
+
+    public function getAlign(): TextAlign
+    {
+        return $this->align;
+    }
+
+    public function setAlign(TextAlign $align): TableCell
+    {
+        $this->align = $align;
+        return $this;
+    }
+
+
 
 
 

@@ -101,5 +101,51 @@ class TableTest extends FigureTestCase
         $this->assertRender($expected);
     }
 
+    public function testHeaderAlignCenter(): void
+    {
+        $this->createDrawer(14, 5);
+        $style = (new TableStyle())->alignHeaderCenter();
 
+        $table = (new Table($this->getSize()))
+            ->setHeader(['City', 'Value'])
+            ->addRows([
+                ['London', '12000'],
+            ])->setStyle($style);
+        $this->render->addFigure($table);
+
+
+        $expected = <<<EOD
+        +------+-----+
+        | City |Value|
+        +------+-----+
+        |London|12000|
+        +------+-----+
+        EOD;
+
+        $this->assertRender($expected);
+    }
+
+    public function testAlignCenter(): void
+    {
+        $this->createDrawer(14, 5);
+        $style = (new TableStyle())->alignCenter();
+
+        $table = (new Table($this->getSize()))
+            ->setHeader(['City', 'Value'])
+            ->addRows([
+                ['London', '1'],
+            ])->setStyle($style);
+        $this->render->addFigure($table);
+
+
+        $expected = <<<EOD
+        +------+-----+
+        |City  |Value|
+        +------+-----+
+        |London|  1  |
+        +------+-----+
+        EOD;
+
+        $this->assertRender($expected);
+    }
 }
