@@ -65,7 +65,7 @@ class Rectangle extends BaseFigure
         return $this->style;
     }
 
-    public function setStyle(RectangleStyle $style): Rectangle
+    public function setStyle(RectangleStyle $style): static
     {
         $this->style = $style;
         return $this;

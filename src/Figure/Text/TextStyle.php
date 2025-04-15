@@ -38,19 +38,19 @@ class TextStyle
         return $this->align;
     }
 
-    public function setAlign(TextAlign $align): TextStyle
+    public function setAlign(TextAlign $align): static
     {
         $this->align = $align;
         return $this;
     }
 
-    public function alignCenter(): self
+    public function alignCenter(): static
     {
         $this->align = TextAlign::Center;
         return $this;
     }
 
-    public function alignRight(): self
+    public function alignRight(): static
     {
         $this->align = TextAlign::Right;
         return $this;

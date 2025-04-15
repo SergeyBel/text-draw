@@ -13,7 +13,7 @@ class TextRenderStyle
         return $this->emptySymbol;
     }
 
-    public function setEmptySymbol(string $emptySymbol): TextRenderStyle
+    public function setEmptySymbol(string $emptySymbol): static
     {
         $this->emptySymbol = $emptySymbol;
         return $this;

@@ -53,7 +53,7 @@ class Text implements FigureInterface
         return $this->style;
     }
 
-    public function setStyle(TextStyle $style): Text
+    public function setStyle(TextStyle $style): static
     {
         $this->style = $style;
         return $this;

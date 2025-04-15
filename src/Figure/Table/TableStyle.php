@@ -21,7 +21,7 @@ class TableStyle
         return $this->verticalChar;
     }
 
-    public function setVerticalChar(string $verticalChar): TableStyle
+    public function setVerticalChar(string $verticalChar): static
     {
         $this->verticalChar = $verticalChar;
         return $this;
@@ -32,7 +32,7 @@ class TableStyle
         return $this->horizontalChar;
     }
 
-    public function setHorizontalChar(string $horizontalChar): TableStyle
+    public function setHorizontalChar(string $horizontalChar): static
     {
         $this->horizontalChar = $horizontalChar;
         return $this;
@@ -43,7 +43,7 @@ class TableStyle
         return $this->crossingChar;
     }
 
-    public function setCrossingChar(string $crossingChar): TableStyle
+    public function setCrossingChar(string $crossingChar): static
     {
         $this->crossingChar = $crossingChar;
         return $this;
@@ -54,7 +54,7 @@ class TableStyle
         return $this->columnMaxWidth;
     }
 
-    public function setColumnMaxWidth(?int $columnMaxWidth): TableStyle
+    public function setColumnMaxWidth(?int $columnMaxWidth): static
     {
         $this->columnMaxWidth = $columnMaxWidth;
         return $this;
@@ -65,31 +65,31 @@ class TableStyle
         return $this->paddingChar;
     }
 
-    public function setPaddingChar(string $paddingChar): TableStyle
+    public function setPaddingChar(string $paddingChar): static
     {
         $this->paddingChar = $paddingChar;
         return $this;
     }
 
-    public function alignCenter(): self
+    public function alignCenter(): static
     {
         $this->align = TextAlign::Center;
         return $this;
     }
 
-    public function alignRight(): self
+    public function alignRight(): static
     {
         $this->align = TextAlign::Right;
         return $this;
     }
 
-    public function alignHeaderCenter(): self
+    public function alignHeaderCenter(): static
     {
         $this->headerAlign = TextAlign::Center;
         return $this;
     }
 
-    public function alignHeaderRight(): self
+    public function alignHeaderRight(): static
     {
         $this->headerAlign = TextAlign::Right;
         return $this;

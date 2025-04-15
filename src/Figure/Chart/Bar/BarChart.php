@@ -46,7 +46,7 @@ class BarChart extends FrameFigure
         return parent::draw();
     }
 
-    public function addBar(Bar $bar): self
+    public function addBar(Bar $bar): static
     {
         $this->bars[] = $bar;
         return $this;

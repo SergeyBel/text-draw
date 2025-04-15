@@ -15,7 +15,7 @@ class RectangleStyle
         return $this->horizontalChar;
     }
 
-    public function setHorizontalChar(string $horizontalChar): RectangleStyle
+    public function setHorizontalChar(string $horizontalChar): static
     {
         $this->horizontalChar = $horizontalChar;
         return $this;
@@ -26,7 +26,7 @@ class RectangleStyle
         return $this->verticalChar;
     }
 
-    public function setVerticalChar(string $verticalChar): RectangleStyle
+    public function setVerticalChar(string $verticalChar): static
     {
         $this->verticalChar = $verticalChar;
         return $this;
@@ -37,7 +37,7 @@ class RectangleStyle
         return $this->crossingChar;
     }
 
-    public function setCrossingChar(string $crossingChar): RectangleStyle
+    public function setCrossingChar(string $crossingChar): static
     {
         $this->crossingChar = $crossingChar;
         return $this;

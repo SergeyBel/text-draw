@@ -18,42 +18,42 @@ class Turtle extends BaseFigure
         parent::__construct();
     }
 
-    public function moveRight(int $value = 1): Turtle
+    public function moveRight(int $value = 1): static
     {
         $this->position = $this->position->addX($value);
         return $this;
     }
-    public function moveLeft(int $value = 1): Turtle
+    public function moveLeft(int $value = 1): static
     {
         $this->position = $this->position->subX($value);
         return $this;
     }
 
-    public function moveUp(int $value = 1): Turtle
+    public function moveUp(int $value = 1): static
     {
         $this->position = $this->position->subY($value);
         return $this;
     }
 
-    public function moveDown(int $value = 1): Turtle
+    public function moveDown(int $value = 1): static
     {
         $this->position = $this->position->addY($value);
         return $this;
     }
 
-    public function moveTo(Point $point): Turtle
+    public function moveTo(Point $point): static
     {
         $this->position = $point;
         return $this;
     }
 
-    public function paint(string $symbol): Turtle
+    public function paint(string $symbol): static
     {
         $this->addFigure(new Pixel($this->position, $symbol));
         return $this;
     }
 
-    public function paintRight(string $symbol, int $value = 1): Turtle
+    public function paintRight(string $symbol, int $value = 1): static
     {
         for ($i = 0; $i < $value; $i++) {
             $this
@@ -64,7 +64,7 @@ class Turtle extends BaseFigure
         return $this;
     }
 
-    public function paintLeft(string $symbol, int $value = 1): Turtle
+    public function paintLeft(string $symbol, int $value = 1): static
     {
         for ($i = 0; $i < $value; $i++) {
             $this
@@ -75,7 +75,7 @@ class Turtle extends BaseFigure
         return $this;
     }
 
-    public function paintUp(string $symbol, int $value = 1): Turtle
+    public function paintUp(string $symbol, int $value = 1): static
     {
         for ($i = 0; $i < $value; $i++) {
             $this
@@ -86,7 +86,7 @@ class Turtle extends BaseFigure
         return $this;
     }
 
-    public function paintDown(string $symbol, int $value = 1): Turtle
+    public function paintDown(string $symbol, int $value = 1): static
     {
         for ($i = 0; $i < $value; $i++) {
             $this

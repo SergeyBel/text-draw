@@ -13,7 +13,7 @@ class TriangleStyle
         return $this->char;
     }
 
-    public function setChar(string $char): TriangleStyle
+    public function setChar(string $char): static
     {
         $this->char = $char;
         return $this;

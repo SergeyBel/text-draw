@@ -37,7 +37,7 @@ class FrameFigure extends BaseFigure
         return $this->leftUpperCorner;
     }
 
-    public function setLeftUpperCorner(Point $leftUpperCorner): FrameFigure
+    public function setLeftUpperCorner(Point $leftUpperCorner): static
     {
         $this->leftUpperCorner = $leftUpperCorner;
         return $this;

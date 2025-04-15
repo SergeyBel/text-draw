@@ -46,15 +46,14 @@ class FunctionGraph extends FrameFigure
 
     /**
      * @param array<FunctionValue> $values
-     * @return $this
      */
-    public function setValues(array $values): FunctionGraph
+    public function setValues(array $values): static
     {
         $this->values = $values;
         return $this;
     }
 
-    public function addValue(FunctionValue $value): FunctionGraph
+    public function addValue(FunctionValue $value): static
     {
         $this->values[] = $value;
         return $this;

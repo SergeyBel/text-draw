@@ -50,6 +50,35 @@ class Table extends FrameFigure
         return parent::draw();
     }
 
+    /**
+     * @param array<string|TableCell> $header
+     */
+    public function setHeader(array $header): static
+    {
+        $this->header = $header;
+        return $this;
+    }
+
+    /**
+     * @param array<array<string|TableCell>> $rows
+     */
+    public function addRows(array $rows): static
+    {
+        $this->rows = array_merge($this->rows, $rows);
+        return $this;
+    }
+
+    public function getStyle(): TableStyle
+    {
+        return $this->style;
+    }
+
+    public function setStyle(TableStyle $style): static
+    {
+        $this->style = $style;
+        return $this;
+    }
+
 
 
     private function drawTable(Point $start): void
@@ -129,8 +158,6 @@ class Table extends FrameFigure
             $this->table[] = $header;
         }
 
-
-
         foreach ($this->rows as $row) {
             $this->formTableRow($row);
         }
@@ -138,9 +165,8 @@ class Table extends FrameFigure
 
     /**
      * @param array<string|TableCell> $row
-     * @return $this
      */
-    public function formTableRow(array $row): self
+    private function formTableRow(array $row): void
     {
         $row = array_map(fn ($cell) => is_string($cell) ? new TableCell($cell, align: $this->style->getAlign()) : $cell, $row);
 
@@ -160,41 +186,9 @@ class Table extends FrameFigure
             );
 
         }
+
         $this->table[] = $fullRow;
-        return $this;
     }
-
-    /**
-     * @param array<string|TableCell> $header
-     * @return $this
-     */
-    public function setHeader(array $header): self
-    {
-        $this->header = $header;
-        return $this;
-    }
-
-    /**
-     * @param array<array<string|TableCell>> $rows
-     * @return $this
-     */
-    public function addRows(array $rows): self
-    {
-        $this->rows = array_merge($this->rows, $rows);
-        return $this;
-    }
-
-    public function getStyle(): TableStyle
-    {
-        return $this->style;
-    }
-
-    public function setStyle(TableStyle $style): Table
-    {
-        $this->style = $style;
-        return $this;
-    }
-
 
     private function calculateColumnsWidth(): void
     {

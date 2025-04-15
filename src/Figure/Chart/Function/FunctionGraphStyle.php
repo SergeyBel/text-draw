@@ -15,7 +15,7 @@ class FunctionGraphStyle
         return $this->pointSymbol;
     }
 
-    public function setPointSymbol(string $pointSymbol): FunctionGraphStyle
+    public function setPointSymbol(string $pointSymbol): static
     {
         $this->pointSymbol = $pointSymbol;
         return $this;
@@ -26,7 +26,7 @@ class FunctionGraphStyle
         return $this->zeroSymbol;
     }
 
-    public function setZeroSymbol(string $zeroSymbol): FunctionGraphStyle
+    public function setZeroSymbol(string $zeroSymbol): static
     {
         $this->zeroSymbol = $zeroSymbol;
         return $this;

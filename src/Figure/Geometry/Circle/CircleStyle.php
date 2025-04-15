@@ -13,7 +13,7 @@ class CircleStyle
         return $this->char;
     }
 
-    public function setChar(string $char): CircleStyle
+    public function setChar(string $char): static
     {
         $this->char = $char;
         return $this;

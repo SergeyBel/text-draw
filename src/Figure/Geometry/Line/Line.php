@@ -122,7 +122,7 @@ class Line implements FigureInterface
         return $this->style;
     }
 
-    public function setStyle(LineStyle $style): Line
+    public function setStyle(LineStyle $style): static
     {
         $this->style = $style;
         return $this;

@@ -66,7 +66,7 @@ class TextRender implements RenderInterface
         return $this->size;
     }
 
-    public function setStyle(TextRenderStyle $style): TextRender
+    public function setStyle(TextRenderStyle $style): static
     {
         $this->style = $style;
         $this->clear();

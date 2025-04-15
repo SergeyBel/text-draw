@@ -19,7 +19,7 @@ class PixelMatrix
         $this->setPixels($pixels);
     }
 
-    public function setPixel(Pixel $pixel): self
+    public function setPixel(Pixel $pixel): static
     {
         $this->matrix[$pixel->getPoint()->getY()][$pixel->getPoint()->getX()] = $pixel;
         return $this;
@@ -50,7 +50,7 @@ class PixelMatrix
      * @param array<Pixel> $pixels
      * @return $this
      */
-    public function setPixels(array $pixels): self
+    public function setPixels(array $pixels): static
     {
         foreach ($pixels as $pixel) {
             $this->setPixel($pixel);
@@ -58,14 +58,14 @@ class PixelMatrix
         return $this;
     }
 
-    public function merge(PixelMatrix $pixelCollection): self
+    public function merge(PixelMatrix $pixelCollection): static
     {
         $this->setPixels($pixelCollection->getPixels());
         return $this;
     }
 
 
-    public function clear(): self
+    public function clear(): static
     {
         $this->matrix = [];
         return $this;

@@ -27,13 +27,13 @@ class TableCell
         return $this->colspan;
     }
 
-    public function setText(string $text): TableCell
+    public function setText(string $text): static
     {
         $this->text = $text;
         return $this;
     }
 
-    public function setColspan(int $colspan): TableCell
+    public function setColspan(int $colspan): static
     {
         $this->colspan = $colspan;
         return $this;
@@ -44,7 +44,7 @@ class TableCell
         return $this->leftChar;
     }
 
-    public function setLeftChar(?string $leftChar): TableCell
+    public function setLeftChar(?string $leftChar): static
     {
         $this->leftChar = $leftChar;
         return $this;
@@ -55,7 +55,7 @@ class TableCell
         return $this->align;
     }
 
-    public function setAlign(TextAlign $align): TableCell
+    public function setAlign(TextAlign $align): static
     {
         $this->align = $align;
         return $this;

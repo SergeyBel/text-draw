@@ -25,7 +25,7 @@ class Pixel implements FigureInterface
         return $this->point;
     }
 
-    public function setPoint(Point $point): self
+    public function setPoint(Point $point): static
     {
         $this->point = $point;
         return $this;
@@ -36,7 +36,7 @@ class Pixel implements FigureInterface
         return $this->char;
     }
 
-    public function setChar(string $char): self
+    public function setChar(string $char): static
     {
         $this->char = $char;
         return $this;
