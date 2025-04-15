@@ -22,28 +22,22 @@ class Text implements FigureInterface
     public function draw(): PixelMatrix
     {
         $pixels = new PixelMatrix();
+
         $start = clone $this->start;
+        $length = $this->style->getWidth() ?? mb_strlen($this->text);
+        $chars = str_split($this->text);
 
-        $textLength = mb_strlen($this->text);
-        $width = $this->style->getWidth();
-        $text = $this->text;
-
-        if (!is_null($width)) {
-            if ($width > $textLength) {
-                $text = $this->align($width);
+        for ($i = 0; $i < $length; $i++) {
+            if ($i < count($chars)) {
+                $char = $chars[$i];
             } else {
-                $text = mb_substr($this->text, 0, $width);
+                $char = $this->style->getPaddingChar();
             }
-        }
 
-
-        $chars = str_split($text);
-
-        foreach ($chars as $char) {
             $pixels->setPixel(new Pixel($start, $char));
             $start = $start->addX(1);
-        }
 
+        }
 
         return $pixels;
     }
@@ -57,17 +51,6 @@ class Text implements FigureInterface
     {
         $this->style = $style;
         return $this;
-    }
-
-    private function align(int $length): string
-    {
-        $mode = match ($this->style->getAlign()) {
-            TextAlign::LEFT => STR_PAD_RIGHT,
-            TextAlign::RIGHT => STR_PAD_LEFT,
-            TextAlign::CENTER => STR_PAD_BOTH,
-        };
-
-        return str_pad($this->text, $length, $this->style->getPaddingChar(), $mode);
     }
 
 
