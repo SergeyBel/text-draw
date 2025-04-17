@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -qqy \
       php8.2-dom \
       php8.2-zip \
       php8.2-curl \
+      php8.2-gd \
       curl \
       git \
       zip \

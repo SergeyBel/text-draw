@@ -31,6 +31,11 @@ class PixelMatrix
         return $this->matrix[$y][$x];
     }
 
+    public function hasPixel(int $x, int $y): bool
+    {
+        return isset($this->matrix[$y][$x]);
+    }
+
     /**
      * @return Pixel[]
      */
