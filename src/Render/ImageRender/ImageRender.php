@@ -8,7 +8,6 @@ use ConsoleDraw\Figure\FigureInterface;
 use ConsoleDraw\Figure\Pixel\PixelMatrix;
 use ConsoleDraw\Plane\Size;
 use ConsoleDraw\Render\RenderInterface;
-use Exception;
 
 class ImageRender implements RenderInterface
 {
@@ -26,29 +25,38 @@ class ImageRender implements RenderInterface
 
     public function render(string $filename): void
     {
-        $width = $this->size->getWidth();
-        $height = $this->size->getHeight();
+        $lines = [];
+        $charHeight = $this->getCharHeight();
+        $imageWidth = 0;
+        $imageHeight = 0;
 
-        if (!($width >= 1 && $height >= 1)) {
-            throw new Exception('Image size must be greater than 0');
+        for ($y = 0; $y < $this->getSize()->getHeight(); $y++) {
+            $line = '';
+            for ($x = 0; $x < $this->getSize()->getWidth(); $x++) {
+                if ($this->matrix->hasPixel($x, $y)) {
+                    $line .= $this->matrix->getPixel($x, $y)->getChar();
+                }
+
+            }
+            if (mb_strlen($line) > 0) {
+                $textWidth = $this->getTextWidth($line);
+                $textHeight = $charHeight;
+                $lines[] = new TextLine($line, $textWidth, $textHeight);
+                $imageHeight += $textHeight;
+                $imageWidth = max($imageWidth, $textWidth);
+            }
         }
-        $image = imagecreatetruecolor($width, $height);
+
+        $image = imagecreatetruecolor($imageWidth, $imageHeight);
 
         $backgroundColor = imagecolorallocate($image, 255, 255, 255);
         $textColor = imagecolorallocate($image, 0, 0, 0);
-
-        if ($backgroundColor === false || $textColor === false) {
-            throw new Exception('Image color allocation error');
-        }
-
         imagefill($image, 0, 0, $backgroundColor);
 
-        for ($y = 0; $y < $this->size->getHeight(); $y++) {
-            for ($x = 0; $x < $this->size->getWidth(); $x++) {
-                if ($this->matrix->hasPixel($x, $y)) {
-                    imagefttext($image, 19, 0, $x, $y, $textColor, './font/OpenSans.ttf', $this->matrix->getPixel($x, $y)->getChar());
-                }
-            }
+        $height = 0;
+        foreach ($lines as $line) {
+            $height += $line->getHeight();
+            imagefttext($image, 16, 0, 0, $height, $textColor, './font/UbuntuMono-Regular.ttf', $line->getText());
         }
 
         imagepng($image, $filename);
@@ -71,6 +79,24 @@ class ImageRender implements RenderInterface
         $this->matrix->clear();
 
     }
+
+    private function getTextWidth(string $text): int
+    {
+        $box = imageftbbox(16, 0, './font/UbuntuMono-Regular.ttf', $text);
+        return abs($box[2] - $box[0]);
+    }
+
+
+    private function getCharHeight(): int
+    {
+        /**
+         * imageftbbox has a bug on determine char height so use one height for all symbols
+         * see https://www.php.net/manual/ru/function.imagettfbbox.php#97211
+         */
+        $box = imageftbbox(16, 0, './font/UbuntuMono-Regular.ttf', '|');
+        return abs($box[1] - $box[7]);
+    }
+
 
 
 }
