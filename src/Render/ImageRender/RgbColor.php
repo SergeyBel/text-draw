@@ -1,6 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ConsoleDraw\Render\ImageRender;
+
+use InvalidArgumentException;
 
 class RgbColor
 {
@@ -53,7 +57,7 @@ class RgbColor
     private function validateColorValue(int $value): int
     {
         if ($value < 0 || $value > 255) {
-            throw new \InvalidArgumentException("Значение цвета должно быть в интервале от 0 до 255.");
+            throw new InvalidArgumentException('Значение цвета должно быть в интервале от 0 до 255.');
         }
         return $value;
     }

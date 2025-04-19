@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace ConsoleDraw\Figure\Table;
 
+use ConsoleDraw\Common\Size;
 use ConsoleDraw\Figure\FrameFigure;
 use ConsoleDraw\Figure\Pixel\PixelMatrix;
 use ConsoleDraw\Figure\Text\Text;
 use ConsoleDraw\Figure\Text\TextStyle;
 use ConsoleDraw\Figure\Turtle\Turtle;
 use ConsoleDraw\Plane\Point;
-use ConsoleDraw\Plane\Size;
 
 class Table extends FrameFigure
 {

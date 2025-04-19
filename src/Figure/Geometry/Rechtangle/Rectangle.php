@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace ConsoleDraw\Figure\Geometry\Rechtangle;
 
+use ConsoleDraw\Common\Size;
 use ConsoleDraw\Figure\BaseFigure;
 use ConsoleDraw\Figure\Geometry\Line\Line;
 use ConsoleDraw\Figure\Geometry\Line\LineStyle;
 use ConsoleDraw\Figure\Pixel\PixelMatrix;
 use ConsoleDraw\Plane\Point;
-use ConsoleDraw\Plane\Size;
 
 class Rectangle extends BaseFigure
 {

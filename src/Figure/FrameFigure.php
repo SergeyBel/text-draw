@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace ConsoleDraw\Figure;
 
+use ConsoleDraw\Common\Size;
 use ConsoleDraw\Plane\Point;
-use ConsoleDraw\Plane\Size;
 
 class FrameFigure extends BaseFigure
 {

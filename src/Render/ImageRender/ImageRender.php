@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace ConsoleDraw\Render\ImageRender;
 
+use ConsoleDraw\Common\Size;
 use ConsoleDraw\Figure\FigureInterface;
 use ConsoleDraw\Figure\Pixel\Pixel;
 use ConsoleDraw\Figure\Pixel\PixelMatrix;
-use ConsoleDraw\Plane\Size;
 use ConsoleDraw\Render\RenderInterface;
 use GdImage;
-use function Symfony\Component\String\s;
 
 class ImageRender implements RenderInterface
 {
@@ -31,13 +30,11 @@ class ImageRender implements RenderInterface
 
     public function render(string $filename): void
     {
-        $charWidth = $this->getCharWidth();
-        $charHeight = $this->getCharHeight();
-        $imageWidth = $this->size->getWidth() * $charWidth;
-        $imageHeight = $this->size->getHeight() * $charHeight;
+        $charSize = new Size($this->getCharWidth(), $this->getCharHeight());
+        $imageSize = new Size($this->size->getWidth() * $charSize->getWidth(), $this->size->getHeight() * $charSize->getHeight());
 
-        $image = $this->createImage($imageWidth, $imageHeight);
-        $this->drawPixels($image, $charWidth, $charHeight);
+        $image = $this->createImage($imageSize);
+        $this->drawPixels($image, $charSize);
         $this->saveImage($filename, $image);
     }
 
@@ -68,9 +65,9 @@ class ImageRender implements RenderInterface
         return $this;
     }
 
-    private function createImage(int $imageWidth, int $imageHeight): GdImage
+    private function createImage(Size $imageSize): GdImage
     {
-        $image = imagecreatetruecolor($imageWidth, $imageHeight);
+        $image = imagecreatetruecolor($imageSize->getWidth(), $imageSize->getHeight());
         $backgroundColor = imagecolorallocate(
             $image,
             $this->style->getBackgroundColor()->getRed(),
@@ -83,7 +80,7 @@ class ImageRender implements RenderInterface
         return $image;
     }
 
-    private function drawPixels(GdImage $image, int $charWidth, int $charHeight): void
+    private function drawPixels(GdImage $image, Size $charSize): void
     {
         $textColor = imagecolorallocate(
             $image,
@@ -92,15 +89,15 @@ class ImageRender implements RenderInterface
             $this->style->getTextColor()->getBlue()
         );
         foreach ($this->matrix->getPixels() as $pixel) {
-            $this->drawPixel($image, $pixel, $charWidth, $charHeight, $textColor);
+            $this->drawPixel($image, $pixel, $charSize, $textColor);
         }
     }
 
 
-    private function drawPixel(GdImage $image, Pixel $pixel, int $charWidth, int $charHeight, int $textColor): void
+    private function drawPixel(GdImage $image, Pixel $pixel, Size $charSize, int $textColor): void
     {
-        $x = $pixel->getPoint()->getX() * $charWidth;
-        $y = ($pixel->getPoint()->getY() + 1) * $charHeight;
+        $x = $pixel->getPoint()->getX() * $charSize->getWidth();
+        $y = ($pixel->getPoint()->getY() + 1) * $charSize->getHeight();
 
         imagefttext($image, $this->style->getFontSize(), 0, $x, $y, $textColor, $this->style->getFont(), $pixel->getChar());
     }
@@ -111,12 +108,12 @@ class ImageRender implements RenderInterface
         imagedestroy($image);
     }
 
+
     private function getCharWidth(): int
     {
         $box = imageftbbox($this->style->getFontSize(), 0, $this->style->getFont(), 'W');
         return abs($box[2] - $box[0]);
     }
-
 
     private function getCharHeight(): int
     {

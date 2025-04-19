@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ConsoleDraw\Figure\Chart\Bar;
 
+use ConsoleDraw\Common\Size;
 use ConsoleDraw\Figure\FrameFigure;
 use ConsoleDraw\Figure\Geometry\Line\Line;
 use ConsoleDraw\Figure\Geometry\Line\LineStyle;
@@ -12,7 +13,6 @@ use ConsoleDraw\Figure\Pixel\PixelMatrix;
 use ConsoleDraw\Figure\Text\Text;
 use ConsoleDraw\Figure\Text\TextStyle;
 use ConsoleDraw\Plane\Point;
-use ConsoleDraw\Plane\Size;
 
 class BarChart extends FrameFigure
 {

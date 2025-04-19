@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace ConsoleDraw\Tests\Render\ImageRender;
 
+use ConsoleDraw\Common\Size;
 use ConsoleDraw\Figure\Table\Table;
-use ConsoleDraw\Plane\Size;
 use ConsoleDraw\Render\ImageRender\ImageRender;
 
 class ImageRenderTest extends \PHPUnit\Framework\TestCase

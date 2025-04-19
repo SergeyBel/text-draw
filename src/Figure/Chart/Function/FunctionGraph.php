@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace ConsoleDraw\Figure\Chart\Function;
 
+use ConsoleDraw\Common\Size;
 use ConsoleDraw\Figure\FrameFigure;
 use ConsoleDraw\Figure\Geometry\Arrow\Arrow;
 use ConsoleDraw\Figure\Pixel\Pixel;
 use ConsoleDraw\Figure\Pixel\PixelMatrix;
 use ConsoleDraw\Plane\Point;
-use ConsoleDraw\Plane\Size;
 
 class FunctionGraph extends FrameFigure
 {

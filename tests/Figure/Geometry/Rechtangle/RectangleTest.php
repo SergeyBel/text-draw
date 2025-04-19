@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace ConsoleDraw\Tests\Figure\Geometry\Rechtangle;
 
+use ConsoleDraw\Common\Size;
 use ConsoleDraw\Figure\Geometry\Rechtangle\Rectangle;
 use ConsoleDraw\Plane\Point;
-use ConsoleDraw\Plane\Size;
 use ConsoleDraw\Tests\Figure\FigureTestCase;
 
 class RectangleTest extends FigureTestCase

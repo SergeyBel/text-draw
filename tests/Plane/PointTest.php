@@ -6,11 +6,7 @@ namespace Tests\Plane;
 
 namespace ConsoleDraw\Tests\Plane;
 
-use ConsoleDraw\Figure\Table\Table;
 use ConsoleDraw\Plane\Point;
-use ConsoleDraw\Plane\Size;
-use ConsoleDraw\Render\ImageRender\ImageRender;
-use ConsoleDraw\Render\ImageRender\ImageRenderStyle;
 use PHPUnit\Framework\TestCase;
 
 class PointTest extends TestCase

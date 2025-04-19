@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace ConsoleDraw\Render\ConsoleRender;
 
+use ConsoleDraw\Common\Size;
 use ConsoleDraw\Figure\FigureInterface;
-use ConsoleDraw\Plane\Size;
 use ConsoleDraw\Render\RenderInterface;
 use ConsoleDraw\Render\TextRender\TextRender;
 use Exception;

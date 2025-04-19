@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ConsoleDraw\Tests\Figure;
 
-use ConsoleDraw\Plane\Size;
+use ConsoleDraw\Common\Size;
 use ConsoleDraw\Render\TextRender\TextRender;
 use ConsoleDraw\Render\TextRender\TextRenderStyle;
 use ConsoleDraw\Tests\RenderConstraint;
