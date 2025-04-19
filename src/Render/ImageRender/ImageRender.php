@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace ConsoleDraw\Render\ImageRender;
 
 use ConsoleDraw\Figure\FigureInterface;
+use ConsoleDraw\Figure\Pixel\Pixel;
 use ConsoleDraw\Figure\Pixel\PixelMatrix;
 use ConsoleDraw\Plane\Size;
 use ConsoleDraw\Render\RenderInterface;
+use GdImage;
 
 class ImageRender implements RenderInterface
 {
@@ -25,38 +27,18 @@ class ImageRender implements RenderInterface
 
     public function render(string $filename): void
     {
-        $lines = [];
+        $charWidth = $this->getCharWidth();
         $charHeight = $this->getCharHeight();
-        $imageWidth = 0;
-        $imageHeight = 0;
-
-        for ($y = 0; $y < $this->getSize()->getHeight(); $y++) {
-            $line = '';
-            for ($x = 0; $x < $this->getSize()->getWidth(); $x++) {
-                if ($this->matrix->hasPixel($x, $y)) {
-                    $line .= $this->matrix->getPixel($x, $y)->getChar();
-                }
-
-            }
-            if (mb_strlen($line) > 0) {
-                $textWidth = $this->getTextWidth($line);
-                $textHeight = $charHeight;
-                $lines[] = new TextLine($line, $textWidth, $textHeight);
-                $imageHeight += $textHeight;
-                $imageWidth = max($imageWidth, $textWidth);
-            }
-        }
+        $imageWidth = $this->size->getWidth() * $charWidth;
+        $imageHeight = $this->size->getHeight() * $charHeight;
 
         $image = imagecreatetruecolor($imageWidth, $imageHeight);
-
         $backgroundColor = imagecolorallocate($image, 255, 255, 255);
         $textColor = imagecolorallocate($image, 0, 0, 0);
         imagefill($image, 0, 0, $backgroundColor);
 
-        $height = 0;
-        foreach ($lines as $line) {
-            $height += $line->getHeight();
-            imagefttext($image, 16, 0, 0, $height, $textColor, './font/UbuntuMono-Regular.ttf', $line->getText());
+        foreach ($this->matrix->getPixels() as $pixel) {
+            $this->drawPixel($image, $pixel, $charWidth, $charHeight, $textColor);
         }
 
         imagepng($image, $filename);
@@ -77,12 +59,19 @@ class ImageRender implements RenderInterface
     public function clear(): void
     {
         $this->matrix->clear();
-
     }
 
-    private function getTextWidth(string $text): int
+    private function drawPixel(GdImage $image, Pixel $pixel, int $charWidth, int $charHeight, int $textColor): void
     {
-        $box = imageftbbox(16, 0, './font/UbuntuMono-Regular.ttf', $text);
+        $x = $pixel->getPoint()->getX() * $charWidth;
+        $y = ($pixel->getPoint()->getY() + 1) * $charHeight;
+
+        imagefttext($image, 16, 0, $x, $y, $textColor, './font/UbuntuMono-Regular.ttf', $pixel->getChar());
+    }
+
+    private function getCharWidth(): int
+    {
+        $box = imageftbbox(16, 0, './font/UbuntuMono-Regular.ttf', 'W');
         return abs($box[2] - $box[0]);
     }
 
@@ -96,7 +85,4 @@ class ImageRender implements RenderInterface
         $box = imageftbbox(16, 0, './font/UbuntuMono-Regular.ttf', '|');
         return abs($box[1] - $box[7]);
     }
-
-
-
 }

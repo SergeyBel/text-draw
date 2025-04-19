@@ -69,6 +69,11 @@ class PixelMatrix
         return $this;
     }
 
+    public function getRows(): int
+    {
+
+    }
+
 
     public function clear(): static
     {
