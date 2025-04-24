@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace ConsoleDraw\Figure\Chart\Bar;
 
 use ConsoleDraw\Common\Size;
-use ConsoleDraw\Figure\FrameFigure;
+use ConsoleDraw\Figure\Base\StretchableFigure;
 use ConsoleDraw\Figure\Geometry\Line\Line;
 use ConsoleDraw\Figure\Geometry\Line\LineStyle;
 use ConsoleDraw\Figure\Geometry\Rechtangle\Rectangle;
@@ -14,7 +14,7 @@ use ConsoleDraw\Figure\Text\Text;
 use ConsoleDraw\Figure\Text\TextStyle;
 use ConsoleDraw\Plane\Point;
 
-class BarChart extends FrameFigure
+class BarChart extends StretchableFigure
 {
     /**
      * @var array<Bar>

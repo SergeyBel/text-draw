@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace ConsoleDraw\Render;
 
 use ConsoleDraw\Common\Size;
-use ConsoleDraw\Figure\FigureInterface;
+use ConsoleDraw\Figure\Base\FigureInterface;
 
 interface RenderInterface
 {

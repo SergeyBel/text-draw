@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ConsoleDraw\Figure\Turtle;
 
-use ConsoleDraw\Figure\BaseFigure;
+use ConsoleDraw\Figure\Base\BaseFigure;
 use ConsoleDraw\Figure\Pixel\Pixel;
 use ConsoleDraw\Plane\Point;
 

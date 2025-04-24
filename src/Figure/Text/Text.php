@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ConsoleDraw\Figure\Text;
 
-use ConsoleDraw\Figure\FigureInterface;
+use ConsoleDraw\Figure\Base\FigureInterface;
 use ConsoleDraw\Figure\Pixel\Pixel;
 use ConsoleDraw\Figure\Pixel\PixelMatrix;
 use ConsoleDraw\Plane\Point;

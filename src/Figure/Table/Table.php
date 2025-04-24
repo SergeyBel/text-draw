@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ConsoleDraw\Figure\Table;
 
-use ConsoleDraw\Figure\BaseFigure;
+use ConsoleDraw\Figure\Base\BaseFigure;
 use ConsoleDraw\Figure\Pixel\PixelMatrix;
 use ConsoleDraw\Figure\Text\Text;
 use ConsoleDraw\Figure\Text\TextStyle;

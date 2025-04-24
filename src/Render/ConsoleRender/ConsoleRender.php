@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace ConsoleDraw\Render\ConsoleRender;
 
 use ConsoleDraw\Common\Size;
-use ConsoleDraw\Figure\FigureInterface;
+use ConsoleDraw\Figure\Base\FigureInterface;
 use ConsoleDraw\Render\RenderInterface;
 use ConsoleDraw\Render\TextRender\TextRender;
 use Exception;

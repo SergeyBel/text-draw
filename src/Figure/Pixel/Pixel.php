@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ConsoleDraw\Figure\Pixel;
 
-use ConsoleDraw\Figure\FigureInterface;
+use ConsoleDraw\Figure\Base\FigureInterface;
 use ConsoleDraw\Plane\Point;
 
 class Pixel implements FigureInterface

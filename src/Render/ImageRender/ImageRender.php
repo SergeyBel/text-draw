@@ -6,12 +6,12 @@ namespace ConsoleDraw\Render\ImageRender;
 
 use ConsoleDraw\Common\Color\RgbColor;
 use ConsoleDraw\Common\Size;
-use ConsoleDraw\Figure\FigureInterface;
+use ConsoleDraw\Figure\Base\FigureInterface;
 use ConsoleDraw\Figure\Pixel\Pixel;
 use ConsoleDraw\Figure\Pixel\PixelMatrix;
 use ConsoleDraw\Render\RenderInterface;
-use GdImage;
 use Exception;
+use GdImage;
 
 class ImageRender implements RenderInterface
 {
