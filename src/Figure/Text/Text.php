@@ -37,7 +37,7 @@ class Text implements FigureInterface
         }
 
 
-        $chars = str_split($text);
+        $chars = mb_str_split($text);
 
         foreach ($chars as $char) {
             $pixels->setPixel(new Pixel($start, $char));
