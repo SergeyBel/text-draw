@@ -15,7 +15,7 @@ class TableTest extends FigureTestCase
     {
         $this->createDrawer(16, 7);
 
-        $table = (new Table($this->getSize()))
+        $table = (new Table())
             ->setHeader(['City', 'Value'])
             ->addRows([
                 ['London', '12000'],
@@ -41,7 +41,7 @@ class TableTest extends FigureTestCase
     {
         $this->createDrawer(14, 3);
 
-        $table = (new Table($this->getSize()))
+        $table = (new Table())
             ->addRows([
                 ['London', new TableCell('12000')],
             ]);
@@ -61,7 +61,7 @@ class TableTest extends FigureTestCase
     {
         $this->createDrawer(14, 5);
 
-        $table = (new Table($this->getSize()))
+        $table = (new Table())
             ->addRows([
                 ['London', '12000'],
                 [new TableCell('Boston', 2)],
@@ -84,7 +84,7 @@ class TableTest extends FigureTestCase
     {
         $this->createDrawer(13, 3);
 
-        $table = (new Table($this->getSize()))
+        $table = (new Table())
             ->addRows([
                 ['London', new TableCell('12000')],
             ]);
@@ -106,7 +106,7 @@ class TableTest extends FigureTestCase
         $this->createDrawer(14, 5);
         $style = (new TableStyle())->alignHeaderCenter();
 
-        $table = (new Table($this->getSize()))
+        $table = (new Table())
             ->setHeader(['City', 'Value'])
             ->addRows([
                 ['London', '12000'],
@@ -130,7 +130,7 @@ class TableTest extends FigureTestCase
         $this->createDrawer(14, 5);
         $style = (new TableStyle())->alignCenter();
 
-        $table = (new Table($this->getSize()))
+        $table = (new Table())
             ->setHeader(['City', 'Value'])
             ->addRows([
                 ['London', '1'],
