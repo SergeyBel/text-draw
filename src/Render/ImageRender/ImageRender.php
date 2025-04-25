@@ -29,7 +29,7 @@ class ImageRender implements RenderInterface
         $this->clear();
     }
 
-    public function render(string $filename): void
+    public function render(string $filepath): Image
     {
         if (is_null($this->size)) {
             $this->size = $this->matrix->getMinSize();
@@ -40,18 +40,14 @@ class ImageRender implements RenderInterface
 
         $image = $this->createImage($imageSize);
         $this->drawPixels($image, $charSize);
-        $this->saveImage($filename, $image);
+        $this->saveImage($filepath, $image);
+        return new Image($filepath, $imageSize);
     }
 
     public function addFigure(FigureInterface $figure): static
     {
         $this->matrix->merge($figure->draw());
         return $this;
-    }
-
-    public function getSize(): Size
-    {
-        return $this->size;
     }
 
     public function clear(): void

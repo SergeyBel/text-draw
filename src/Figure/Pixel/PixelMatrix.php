@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ConsoleDraw\Figure\Pixel;
 
 use ConsoleDraw\Common\Size;
+use Exception;
 
 class PixelMatrix
 {
@@ -82,8 +83,12 @@ class PixelMatrix
     {
         $ys = array_keys($this->matrix);
         $xs = [];
-        foreach ($this->matrix as $y => $line) {
+        foreach ($this->matrix as $line) {
             $xs = array_merge($xs, array_keys($line));
+        }
+
+        if (count($ys) === 0 || count($xs) === 0) {
+            throw new Exception('Can not get matrix size: empty');
         }
 
         return new Size(
