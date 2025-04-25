@@ -16,14 +16,13 @@ use GdImage;
 class ImageRender implements RenderInterface
 {
     private PixelMatrix $matrix;
-    private Size $size;
+    private ?Size $size = null;
     private ImageRenderStyle $style;
 
     public function __construct(
-        int $width,
-        int $height,
+        ?Size $size = null
     ) {
-        $this->size = new Size($width, $height);
+        $this->size = $size;
         $this->matrix = new PixelMatrix();
 
         $this->style = new ImageRenderStyle();
@@ -32,6 +31,10 @@ class ImageRender implements RenderInterface
 
     public function render(string $filename): void
     {
+        if (is_null($this->size)) {
+            $this->size = $this->matrix->getMinSize();
+        }
+
         $charSize = new Size($this->getCharWidth(), $this->getCharHeight());
         $imageSize = new Size($this->size->getWidth() * $charSize->getWidth(), $this->size->getHeight() * $charSize->getHeight());
 

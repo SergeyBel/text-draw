@@ -18,15 +18,15 @@ class TextRender implements RenderInterface
     private Size $size;
 
     public function __construct(
-        int $width,
-        int $height,
+        Size $size
     ) {
         $this->style = new TextRenderStyle();
-        $this->size = new Size($width, $height);
+        $this->size = $size;
         $this->matrix = new PixelMatrix();
 
         $this->clear();
     }
+
     public function render(): string
     {
         $lines = [];

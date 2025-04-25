@@ -10,4 +10,5 @@ interface FigureInterface
 {
     public function draw(): PixelMatrix;
 
+
 }

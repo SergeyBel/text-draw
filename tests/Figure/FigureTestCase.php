@@ -16,7 +16,7 @@ class FigureTestCase extends TestCase
 
     protected function createDrawer(int $width, int $height, string $emptySymbol = '.'): void
     {
-        $this->render = (new TextRender($width, $height))
+        $this->render = (new TextRender(new Size($width, $height)))
             ->setStyle(
                 (new TextRenderStyle())
                     ->setEmptySymbol($emptySymbol)

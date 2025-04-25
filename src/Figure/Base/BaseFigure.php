@@ -8,23 +8,23 @@ use ConsoleDraw\Figure\Pixel\PixelMatrix;
 
 class BaseFigure implements FigureInterface
 {
-    protected PixelMatrix $pixels;
+    protected PixelMatrix $pixelMatrix;
 
 
     public function __construct()
     {
-        $this->pixels = new PixelMatrix();
+        $this->pixelMatrix = new PixelMatrix();
     }
 
 
     public function draw(): PixelMatrix
     {
-        return $this->pixels;
+        return $this->pixelMatrix;
     }
 
     protected function addFigure(FigureInterface $figure): static
     {
-        $this->pixels->merge($figure->draw());
+        $this->pixelMatrix->merge($figure->draw());
         return $this;
     }
 

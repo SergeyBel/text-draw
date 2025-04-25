@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace ConsoleDraw\Figure\Pixel;
 
+use ConsoleDraw\Common\Size;
+
 class PixelMatrix
 {
     /**
@@ -74,6 +76,21 @@ class PixelMatrix
     {
         $this->matrix = [];
         return $this;
+    }
+
+    public function getMinSize(): Size
+    {
+        $ys = array_keys($this->matrix);
+        $xs = [];
+        foreach ($this->matrix as $y => $line) {
+            $xs = array_merge($xs, array_keys($line));
+        }
+
+        return new Size(
+            max($xs) - min($xs) + 1,
+            max($ys) - min($ys) + 1
+        );
+
     }
 
 }

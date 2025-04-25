@@ -15,18 +15,14 @@ class ConsoleRender implements RenderInterface
     private TextRender $textRender;
 
     public function __construct(
-        ?int $width = null,
-        ?int $height = null,
+        ?Size $size = null,
     ) {
-        if (is_null($width)) {
-            $width = $this->detectWidth();
+
+        if (is_null($size)) {
+            $size = new Size($this->detectWidth(), $this->detectHeight());
         }
 
-        if (is_null($height)) {
-            $height = $this->detectHeight();
-        }
-
-        $this->textRender = new TextRender($width - 1, $height);
+        $this->textRender = new TextRender($size->subWidth(1));
     }
 
     public function render(): void
