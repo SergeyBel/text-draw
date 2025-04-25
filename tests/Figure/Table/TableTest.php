@@ -7,6 +7,7 @@ namespace ConsoleDraw\Tests\Figure\Table;
 use ConsoleDraw\Figure\Table\Table;
 use ConsoleDraw\Figure\Table\TableCell;
 use ConsoleDraw\Figure\Table\TableStyle;
+use ConsoleDraw\Figure\Text\TextAlign;
 use ConsoleDraw\Tests\Figure\FigureTestCase;
 
 class TableTest extends FigureTestCase
@@ -104,7 +105,7 @@ class TableTest extends FigureTestCase
     public function testHeaderAlignCenter(): void
     {
         $this->createDrawer(14, 5);
-        $style = (new TableStyle())->alignHeaderCenter();
+        $style = (new TableStyle())->setHeaderAlign(TextAlign::Center);
 
         $table = (new Table())
             ->setHeader(['City', 'Value'])
@@ -128,7 +129,7 @@ class TableTest extends FigureTestCase
     public function testAlignCenter(): void
     {
         $this->createDrawer(14, 5);
-        $style = (new TableStyle())->alignCenter();
+        $style = (new TableStyle())->setAlign(TextAlign::Center);
 
         $table = (new Table())
             ->setHeader(['City', 'Value'])

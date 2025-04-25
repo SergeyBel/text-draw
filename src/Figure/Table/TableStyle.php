@@ -71,29 +71,18 @@ class TableStyle
         return $this;
     }
 
-    public function alignCenter(): static
+    public function setAlign(TextAlign $align): static
     {
-        $this->align = TextAlign::Center;
+        $this->align = $align;
         return $this;
     }
 
-    public function alignRight(): static
+    public function setHeaderAlign(TextAlign $headerAlign): static
     {
-        $this->align = TextAlign::Right;
+        $this->headerAlign = $headerAlign;
         return $this;
     }
 
-    public function alignHeaderCenter(): static
-    {
-        $this->headerAlign = TextAlign::Center;
-        return $this;
-    }
-
-    public function alignHeaderRight(): static
-    {
-        $this->headerAlign = TextAlign::Right;
-        return $this;
-    }
 
     public function getAlign(): TextAlign
     {
