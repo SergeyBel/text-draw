@@ -31,7 +31,7 @@ class FigureTestCase extends TestCase
     protected function assertRender(string $expected)
     {
         $actual = $this->render->render();
-        $message = "Expected:\n".$expected."\n\nActual:\n".$actual;
+        $message = "Expected:\n" . $expected . "\n\nActual:\n" . $actual;
 
         $this->assertThat($actual, new RenderConstraint($expected), $message);
     }
