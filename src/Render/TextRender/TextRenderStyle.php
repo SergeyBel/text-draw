@@ -6,16 +6,16 @@ namespace ConsoleDraw\Render\TextRender;
 
 class TextRenderStyle
 {
-    private string $emptySymbol = ' ';
+    private string $emptyChar = ' ';
 
-    public function getEmptySymbol(): string
+    public function getEmptyChar(): string
     {
-        return $this->emptySymbol;
+        return $this->emptyChar;
     }
 
-    public function setEmptySymbol(string $emptySymbol): static
+    public function setEmptyChar(string $emptyChar): static
     {
-        $this->emptySymbol = $emptySymbol;
+        $this->emptyChar = $emptyChar;
         return $this;
     }
 }

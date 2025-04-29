@@ -6,19 +6,17 @@ namespace ConsoleDraw\Render\TextRender;
 
 use ConsoleDraw\Common\Size;
 use ConsoleDraw\Figure\Base\FigureInterface;
-use ConsoleDraw\Figure\Pixel\Pixel;
 use ConsoleDraw\Figure\Pixel\PixelMatrix;
-use ConsoleDraw\Plane\Point;
 use ConsoleDraw\Render\RenderInterface;
 
 class TextRender implements RenderInterface
 {
     private PixelMatrix $matrix;
     private TextRenderStyle $style;
-    private Size $size;
+    private ?Size $size = null;
 
     public function __construct(
-        Size $size
+        ?Size $size = null
     ) {
         $this->style = new TextRenderStyle();
         $this->size = $size;
@@ -29,11 +27,15 @@ class TextRender implements RenderInterface
 
     public function render(): string
     {
+        if (is_null($this->size)) {
+            $this->size = $this->matrix->getMinSize();
+        }
+
         $lines = [];
-        for ($y = 0; $y < $this->getSize()->getHeight(); $y++) {
+        for ($y = 0; $y < $this->size->getHeight(); $y++) {
             $line = '';
-            for ($x = 0; $x < $this->getSize()->getWidth(); $x++) {
-                $line .= $this->matrix->getPixel($x, $y)->getChar();
+            for ($x = 0; $x < $this->size->getWidth(); $x++) {
+                $line .= $this->matrix->hasPixel($x, $y) ? $this->matrix->getPixel($x, $y)->getChar() : $this->style->getEmptyChar();
             }
             $lines[] = $line;
 
@@ -50,20 +52,9 @@ class TextRender implements RenderInterface
         return $this;
     }
 
-    public function clear(): void
+    private function clear(): void
     {
         $this->matrix->clear();
-        for ($y = 0; $y < $this->getSize()->getHeight(); $y++) {
-            for ($x = 0; $x < $this->getSize()->getWidth(); $x++) {
-                $this->matrix->setPixel(new Pixel(new Point($x, $y), $this->style->getEmptySymbol()));
-            }
-        }
-
-    }
-
-    public function getSize(): Size
-    {
-        return $this->size;
     }
 
     public function setStyle(TextRenderStyle $style): static
@@ -72,8 +63,4 @@ class TextRender implements RenderInterface
         $this->clear();
         return $this;
     }
-
-
-
-
 }

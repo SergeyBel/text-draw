@@ -14,18 +14,13 @@ class FigureTestCase extends TestCase
 {
     protected TextRender $render;
 
-    protected function createDrawer(int $width, int $height, string $emptySymbol = '.'): void
+    protected function createDrawer(?Size $size = null, string $emptySymbol = '.'): void
     {
-        $this->render = (new TextRender(new Size($width, $height)))
+        $this->render = (new TextRender($size))
             ->setStyle(
                 (new TextRenderStyle())
-                    ->setEmptySymbol($emptySymbol)
+                    ->setEmptyChar($emptySymbol)
             );
-    }
-
-    protected function getSize(): Size
-    {
-        return $this->render->getSize();
     }
 
     protected function assertRender(string $expected)

@@ -13,14 +13,10 @@ class LineTest extends FigureTestCase
 {
     public function testHorizontalLine(): void
     {
-        $this->createDrawer(5, 5);
+        $this->createDrawer();
         $this->render->addFigure(new Line(new Point(0, 0), new Point(2, 0)));
         $expected = <<<EOD
-        ***..
-        .....
-        .....
-        .....
-        .....
+        ***
         EOD;
 
         $this->assertRender($expected);
@@ -28,14 +24,12 @@ class LineTest extends FigureTestCase
 
     public function testVerticalLine(): void
     {
-        $this->createDrawer(5, 5);
+        $this->createDrawer();
         $this->render->addFigure(new Line(new Point(0, 0), new Point(0, 2)));
         $expected = <<<EOD
-        *....
-        *....
-        *....
-        .....
-        .....
+        *
+        *
+        *
         EOD;
 
         $this->assertRender($expected);
@@ -43,7 +37,7 @@ class LineTest extends FigureTestCase
 
     public function testDiagonalLine(): void
     {
-        $this->createDrawer(3, 3);
+        $this->createDrawer();
         $this->render->addFigure(new Line(new Point(0, 0), new Point(2, 2)));
         $expected = <<<EOD
         *..
@@ -56,7 +50,7 @@ class LineTest extends FigureTestCase
 
     public function testStyleSymbol(): void
     {
-        $this->createDrawer(3, 3);
+        $this->createDrawer();
 
         $style = (new LineStyle())->setSymbol('+');
         $this->render->addFigure(
@@ -74,7 +68,7 @@ class LineTest extends FigureTestCase
 
     public function testStyleStartFinishSymbol(): void
     {
-        $this->createDrawer(3, 3);
+        $this->createDrawer();
 
         $style = (new LineStyle())
             ->setStartChar('+')

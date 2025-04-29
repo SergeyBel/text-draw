@@ -12,7 +12,7 @@ class TriangleTest extends FigureTestCase
 {
     public function testTriangle(): void
     {
-        $this->createDrawer(5, 5);
+        $this->createDrawer();
         $this->render->addFigure(new Triangle(
             new Point(1, 1),
             new Point(1, 4),

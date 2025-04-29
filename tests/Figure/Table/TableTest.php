@@ -14,7 +14,7 @@ class TableTest extends FigureTestCase
 {
     public function testTable(): void
     {
-        $this->createDrawer(16, 7);
+        $this->createDrawer();
 
         $table = (new Table())
             ->setHeader(['City', 'Value'])
@@ -40,7 +40,7 @@ class TableTest extends FigureTestCase
 
     public function testTableCell(): void
     {
-        $this->createDrawer(14, 3);
+        $this->createDrawer();
 
         $table = (new Table())
             ->addRows([
@@ -60,7 +60,7 @@ class TableTest extends FigureTestCase
 
     public function testTableColspan(): void
     {
-        $this->createDrawer(14, 5);
+        $this->createDrawer();
 
         $table = (new Table())
             ->addRows([
@@ -83,7 +83,7 @@ class TableTest extends FigureTestCase
 
     public function testTableCellMaxWidth(): void
     {
-        $this->createDrawer(13, 3);
+        $this->createDrawer();
 
         $table = (new Table())
             ->addRows([
@@ -104,7 +104,7 @@ class TableTest extends FigureTestCase
 
     public function testHeaderAlignCenter(): void
     {
-        $this->createDrawer(14, 5);
+        $this->createDrawer();
         $style = (new TableStyle())->setHeaderAlign(TextAlign::Center);
 
         $table = (new Table())
@@ -128,7 +128,7 @@ class TableTest extends FigureTestCase
 
     public function testAlignCenter(): void
     {
-        $this->createDrawer(14, 5);
+        $this->createDrawer();
         $style = (new TableStyle())->setAlign(TextAlign::Center);
 
         $table = (new Table())

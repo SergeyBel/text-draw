@@ -92,8 +92,8 @@ class PixelMatrix
         }
 
         return new Size(
-            max($xs) - min($xs) + 1,
-            max($ys) - min($ys) + 1
+            max($xs) + 1,
+            max($ys) + 1
         );
 
     }

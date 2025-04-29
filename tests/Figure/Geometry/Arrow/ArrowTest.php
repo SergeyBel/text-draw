@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Tests\Figure\Arrow;
+namespace ConsoleDraw\Tests\Figure\Geometry\Arrow;
 
 use ConsoleDraw\Figure\Geometry\Arrow\Arrow;
 use ConsoleDraw\Plane\Point;
@@ -12,15 +12,14 @@ class ArrowTest extends FigureTestCase
 {
     public function testHorizontalRightArrow(): void
     {
-        $this->createDrawer(5, 3);
+        $this->createDrawer();
         $this->render->addFigure(new Arrow(
             new Point(1, 1),
             new Point(3, 1)
         ));
         $expected = <<<EOD
-        .....
-        .-->.
-        .....
+        ....
+        .-->
         EOD;
 
         $this->assertRender($expected);
@@ -28,15 +27,14 @@ class ArrowTest extends FigureTestCase
 
     public function testHorizontalLeftArrow(): void
     {
-        $this->createDrawer(5, 3);
+        $this->createDrawer();
         $this->render->addFigure(new Arrow(
             new Point(3, 1),
             new Point(1, 1)
         ));
         $expected = <<<EOD
-        .....
-        .<--.
-        .....
+        ....
+        .<--
         EOD;
 
         $this->assertRender($expected);
@@ -44,16 +42,16 @@ class ArrowTest extends FigureTestCase
 
     public function testVerticalDownArrow(): void
     {
-        $this->createDrawer(3, 4);
+        $this->createDrawer();
         $this->render->addFigure(new Arrow(
             new Point(1, 1),
             new Point(1, 3)
         ));
         $expected = <<<EOD
-        ...
-        .|.
-        .|.
-        .v.
+        ..
+        .|
+        .|
+        .v
         EOD;
 
         $this->assertRender($expected);
@@ -61,21 +59,18 @@ class ArrowTest extends FigureTestCase
 
     public function testVerticalUpArrow(): void
     {
-        $this->createDrawer(3, 4);
+        $this->createDrawer();
         $this->render->addFigure(new Arrow(
             new Point(1, 3),
             new Point(1, 1)
         ));
         $expected = <<<EOD
-        ...
-        .^.
-        .|.
-        .|.
+        ..
+        .^
+        .|
+        .|
         EOD;
 
         $this->assertRender($expected);
     }
-
-
-
 }

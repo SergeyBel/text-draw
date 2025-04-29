@@ -13,14 +13,14 @@ class TextTest extends FigureTestCase
 {
     public function testText(): void
     {
-        $this->createDrawer(7, 2);
+        $this->createDrawer();
         $this->render->addFigure(new Text(
             new Point(1, 1),
             'hello'
         ));
         $expected = <<<EOD
-        .......
-        .hello.
+        ......
+        .hello
         EOD;
 
         $this->assertRender($expected);
@@ -28,7 +28,7 @@ class TextTest extends FigureTestCase
 
     public function testWidthLess(): void
     {
-        $this->createDrawer(7, 1);
+        $this->createDrawer();
         $text = new Text(
             new Point(0, 0),
             'hello'
@@ -36,7 +36,7 @@ class TextTest extends FigureTestCase
         $text->setStyle((new TextStyle())->setWidth(3));
         $this->render->addFigure($text);
         $expected = <<<EOD
-        hel....
+        hel
         EOD;
 
         $this->assertRender($expected);
@@ -44,7 +44,7 @@ class TextTest extends FigureTestCase
 
     public function testWidthMore(): void
     {
-        $this->createDrawer(7, 1);
+        $this->createDrawer();
         $text = new Text(
             new Point(0, 0),
             'hello'
@@ -52,7 +52,7 @@ class TextTest extends FigureTestCase
         $text->setStyle((new TextStyle())->setWidth(6));
         $this->render->addFigure($text);
         $expected = <<<EOD
-        hello .
+        hello 
         EOD;
 
         $this->assertRender($expected);
@@ -60,7 +60,7 @@ class TextTest extends FigureTestCase
 
     public function testAlignCenter(): void
     {
-        $this->createDrawer(9, 1);
+        $this->createDrawer();
         $text = new Text(
             new Point(1, 0),
             'hello'
@@ -72,7 +72,7 @@ class TextTest extends FigureTestCase
         );
         $this->render->addFigure($text);
         $expected = <<<EOD
-        . hello .
+        . hello 
         EOD;
 
         $this->assertRender($expected);
@@ -80,7 +80,7 @@ class TextTest extends FigureTestCase
 
     public function testAlignRight(): void
     {
-        $this->createDrawer(9, 1);
+        $this->createDrawer();
         $text = new Text(
             new Point(1, 0),
             'hello'
@@ -92,12 +92,9 @@ class TextTest extends FigureTestCase
         );
         $this->render->addFigure($text);
         $expected = <<<EOD
-        .  hello.
+        .  hello
         EOD;
 
         $this->assertRender($expected);
     }
-
-
-
 }
