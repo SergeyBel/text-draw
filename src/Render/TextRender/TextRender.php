@@ -28,7 +28,7 @@ class TextRender implements RenderInterface
     public function render(): string
     {
         if (is_null($this->size)) {
-            $this->size = $this->matrix->getMinSize();
+            $this->size = $this->matrix->getMinHull();
         }
 
         $lines = [];

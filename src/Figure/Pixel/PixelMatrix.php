@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ConsoleDraw\Figure\Pixel;
 
+use ConsoleDraw\Common\Exception\RenderException;
 use ConsoleDraw\Common\Size;
 use Exception;
 
@@ -12,7 +13,7 @@ class PixelMatrix
     /**
      * @var Pixel[][]
      */
-    private array $matrix;
+    private array $matrix = [];
 
     /**
      * @param array<Pixel> $pixels
@@ -31,6 +32,9 @@ class PixelMatrix
 
     public function getPixel(int $x, int $y): Pixel
     {
+        if (!$this->hasPixel($x, $y)) {
+            throw new RenderException('Pixel not found');
+        }
         return $this->matrix[$y][$x];
     }
 
@@ -79,7 +83,7 @@ class PixelMatrix
         return $this;
     }
 
-    public function getMinSize(): Size
+    public function getMinHull(): Size
     {
         $ys = array_keys($this->matrix);
         $xs = [];

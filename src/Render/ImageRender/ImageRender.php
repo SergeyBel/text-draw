@@ -32,7 +32,7 @@ class ImageRender implements RenderInterface
     public function render(string $filepath): Image
     {
         if (is_null($this->size)) {
-            $this->size = $this->matrix->getMinSize();
+            $this->size = $this->matrix->getMinHull();
         }
 
         $charSize = new Size($this->getCharWidth(), $this->getCharHeight());
