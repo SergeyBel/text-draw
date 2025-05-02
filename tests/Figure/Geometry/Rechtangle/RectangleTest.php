@@ -13,8 +13,7 @@ class RectangleTest extends FigureTestCase
 {
     public function testRectangle(): void
     {
-        $this->createDrawer();
-        $this->render->addFigure(new Rectangle(
+        $this->addFigure(new Rectangle(
             new Point(1, 1),
             new Size(3, 4)
         ));

@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace ConsoleDraw\Render\ConsoleRender;
 
 use ConsoleDraw\Common\Size;
-use ConsoleDraw\Figure\Base\FigureInterface;
-use ConsoleDraw\Render\RenderInterface;
+use ConsoleDraw\Frame\Frame;
 use ConsoleDraw\Render\TextRender\TextRender;
 use Exception;
 
-class ConsoleRender implements RenderInterface
+class ConsoleRender
 {
     private TextRender $textRender;
 
@@ -25,19 +24,12 @@ class ConsoleRender implements RenderInterface
         $this->textRender = new TextRender($size->subWidth(1));
     }
 
-    public function render(): void
+    public function render(Frame $frame): void
     {
-        $text = $this->textRender->render();
+        $text = $this->textRender->render($frame);
         echo $text;
 
     }
-
-    public function addFigure(FigureInterface $figure): static
-    {
-        $this->textRender->addFigure($figure);
-        return $this;
-    }
-
 
     private function detectWidth(): int
     {

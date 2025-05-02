@@ -4,18 +4,20 @@ declare(strict_types=1);
 
 namespace ConsoleDraw\Tests\Figure\Chart\Bar;
 
-use ConsoleDraw\Common\Size;
 use ConsoleDraw\Figure\Chart\Bar\Bar;
 use ConsoleDraw\Figure\Chart\Bar\BarChart;
+use ConsoleDraw\Figure\Chart\Bar\BarChartStyle;
 use ConsoleDraw\Tests\Figure\FigureTestCase;
 
 class BarChartTest extends FigureTestCase
 {
     public function testBarChart(): void
     {
-        $this->createDrawer();
-
-        $barChart = new BarChart(new Size(11, 11));
+        $barChart = (new BarChart())->setStyle(
+            (new BarChartStyle())
+                ->setBarWidth(4)
+                ->setUnitHeight(1)
+        );
         $barChart->addBar(
             new Bar('a', 2)
         )
@@ -23,19 +25,14 @@ class BarChartTest extends FigureTestCase
                 new Bar('b', 5)
             );
 
-        $this->render->addFigure($barChart);
+        $this->addFigure($barChart);
 
 
         $expected = <<<EOD
         |......****
         |......*..*
         |......*..*
-        |......*..*
-        |......*..*
-        |......*..*
         |.****.*..*
-        |.*..*.*..*
-        |.*..*.*..*
         |.****.****
         |__a____b__
         EOD;

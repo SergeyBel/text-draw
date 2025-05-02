@@ -6,53 +6,40 @@ namespace ConsoleDraw\Render\ImageRender;
 
 use ConsoleDraw\Common\Color\RgbColor;
 use ConsoleDraw\Common\Size;
-use ConsoleDraw\Figure\Base\FigureInterface;
 use ConsoleDraw\Figure\Pixel\Pixel;
 use ConsoleDraw\Figure\Pixel\PixelMatrix;
-use ConsoleDraw\Render\RenderInterface;
+use ConsoleDraw\Frame\Frame;
 use Exception;
 use GdImage;
 
-class ImageRender implements RenderInterface
+class ImageRender
 {
-    private PixelMatrix $matrix;
-    private ?Size $size = null;
+    private ?Size $size;
     private ImageRenderStyle $style;
 
     public function __construct(
         ?Size $size = null
     ) {
         $this->size = $size;
-        $this->matrix = new PixelMatrix();
 
         $this->style = new ImageRenderStyle();
-        $this->clear();
     }
 
-    public function render(string $filepath): Image
+    public function render(Frame $frame, string $filepath): Image
     {
+        $matrix = $frame->draw();
+
         if (is_null($this->size)) {
-            $this->size = $this->matrix->getMinHull();
+            $this->size = $matrix->getMinHull();
         }
 
         $charSize = new Size($this->getCharWidth(), $this->getCharHeight());
         $imageSize = new Size($this->size->getWidth() * $charSize->getWidth(), $this->size->getHeight() * $charSize->getHeight());
 
         $image = $this->createImage($imageSize);
-        $this->drawPixels($image, $charSize);
+        $this->drawPixels($matrix, $image, $charSize);
         $this->saveImage($filepath, $image);
         return new Image($filepath, $imageSize);
-    }
-
-    public function addFigure(FigureInterface $figure): static
-    {
-        $this->matrix->merge($figure->draw());
-        return $this;
-    }
-
-    public function clear(): void
-    {
-        $this->matrix->clear();
     }
 
     public function getStyle(): ImageRenderStyle
@@ -79,11 +66,11 @@ class ImageRender implements RenderInterface
         return $image;
     }
 
-    private function drawPixels(GdImage $image, Size $charSize): void
+    private function drawPixels(PixelMatrix $matrix, GdImage $image, Size $charSize): void
     {
         $textColor = $this->createColor($image, $this->style->getTextColor());
 
-        foreach ($this->matrix->getPixels() as $pixel) {
+        foreach ($matrix->getPixels() as $pixel) {
             $this->drawPixel($image, $pixel, $charSize, $textColor);
         }
     }

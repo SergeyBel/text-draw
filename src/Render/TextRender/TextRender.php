@@ -5,37 +5,33 @@ declare(strict_types=1);
 namespace ConsoleDraw\Render\TextRender;
 
 use ConsoleDraw\Common\Size;
-use ConsoleDraw\Figure\Base\FigureInterface;
-use ConsoleDraw\Figure\Pixel\PixelMatrix;
-use ConsoleDraw\Render\RenderInterface;
+use ConsoleDraw\Frame\Frame;
 
-class TextRender implements RenderInterface
+class TextRender
 {
-    private PixelMatrix $matrix;
     private TextRenderStyle $style;
-    private ?Size $size = null;
+    private ?Size $size;
 
     public function __construct(
         ?Size $size = null
     ) {
         $this->style = new TextRenderStyle();
         $this->size = $size;
-        $this->matrix = new PixelMatrix();
-
-        $this->clear();
     }
 
-    public function render(): string
+    public function render(Frame $frame): string
     {
+        $matrix = $frame->draw();
+
         if (is_null($this->size)) {
-            $this->size = $this->matrix->getMinHull();
+            $this->size = $matrix->getMinHull();
         }
 
         $lines = [];
         for ($y = 0; $y < $this->size->getHeight(); $y++) {
             $line = '';
             for ($x = 0; $x < $this->size->getWidth(); $x++) {
-                $line .= $this->matrix->hasPixel($x, $y) ? $this->matrix->getPixel($x, $y)->getChar() : $this->style->getEmptyChar();
+                $line .= $matrix->hasPixel($x, $y) ? $matrix->getPixel($x, $y)->getChar() : $this->style->getEmptyChar();
             }
             $lines[] = $line;
 
@@ -45,22 +41,9 @@ class TextRender implements RenderInterface
     }
 
 
-
-    public function addFigure(FigureInterface $figure): static
-    {
-        $this->matrix->merge($figure->draw());
-        return $this;
-    }
-
-    private function clear(): void
-    {
-        $this->matrix->clear();
-    }
-
     public function setStyle(TextRenderStyle $style): static
     {
         $this->style = $style;
-        $this->clear();
         return $this;
     }
 }

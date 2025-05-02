@@ -13,8 +13,7 @@ class TextTest extends FigureTestCase
 {
     public function testText(): void
     {
-        $this->createDrawer();
-        $this->render->addFigure(new Text(
+        $this->addFigure(new Text(
             new Point(1, 1),
             'hello'
         ));
@@ -28,13 +27,12 @@ class TextTest extends FigureTestCase
 
     public function testWidthLess(): void
     {
-        $this->createDrawer();
         $text = new Text(
             new Point(0, 0),
             'hello'
         );
         $text->setStyle((new TextStyle())->setWidth(3));
-        $this->render->addFigure($text);
+        $this->addFigure($text);
         $expected = <<<EOD
         hel
         EOD;
@@ -44,13 +42,13 @@ class TextTest extends FigureTestCase
 
     public function testWidthMore(): void
     {
-        $this->createDrawer();
+
         $text = new Text(
             new Point(0, 0),
             'hello'
         );
         $text->setStyle((new TextStyle())->setWidth(6));
-        $this->render->addFigure($text);
+        $this->addFigure($text);
         $expected = <<<EOD
         hello 
         EOD;
@@ -60,7 +58,6 @@ class TextTest extends FigureTestCase
 
     public function testAlignCenter(): void
     {
-        $this->createDrawer();
         $text = new Text(
             new Point(1, 0),
             'hello'
@@ -70,7 +67,7 @@ class TextTest extends FigureTestCase
                 ->setWidth(7)
                 ->alignCenter()
         );
-        $this->render->addFigure($text);
+        $this->addFigure($text);
         $expected = <<<EOD
         . hello 
         EOD;
@@ -80,7 +77,6 @@ class TextTest extends FigureTestCase
 
     public function testAlignRight(): void
     {
-        $this->createDrawer();
         $text = new Text(
             new Point(1, 0),
             'hello'
@@ -90,7 +86,7 @@ class TextTest extends FigureTestCase
                 ->setWidth(7)
                 ->alignRight()
         );
-        $this->render->addFigure($text);
+        $this->addFigure($text);
         $expected = <<<EOD
         .  hello
         EOD;

@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace ConsoleDraw\Figure\Chart\Bar;
 
+use ConsoleDraw\Common\Exception\RenderException;
 use ConsoleDraw\Common\Size;
-use ConsoleDraw\Figure\Base\StretchableFigure;
+use ConsoleDraw\Figure\Base\BaseFigure;
 use ConsoleDraw\Figure\Geometry\Line\Line;
 use ConsoleDraw\Figure\Geometry\Line\LineStyle;
 use ConsoleDraw\Figure\Geometry\Rechtangle\Rectangle;
@@ -14,64 +15,80 @@ use ConsoleDraw\Figure\Text\Text;
 use ConsoleDraw\Figure\Text\TextStyle;
 use ConsoleDraw\Plane\Point;
 
-class BarChart extends StretchableFigure
+class BarChart extends BaseFigure
 {
     /**
      * @var array<Bar>
      */
     private array $bars;
 
+    private BarChartStyle $style;
+
     public function __construct(
-        Size $size,
-        ?Point $leftUpperCorner = null
     ) {
-        parent::__construct($size, $leftUpperCorner);
+        $this->style = new BarChartStyle();
+        parent::__construct();
     }
 
-    public function draw(): PixelMatrix
-    {
-        $this->drawAxes();
-        $area = $this->size
-            ->subWidth(2)
-            ->subHeight(1);
-
-        $this->drawLabels($this->leftUpperCorner->addX(2)->addY($area->getHeight()), $area);
-
-        $this->drawBars(
-            $area,
-            $this->leftUpperCorner->addX(2)->addY($area->getHeight())
-        );
-
-
-        return parent::draw();
-    }
 
     public function addBar(Bar $bar): static
     {
         $this->bars[] = $bar;
         return $this;
-
     }
 
-    private function drawAxes(): void
+    public function setStyle(BarChartStyle $style): static
+    {
+        $this->style = $style;
+        return $this;
+    }
+
+
+
+    public function draw(): PixelMatrix
+    {
+        $barWidth = $this->style->getBarWidth();
+        $unitHeight = $this->style->getUnitHeight();
+
+        if (count($this->bars) === 0) {
+            throw new RenderException('No bars');
+        }
+
+        $height = max(array_map(fn (Bar $bar) => $bar->getValue(), $this->bars)) * $unitHeight;
+
+        $size = new Size(count($this->bars) * ($barWidth + 1) + 1, $height * 1);
+
+        $this->drawAxes($size);
+
+        $this->drawLabels($size, $barWidth);
+
+        $this->drawBars($size, $barWidth, $unitHeight);
+
+
+        return parent::draw();
+    }
+
+
+    private function drawAxes(size $size): void
     {
         $this->addFigure(
             (new Line(
-                $this->leftUpperCorner,
-                $this->leftUpperCorner->addHeight($this->size->getHeight())
+                new Point(0, 0),
+                new Point(0, $size->getHeight())
             ))->setStyle((new LineStyle())->setSymbol('|'))
         )->addFigure(
             (new Line(
-                $this->leftUpperCorner->addHeight($this->size->getHeight())->addX(1),
-                $this->leftUpperCorner->addHeight($this->size->getHeight())->addWidth($this->size->getWidth())
+                (new Point(0, $size->getHeight()))->addX(1),
+                new Point($size->getWidth() - 1, $size->getHeight())
             ))->setStyle((new LineStyle())->setSymbol('_'))
         )
         ;
     }
 
-    private function drawLabels(Point $start, Size $area): void
+    private function drawLabels(Size $size, int $barWidth): void
     {
-        $barWidth = $this->calculateBarWidth($area);
+        $start = (new Point(0, $size->getHeight()))->addX(2);
+
         $labelStyle = (new TextStyle())
             ->setWidth($barWidth)
             ->setPaddingChar('_')
@@ -84,13 +101,9 @@ class BarChart extends StretchableFigure
         }
     }
 
-    private function drawBars(Size $area, Point $start): void
+    private function drawBars(Size $size, int $barWidth, int $unitHeight): void
     {
-        $barWidth = $this->calculateBarWidth($area);
-        $unitHeight = $this->calculateUnitValueHeight($area);
-
-
-
+        $start = (new Point(0, $size->getHeight()))->addX(2);
         foreach ($this->bars as $bar) {
             $barHeight = $unitHeight * $bar->getValue();
             $this->drawBar($start, new Size($barWidth, $barHeight));
@@ -104,21 +117,6 @@ class BarChart extends StretchableFigure
             $leftDownCorner->subY($size->getHeight()),
             $size
         ));
-    }
-
-    private function calculateBarWidth(Size $size): int
-    {
-        return (int)floor($size->getWidth() / count($this->bars));
-    }
-
-    private function calculateUnitValueHeight(Size $size): int
-    {
-        if (count($this->bars) === 0) {
-            return 0;
-        }
-
-        return (int) floor($size->getHeight() / max(array_map(fn (Bar $bar) => $bar->getValue(), $this->bars)));
-
     }
 
 }

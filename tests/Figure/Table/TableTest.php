@@ -14,15 +14,13 @@ class TableTest extends FigureTestCase
 {
     public function testTable(): void
     {
-        $this->createDrawer();
-
         $table = (new Table())
             ->setHeader(['City', 'Value'])
             ->addRows([
                 ['London', '12000'],
                 ['New York', '540'],
             ]);
-        $this->render->addFigure($table);
+        $this->addFigure($table);
 
 
         $expected = <<<EOD
@@ -40,13 +38,12 @@ class TableTest extends FigureTestCase
 
     public function testTableCell(): void
     {
-        $this->createDrawer();
 
         $table = (new Table())
             ->addRows([
                 ['London', new TableCell('12000')],
             ]);
-        $this->render->addFigure($table);
+        $this->addFigure($table);
 
 
         $expected = <<<EOD
@@ -60,14 +57,13 @@ class TableTest extends FigureTestCase
 
     public function testTableColspan(): void
     {
-        $this->createDrawer();
 
         $table = (new Table())
             ->addRows([
                 ['London', '12000'],
                 [new TableCell('Boston', 2)],
             ]);
-        $this->render->addFigure($table);
+        $this->addFigure($table);
 
 
         $expected = <<<EOD
@@ -83,14 +79,12 @@ class TableTest extends FigureTestCase
 
     public function testTableCellMaxWidth(): void
     {
-        $this->createDrawer();
-
         $table = (new Table())
             ->addRows([
                 ['London', new TableCell('12000')],
             ]);
         $table->setStyle((new TableStyle())->setColumnMaxWidth(5));
-        $this->render->addFigure($table);
+        $this->addFigure($table);
 
 
         $expected = <<<EOD
@@ -104,7 +98,6 @@ class TableTest extends FigureTestCase
 
     public function testHeaderAlignCenter(): void
     {
-        $this->createDrawer();
         $style = (new TableStyle())->setHeaderAlign(TextAlign::Center);
 
         $table = (new Table())
@@ -112,7 +105,7 @@ class TableTest extends FigureTestCase
             ->addRows([
                 ['London', '12000'],
             ])->setStyle($style);
-        $this->render->addFigure($table);
+        $this->addFigure($table);
 
 
         $expected = <<<EOD
@@ -128,7 +121,6 @@ class TableTest extends FigureTestCase
 
     public function testAlignCenter(): void
     {
-        $this->createDrawer();
         $style = (new TableStyle())->setAlign(TextAlign::Center);
 
         $table = (new Table())
@@ -136,7 +128,7 @@ class TableTest extends FigureTestCase
             ->addRows([
                 ['London', '1'],
             ])->setStyle($style);
-        $this->render->addFigure($table);
+        $this->addFigure($table);
 
 
         $expected = <<<EOD

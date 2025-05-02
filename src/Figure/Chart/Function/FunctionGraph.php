@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace ConsoleDraw\Figure\Chart\Function;
 
+use ConsoleDraw\Common\Exception\RenderException;
 use ConsoleDraw\Common\Size;
-use ConsoleDraw\Figure\Base\StretchableFigure;
-use ConsoleDraw\Figure\Geometry\Arrow\Arrow;
+use ConsoleDraw\Figure\Base\BaseFigure;
+use ConsoleDraw\Figure\Geometry\Line\Line;
+use ConsoleDraw\Figure\Geometry\Line\LineStyle;
 use ConsoleDraw\Figure\Pixel\Pixel;
 use ConsoleDraw\Figure\Pixel\PixelMatrix;
 use ConsoleDraw\Plane\Point;
 
-class FunctionGraph extends StretchableFigure
+class FunctionGraph extends BaseFigure
 {
     /**
      * @var array<FunctionValue>
@@ -21,20 +23,12 @@ class FunctionGraph extends StretchableFigure
     private FunctionGraphStyle $style;
 
     public function __construct(
-        Size $size,
-        ?Point $leftUpperCorner = null
     ) {
         $this->style = new FunctionGraphStyle();
-        parent::__construct($size, $leftUpperCorner);
+        parent::__construct();
+
     }
 
-    public function draw(): PixelMatrix
-    {
-        $this->drawAxes();
-        $this->drawFunction();
-
-        return parent::draw();
-    }
 
     /**
      * @return FunctionValue[]
@@ -59,34 +53,61 @@ class FunctionGraph extends StretchableFigure
         return $this;
     }
 
-
-    private function drawAxes(): void
+    public function draw(): PixelMatrix
     {
-        $width = $this->getSize()->getWidth();
-        $height = $this->getSize()->getHeight();
+        if (count($this->values) === 0) {
+            throw new RenderException('No values');
+        }
+        $maxX = max(array_map(fn (FunctionValue $value) => $value->getX(), $this->values));
+        $minX = min(array_map(fn (FunctionValue $value) => $value->getX(), $this->values));
 
-        $zeroPoint = $this->getLeftUpperCorner()->addHeight($height);
-        $highYPoint = clone $this->getLeftUpperCorner();
+        $maxY = max(array_map(fn (FunctionValue $value) => $value->getY(), $this->values));
+        $minY = min(array_map(fn (FunctionValue $value) => $value->getY(), $this->values));
+
+        $size = new Size($maxX - $minX + 1, $maxY - $minY + 1);
+
+        $this->drawAxes($size);
+        $this->drawFunction($size);
+
+        return parent::draw();
+    }
+
+    private function drawFunction(Size $size): void
+    {
+        $maxY = $size->getHeight() - 1;
+        foreach ($this->values as $value) {
+            $x = $value->getX();
+            $y = $maxY - $value->getY();
+            $value = new Pixel(new Point($x, $y), $this->style->getPointSymbol());
+            $this->addFigure($value);
+        }
+    }
+
+
+    private function drawAxes(Size $size): void
+    {
+        $width = $size->getWidth();
+        $height = $size->getHeight();
+
+        $highYPoint = new Point(0, 0);
+        $zeroPoint = $highYPoint->addHeight($height);
         $highXPoint = $zeroPoint->addWidth($width);
 
         $this
             ->addFigure(
-                new Arrow($zeroPoint, $highYPoint)
+                (new Line($zeroPoint, $highYPoint))
+                    ->setStyle(
+                        (new LineStyle())->setSymbol('|')
+                    )
             )
             ->addFigure(
-                new Arrow($zeroPoint, $highXPoint)
+                (new Line($zeroPoint, $highXPoint))->setStyle(
+                    (new LineStyle())->setSymbol('-')
+                )
             )
             ->addFigure(new Pixel($zeroPoint, $this->style->getZeroSymbol()))
         ;
     }
 
-    private function drawFunction(): void
-    {
-        foreach ($this->values as $value) {
-            $x = $value->getX();
-            $y = $this->getSize()->getHeight() - 1 - $value->getY();
-            $value = new Pixel(new Point($x, $y), $this->style->getPointSymbol());
-            $this->addFigure($value);
-        }
-    }
+
 }

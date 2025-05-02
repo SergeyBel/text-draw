@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace ConsoleDraw\Figure\Table;
 
-use ConsoleDraw\Figure\Base\PositionFigure;
+use ConsoleDraw\Figure\Base\BaseFigure;
 use ConsoleDraw\Figure\Pixel\PixelMatrix;
 use ConsoleDraw\Figure\Text\Text;
 use ConsoleDraw\Figure\Text\TextStyle;
 use ConsoleDraw\Figure\Turtle\Turtle;
 use ConsoleDraw\Plane\Point;
 
-class Table extends PositionFigure
+class Table extends BaseFigure
 {
     /** @var array<string|TableCell>  */
     private array $header = [];
@@ -31,12 +31,9 @@ class Table extends PositionFigure
 
 
     public function __construct(
-        ?Point $leftUpperCorner = null
     ) {
-
         $this->style = new TableStyle();
-
-        parent::__construct($leftUpperCorner);
+        parent::__construct();
     }
 
 
@@ -45,7 +42,7 @@ class Table extends PositionFigure
         $this->formTable();
         $this->calculateColumnsWidth();
 
-        $start = $this->leftUpperCorner;
+        $start = new Point(0, 0);
         $this->drawTable($start);
 
         return parent::draw();
