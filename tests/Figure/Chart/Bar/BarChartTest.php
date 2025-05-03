@@ -29,12 +29,12 @@ class BarChartTest extends FigureTestCase
 
 
         $expected = <<<EOD
-        |......****
-        |......*..*
-        |......*..*
-        |.****.*..*
-        |.****.****
-        |__a____b__
+        |.....****
+        |.....*..*
+        |.....*..*
+        |****.*..*
+        |****.****
+        |_a____b__
         EOD;
 
         $this->assertRender($expected);

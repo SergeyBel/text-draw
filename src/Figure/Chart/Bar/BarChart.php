@@ -50,13 +50,9 @@ class BarChart extends BaseFigure
         $barWidth = $this->style->getBarWidth();
         $unitHeight = $this->style->getUnitHeight();
 
-        if (count($this->bars) === 0) {
-            throw new RenderException('No bars');
-        }
 
-        $height = max(array_map(fn (Bar $bar) => $bar->getValue(), $this->bars)) * $unitHeight;
 
-        $size = new Size(count($this->bars) * ($barWidth + 1) + 1, $height * 1);
+        $size = new Size($this->calculateWidth($barWidth), $this->calculateHeight($unitHeight));
 
         $this->drawAxes($size);
 
@@ -66,6 +62,20 @@ class BarChart extends BaseFigure
 
 
         return parent::draw();
+    }
+
+    private function calculateWidth(int $barWidth): int
+    {
+        $count = count($this->bars);
+        return $count * $barWidth + ($count - 1) * 1 + 1;
+    }
+
+    private function calculateHeight(int $unitHeight): int
+    {
+        if (count($this->bars) === 0) {
+            throw new RenderException('No bars');
+        }
+        return max(array_map(fn (Bar $bar) => $bar->getValue(), $this->bars)) * $unitHeight * 1;
     }
 
 
@@ -87,7 +97,7 @@ class BarChart extends BaseFigure
 
     private function drawLabels(Size $size, int $barWidth): void
     {
-        $start = (new Point(0, $size->getHeight()))->addX(2);
+        $start = (new Point(0, $size->getHeight()))->addX(1);
 
         $labelStyle = (new TextStyle())
             ->setWidth($barWidth)
@@ -103,7 +113,7 @@ class BarChart extends BaseFigure
 
     private function drawBars(Size $size, int $barWidth, int $unitHeight): void
     {
-        $start = (new Point(0, $size->getHeight()))->addX(2);
+        $start = (new Point(0, $size->getHeight()))->addX(1);
         foreach ($this->bars as $bar) {
             $barHeight = $unitHeight * $bar->getValue();
             $this->drawBar($start, new Size($barWidth, $barHeight));
