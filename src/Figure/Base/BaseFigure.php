@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Figure\Base;
+namespace TextDraw\Figure\Base;
 
-use ConsoleDraw\Figure\Pixel\PixelMatrix;
+use TextDraw\Figure\Pixel\PixelMatrix;
 
 class BaseFigure implements FigureInterface
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Common;
+namespace TextDraw\Common;
 
 class Size
 {

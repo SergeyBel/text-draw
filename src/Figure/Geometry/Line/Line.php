@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Figure\Geometry\Line;
+namespace TextDraw\Figure\Geometry\Line;
 
-use ConsoleDraw\Figure\Base\FigureInterface;
-use ConsoleDraw\Figure\Pixel\Pixel;
-use ConsoleDraw\Figure\Pixel\PixelMatrix;
-use ConsoleDraw\Plane\Point;
+use TextDraw\Figure\Base\FigureInterface;
+use TextDraw\Figure\Pixel\Pixel;
+use TextDraw\Figure\Pixel\PixelMatrix;
+use TextDraw\Plane\Point;
 
 /**
  * @see https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm

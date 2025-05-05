@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Frame;
+namespace TextDraw\Frame;
 
-use ConsoleDraw\Figure\Base\FigureInterface;
-use ConsoleDraw\Figure\Pixel\PixelMatrix;
+use TextDraw\Figure\Base\FigureInterface;
+use TextDraw\Figure\Pixel\PixelMatrix;
 
 class Frame
 {

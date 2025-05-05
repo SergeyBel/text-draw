@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Render\TextRender;
+namespace TextDraw\Render\TextRender;
 
 class TextRenderStyle
 {

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Figure\Geometry\Circle;
+namespace TextDraw\Figure\Geometry\Circle;
 
-use ConsoleDraw\Figure\Base\FigureInterface;
-use ConsoleDraw\Figure\Pixel\Pixel;
-use ConsoleDraw\Figure\Pixel\PixelMatrix;
-use ConsoleDraw\Plane\Point;
+use TextDraw\Figure\Base\FigureInterface;
+use TextDraw\Figure\Pixel\Pixel;
+use TextDraw\Figure\Pixel\PixelMatrix;
+use TextDraw\Plane\Point;
 
 class Circle implements FigureInterface
 {

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Tests\Figure\Pixel;
+namespace TextDraw\Tests\Figure\Pixel;
 
-use ConsoleDraw\Common\Exception\RenderException;
-use ConsoleDraw\Common\Size;
-use ConsoleDraw\Figure\Pixel\Pixel;
-use ConsoleDraw\Figure\Pixel\PixelMatrix;
-use ConsoleDraw\Plane\Point;
+use TextDraw\Common\Exception\RenderException;
+use TextDraw\Common\Size;
+use TextDraw\Figure\Pixel\Pixel;
+use TextDraw\Figure\Pixel\PixelMatrix;
+use TextDraw\Plane\Point;
 use PHPUnit\Framework\TestCase;
 
 class PixelMatrixTest extends TestCase

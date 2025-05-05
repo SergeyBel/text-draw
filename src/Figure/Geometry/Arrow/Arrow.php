@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Figure\Geometry\Arrow;
+namespace TextDraw\Figure\Geometry\Arrow;
 
-use ConsoleDraw\Figure\Base\BaseFigure;
-use ConsoleDraw\Figure\Geometry\Line\Line;
-use ConsoleDraw\Figure\Geometry\Line\LineStyle;
-use ConsoleDraw\Figure\Pixel\PixelMatrix;
-use ConsoleDraw\Plane\Point;
+use TextDraw\Figure\Base\BaseFigure;
+use TextDraw\Figure\Geometry\Line\Line;
+use TextDraw\Figure\Geometry\Line\LineStyle;
+use TextDraw\Figure\Pixel\PixelMatrix;
+use TextDraw\Plane\Point;
 use Exception;
 
 class Arrow extends BaseFigure

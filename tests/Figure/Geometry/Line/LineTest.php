@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Tests\Figure\Geometry\Line;
+namespace TextDraw\Tests\Figure\Geometry\Line;
 
-use ConsoleDraw\Figure\Geometry\Line\Line;
-use ConsoleDraw\Figure\Geometry\Line\LineStyle;
-use ConsoleDraw\Plane\Point;
-use ConsoleDraw\Tests\Figure\FigureTestCase;
+use TextDraw\Figure\Geometry\Line\Line;
+use TextDraw\Figure\Geometry\Line\LineStyle;
+use TextDraw\Plane\Point;
+use TextDraw\Tests\Figure\FigureTestCase;
 
 class LineTest extends FigureTestCase
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Figure\Geometry\Triangle;
+namespace TextDraw\Figure\Geometry\Triangle;
 
 class TriangleStyle
 {

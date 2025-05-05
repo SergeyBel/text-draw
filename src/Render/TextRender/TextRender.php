@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Render\TextRender;
+namespace TextDraw\Render\TextRender;
 
-use ConsoleDraw\Common\Size;
-use ConsoleDraw\Frame\Frame;
+use TextDraw\Common\Size;
+use TextDraw\Frame\Frame;
 
 class TextRender
 {

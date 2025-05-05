@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Common\Exception;
+namespace TextDraw\Common\Exception;
 
 use Exception;
 

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Figure\Pixel;
+namespace TextDraw\Figure\Pixel;
 
-use ConsoleDraw\Common\Exception\RenderException;
-use ConsoleDraw\Common\Size;
+use TextDraw\Common\Exception\RenderException;
+use TextDraw\Common\Size;
 use Exception;
 
 class PixelMatrix

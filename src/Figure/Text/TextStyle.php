@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Figure\Text;
+namespace TextDraw\Figure\Text;
 
 class TextStyle
 {

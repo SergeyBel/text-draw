@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Common\Color;
+namespace TextDraw\Common\Color;
 
 use Exception;
 

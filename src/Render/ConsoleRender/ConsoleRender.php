@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Render\ConsoleRender;
+namespace TextDraw\Render\ConsoleRender;
 
-use ConsoleDraw\Common\Size;
-use ConsoleDraw\Frame\Frame;
-use ConsoleDraw\Render\TextRender\TextRender;
+use TextDraw\Common\Size;
+use TextDraw\Frame\Frame;
+use TextDraw\Render\TextRender\TextRender;
 use Exception;
 
 class ConsoleRender

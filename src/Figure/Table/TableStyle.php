@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Figure\Table;
+namespace TextDraw\Figure\Table;
 
-use ConsoleDraw\Figure\Text\TextAlign;
+use TextDraw\Figure\Text\TextAlign;
 
 class TableStyle
 {

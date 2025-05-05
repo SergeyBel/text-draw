@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Tests\Figure\Geometry\Arrow;
+namespace TextDraw\Tests\Figure\Geometry\Arrow;
 
-use ConsoleDraw\Figure\Geometry\Arrow\Arrow;
-use ConsoleDraw\Plane\Point;
-use ConsoleDraw\Tests\Figure\FigureTestCase;
+use TextDraw\Figure\Geometry\Arrow\Arrow;
+use TextDraw\Plane\Point;
+use TextDraw\Tests\Figure\FigureTestCase;
 
 class ArrowTest extends FigureTestCase
 {

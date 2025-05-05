@@ -1,13 +1,18 @@
 {
+    "config": {
+        "platform": {
+            "php": "8.2"
+        }
+    },
     "autoload": {
         "psr-4": {
-            "ConsoleDraw\\": "./src"
+            "TextDraw\\": "./src"
 
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ConsoleDraw\\Tests\\": "./tests"
+            "TextDraw\\Tests\\": "./tests"
         }
     },
 

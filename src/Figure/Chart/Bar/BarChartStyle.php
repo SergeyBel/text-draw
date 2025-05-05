@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Figure\Chart\Bar;
+namespace TextDraw\Figure\Chart\Bar;
 
 class BarChartStyle
 {

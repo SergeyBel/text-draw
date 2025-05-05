@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Tests\Figure\Text;
+namespace TextDraw\Tests\Figure\Text;
 
-use ConsoleDraw\Figure\Text\Text;
-use ConsoleDraw\Figure\Text\TextStyle;
-use ConsoleDraw\Plane\Point;
-use ConsoleDraw\Tests\Figure\FigureTestCase;
+use TextDraw\Figure\Text\Text;
+use TextDraw\Figure\Text\TextStyle;
+use TextDraw\Plane\Point;
+use TextDraw\Tests\Figure\FigureTestCase;
 
 class TextTest extends FigureTestCase
 {

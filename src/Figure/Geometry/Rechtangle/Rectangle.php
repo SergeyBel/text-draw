@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Figure\Geometry\Rechtangle;
+namespace TextDraw\Figure\Geometry\Rechtangle;
 
-use ConsoleDraw\Common\Size;
-use ConsoleDraw\Figure\Base\BaseFigure;
-use ConsoleDraw\Figure\Geometry\Line\Line;
-use ConsoleDraw\Figure\Geometry\Line\LineStyle;
-use ConsoleDraw\Figure\Pixel\PixelMatrix;
-use ConsoleDraw\Plane\Point;
+use TextDraw\Common\Size;
+use TextDraw\Figure\Base\BaseFigure;
+use TextDraw\Figure\Geometry\Line\Line;
+use TextDraw\Figure\Geometry\Line\LineStyle;
+use TextDraw\Figure\Pixel\PixelMatrix;
+use TextDraw\Plane\Point;
 
 class Rectangle extends BaseFigure
 {

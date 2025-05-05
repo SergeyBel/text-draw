@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Figure\Chart\Function;
+namespace TextDraw\Figure\Chart\Function;
 
 class FunctionGraphStyle
 {

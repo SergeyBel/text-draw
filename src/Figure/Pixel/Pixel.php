@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Figure\Pixel;
+namespace TextDraw\Figure\Pixel;
 
-use ConsoleDraw\Figure\Base\FigureInterface;
-use ConsoleDraw\Plane\Point;
+use TextDraw\Figure\Base\FigureInterface;
+use TextDraw\Plane\Point;
 
 class Pixel implements FigureInterface
 {

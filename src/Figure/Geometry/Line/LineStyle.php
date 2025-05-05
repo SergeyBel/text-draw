@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Figure\Geometry\Line;
+namespace TextDraw\Figure\Geometry\Line;
 
 class LineStyle
 {

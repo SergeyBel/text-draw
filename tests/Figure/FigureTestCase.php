@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Tests\Figure;
+namespace TextDraw\Tests\Figure;
 
-use ConsoleDraw\Figure\Base\FigureInterface;
-use ConsoleDraw\Frame\Frame;
-use ConsoleDraw\Render\TextRender\TextRender;
-use ConsoleDraw\Render\TextRender\TextRenderStyle;
-use ConsoleDraw\Tests\RenderConstraint;
+use TextDraw\Figure\Base\FigureInterface;
+use TextDraw\Frame\Frame;
+use TextDraw\Render\TextRender\TextRender;
+use TextDraw\Render\TextRender\TextRenderStyle;
+use TextDraw\Tests\RenderConstraint;
 use PHPUnit\Framework\TestCase;
 
 class FigureTestCase extends TestCase

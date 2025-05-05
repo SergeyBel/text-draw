@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Plane;
 
-namespace ConsoleDraw\Tests\Plane;
+namespace TextDraw\Tests\Plane;
 
-use ConsoleDraw\Plane\Point;
+use TextDraw\Plane\Point;
 use PHPUnit\Framework\TestCase;
 
 class PointTest extends TestCase

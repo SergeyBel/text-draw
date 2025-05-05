@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Tests\Figure\Geometry\Triangle;
+namespace TextDraw\Tests\Figure\Geometry\Triangle;
 
-use ConsoleDraw\Figure\Geometry\Triangle\Triangle;
-use ConsoleDraw\Plane\Point;
-use ConsoleDraw\Tests\Figure\FigureTestCase;
+use TextDraw\Figure\Geometry\Triangle\Triangle;
+use TextDraw\Plane\Point;
+use TextDraw\Tests\Figure\FigureTestCase;
 
 class TriangleTest extends FigureTestCase
 {

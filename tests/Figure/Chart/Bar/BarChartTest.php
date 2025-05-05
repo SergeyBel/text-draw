@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Tests\Figure\Chart\Bar;
+namespace TextDraw\Tests\Figure\Chart\Bar;
 
-use ConsoleDraw\Figure\Chart\Bar\Bar;
-use ConsoleDraw\Figure\Chart\Bar\BarChart;
-use ConsoleDraw\Figure\Chart\Bar\BarChartStyle;
-use ConsoleDraw\Tests\Figure\FigureTestCase;
+use TextDraw\Figure\Chart\Bar\Bar;
+use TextDraw\Figure\Chart\Bar\BarChart;
+use TextDraw\Figure\Chart\Bar\BarChartStyle;
+use TextDraw\Tests\Figure\FigureTestCase;
 
 class BarChartTest extends FigureTestCase
 {

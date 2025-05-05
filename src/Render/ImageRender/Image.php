@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Render\ImageRender;
+namespace TextDraw\Render\ImageRender;
 
-use ConsoleDraw\Common\Size;
+use TextDraw\Common\Size;
 
 class Image
 {

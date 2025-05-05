@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Figure\Geometry\Triangle;
+namespace TextDraw\Figure\Geometry\Triangle;
 
-use ConsoleDraw\Figure\Base\BaseFigure;
-use ConsoleDraw\Figure\Geometry\Line\Line;
-use ConsoleDraw\Figure\Pixel\PixelMatrix;
-use ConsoleDraw\Plane\Point;
+use TextDraw\Figure\Base\BaseFigure;
+use TextDraw\Figure\Geometry\Line\Line;
+use TextDraw\Figure\Pixel\PixelMatrix;
+use TextDraw\Plane\Point;
 
 class Triangle extends BaseFigure
 {

@@ -1,7 +1,7 @@
 services:
-  console-draw:
+  text-draw:
     build: "./docker"
-    container_name: console-draw
+    container_name: text-draw
     volumes:
       - ./:/app:rw
     stdin_open: true

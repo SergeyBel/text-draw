@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Tests\Figure\Table;
+namespace TextDraw\Tests\Figure\Table;
 
-use ConsoleDraw\Figure\Table\Table;
-use ConsoleDraw\Figure\Table\TableCell;
-use ConsoleDraw\Figure\Table\TableStyle;
-use ConsoleDraw\Figure\Text\TextAlign;
-use ConsoleDraw\Tests\Figure\FigureTestCase;
+use TextDraw\Figure\Table\Table;
+use TextDraw\Figure\Table\TableCell;
+use TextDraw\Figure\Table\TableStyle;
+use TextDraw\Figure\Text\TextAlign;
+use TextDraw\Tests\Figure\FigureTestCase;
 
 class TableTest extends FigureTestCase
 {

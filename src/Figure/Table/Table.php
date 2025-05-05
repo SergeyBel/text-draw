@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Figure\Table;
+namespace TextDraw\Figure\Table;
 
-use ConsoleDraw\Figure\Base\BaseFigure;
-use ConsoleDraw\Figure\Pixel\PixelMatrix;
-use ConsoleDraw\Figure\Text\Text;
-use ConsoleDraw\Figure\Text\TextStyle;
-use ConsoleDraw\Figure\Turtle\Turtle;
-use ConsoleDraw\Plane\Point;
+use TextDraw\Figure\Base\BaseFigure;
+use TextDraw\Figure\Pixel\PixelMatrix;
+use TextDraw\Figure\Text\Text;
+use TextDraw\Figure\Text\TextStyle;
+use TextDraw\Figure\Turtle\Turtle;
+use TextDraw\Plane\Point;
 
 class Table extends BaseFigure
 {

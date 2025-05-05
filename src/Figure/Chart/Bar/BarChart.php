@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Figure\Chart\Bar;
+namespace TextDraw\Figure\Chart\Bar;
 
-use ConsoleDraw\Common\Exception\RenderException;
-use ConsoleDraw\Common\Size;
-use ConsoleDraw\Figure\Base\BaseFigure;
-use ConsoleDraw\Figure\Geometry\Line\Line;
-use ConsoleDraw\Figure\Geometry\Line\LineStyle;
-use ConsoleDraw\Figure\Geometry\Rechtangle\Rectangle;
-use ConsoleDraw\Figure\Pixel\PixelMatrix;
-use ConsoleDraw\Figure\Text\Text;
-use ConsoleDraw\Figure\Text\TextStyle;
-use ConsoleDraw\Plane\Point;
+use TextDraw\Common\Exception\RenderException;
+use TextDraw\Common\Size;
+use TextDraw\Figure\Base\BaseFigure;
+use TextDraw\Figure\Geometry\Line\Line;
+use TextDraw\Figure\Geometry\Line\LineStyle;
+use TextDraw\Figure\Geometry\Rechtangle\Rectangle;
+use TextDraw\Figure\Pixel\PixelMatrix;
+use TextDraw\Figure\Text\Text;
+use TextDraw\Figure\Text\TextStyle;
+use TextDraw\Plane\Point;
 
 class BarChart extends BaseFigure
 {

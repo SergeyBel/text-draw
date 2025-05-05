@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Figure\Turtle;
+namespace TextDraw\Figure\Turtle;
 
-use ConsoleDraw\Figure\Base\BaseFigure;
-use ConsoleDraw\Figure\Pixel\Pixel;
-use ConsoleDraw\Plane\Point;
+use TextDraw\Figure\Base\BaseFigure;
+use TextDraw\Figure\Pixel\Pixel;
+use TextDraw\Plane\Point;
 
 class Turtle extends BaseFigure
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Render\ImageRender;
+namespace TextDraw\Render\ImageRender;
 
-use ConsoleDraw\Common\Color\RgbColor;
+use TextDraw\Common\Color\RgbColor;
 
 class ImageRenderStyle
 {

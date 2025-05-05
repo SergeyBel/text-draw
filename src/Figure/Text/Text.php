@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Figure\Text;
+namespace TextDraw\Figure\Text;
 
-use ConsoleDraw\Figure\Base\FigureInterface;
-use ConsoleDraw\Figure\Pixel\Pixel;
-use ConsoleDraw\Figure\Pixel\PixelMatrix;
-use ConsoleDraw\Plane\Point;
+use TextDraw\Figure\Base\FigureInterface;
+use TextDraw\Figure\Pixel\Pixel;
+use TextDraw\Figure\Pixel\PixelMatrix;
+use TextDraw\Plane\Point;
 
 class Text implements FigureInterface
 {

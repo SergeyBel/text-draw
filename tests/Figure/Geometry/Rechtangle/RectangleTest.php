@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Tests\Figure\Geometry\Rechtangle;
+namespace TextDraw\Tests\Figure\Geometry\Rechtangle;
 
-use ConsoleDraw\Common\Size;
-use ConsoleDraw\Figure\Geometry\Rechtangle\Rectangle;
-use ConsoleDraw\Plane\Point;
-use ConsoleDraw\Tests\Figure\FigureTestCase;
+use TextDraw\Common\Size;
+use TextDraw\Figure\Geometry\Rechtangle\Rectangle;
+use TextDraw\Plane\Point;
+use TextDraw\Tests\Figure\FigureTestCase;
 
 class RectangleTest extends FigureTestCase
 {

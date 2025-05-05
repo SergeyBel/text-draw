@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace ConsoleDraw\Figure\Chart\Function;
+namespace TextDraw\Figure\Chart\Function;
 
-use ConsoleDraw\Common\Exception\RenderException;
-use ConsoleDraw\Common\Size;
-use ConsoleDraw\Figure\Base\BaseFigure;
-use ConsoleDraw\Figure\Geometry\Line\Line;
-use ConsoleDraw\Figure\Geometry\Line\LineStyle;
-use ConsoleDraw\Figure\Pixel\Pixel;
-use ConsoleDraw\Figure\Pixel\PixelMatrix;
-use ConsoleDraw\Plane\Point;
+use TextDraw\Common\Exception\RenderException;
+use TextDraw\Common\Size;
+use TextDraw\Figure\Base\BaseFigure;
+use TextDraw\Figure\Geometry\Line\Line;
+use TextDraw\Figure\Geometry\Line\LineStyle;
+use TextDraw\Figure\Pixel\Pixel;
+use TextDraw\Figure\Pixel\PixelMatrix;
+use TextDraw\Plane\Point;
 
 class FunctionGraph extends BaseFigure
 {
