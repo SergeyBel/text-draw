@@ -1,4 +1,5 @@
 {
+    "name": "sergey-bel/text-draw",
     "config": {
         "platform": {
             "php": "8.2"
