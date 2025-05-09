@@ -9,7 +9,7 @@ use TextDraw\Common\Color\RgbColor;
 class ImageRenderStyle
 {
     private int $fontSize = 16;
-    private string $font = __DIR__ . '/font/monospace.ttf';
+    private string $font = __DIR__ . '/font/UbuntuMono-Regular.ttf';
     private RgbColor $backgroundColor;
     private RgbColor $textColor;
 
