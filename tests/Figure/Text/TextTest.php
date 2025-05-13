@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TextDraw\Tests\Figure\Text;
 
 use TextDraw\Figure\Text\Text;
+use TextDraw\Figure\Text\TextAlign;
 use TextDraw\Figure\Text\TextStyle;
 use TextDraw\Plane\Point;
 use TextDraw\Tests\Figure\FigureTestCase;
@@ -59,17 +60,18 @@ class TextTest extends FigureTestCase
     public function testAlignCenter(): void
     {
         $text = new Text(
-            new Point(1, 0),
+            new Point(0, 0),
             'hello'
         );
         $text->setStyle(
             (new TextStyle())
                 ->setWidth(7)
-                ->alignCenter()
+                ->setAlign(TextAlign::Center)
         );
         $this->addFigure($text);
+
         $expected = <<<EOD
-        . hello 
+         hello 
         EOD;
 
         $this->assertRender($expected);
@@ -84,7 +86,7 @@ class TextTest extends FigureTestCase
         $text->setStyle(
             (new TextStyle())
                 ->setWidth(7)
-                ->alignRight()
+                ->setAlign(TextAlign::Right)
         );
         $this->addFigure($text);
         $expected = <<<EOD

@@ -60,10 +60,4 @@ class TableCell
         $this->align = $align;
         return $this;
     }
-
-
-
-
-
-
 }

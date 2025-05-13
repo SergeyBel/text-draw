@@ -12,6 +12,7 @@ use TextDraw\Figure\Geometry\Line\LineStyle;
 use TextDraw\Figure\Geometry\Rechtangle\Rectangle;
 use TextDraw\Figure\Pixel\PixelMatrix;
 use TextDraw\Figure\Text\Text;
+use TextDraw\Figure\Text\TextAlign;
 use TextDraw\Figure\Text\TextStyle;
 use TextDraw\Plane\Point;
 
@@ -102,7 +103,7 @@ class BarChart extends BaseFigure
         $labelStyle = (new TextStyle())
             ->setWidth($barWidth)
             ->setPaddingChar('_')
-            ->alignCenter();
+            ->setAlign(TextAlign::Center);
 
         foreach ($this->bars as $bar) {
             $label = (new Text($start, $bar->getLabel()))->setStyle($labelStyle);

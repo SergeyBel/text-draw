@@ -44,7 +44,6 @@ class Text implements FigureInterface
             $start = $start->addX(1);
         }
 
-
         return $pixels;
     }
 
@@ -67,7 +66,7 @@ class Text implements FigureInterface
             TextAlign::Center => STR_PAD_BOTH,
         };
 
-        return str_pad($this->text, $length, $this->style->getPaddingChar(), $mode);
+        return mb_str_pad($this->text, $length, $this->style->getPaddingChar(), $mode);
     }
 
 

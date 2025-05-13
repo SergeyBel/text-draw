@@ -43,23 +43,4 @@ class TextStyle
         $this->align = $align;
         return $this;
     }
-
-    public function alignCenter(): static
-    {
-        $this->align = TextAlign::Center;
-        return $this;
-    }
-
-    public function alignRight(): static
-    {
-        $this->align = TextAlign::Right;
-        return $this;
-    }
-
-
-
-
-
-
-
 }

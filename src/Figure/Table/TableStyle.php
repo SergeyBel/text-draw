@@ -83,15 +83,13 @@ class TableStyle
         return $this;
     }
 
-
-    public function getAlign(): TextAlign
-    {
-        return $this->align;
-    }
-
     public function getHeaderAlign(): TextAlign
     {
         return $this->headerAlign;
     }
 
+    public function getAlign(): TextAlign
+    {
+        return $this->align;
+    }
 }
