@@ -9,28 +9,26 @@ use TextDraw\Figure\Pixel\PixelMatrix;
 
 class SequenceDiagram extends BaseFigure
 {
+    /**
+     * @var array<Actor>
+     */
     private array $actors = [];
-    private array $steps = [];
+
+    /**
+     * @var array<Message>
+     */
+    private array $messages = [];
+
+    /**
+     * @var array<Action>
+     */
+    private array $actions = [];
 
 
     public function draw(): PixelMatrix
     {
 
-    }
-
-    public function addActors()
-    {
-
-    }
-
-    public function addAction()
-    {
-
-    }
-
-    public function addMessage()
-    {
-
+        return parent::draw();
     }
 
 }
