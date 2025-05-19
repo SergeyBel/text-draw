@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TextDraw\Tests\Figure\Diagram\Elements;
+namespace TextDraw\Tests\Figure\Diagram\Elements\TextBox;
 
 use TextDraw\Common\Size;
 use TextDraw\Figure\Diagram\Elements\TextBox\TextBox;
