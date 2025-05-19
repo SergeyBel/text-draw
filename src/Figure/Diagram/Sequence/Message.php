@@ -7,9 +7,9 @@ namespace TextDraw\Figure\Diagram\Sequence;
 class Message
 {
     public function __construct(
-        private string $from,
-        private string $to,
-        private string $text
+        private string $text,
+        private ?string $from = null,
+        private ?string $to = null,
     ) {
     }
 }
