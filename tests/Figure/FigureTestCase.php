@@ -40,7 +40,13 @@ class FigureTestCase extends TestCase
     {
         $actual = $this->render->render($this->frame);
 
-        $message = "Expected:\n" . $expected . "\n\nActual:\n" . $actual;
+        $message = sprintf(
+            "Expected(length=%d):\n%s\n\nActual(length=%d):\n%s\n",
+            mb_strlen($expected),
+            $expected,
+            mb_strlen($actual),
+            $actual
+        );
         $this->assertThat($actual, new RenderConstraint($expected), $message);
     }
 

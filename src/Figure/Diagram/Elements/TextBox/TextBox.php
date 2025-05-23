@@ -63,6 +63,18 @@ class TextBox extends BaseFigure
         );
     }
 
+    public function getLeftUpperCorner(): Point
+    {
+        return $this->leftUpperCorner;
+    }
+
+    public function setLeftUpperCorner(Point $leftUpperCorner): void
+    {
+        $this->leftUpperCorner = $leftUpperCorner;
+    }
+
+
+
 
 
 }

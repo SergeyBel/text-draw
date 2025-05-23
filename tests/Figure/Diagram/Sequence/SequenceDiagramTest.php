@@ -30,11 +30,12 @@ class SequenceDiagramTest extends FigureTestCase
 
 
         $expected = <<<EOD
-        +---+.......+---+       
-        |.A.|.......|.B.|
-        +---+.......+---+
-        ..|...hello...|..
-        ..|---------->|..
+        +---+.....+---+
+        |.A.|.....|.B.|
+        +---+.....+---+
+        ..|..hello..|..
+        ..|-------->|..
+        ..|.........|..
         EOD;
 
         $this->assertRender($expected);
