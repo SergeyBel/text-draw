@@ -43,5 +43,10 @@ class Message
         $this->text = $text;
     }
 
+    public function isSelfMessage(): bool
+    {
+        return $this->from === $this->to;
+    }
+
 
 }

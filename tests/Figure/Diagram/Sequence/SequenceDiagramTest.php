@@ -26,6 +26,7 @@ class SequenceDiagramTest extends FigureTestCase
         ])
         ;
 
+
         $this->addFigure($diagram);
 
 
@@ -36,6 +37,63 @@ class SequenceDiagramTest extends FigureTestCase
         ..|..hello..|..
         ..|-------->|..
         ..|.........|..
+        EOD;
+
+        $this->assertRender($expected);
+    }
+
+    public function testWithoutMessages(): void
+    {
+        $diagram = new SequenceDiagram(
+        );
+
+        $diagram->addActors(
+            [
+                new Actor('A', 'a'),
+                new Actor('B', 'b'),
+            ]
+        )
+        ;
+
+
+        $this->addFigure($diagram);
+
+
+        $expected = <<<EOD
+        +---+...+---+
+        |.A.|...|.B.|
+        +---+...+---+
+        ..|.......|..
+        EOD;
+
+        $this->assertRender($expected);
+    }
+
+    public function testSelfMessage(): void
+    {
+        $diagram = new SequenceDiagram(
+        );
+
+        $diagram->addActors(
+            [
+                new Actor('A', 'a'),
+                new Actor('B', 'b'),
+            ]
+        )->addMessages([
+            new Message('hi', 'a', 'a')
+        ])
+        ;
+
+
+        $this->addFigure($diagram);
+
+
+        $expected = <<<EOD
+        +---+...+---+
+        |.A.|...|.B.|
+        +---+...+---+
+        hi|.......|..
+        ..|.......|..
         EOD;
 
         $this->assertRender($expected);
