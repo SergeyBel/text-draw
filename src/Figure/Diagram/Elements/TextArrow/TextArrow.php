@@ -21,13 +21,16 @@ class TextArrow extends BaseFigure
     }
     public function draw(): PixelMatrix
     {
+        $arrow = new Arrow($this->start, $this->end);
         $this->addFigure(
-            new Arrow($this->start, $this->end)
+            $arrow
         )->addFigure(
             new Text(
-                $this->start->subY(1)->addX(
-                    intdiv($this->end->getX() - $this->start->getX() + 1 - mb_strlen($this->text), 2)
-                ),
+                $arrow->getLine()->getCenter()
+                    ->subY(1)
+                    ->subX(
+                        intdiv(mb_strlen($this->text), 2)
+                    ),
                 $this->text
             )
         );
