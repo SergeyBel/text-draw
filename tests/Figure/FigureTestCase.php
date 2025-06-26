@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace TextDraw\Tests\Figure;
 
+use PHPUnit\Framework\TestCase;
 use TextDraw\Figure\Base\FigureInterface;
-use TextDraw\Frame\Frame;
+use TextDraw\Render\Scene;
 use TextDraw\Render\TextRender\TextRender;
 use TextDraw\Render\TextRender\TextRenderStyle;
 use TextDraw\Tests\RenderConstraint;
-use PHPUnit\Framework\TestCase;
 
 class FigureTestCase extends TestCase
 {
     protected TextRender $render;
 
-    protected Frame $frame;
+    protected Scene $frame;
 
     protected function setUp(): void
     {
@@ -25,7 +25,7 @@ class FigureTestCase extends TestCase
                     ->setEmptyChar('.')
             );
 
-        $this->frame = new Frame();
+        $this->frame = new Scene();
     }
 
 

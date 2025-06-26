@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace TextDraw\Render\TextRender;
 
 use TextDraw\Common\Size;
-use TextDraw\Frame\Frame;
+use TextDraw\Render\Scene;
 
 class TextRender
 {
@@ -19,25 +19,18 @@ class TextRender
         $this->size = $size;
     }
 
-    public function render(Frame $frame): string
+    public function render(Scene $frame): string
     {
-        $matrix = $frame->draw();
+        $matrix = $frame->getMatrix();
+        $size = $this->size ?? $matrix->getMinHullSize();
+        $text = $this->getClearText($size);
 
-        if (is_null($this->size)) {
-            $this->size = $matrix->getMinHull();
+        foreach ($matrix->getPixels() as $pixel) {
+            $text[$pixel->getPoint()->getY()][$pixel->getPoint()->getX()] = $pixel->getChar();
         }
 
-        $lines = [];
-        for ($y = 0; $y < $this->size->getHeight(); $y++) {
-            $line = '';
-            for ($x = 0; $x < $this->size->getWidth(); $x++) {
-                $line .= $matrix->hasPixel($x, $y) ? $matrix->getPixel($x, $y)->getChar() : $this->style->getEmptyChar();
-            }
-            $lines[] = $line;
 
-        }
-
-        return implode("\n", $lines);
+        return implode("\n", array_map(fn ($row) => implode('', $row), $text));
     }
 
 
@@ -46,4 +39,19 @@ class TextRender
         $this->style = $style;
         return $this;
     }
+
+    /**
+     * @return string[][]
+     */
+    private function getClearText(Size $size): array
+    {
+        $text = [];
+        for ($i = 0; $i < $size->getHeight(); $i++) {
+            for ($j = 0; $j < $size->getWidth(); $j++) {
+                $text[$i][$j] = $this->style->getEmptyChar();
+            }
+        }
+        return $text;
+    }
+
 }

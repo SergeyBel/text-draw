@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace TextDraw\Render\ConsoleRender;
 
-use TextDraw\Common\Size;
-use TextDraw\Frame\Frame;
-use TextDraw\Render\TextRender\TextRender;
 use Exception;
+use TextDraw\Common\Size;
+use TextDraw\Render\Scene;
+use TextDraw\Render\TextRender\TextRender;
 
 class ConsoleRender
 {
@@ -24,7 +24,7 @@ class ConsoleRender
         $this->textRender = new TextRender($size->subWidth(1));
     }
 
-    public function render(Frame $frame): void
+    public function render(Scene $frame): void
     {
         $text = $this->textRender->render($frame);
         echo $text;

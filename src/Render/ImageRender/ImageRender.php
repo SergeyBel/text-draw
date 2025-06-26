@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace TextDraw\Render\ImageRender;
 
+use Exception;
+use GdImage;
 use TextDraw\Common\Color\RgbColor;
 use TextDraw\Common\Size;
 use TextDraw\Figure\Pixel\Pixel;
 use TextDraw\Figure\Pixel\PixelMatrix;
-use TextDraw\Frame\Frame;
-use Exception;
-use GdImage;
+use TextDraw\Render\Scene;
 
 class ImageRender
 {
@@ -25,12 +25,12 @@ class ImageRender
         $this->style = new ImageRenderStyle();
     }
 
-    public function render(Frame $frame, string $filepath): Image
+    public function render(Scene $frame, string $filepath): Image
     {
-        $matrix = $frame->draw();
+        $matrix = $frame->getMatrix();
 
         if (is_null($this->size)) {
-            $this->size = $matrix->getMinHull();
+            $this->size = $matrix->getMinHullSize();
         }
 
         $charSize = new Size($this->getCharWidth(), $this->getCharHeight());

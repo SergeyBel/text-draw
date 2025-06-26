@@ -58,6 +58,8 @@ class PixelMatrix
         return $pixels;
     }
 
+
+
     /**
      * @param array<Pixel> $pixels
      * @return $this
@@ -83,7 +85,7 @@ class PixelMatrix
         return $this;
     }
 
-    public function getMinHull(): Size
+    public function getMinHullSize(): Size
     {
         $ys = array_keys($this->matrix);
         $xs = [];

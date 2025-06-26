@@ -94,7 +94,7 @@ class PixelMatrixTest extends TestCase
         $matrix = new PixelMatrix()->setPixels($pixels);
 
         $size = new Size(4, 6);
-        $this->assertEquals($size, $matrix->getMinHull());
+        $this->assertEquals($size, $matrix->getMinHullSize());
     }
 
     public function testMinHullZeroPoint(): void
@@ -103,7 +103,7 @@ class PixelMatrixTest extends TestCase
         $matrix = new PixelMatrix()->setPixel($pixel);
 
         $size = new Size(1, 1);
-        $this->assertEquals($size, $matrix->getMinHull());
+        $this->assertEquals($size, $matrix->getMinHullSize());
     }
 
 }
