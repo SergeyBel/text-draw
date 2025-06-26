@@ -7,3 +7,5 @@ services:
     stdin_open: true
     tty: true
     working_dir: /app
+    environment:
+      PHP_CS_FIXER_IGNORE_ENV: 1
