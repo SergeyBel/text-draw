@@ -49,7 +49,7 @@ class Table extends BaseFigure
         foreach ($rows as $row) {
             foreach ($row as $key => $cell) {
                 if (is_string($cell)) {
-                    $rows[$key] = new TableCell($cell, align: $this->style->getAlign());
+                    $row[$key] = new TableCell($cell, align: $this->style->getAlign());
                 }
             }
             $this->table->addRow($row);
@@ -71,7 +71,7 @@ class Table extends BaseFigure
 
     public function draw(): PixelMatrix
     {
-        $this->formTable();
+        //$this->formTable();
         //$this->calculateColumnsWidth();
 
         $start = new Point(0, 0);
