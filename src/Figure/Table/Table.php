@@ -6,6 +6,8 @@ namespace TextDraw\Figure\Table;
 
 use TextDraw\Figure\Base\BaseFigure;
 use TextDraw\Figure\Pixel\PixelMatrix;
+use TextDraw\Figure\Table\TableBag\TableBag;
+use TextDraw\Figure\Table\TableBag\TableElement;
 use TextDraw\Figure\Text\Text;
 use TextDraw\Figure\Text\TextStyle;
 use TextDraw\Figure\Turtle\Turtle;
@@ -13,39 +15,15 @@ use TextDraw\Plane\Point;
 
 class Table extends BaseFigure
 {
-    /** @var array<string|TableCell>  */
-    private array $header = [];
-
-    /** @var array<array<string|TableCell>>  */
-    private array $rows = [];
-
-    /** @var array<array<TableCell>>  */
-    private array $table;
-
     private TableStyle $style;
 
-    /**
-     * @var array<int>
-     */
-    private array $columnsWidth = [];
-
+    private TableBag $table;
 
     public function __construct(
     ) {
         $this->style = new TableStyle();
+        $this->table = new TableBag();
         parent::__construct();
-    }
-
-
-    public function draw(): PixelMatrix
-    {
-        $this->formTable();
-        $this->calculateColumnsWidth();
-
-        $start = new Point(0, 0);
-        $this->drawTable($start);
-
-        return parent::draw();
     }
 
     /**
@@ -53,7 +31,13 @@ class Table extends BaseFigure
      */
     public function setHeader(array $header): static
     {
-        $this->header = $header;
+        foreach ($header as $key => $cell) {
+            if (is_string($cell)) {
+                $header[$key] = new TableCell($cell, align: $this->style->getHeaderAlign());
+            }
+
+        }
+        $this->table->addRow($header);
         return $this;
     }
 
@@ -62,7 +46,14 @@ class Table extends BaseFigure
      */
     public function addRows(array $rows): static
     {
-        $this->rows = array_merge($this->rows, $rows);
+        foreach ($rows as $row) {
+            foreach ($row as $key => $cell) {
+                if (is_string($cell)) {
+                    $rows[$key] = new TableCell($cell, align: $this->style->getAlign());
+                }
+            }
+            $this->table->addRow($row);
+        }
         return $this;
     }
 
@@ -78,82 +69,84 @@ class Table extends BaseFigure
     }
 
 
+    public function draw(): PixelMatrix
+    {
+        $this->formTable();
+        //$this->calculateColumnsWidth();
+
+        $start = new Point(0, 0);
+        $this->drawTable($start);
+
+        return parent::draw();
+    }
 
     private function drawTable(Point $start): void
     {
-        foreach ($this->table as $row) {
+        foreach ($this->table->getRows() as $row) {
             $this->drawRow($start, $row);
             $start = $start->addY(2);
         }
     }
 
     /**
-     * @param array<TableCell> $row
+     * @param array<TableElement> $row
      */
     private function drawRow(Point $start, array $row): void
     {
-        foreach ($row as $columnIndex => $cell) {
-            $this->drawCell($start, $cell, $columnIndex);
-            $start = $start->addX($this->columnsWidth[$columnIndex] + 1);
+        foreach ($row as $element) {
+            $this->drawElement($start, $element);
+            $start = $start->addX($element->getWidth() + 1);
         }
     }
 
-    private function drawCell(Point $start, TableCell $cell, int $columnIndex): void
+    private function drawElement(Point $start, TableElement $element): void
     {
-        $cellWidth = $this->columnsWidth[$columnIndex];
 
         $turtle = new Turtle()
             ->moveTo($start);
 
-        $turtle = $this->drawCellBorder($turtle, $cellWidth);
+        $turtle = $this->drawElementBorder($turtle, $element);
         $turtle->moveTo($start)->moveDown(1);
-        $turtle = $this->drawCellText($turtle, $cell, $cellWidth);
+        $turtle = $this->drawElementText($turtle, $element);
         $turtle->moveTo($start)->moveDown(2);
-        $turtle = $this->drawCellBorder($turtle, $cellWidth);
+        $turtle = $this->drawElementBorder($turtle, $element);
 
         $this->addFigure($turtle);
     }
 
-    private function drawCellBorder(Turtle $turtle, int $cellWidth): Turtle
+    private function drawElementBorder(Turtle $turtle, TableElement $element): Turtle
     {
         $turtle
             ->paintRight($this->style->getCrossingChar())
-            ->paintRight($this->style->getHorizontalChar(), $cellWidth)
+            ->paintRight($this->style->getHorizontalChar(), $element->getWidth())
             ->paint($this->style->getCrossingChar())
         ;
 
         return $turtle;
     }
 
-    private function drawCellText(Turtle $turtle, TableCell $cell, int $cellWidth): Turtle
+    private function drawElementText(Turtle $turtle, TableElement $element): Turtle
     {
-        $turtle
-            ->paintRight($cell->getLeftChar() ?? $this->style->getVerticalChar());
+        $turtle->paintRight($this->style->getVerticalChar());
 
-        $text = new Text($turtle->getPosition(), $cell->getText());
-        $text->setStyle(
-            new TextStyle()
-                ->setWidth($cellWidth)
-                ->setPaddingChar($this->style->getPaddingChar())
-                ->setAlign($cell->getAlign())
-        );
+        $text = Text::fromTextFrame($turtle->getPosition(), $element->getTextFrame());
         $this->addFigure($text);
 
         $turtle
-            ->moveRight($cellWidth)
+            ->moveRight($element->getWidth())
             ->paint($this->style->getVerticalChar());
 
         return $turtle;
     }
 
-    private function formTable(): void
+   private function formTable(): void
     {
         if (count($this->header) > 0) {
             $header = array_map(fn ($cell) =>
             is_string($cell)
                 ? new TableCell($cell, align: $this->style->getHeaderAlign())
                 : $cell, $this->header);
-            $this->table[] = $header;
+            $this->table_pld[] = $header;
         }
 
         foreach ($this->rows as $row) {
@@ -164,9 +157,11 @@ class Table extends BaseFigure
     /**
      * @param array<string|TableCell> $row
      */
-    private function formTableRow(array $row): void
+    /*private function formTableRow(array $row): void
     {
-        $row = array_map(fn ($cell) => is_string($cell) ? new TableCell($cell, align: $this->style->getAlign()) : $cell, $row);
+        $row = array_map(fn ($cell) => is_string($cell) ?
+            new TableCell($cell, align: $this->style->getAlign())
+            : $cell, $row);
 
         $fullRow = [];
         foreach ($row as $cell) {
@@ -177,23 +172,24 @@ class Table extends BaseFigure
             $colspan = $cell->getColspan();
 
             $fullRow[] = $cell->setColspan(1);
-            $emptyCell = new TableCell($this->style->getPaddingChar())->setLeftChar($this->style->getPaddingChar());
+            $emptyCell = TableCell::createEmpty($this->style);
             $fullRow = array_merge(
                 $fullRow,
-                array_fill(0, $colspan - 1, $emptyCell)
+                array_fill(0, $colspan, $emptyCell)
             );
 
+            $fullRow[] = $cell;
         }
 
-        $this->table[] = $fullRow;
-    }
+        $this->table_pld[] = $fullRow;
+    }*/
 
-    private function calculateColumnsWidth(): void
+    /*private function calculateColumnsWidth(): void
     {
         $columns = [];
-        foreach ($this->table as $row) {
+        foreach ($this->table_pld as $row) {
             foreach ($row as $index => $cell) {
-                $columns[$index][] = mb_strlen($cell->getText());
+                $columns[$index][] = $cell->getLength();
             }
         }
 
@@ -205,5 +201,5 @@ class Table extends BaseFigure
             $this->columnsWidth[$index] = $width;
         }
 
-    }
+    }*/
 }

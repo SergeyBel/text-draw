@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Text;
 
+use TextDraw\Common\TextAlign;
+
 class TextStyle
 {
     private ?int $width = null;

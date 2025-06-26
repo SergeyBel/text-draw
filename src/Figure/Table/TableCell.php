@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Table;
 
-use TextDraw\Figure\Text\TextAlign;
+use TextDraw\Common\TextAlign;
 
 class TableCell
 {
-    private ?string $leftChar = null;
-
     public function __construct(
         private string $text,
         private int $colspan = 1,
@@ -36,17 +34,6 @@ class TableCell
     public function setColspan(int $colspan): static
     {
         $this->colspan = $colspan;
-        return $this;
-    }
-
-    public function getLeftChar(): ?string
-    {
-        return $this->leftChar;
-    }
-
-    public function setLeftChar(?string $leftChar): static
-    {
-        $this->leftChar = $leftChar;
         return $this;
     }
 

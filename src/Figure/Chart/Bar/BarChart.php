@@ -6,13 +6,13 @@ namespace TextDraw\Figure\Chart\Bar;
 
 use TextDraw\Common\Exception\RenderException;
 use TextDraw\Common\Size;
+use TextDraw\Common\TextAlign;
 use TextDraw\Figure\Base\BaseFigure;
 use TextDraw\Figure\Geometry\Line\Line;
 use TextDraw\Figure\Geometry\Line\LineStyle;
 use TextDraw\Figure\Geometry\Rechtangle\Rectangle;
 use TextDraw\Figure\Pixel\PixelMatrix;
 use TextDraw\Figure\Text\Text;
-use TextDraw\Figure\Text\TextAlign;
 use TextDraw\Figure\Text\TextStyle;
 use TextDraw\Plane\Point;
 

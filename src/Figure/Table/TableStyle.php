@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Table;
 
-use TextDraw\Figure\Text\TextAlign;
+use TextDraw\Common\TextAlign;
 
 class TableStyle
 {

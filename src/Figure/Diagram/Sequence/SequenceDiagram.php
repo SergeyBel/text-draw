@@ -116,7 +116,6 @@ class SequenceDiagram extends BaseFigure
                 $currentY = $this->drawSelfMessage($message, $currentY);
             } else {
                 $currentY = $this->drawMessage($message, $currentY);
-                ;
             }
 
         }

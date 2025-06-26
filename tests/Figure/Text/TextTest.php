@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace TextDraw\Tests\Figure\Text;
 
+use TextDraw\Common\TextAlign;
 use TextDraw\Figure\Text\Text;
-use TextDraw\Figure\Text\TextAlign;
 use TextDraw\Figure\Text\TextStyle;
 use TextDraw\Plane\Point;
 use TextDraw\Tests\Figure\FigureTestCase;

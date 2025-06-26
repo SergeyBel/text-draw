@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Text;
 
+use TextDraw\Common\TextAlign;
+use TextDraw\Common\TextFrame;
 use TextDraw\Figure\Base\FigureInterface;
 use TextDraw\Figure\Pixel\Pixel;
 use TextDraw\Figure\Pixel\PixelMatrix;
@@ -12,11 +14,26 @@ use TextDraw\Plane\Point;
 class Text implements FigureInterface
 {
     private TextStyle $style;
+    private TextFrame $textFrame;
+
     public function __construct(
         private Point $start,
-        private string $text,
+        string $text,
     ) {
         $this->style = new TextStyle();
+        $this->textFrame = new TextFrame($text);
+    }
+
+    public static function fromTextFrame(Point $start, TextFrame $textFrame): static
+    {
+        $text = new self($start, $textFrame->getText());
+        $text->setStyle(
+            new TextStyle()
+                ->setWidth($textFrame->getWidth())
+                ->setPaddingChar($textFrame->getPaddingChar())
+                ->setAlign($textFrame->getAlign())
+        );
+        return $text;
     }
 
     public function draw(): PixelMatrix
@@ -24,20 +41,7 @@ class Text implements FigureInterface
         $pixels = new PixelMatrix();
         $start = clone $this->start;
 
-        $textLength = mb_strlen($this->text);
-        $width = $this->style->getWidth();
-        $text = $this->text;
-
-        if (!is_null($width)) {
-            if ($width > $textLength) {
-                $text = $this->align($width);
-            } else {
-                $text = mb_substr($this->text, 0, $width);
-            }
-        }
-
-
-        $chars = mb_str_split($text);
+        $chars = mb_str_split($this->textFrame->getText());
 
         foreach ($chars as $char) {
             $pixels->setPixel(new Pixel($start, $char));
@@ -55,19 +59,10 @@ class Text implements FigureInterface
     public function setStyle(TextStyle $style): static
     {
         $this->style = $style;
+        $this->textFrame
+            ->setWidth($style->getWidth())
+            ->setAlign($style->getAlign())
+            ->setPaddingChar($style->getPaddingChar());
         return $this;
     }
-
-    private function align(int $length): string
-    {
-        $mode = match ($this->style->getAlign()) {
-            TextAlign::Left => STR_PAD_RIGHT,
-            TextAlign::Right => STR_PAD_LEFT,
-            TextAlign::Center => STR_PAD_BOTH,
-        };
-
-        return mb_str_pad($this->text, $length, $this->style->getPaddingChar(), $mode);
-    }
-
-
 }

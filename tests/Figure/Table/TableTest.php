@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace TextDraw\Tests\Figure\Table;
 
+use TextDraw\Common\TextAlign;
 use TextDraw\Figure\Table\Table;
 use TextDraw\Figure\Table\TableCell;
 use TextDraw\Figure\Table\TableStyle;
-use TextDraw\Figure\Text\TextAlign;
 use TextDraw\Tests\Figure\FigureTestCase;
 
 class TableTest extends FigureTestCase
@@ -61,7 +61,7 @@ class TableTest extends FigureTestCase
         $table = new Table()
             ->addRows([
                 ['London', '12000'],
-                [new TableCell('Boston', 2)],
+                [new TableCell('Boston123', 2)],
             ]);
         $this->addFigure($table);
 
@@ -70,7 +70,7 @@ class TableTest extends FigureTestCase
         +------+-----+
         |London|12000|
         +------+-----+
-        |Boston      |
+        |Boston123   |
         +------+-----+
         EOD;
 

@@ -59,8 +59,4 @@ class Arrow extends BaseFigure
     {
         return $this->line;
     }
-
-
-
-
 }
