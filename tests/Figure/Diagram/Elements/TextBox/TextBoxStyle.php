@@ -18,7 +18,7 @@ class TextBoxStyle
     public function __construct()
     {
         $this->rectangleStyle =
-            (new RectangleStyle())
+            new RectangleStyle()
                 ->setHorizontalChar('-')
                 ->setVerticalChar('|')
                 ->setCrossingChar('+')

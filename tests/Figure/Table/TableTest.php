@@ -14,7 +14,7 @@ class TableTest extends FigureTestCase
 {
     public function testTable(): void
     {
-        $table = (new Table())
+        $table = new Table()
             ->setHeader(['City', 'Value'])
             ->addRows([
                 ['London', '12000'],
@@ -39,7 +39,7 @@ class TableTest extends FigureTestCase
     public function testTableCell(): void
     {
 
-        $table = (new Table())
+        $table = new Table()
             ->addRows([
                 ['London', new TableCell('12000')],
             ]);
@@ -58,7 +58,7 @@ class TableTest extends FigureTestCase
     public function testTableColspan(): void
     {
 
-        $table = (new Table())
+        $table = new Table()
             ->addRows([
                 ['London', '12000'],
                 [new TableCell('Boston', 2)],
@@ -79,11 +79,11 @@ class TableTest extends FigureTestCase
 
     public function testTableCellMaxWidth(): void
     {
-        $table = (new Table())
+        $table = new Table()
             ->addRows([
                 ['London', new TableCell('12000')],
             ]);
-        $table->setStyle((new TableStyle())->setColumnMaxWidth(5));
+        $table->setStyle(new TableStyle()->setColumnMaxWidth(5));
         $this->addFigure($table);
 
 
@@ -98,9 +98,9 @@ class TableTest extends FigureTestCase
 
     public function testHeaderAlignCenter(): void
     {
-        $style = (new TableStyle())->setHeaderAlign(TextAlign::Center);
+        $style = new TableStyle()->setHeaderAlign(TextAlign::Center);
 
-        $table = (new Table())
+        $table = new Table()
             ->setHeader(['City', 'Value'])
             ->addRows([
                 ['London', '12000'],
@@ -121,9 +121,9 @@ class TableTest extends FigureTestCase
 
     public function testAlignCenter(): void
     {
-        $style = (new TableStyle())->setAlign(TextAlign::Center);
+        $style = new TableStyle()->setAlign(TextAlign::Center);
 
-        $table = (new Table())
+        $table = new Table()
             ->setHeader(['City', 'Value'])
             ->addRows([
                 ['London', '1'],

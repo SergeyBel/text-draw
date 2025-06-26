@@ -29,7 +29,7 @@ class TextBox extends BaseFigure
         $size = $this->getSize();
 
         $this->addFigure(
-            (new Rectangle($this->leftUpperCorner, $size))
+            new Rectangle($this->leftUpperCorner, $size)
             ->setStyle($this->style->getRectangleStyle())
         );
 

@@ -50,9 +50,9 @@ class LineTest extends FigureTestCase
     public function testStyleSymbol(): void
     {
 
-        $style = (new LineStyle())->setSymbol('+');
+        $style = new LineStyle()->setSymbol('+');
         $this->addFigure(
-            (new Line(new Point(0, 0), new Point(2, 2)))
+            new Line(new Point(0, 0), new Point(2, 2))
                 ->setStyle($style)
         );
         $expected = <<<EOD
@@ -67,11 +67,11 @@ class LineTest extends FigureTestCase
     public function testStyleStartFinishSymbol(): void
     {
 
-        $style = (new LineStyle())
+        $style = new LineStyle()
             ->setStartChar('+')
             ->setFinishChar('@');
         $this->addFigure(
-            (new Line(new Point(0, 0), new Point(2, 2)))
+            new Line(new Point(0, 0), new Point(2, 2))
                 ->setStyle($style)
         );
         $expected = <<<EOD

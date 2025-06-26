@@ -15,8 +15,8 @@ class SequenceDiagramStyle
 
     public function __construct(
     ) {
-        $this->actorStyle = (new TextBoxStyle())->setRectangleStyle(
-            (new RectangleStyle())
+        $this->actorStyle = new TextBoxStyle()->setRectangleStyle(
+            new RectangleStyle()
                 ->setHorizontalChar('-')
                 ->setVerticalChar('|')
                 ->setCrossingChar('+')

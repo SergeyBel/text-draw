@@ -27,13 +27,13 @@ class Rectangle extends BaseFigure
     public function draw(): PixelMatrix
     {
 
-        $horizontalLineStyle = (new LineStyle())
+        $horizontalLineStyle = new LineStyle()
                 ->setSymbol($this->style->getHorizontalChar())
                 ->setStartChar($this->style->getCrossingChar())
                 ->setFinishChar($this->style->getCrossingChar())
         ;
 
-        $verticalLineStyle = (new LineStyle())
+        $verticalLineStyle = new LineStyle()
             ->setSymbol($this->style->getVerticalChar())
             ->setStartChar($this->style->getCrossingChar())
             ->setFinishChar($this->style->getCrossingChar())
@@ -45,10 +45,10 @@ class Rectangle extends BaseFigure
         $rightBottomCorner = $rightUpperCorner->addHeight($this->size->getHeight());
 
 
-        $top = (new Line($this->leftUpperCorner, $rightUpperCorner))->setStyle($horizontalLineStyle);
-        $right = (new Line($rightUpperCorner, $rightBottomCorner))->setStyle($verticalLineStyle);
-        $bottom = (new Line($rightBottomCorner, $leftBottomCorner))->setStyle($horizontalLineStyle);
-        $left = (new Line($leftBottomCorner, $this->leftUpperCorner))->setStyle($verticalLineStyle);
+        $top = new Line($this->leftUpperCorner, $rightUpperCorner)->setStyle($horizontalLineStyle);
+        $right = new Line($rightUpperCorner, $rightBottomCorner)->setStyle($verticalLineStyle);
+        $bottom = new Line($rightBottomCorner, $leftBottomCorner)->setStyle($horizontalLineStyle);
+        $left = new Line($leftBottomCorner, $this->leftUpperCorner)->setStyle($verticalLineStyle);
 
         $this
             ->addFigure($top)

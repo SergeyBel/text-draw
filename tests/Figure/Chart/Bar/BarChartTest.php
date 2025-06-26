@@ -13,8 +13,8 @@ class BarChartTest extends FigureTestCase
 {
     public function testBarChart(): void
     {
-        $barChart = (new BarChart())->setStyle(
-            (new BarChartStyle())
+        $barChart = new BarChart()->setStyle(
+            new BarChartStyle()
                 ->setBarWidth(4)
                 ->setUnitHeight(1)
         );

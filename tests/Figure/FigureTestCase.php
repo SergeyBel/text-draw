@@ -19,9 +19,9 @@ class FigureTestCase extends TestCase
 
     protected function setUp(): void
     {
-        $this->render = (new TextRender())
+        $this->render = new TextRender()
             ->setStyle(
-                (new TextRenderStyle())
+                new TextRenderStyle()
                     ->setEmptyChar('.')
             );
 

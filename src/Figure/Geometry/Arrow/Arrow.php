@@ -29,7 +29,7 @@ class Arrow extends BaseFigure
         $line = new Line($this->start, $this->end);
 
         if ($this->line->isHorizontal()) {
-            $style = (new LineStyle())->setSymbol('-');
+            $style = new LineStyle()->setSymbol('-');
 
             if ($this->start->getX() < $this->end->getX()) {
                 $style->setFinishChar('>');
@@ -38,7 +38,7 @@ class Arrow extends BaseFigure
             }
             $line->setStyle($style);
         } else {
-            $style = (new LineStyle())->setSymbol('|');
+            $style = new LineStyle()->setSymbol('|');
 
             if ($this->start->getY() < $this->end->getY()) {
                 $style->setFinishChar('v');

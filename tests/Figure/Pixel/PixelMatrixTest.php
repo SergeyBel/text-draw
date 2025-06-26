@@ -53,7 +53,7 @@ class PixelMatrixTest extends TestCase
             new Pixel(new Point(1, 2), '+'),
             new Pixel(new Point(3, 4), '+')
         ];
-        $matrix = (new PixelMatrix())->setPixels($pixels);
+        $matrix = new PixelMatrix()->setPixels($pixels);
 
         $this->assertEquals($pixels, $matrix->getPixels());
     }
@@ -65,8 +65,8 @@ class PixelMatrixTest extends TestCase
         $pixel3 = new Pixel(new Point(1, 2), '@');
 
 
-        $matrix1 = (new PixelMatrix())->setPixel($pixel1);
-        $matrix2 = (new PixelMatrix())->setPixels([$pixel2, $pixel3]);
+        $matrix1 = new PixelMatrix()->setPixel($pixel1);
+        $matrix2 = new PixelMatrix()->setPixels([$pixel2, $pixel3]);
 
         $pixels = [
             $pixel3,
@@ -79,7 +79,7 @@ class PixelMatrixTest extends TestCase
     public function testClear(): void
     {
         $pixel = new Pixel(new Point(1, 2), '+');
-        $matrix = (new PixelMatrix())->setPixel($pixel);
+        $matrix = new PixelMatrix()->setPixel($pixel);
 
         $this->assertEquals([], $matrix->clear()->getPixels());
     }
@@ -91,7 +91,7 @@ class PixelMatrixTest extends TestCase
             new Pixel(new Point(1, 5), '+'),
             new Pixel(new Point(3, 2), '+'),
         ];
-        $matrix = (new PixelMatrix())->setPixels($pixels);
+        $matrix = new PixelMatrix()->setPixels($pixels);
 
         $size = new Size(4, 6);
         $this->assertEquals($size, $matrix->getMinHull());
@@ -100,7 +100,7 @@ class PixelMatrixTest extends TestCase
     public function testMinHullZeroPoint(): void
     {
         $pixel = new Pixel(new Point(0, 0), '+');
-        $matrix = (new PixelMatrix())->setPixel($pixel);
+        $matrix = new PixelMatrix()->setPixel($pixel);
 
         $size = new Size(1, 1);
         $this->assertEquals($size, $matrix->getMinHull());

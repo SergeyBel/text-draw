@@ -32,7 +32,7 @@ class TextTest extends FigureTestCase
             new Point(0, 0),
             'hello'
         );
-        $text->setStyle((new TextStyle())->setWidth(3));
+        $text->setStyle(new TextStyle()->setWidth(3));
         $this->addFigure($text);
         $expected = <<<EOD
         hel
@@ -48,7 +48,7 @@ class TextTest extends FigureTestCase
             new Point(0, 0),
             'hello'
         );
-        $text->setStyle((new TextStyle())->setWidth(6));
+        $text->setStyle(new TextStyle()->setWidth(6));
         $this->addFigure($text);
         $expected = <<<EOD
         hello 
@@ -64,7 +64,7 @@ class TextTest extends FigureTestCase
             'hello'
         );
         $text->setStyle(
-            (new TextStyle())
+            new TextStyle()
                 ->setWidth(7)
                 ->setAlign(TextAlign::Center)
         );
@@ -84,7 +84,7 @@ class TextTest extends FigureTestCase
             'hello'
         );
         $text->setStyle(
-            (new TextStyle())
+            new TextStyle()
                 ->setWidth(7)
                 ->setAlign(TextAlign::Right)
         );

@@ -102,7 +102,7 @@ class Table extends BaseFigure
     {
         $cellWidth = $this->columnsWidth[$columnIndex];
 
-        $turtle = (new Turtle())
+        $turtle = new Turtle()
             ->moveTo($start);
 
         $turtle = $this->drawCellBorder($turtle, $cellWidth);
@@ -132,7 +132,7 @@ class Table extends BaseFigure
 
         $text = new Text($turtle->getPosition(), $cell->getText());
         $text->setStyle(
-            (new TextStyle())
+            new TextStyle()
                 ->setWidth($cellWidth)
                 ->setPaddingChar($this->style->getPaddingChar())
                 ->setAlign($cell->getAlign())
@@ -177,7 +177,7 @@ class Table extends BaseFigure
             $colspan = $cell->getColspan();
 
             $fullRow[] = $cell->setColspan(1);
-            $emptyCell = (new TableCell($this->style->getPaddingChar()))->setLeftChar($this->style->getPaddingChar());
+            $emptyCell = new TableCell($this->style->getPaddingChar())->setLeftChar($this->style->getPaddingChar());
             $fullRow = array_merge(
                 $fullRow,
                 array_fill(0, $colspan - 1, $emptyCell)

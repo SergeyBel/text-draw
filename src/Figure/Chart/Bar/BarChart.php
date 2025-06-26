@@ -83,30 +83,30 @@ class BarChart extends BaseFigure
     private function drawAxes(size $size): void
     {
         $this->addFigure(
-            (new Line(
+            new Line(
                 new Point(0, 0),
                 new Point(0, $size->getHeight())
-            ))->setStyle((new LineStyle())->setSymbol('|'))
+            )->setStyle(new LineStyle()->setSymbol('|'))
         )->addFigure(
-            (new Line(
-                (new Point(0, $size->getHeight()))->addX(1),
+            new Line(
+                new Point(0, $size->getHeight())->addX(1),
                 new Point($size->getWidth() - 1, $size->getHeight())
-            ))->setStyle((new LineStyle())->setSymbol('_'))
+            )->setStyle(new LineStyle()->setSymbol('_'))
         )
         ;
     }
 
     private function drawLabels(Size $size, int $barWidth): void
     {
-        $start = (new Point(0, $size->getHeight()))->addX(1);
+        $start = new Point(0, $size->getHeight())->addX(1);
 
-        $labelStyle = (new TextStyle())
+        $labelStyle = new TextStyle()
             ->setWidth($barWidth)
             ->setPaddingChar('_')
             ->setAlign(TextAlign::Center);
 
         foreach ($this->bars as $bar) {
-            $label = (new Text($start, $bar->getLabel()))->setStyle($labelStyle);
+            $label = new Text($start, $bar->getLabel())->setStyle($labelStyle);
             $this->addFigure($label);
             $start = $start->addX($barWidth + 1);
         }
@@ -114,7 +114,7 @@ class BarChart extends BaseFigure
 
     private function drawBars(Size $size, int $barWidth, int $unitHeight): void
     {
-        $start = (new Point(0, $size->getHeight()))->addX(1);
+        $start = new Point(0, $size->getHeight())->addX(1);
         foreach ($this->bars as $bar) {
             $barHeight = $unitHeight * $bar->getValue();
             $this->drawBar($start, new Size($barWidth, $barHeight));

@@ -88,10 +88,10 @@ class SequenceDiagram extends BaseFigure
 
     private function drawActor(Point $leftCorner, Actor $actor, int $gap): Point
     {
-        $textBox = (new TextBox(
+        $textBox = new TextBox(
             $actor->getText(),
             $leftCorner,
-        ))->setStyle(
+        )->setStyle(
             $this->style->getActorStyle()
         );
 
@@ -158,11 +158,11 @@ class SequenceDiagram extends BaseFigure
             $start = $this->getBoxBottomCenter($box)->addY(1);
             $end = $start->addY($height)->subY($box->getSize()->getHeight());
             $this->addFigure(
-                (new Line(
+                new Line(
                     $start,
                     $end
-                ))->setStyle(
-                    (new LineStyle())->setSymbol('|')
+                )->setStyle(
+                    new LineStyle()->setSymbol('|')
                 )
             );
         }
