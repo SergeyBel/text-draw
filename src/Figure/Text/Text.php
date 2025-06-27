@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Text;
 
-use TextDraw\Common\TextAlign;
 use TextDraw\Common\TextFrame;
 use TextDraw\Figure\Base\FigureInterface;
 use TextDraw\Figure\Pixel\Pixel;
@@ -24,7 +23,7 @@ class Text implements FigureInterface
         $this->textFrame = new TextFrame($text);
     }
 
-    public static function fromTextFrame(Point $start, TextFrame $textFrame): static
+    public static function fromTextFrame(Point $start, TextFrame $textFrame): Text
     {
         $text = new self($start, $textFrame->getText());
         $text->setStyle(

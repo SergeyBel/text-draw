@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TextDraw\Figure\Table\TableBag;
 
 use TextDraw\Common\TextFrame;
@@ -8,47 +10,59 @@ use TextDraw\Figure\Table\TableCell;
 class TableBag
 {
     /**
-     * @var array<<TableElement>
+     * @var TableCell[][]
      */
-    private array $table;
-
+    private array $cells;
 
     /**
      * @param array<TableCell> $row
      */
     public function addRow(array $row): static
     {
-        $elementsRow = [];
-        foreach ($row as $cell) {
-            $elementsRow[] = new TableElement(
-                new TextFrame(
-                    $cell->getText(),
-                    align: $cell->getAlign()
-                )
-            );
-        }
-
-        $this->table[] = $elementsRow;
+        $this->cells[] = $row;
         return $this;
     }
 
     /**
-     * @var array<<TableElement>>
+     * @return array<array<TextFrame>>
      */
-    public function getRows(): array
+    public function getTable(): array
     {
-        $this->round();
-        return $this->table;
+        $sizes = $this->prepare();
+
+        $table = [];
+        $calculatedSizes = $sizes->calculate();
+        for ($i = 0; $i < count($this->cells); $i++) {
+            $row = [];
+            for ($j = 0; $j < count($this->cells[$i]); $j++) {
+                $cell = $this->cells[$i][$j];
+                $width = 0;
+                for ($c = 0; $c < $cell->getColspan(); $c++) {
+                    $width += $calculatedSizes[$i][$j];
+                }
+                $row[] = new TextFrame($cell->getText(), $width, $cell->getAlign());
+            }
+            $table[] = $row;
+        }
+
+        return $table;
     }
 
-    private function round(): void
+    private function prepare(): SizeMatrix
     {
-        $columns = [];
-        foreach ($this->table as $row) {
-            foreach ($row as $index => $element) {
-                $columns[$index][] = $element->getLength();
+        $sizes = new SizeMatrix();
+        foreach ($this->cells as $row) {
+            $rowSizes = [];
+            foreach ($row as $cell) {
+                $rowSizes = array_merge($rowSizes, array_fill(0, $cell->getColspan() - 1, null), [mb_strlen($cell->getText())]);
+
             }
+            $sizes->addRow($rowSizes);
         }
+        return $sizes;
     }
+
+
+
 
 }

@@ -12,7 +12,6 @@ class TableStyle
     private string $horizontalChar = '-';
     private string $crossingChar = '+';
     private string $paddingChar = ' ';
-    private ?int $columnMaxWidth = null;
     private TextAlign $align = TextAlign::Left;
     private TextAlign $headerAlign = TextAlign::Left;
 
@@ -49,16 +48,6 @@ class TableStyle
         return $this;
     }
 
-    public function getColumnMaxWidth(): ?int
-    {
-        return $this->columnMaxWidth;
-    }
-
-    public function setColumnMaxWidth(?int $columnMaxWidth): static
-    {
-        $this->columnMaxWidth = $columnMaxWidth;
-        return $this;
-    }
 
     public function getPaddingChar(): string
     {

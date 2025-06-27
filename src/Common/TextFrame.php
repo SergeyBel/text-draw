@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TextDraw\Common;
 
 class TextFrame
@@ -11,8 +13,7 @@ class TextFrame
         ?int $width = null,
         private TextAlign $align = TextAlign::Left,
         private string $paddingChar = ' ',
-    )
-    {
+    ) {
         $this->setWidth($width);
     }
 

@@ -69,28 +69,9 @@ class TableTest extends FigureTestCase
         $expected = <<<EOD
         +------+-----+
         |London|12000|
-        +------+-----+
+        +------------+
         |Boston123   |
-        +------+-----+
-        EOD;
-
-        $this->assertRender($expected);
-    }
-
-    public function testTableCellMaxWidth(): void
-    {
-        $table = new Table()
-            ->addRows([
-                ['London', new TableCell('12000')],
-            ]);
-        $table->setStyle(new TableStyle()->setColumnMaxWidth(5));
-        $this->addFigure($table);
-
-
-        $expected = <<<EOD
-        +-----+-----+
-        |Londo|12000|
-        +-----+-----+
+        +------------+
         EOD;
 
         $this->assertRender($expected);
@@ -105,6 +86,7 @@ class TableTest extends FigureTestCase
             ->addRows([
                 ['London', '12000'],
             ])->setStyle($style);
+
         $this->addFigure($table);
 
 
