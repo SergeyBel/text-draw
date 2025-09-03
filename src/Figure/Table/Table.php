@@ -6,11 +6,11 @@ namespace TextDraw\Figure\Table;
 
 use TextDraw\Common\TextFrame;
 use TextDraw\Figure\Base\BaseFigure;
-use TextDraw\Figure\Pixel\PixelMatrix;
 use TextDraw\Figure\Table\TableBag\TableBag;
 use TextDraw\Figure\Text\Text;
 use TextDraw\Figure\Turtle\Turtle;
 use TextDraw\Plane\Point;
+use TextDraw\Screen\PixelMatrix;
 
 class Table extends BaseFigure
 {

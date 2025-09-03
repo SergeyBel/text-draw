@@ -7,9 +7,9 @@ namespace TextDraw\Figure\Geometry\Arrow;
 use TextDraw\Figure\Base\BaseFigure;
 use TextDraw\Figure\Geometry\Line\Line;
 use TextDraw\Figure\Geometry\Line\LineStyle;
-use TextDraw\Figure\Pixel\PixelMatrix;
 use TextDraw\Plane\Point;
 use TextDraw\Plane\StraightLine;
+use TextDraw\Screen\PixelMatrix;
 
 class Arrow extends BaseFigure
 {

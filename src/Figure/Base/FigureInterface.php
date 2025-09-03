@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Base;
 
-use TextDraw\Figure\Pixel\PixelMatrix;
+use TextDraw\Screen\PixelMatrix;
 
 interface FigureInterface
 {

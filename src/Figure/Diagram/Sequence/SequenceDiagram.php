@@ -9,9 +9,9 @@ use TextDraw\Figure\Diagram\Elements\TextArrow\TextArrow;
 use TextDraw\Figure\Diagram\Elements\TextBox\TextBox;
 use TextDraw\Figure\Geometry\Line\Line;
 use TextDraw\Figure\Geometry\Line\LineStyle;
-use TextDraw\Figure\Pixel\PixelMatrix;
 use TextDraw\Figure\Text\Text;
 use TextDraw\Plane\Point;
+use TextDraw\Screen\PixelMatrix;
 
 class SequenceDiagram extends BaseFigure
 {

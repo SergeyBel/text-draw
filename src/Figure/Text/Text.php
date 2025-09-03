@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace TextDraw\Figure\Text;
 
 use TextDraw\Common\TextFrame;
-use TextDraw\Figure\Base\FigureInterface;
+use TextDraw\Figure\Base\BaseFigure;
 use TextDraw\Figure\Pixel\Pixel;
-use TextDraw\Figure\Pixel\PixelMatrix;
 use TextDraw\Plane\Point;
+use TextDraw\Screen\PixelMatrix;
 
-class Text implements FigureInterface
+class Text extends BaseFigure
 {
     private TextStyle $style;
     private TextFrame $textFrame;
@@ -21,6 +21,7 @@ class Text implements FigureInterface
     ) {
         $this->style = new TextStyle();
         $this->textFrame = new TextFrame($text);
+        parent::__construct();
     }
 
     public static function fromTextFrame(Point $start, TextFrame $textFrame): Text

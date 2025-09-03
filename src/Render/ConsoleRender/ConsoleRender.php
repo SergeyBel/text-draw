@@ -6,8 +6,8 @@ namespace TextDraw\Render\ConsoleRender;
 
 use Exception;
 use TextDraw\Common\Size;
-use TextDraw\Render\Scene;
 use TextDraw\Render\TextRender\TextRender;
+use TextDraw\Screen\Screen;
 
 class ConsoleRender
 {
@@ -24,9 +24,9 @@ class ConsoleRender
         $this->textRender = new TextRender($size->subWidth(1));
     }
 
-    public function render(Scene $frame): void
+    public function render(Screen $screen): void
     {
-        $text = $this->textRender->render($frame);
+        $text = $this->textRender->render($screen);
         echo $text;
 
     }

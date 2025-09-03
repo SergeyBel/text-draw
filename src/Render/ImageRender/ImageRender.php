@@ -9,8 +9,7 @@ use GdImage;
 use TextDraw\Common\Color\RgbColor;
 use TextDraw\Common\Size;
 use TextDraw\Figure\Pixel\Pixel;
-use TextDraw\Figure\Pixel\PixelMatrix;
-use TextDraw\Render\Scene;
+use TextDraw\Screen\Screen;
 
 class ImageRender
 {
@@ -25,19 +24,18 @@ class ImageRender
         $this->style = new ImageRenderStyle();
     }
 
-    public function render(Scene $frame, string $filepath): Image
+    public function render(Screen $screen, string $filepath): Image
     {
-        $matrix = $frame->getMatrix();
 
         if (is_null($this->size)) {
-            $this->size = $matrix->getMinHullSize();
+            $this->size = $screen->getSize();
         }
 
         $charSize = new Size($this->getCharWidth(), $this->getCharHeight());
         $imageSize = new Size($this->size->getWidth() * $charSize->getWidth(), $this->size->getHeight() * $charSize->getHeight());
 
         $image = $this->createImage($imageSize);
-        $this->drawPixels($matrix, $image, $charSize);
+        $this->drawPixels($screen, $image, $charSize);
         $this->saveImage($filepath, $image);
         return new Image($filepath, $imageSize);
     }
@@ -66,11 +64,11 @@ class ImageRender
         return $image;
     }
 
-    private function drawPixels(PixelMatrix $matrix, GdImage $image, Size $charSize): void
+    private function drawPixels(Screen $screen, GdImage $image, Size $charSize): void
     {
         $textColor = $this->createColor($image, $this->style->getTextColor());
 
-        foreach ($matrix->getPixels() as $pixel) {
+        foreach ($screen->getPixels() as $pixel) {
             $this->drawPixel($image, $pixel, $charSize, $textColor);
         }
     }

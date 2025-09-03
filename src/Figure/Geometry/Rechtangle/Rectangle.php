@@ -8,8 +8,8 @@ use TextDraw\Common\Size;
 use TextDraw\Figure\Base\BaseFigure;
 use TextDraw\Figure\Geometry\Line\Line;
 use TextDraw\Figure\Geometry\Line\LineStyle;
-use TextDraw\Figure\Pixel\PixelMatrix;
 use TextDraw\Plane\Point;
+use TextDraw\Screen\PixelMatrix;
 
 class Rectangle extends BaseFigure
 {

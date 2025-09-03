@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Pixel;
 
-use TextDraw\Figure\Base\FigureInterface;
+use TextDraw\Figure\Base\BaseFigure;
 use TextDraw\Plane\Point;
+use TextDraw\Screen\PixelMatrix;
 
-class Pixel implements FigureInterface
+class Pixel extends BaseFigure
 {
     public function __construct(
         private Point $point,
         private string $char,
     ) {
+        parent::__construct();
     }
 
     public function draw(): PixelMatrix

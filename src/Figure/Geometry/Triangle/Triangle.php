@@ -6,8 +6,8 @@ namespace TextDraw\Figure\Geometry\Triangle;
 
 use TextDraw\Figure\Base\BaseFigure;
 use TextDraw\Figure\Geometry\Line\Line;
-use TextDraw\Figure\Pixel\PixelMatrix;
 use TextDraw\Plane\Point;
+use TextDraw\Screen\PixelMatrix;
 
 class Triangle extends BaseFigure
 {

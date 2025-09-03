@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace TextDraw\Tests\Figure\Pixel;
+namespace TextDraw\Tests\Screen;
 
+use PHPUnit\Framework\TestCase;
 use TextDraw\Common\Exception\RenderException;
 use TextDraw\Common\Size;
 use TextDraw\Figure\Pixel\Pixel;
-use TextDraw\Figure\Pixel\PixelMatrix;
 use TextDraw\Plane\Point;
-use PHPUnit\Framework\TestCase;
+use TextDraw\Screen\PixelMatrix;
 
 class PixelMatrixTest extends TestCase
 {
@@ -94,7 +94,7 @@ class PixelMatrixTest extends TestCase
         $matrix = new PixelMatrix()->setPixels($pixels);
 
         $size = new Size(4, 6);
-        $this->assertEquals($size, $matrix->getMinHullSize());
+        $this->assertEquals($size, $matrix->getSize());
     }
 
     public function testMinHullZeroPoint(): void
@@ -103,7 +103,7 @@ class PixelMatrixTest extends TestCase
         $matrix = new PixelMatrix()->setPixel($pixel);
 
         $size = new Size(1, 1);
-        $this->assertEquals($size, $matrix->getMinHullSize());
+        $this->assertEquals($size, $matrix->getSize());
     }
 
 }

@@ -6,9 +6,9 @@ namespace TextDraw\Figure\Diagram\Elements\TextArrow;
 
 use TextDraw\Figure\Base\BaseFigure;
 use TextDraw\Figure\Geometry\Arrow\Arrow;
-use TextDraw\Figure\Pixel\PixelMatrix;
 use TextDraw\Figure\Text\Text;
 use TextDraw\Plane\Point;
+use TextDraw\Screen\PixelMatrix;
 
 class TextArrow extends BaseFigure
 {

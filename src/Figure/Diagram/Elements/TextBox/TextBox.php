@@ -7,9 +7,9 @@ namespace TextDraw\Figure\Diagram\Elements\TextBox;
 use TextDraw\Common\Size;
 use TextDraw\Figure\Base\BaseFigure;
 use TextDraw\Figure\Geometry\Rechtangle\Rectangle;
-use TextDraw\Figure\Pixel\PixelMatrix;
 use TextDraw\Figure\Text\Text;
 use TextDraw\Plane\Point;
+use TextDraw\Screen\PixelMatrix;
 use TextDraw\Tests\Figure\Diagram\Elements\TextBox\TextBoxStyle;
 
 class TextBox extends BaseFigure

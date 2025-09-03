@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Geometry\Circle;
 
-use TextDraw\Figure\Base\FigureInterface;
+use TextDraw\Figure\Base\BaseFigure;
 use TextDraw\Figure\Pixel\Pixel;
-use TextDraw\Figure\Pixel\PixelMatrix;
 use TextDraw\Plane\Point;
+use TextDraw\Screen\PixelMatrix;
 
-class Circle implements FigureInterface
+class Circle extends BaseFigure
 {
     private CircleStyle $style;
 
@@ -18,6 +18,7 @@ class Circle implements FigureInterface
         private int $radius,
     ) {
         $this->style = new CircleStyle();
+        parent::__construct();
     }
 
     public function draw(): PixelMatrix

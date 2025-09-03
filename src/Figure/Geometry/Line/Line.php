@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Geometry\Line;
 
-use TextDraw\Figure\Base\FigureInterface;
+use TextDraw\Figure\Base\BaseFigure;
 use TextDraw\Figure\Pixel\Pixel;
-use TextDraw\Figure\Pixel\PixelMatrix;
 use TextDraw\Plane\Point;
+use TextDraw\Screen\PixelMatrix;
 
 /**
  * @see https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
  */
-class Line implements FigureInterface
+class Line extends BaseFigure
 {
     private LineStyle $style;
 
@@ -21,6 +21,7 @@ class Line implements FigureInterface
         private Point $end,
     ) {
         $this->style = new LineStyle();
+        parent::__construct();
     }
 
     public function draw(): PixelMatrix

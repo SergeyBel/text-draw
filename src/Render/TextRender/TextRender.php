@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace TextDraw\Render\TextRender;
 
 use TextDraw\Common\Size;
-use TextDraw\Render\Scene;
+use TextDraw\Screen\Screen;
 
 class TextRender
 {
@@ -19,13 +19,12 @@ class TextRender
         $this->size = $size;
     }
 
-    public function render(Scene $frame): string
+    public function render(Screen $screen): string
     {
-        $matrix = $frame->getMatrix();
-        $size = $this->size ?? $matrix->getMinHullSize();
+        $size = $this->size ?? $screen->getSize();
         $text = $this->getClearText($size);
 
-        foreach ($matrix->getPixels() as $pixel) {
+        foreach ($screen->getPixels() as $pixel) {
             $text[$pixel->getPoint()->getY()][$pixel->getPoint()->getX()] = $pixel->getChar();
         }
 

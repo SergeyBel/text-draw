@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace TextDraw\Figure\Pixel;
+namespace TextDraw\Screen;
 
+use Exception;
 use TextDraw\Common\Exception\RenderException;
 use TextDraw\Common\Size;
-use Exception;
+use TextDraw\Figure\Pixel\Pixel;
 
 class PixelMatrix
 {
@@ -85,7 +86,7 @@ class PixelMatrix
         return $this;
     }
 
-    public function getMinHullSize(): Size
+    public function getSize(): Size
     {
         $ys = array_keys($this->matrix);
         $xs = [];

@@ -6,16 +6,16 @@ namespace TextDraw\Tests\Figure;
 
 use PHPUnit\Framework\TestCase;
 use TextDraw\Figure\Base\FigureInterface;
-use TextDraw\Render\Scene;
 use TextDraw\Render\TextRender\TextRender;
 use TextDraw\Render\TextRender\TextRenderStyle;
+use TextDraw\Screen\Screen;
 use TextDraw\Tests\RenderConstraint;
 
 class FigureTestCase extends TestCase
 {
     protected TextRender $render;
 
-    protected Scene $frame;
+    protected Screen $screen;
 
     protected function setUp(): void
     {
@@ -25,20 +25,20 @@ class FigureTestCase extends TestCase
                     ->setEmptyChar('.')
             );
 
-        $this->frame = new Scene();
+        $this->screen = new Screen();
     }
 
 
     protected function addFigure(FigureInterface $figure): static
     {
-        $this->frame->addFigure($figure);
+        $this->screen->addFigure($figure);
         return $this;
     }
 
 
     protected function assertRender(string $expected)
     {
-        $actual = $this->render->render($this->frame);
+        $actual = $this->render->render($this->screen);
 
         $message = sprintf(
             "Expected(length=%d):\n%s\n\nActual(length=%d):\n%s\n",
