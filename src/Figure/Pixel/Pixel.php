@@ -6,7 +6,7 @@ namespace TextDraw\Figure\Pixel;
 
 use TextDraw\Figure\Base\BaseFigure;
 use TextDraw\Plane\Point;
-use TextDraw\Screen\PixelMatrix;
+use TextDraw\Screen\Screen;
 
 class Pixel extends BaseFigure
 {
@@ -17,9 +17,9 @@ class Pixel extends BaseFigure
         parent::__construct();
     }
 
-    public function draw(): PixelMatrix
+    public function draw(): Screen
     {
-        return new PixelMatrix([$this]);
+        return new Screen([$this]);
     }
 
     public function getPoint(): Point

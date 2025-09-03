@@ -9,7 +9,7 @@ use TextDraw\Figure\Base\BaseFigure;
 use TextDraw\Figure\Geometry\Line\Line;
 use TextDraw\Figure\Geometry\Line\LineStyle;
 use TextDraw\Plane\Point;
-use TextDraw\Screen\PixelMatrix;
+use TextDraw\Screen\Screen;
 
 class Rectangle extends BaseFigure
 {
@@ -24,7 +24,7 @@ class Rectangle extends BaseFigure
         parent::__construct();
     }
 
-    public function draw(): PixelMatrix
+    public function draw(): Screen
     {
 
         $horizontalLineStyle = new LineStyle()

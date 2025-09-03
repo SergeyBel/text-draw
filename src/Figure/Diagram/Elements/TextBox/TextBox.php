@@ -9,7 +9,7 @@ use TextDraw\Figure\Base\BaseFigure;
 use TextDraw\Figure\Geometry\Rechtangle\Rectangle;
 use TextDraw\Figure\Text\Text;
 use TextDraw\Plane\Point;
-use TextDraw\Screen\PixelMatrix;
+use TextDraw\Screen\Screen;
 use TextDraw\Tests\Figure\Diagram\Elements\TextBox\TextBoxStyle;
 
 class TextBox extends BaseFigure
@@ -24,7 +24,7 @@ class TextBox extends BaseFigure
         parent::__construct();
     }
 
-    public function draw(): PixelMatrix
+    public function draw(): Screen
     {
         $size = $this->getSize();
 

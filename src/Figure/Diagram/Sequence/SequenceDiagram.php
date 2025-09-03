@@ -11,7 +11,7 @@ use TextDraw\Figure\Geometry\Line\Line;
 use TextDraw\Figure\Geometry\Line\LineStyle;
 use TextDraw\Figure\Text\Text;
 use TextDraw\Plane\Point;
-use TextDraw\Screen\PixelMatrix;
+use TextDraw\Screen\Screen;
 
 class SequenceDiagram extends BaseFigure
 {
@@ -65,7 +65,7 @@ class SequenceDiagram extends BaseFigure
     }
 
 
-    public function draw(): PixelMatrix
+    public function draw(): Screen
     {
         $this->drawActors();
         $firstBox = $this->actorsBoxes[array_key_first($this->actorsBoxes)];

@@ -8,7 +8,7 @@ use TextDraw\Figure\Base\BaseFigure;
 use TextDraw\Figure\Geometry\Arrow\Arrow;
 use TextDraw\Figure\Text\Text;
 use TextDraw\Plane\Point;
-use TextDraw\Screen\PixelMatrix;
+use TextDraw\Screen\Screen;
 
 class TextArrow extends BaseFigure
 {
@@ -19,7 +19,7 @@ class TextArrow extends BaseFigure
     ) {
         parent::__construct();
     }
-    public function draw(): PixelMatrix
+    public function draw(): Screen
     {
         $arrow = new Arrow($this->start, $this->end);
         $this->addFigure(

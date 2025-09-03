@@ -10,7 +10,7 @@ use TextDraw\Figure\Table\TableBag\TableBag;
 use TextDraw\Figure\Text\Text;
 use TextDraw\Figure\Turtle\Turtle;
 use TextDraw\Plane\Point;
-use TextDraw\Screen\PixelMatrix;
+use TextDraw\Screen\Screen;
 
 class Table extends BaseFigure
 {
@@ -65,7 +65,7 @@ class Table extends BaseFigure
     }
 
 
-    public function draw(): PixelMatrix
+    public function draw(): Screen
     {
         $this->prepareTable();
         $start = new Point(0, 0);

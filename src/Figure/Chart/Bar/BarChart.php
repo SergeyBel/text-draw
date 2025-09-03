@@ -14,7 +14,7 @@ use TextDraw\Figure\Geometry\Rechtangle\Rectangle;
 use TextDraw\Figure\Text\Text;
 use TextDraw\Figure\Text\TextStyle;
 use TextDraw\Plane\Point;
-use TextDraw\Screen\PixelMatrix;
+use TextDraw\Screen\Screen;
 
 class BarChart extends BaseFigure
 {
@@ -46,7 +46,7 @@ class BarChart extends BaseFigure
 
 
 
-    public function draw(): PixelMatrix
+    public function draw(): Screen
     {
         $barWidth = $this->style->getBarWidth();
         $unitHeight = $this->style->getUnitHeight();

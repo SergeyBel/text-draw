@@ -7,7 +7,7 @@ namespace TextDraw\Figure\Geometry\Triangle;
 use TextDraw\Figure\Base\BaseFigure;
 use TextDraw\Figure\Geometry\Line\Line;
 use TextDraw\Plane\Point;
-use TextDraw\Screen\PixelMatrix;
+use TextDraw\Screen\Screen;
 
 class Triangle extends BaseFigure
 {
@@ -19,7 +19,7 @@ class Triangle extends BaseFigure
         parent::__construct();
     }
 
-    public function draw(): PixelMatrix
+    public function draw(): Screen
     {
         $this
             ->addFigure(new Line($this->vertex1, $this->vertex2))

@@ -4,44 +4,114 @@ declare(strict_types=1);
 
 namespace TextDraw\Screen;
 
+use TextDraw\Common\Exception\RenderException;
+use TextDraw\Common\Size;
 use TextDraw\Figure\Base\FigureInterface;
+use TextDraw\Figure\Pixel\Pixel;
+use Exception;
 
 class Screen
 {
     /**
-     * @var array<FigureInterface>
+     * @var Pixel[][]
      */
-    private array $figures = [];
+    private array $matrix = [];
 
-    private PixelMatrix $pixelMatrix;
-
-    public function __construct()
+    /**
+     * @param array<Pixel> $pixels
+     */
+    public function __construct(array $pixels = [])
     {
-        $this->pixelMatrix = new PixelMatrix();
+        $this->setPixels($pixels);
     }
 
 
-    public function addFigure(FigureInterface $figure): self
+    public function drawFigure(FigureInterface $figure): self
     {
-        $this->figures[] = $figure;
-        $this->pixelMatrix->merge($figure->draw());
+        $this->merge($figure->draw());
         return $this;
     }
 
-    public function getPixels()
+    public function setPixel(Pixel $pixel): static
     {
-        return $this->pixelMatrix->getPixels();
-    }
-
-    public function getSize()
-    {
-        return $this->pixelMatrix->getSize();
+        $this->matrix[$pixel->getPoint()->getY()][$pixel->getPoint()->getX()] = $pixel;
+        return $this;
     }
 
 
-
-    public function getMatrix(): PixelMatrix
+    public function getPixel(int $x, int $y): Pixel
     {
-        return $this->pixelMatrix;
+        if (!$this->hasPixel($x, $y)) {
+            throw new RenderException('Pixel not found');
+        }
+        return $this->matrix[$y][$x];
     }
+
+    public function hasPixel(int $x, int $y): bool
+    {
+        return isset($this->matrix[$y][$x]);
+    }
+
+    /**
+     * @return Pixel[]
+     */
+    public function getPixels(): array
+    {
+        $pixels = [];
+        foreach ($this->matrix as $line) {
+            foreach ($line as $pixel) {
+                $pixels[] = $pixel;
+            }
+
+        }
+        return $pixels;
+    }
+
+
+
+    /**
+     * @param array<Pixel> $pixels
+     * @return $this
+     */
+    public function setPixels(array $pixels): static
+    {
+        foreach ($pixels as $pixel) {
+            $this->setPixel($pixel);
+        }
+        return $this;
+    }
+
+    public function merge(Screen $screen): static
+    {
+        $this->setPixels($screen->getPixels());
+        return $this;
+    }
+
+
+    public function clear(): static
+    {
+        $this->matrix = [];
+        return $this;
+    }
+
+    public function getSize(): Size
+    {
+        $ys = array_keys($this->matrix);
+        $xs = [];
+        foreach ($this->matrix as $line) {
+            $xs = array_merge($xs, array_keys($line));
+        }
+
+        if (count($ys) === 0 || count($xs) === 0) {
+            throw new Exception('Can not get matrix size: empty');
+        }
+
+        return new Size(
+            max($xs) + 1,
+            max($ys) + 1
+        );
+
+    }
+
+
 }

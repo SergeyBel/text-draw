@@ -4,27 +4,27 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Base;
 
-use TextDraw\Screen\PixelMatrix;
+use TextDraw\Screen\Screen;
 
 class BaseFigure implements FigureInterface
 {
-    protected PixelMatrix $pixelMatrix;
+    protected Screen $screen;
 
 
     public function __construct()
     {
-        $this->pixelMatrix = new PixelMatrix();
+        $this->screen = new Screen();
     }
 
 
-    public function draw(): PixelMatrix
+    public function draw(): Screen
     {
-        return $this->pixelMatrix;
+        return $this->screen;
     }
 
     protected function addFigure(FigureInterface $figure): static
     {
-        $this->pixelMatrix->merge($figure->draw());
+        $this->screen->drawFigure($figure);
         return $this;
     }
 

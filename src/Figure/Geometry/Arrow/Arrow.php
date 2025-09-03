@@ -9,7 +9,7 @@ use TextDraw\Figure\Geometry\Line\Line;
 use TextDraw\Figure\Geometry\Line\LineStyle;
 use TextDraw\Plane\Point;
 use TextDraw\Plane\StraightLine;
-use TextDraw\Screen\PixelMatrix;
+use TextDraw\Screen\Screen;
 
 class Arrow extends BaseFigure
 {
@@ -24,7 +24,7 @@ class Arrow extends BaseFigure
         parent::__construct();
     }
 
-    public function draw(): PixelMatrix
+    public function draw(): Screen
     {
         $line = new Line($this->start, $this->end);
 

@@ -7,7 +7,7 @@ namespace TextDraw\Figure\Geometry\Line;
 use TextDraw\Figure\Base\BaseFigure;
 use TextDraw\Figure\Pixel\Pixel;
 use TextDraw\Plane\Point;
-use TextDraw\Screen\PixelMatrix;
+use TextDraw\Screen\Screen;
 
 /**
  * @see https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
@@ -24,7 +24,7 @@ class Line extends BaseFigure
         parent::__construct();
     }
 
-    public function draw(): PixelMatrix
+    public function draw(): Screen
     {
         $x0 = $this->start->getX();
         $x1 = $this->end->getX();
@@ -54,7 +54,7 @@ class Line extends BaseFigure
             $pixels[count($pixels) - 1]->setChar($this->style->getFinishChar());
         }
 
-        return new PixelMatrix($pixels);
+        return new Screen($pixels);
     }
 
     /**

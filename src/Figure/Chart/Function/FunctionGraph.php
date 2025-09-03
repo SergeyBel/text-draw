@@ -11,7 +11,7 @@ use TextDraw\Figure\Geometry\Line\Line;
 use TextDraw\Figure\Geometry\Line\LineStyle;
 use TextDraw\Figure\Pixel\Pixel;
 use TextDraw\Plane\Point;
-use TextDraw\Screen\PixelMatrix;
+use TextDraw\Screen\Screen;
 
 class FunctionGraph extends BaseFigure
 {
@@ -53,7 +53,7 @@ class FunctionGraph extends BaseFigure
         return $this;
     }
 
-    public function draw(): PixelMatrix
+    public function draw(): Screen
     {
         if (count($this->values) === 0) {
             throw new RenderException('No values');

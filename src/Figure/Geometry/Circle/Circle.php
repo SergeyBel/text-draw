@@ -7,7 +7,7 @@ namespace TextDraw\Figure\Geometry\Circle;
 use TextDraw\Figure\Base\BaseFigure;
 use TextDraw\Figure\Pixel\Pixel;
 use TextDraw\Plane\Point;
-use TextDraw\Screen\PixelMatrix;
+use TextDraw\Screen\Screen;
 
 class Circle extends BaseFigure
 {
@@ -21,7 +21,7 @@ class Circle extends BaseFigure
         parent::__construct();
     }
 
-    public function draw(): PixelMatrix
+    public function draw(): Screen
     {
         $points = [];
 
@@ -55,7 +55,7 @@ class Circle extends BaseFigure
             }
             $delta += 2 * (++$x - --$y);
         }
-        return new PixelMatrix($points);
+        return new Screen($points);
 
     }
 }

@@ -8,7 +8,7 @@ use TextDraw\Common\TextFrame;
 use TextDraw\Figure\Base\BaseFigure;
 use TextDraw\Figure\Pixel\Pixel;
 use TextDraw\Plane\Point;
-use TextDraw\Screen\PixelMatrix;
+use TextDraw\Screen\Screen;
 
 class Text extends BaseFigure
 {
@@ -36,19 +36,19 @@ class Text extends BaseFigure
         return $text;
     }
 
-    public function draw(): PixelMatrix
+    public function draw(): Screen
     {
-        $pixels = new PixelMatrix();
+        $screen = new Screen();
         $start = clone $this->start;
 
         $chars = mb_str_split($this->textFrame->getText());
 
         foreach ($chars as $char) {
-            $pixels->setPixel(new Pixel($start, $char));
+            $screen->setPixel(new Pixel($start, $char));
             $start = $start->addX(1);
         }
 
-        return $pixels;
+        return $screen;
     }
 
     public function getStyle(): TextStyle
