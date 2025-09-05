@@ -24,7 +24,7 @@ class BaseFigure implements FigureInterface
 
     protected function addFigure(FigureInterface $figure): static
     {
-        $this->screen->drawFigure($figure);
+        $this->screen->addFigure($figure);
         return $this;
     }
 

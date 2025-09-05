@@ -43,6 +43,14 @@ class RectangleStyle
         return $this;
     }
 
+    public function setChar(string $char): self
+    {
+        return $this
+            ->setCrossingChar($char)
+            ->setHorizontalChar($char)
+            ->setVerticalChar($char);
+    }
+
 
 
 }

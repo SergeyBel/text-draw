@@ -26,8 +26,9 @@ class Screen
     }
 
 
-    public function drawFigure(FigureInterface $figure): self
+    public function addFigure(FigureInterface $figure): self
     {
+
         $this->merge($figure->draw());
         return $this;
     }
@@ -68,7 +69,6 @@ class Screen
     }
 
 
-
     /**
      * @param array<Pixel> $pixels
      * @return $this
@@ -78,6 +78,7 @@ class Screen
         foreach ($pixels as $pixel) {
             $this->setPixel($pixel);
         }
+
         return $this;
     }
 
@@ -110,6 +111,43 @@ class Screen
             max($xs) + 1,
             max($ys) + 1
         );
+
+    }
+
+    public function move(int $deltaX, int $deltaY): self
+    {
+        $pixels = $this->getPixels();
+        foreach ($pixels as $pixel) {
+            $pixel->setPoint(
+                $pixel->getPoint()
+                    ->addX($deltaX)
+                    ->addY($deltaY)
+            );
+        }
+        return $this->setPixels($pixels);
+    }
+
+    public function rotate(): self
+    {
+        $size = $this->getSize();
+        $newPixels = [];
+
+        foreach ($this->getPixels() as $pixel) {
+            $x = $pixel->getPoint()->getX();
+            $y = $pixel->getPoint()->getY();
+
+            $newPoint = clone $pixel->getPoint();
+
+            $newPoint
+                ->setX($size->getHeight() - $y - 1)
+                ->setY($x);
+            $newPixels[] = new Pixel(
+                $newPoint,
+                $pixel->getChar()
+            );
+        }
+        $this->clear()->setPixels($newPixels);
+        return $this;
 
     }
 

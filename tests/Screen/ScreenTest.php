@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace TextDraw\Tests\Screen;
 
-use PHPUnit\Framework\TestCase;
 use TextDraw\Common\Exception\RenderException;
 use TextDraw\Common\Size;
+use TextDraw\Figure\Geometry\Rechtangle\Rectangle;
+use TextDraw\Figure\Geometry\Rechtangle\RectangleStyle;
 use TextDraw\Figure\Pixel\Pixel;
 use TextDraw\Plane\Point;
 use TextDraw\Screen\Screen;
+use TextDraw\Tests\Figure\FigureTestCase;
 
-class ScreenTest extends TestCase
+class ScreenTest extends FigureTestCase
 {
     public function testCreate(): void
     {
@@ -104,6 +106,48 @@ class ScreenTest extends TestCase
 
         $size = new Size(1, 1);
         $this->assertEquals($size, $matrix->getSize());
+    }
+
+    public function testMove(): void
+    {
+        $screen = new Screen()
+            ->addFigure(new Rectangle(
+                new Point(0, 0),
+                new Size(3, 2)
+            )->setStyle(new RectangleStyle()->setChar('*')))
+            ->move(1, 2)
+        ;
+
+
+        $this->setScreen($screen);
+        $expected = <<<EOD
+        ....
+        ....
+        .***
+        .***
+        EOD;
+
+        $this->assertRender($expected);
+    }
+
+    public function testRotate(): void
+    {
+        $screen = new Screen()
+            ->addFigure(new Rectangle(
+                new Point(0, 0),
+                new Size(4, 3)
+            )->setStyle(new RectangleStyle()->setChar('*')))
+            ->rotate();
+
+        $this->setScreen($screen);
+        $expected = <<<EOD
+        ***
+        *.*
+        *.*
+        ***
+        EOD;
+
+        $this->assertRender($expected);
     }
 
 }
