@@ -14,8 +14,8 @@ class Size
         int $width,
         int $height,
     ) {
-        $this->setWidth($width);
-        $this->setHeight($height);
+        $this->width = new PositiveInt($width);
+        $this->height = new PositiveInt($height);
     }
 
     /**
@@ -26,13 +26,6 @@ class Size
         return $this->width->getValue();
     }
 
-
-    public function setWidth(int $width): static
-    {
-        $this->width = new PositiveInt($width);
-        return $this;
-    }
-
     /**
      * @return int<1, max>
      */
@@ -40,13 +33,6 @@ class Size
     {
         return $this->height->getValue();
     }
-
-    public function setHeight(int $height): static
-    {
-        $this->height = new PositiveInt($height);
-        return $this;
-    }
-
 
     public function addWidth(int $value): static
     {

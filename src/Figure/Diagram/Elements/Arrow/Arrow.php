@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TextDraw\Figure\Geometry\Arrow;
+namespace TextDraw\Figure\Diagram\Elements\Arrow;
 
 use TextDraw\Figure\Base\BaseFigure;
 use TextDraw\Figure\Geometry\Line\Line;
@@ -24,7 +24,7 @@ class Arrow extends BaseFigure
         parent::__construct();
     }
 
-    public function draw(): Screen
+    public function getScreen(): Screen
     {
         $line = new Line($this->start, $this->end);
 
@@ -52,7 +52,7 @@ class Arrow extends BaseFigure
         $this
             ->addFigure($line);
 
-        return parent::draw();
+        return parent::getScreen();
     }
 
     public function getLine(): StraightLine

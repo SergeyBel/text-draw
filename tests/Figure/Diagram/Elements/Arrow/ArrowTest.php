@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace TextDraw\Tests\Figure\Geometry\Arrow;
+namespace TextDraw\Tests\Figure\Diagram\Elements\Arrow;
 
-use TextDraw\Figure\Geometry\Arrow\Arrow;
+use TextDraw\Figure\Diagram\Elements\Arrow\Arrow;
 use TextDraw\Plane\Point;
 use TextDraw\Tests\Figure\FigureTestCase;
 

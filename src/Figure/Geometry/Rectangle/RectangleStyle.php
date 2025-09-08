@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TextDraw\Figure\Geometry\Rechtangle;
+namespace TextDraw\Figure\Geometry\Rectangle;
 
 class RectangleStyle
 {

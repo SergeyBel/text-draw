@@ -8,7 +8,5 @@ use TextDraw\Screen\Screen;
 
 interface FigureInterface
 {
-    public function draw(): Screen;
-
-
+    public function getScreen(): Screen;
 }

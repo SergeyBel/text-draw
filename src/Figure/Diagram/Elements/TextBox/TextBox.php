@@ -6,7 +6,7 @@ namespace TextDraw\Figure\Diagram\Elements\TextBox;
 
 use TextDraw\Common\Size;
 use TextDraw\Figure\Base\BaseFigure;
-use TextDraw\Figure\Geometry\Rechtangle\Rectangle;
+use TextDraw\Figure\Geometry\Rectangle\Rectangle;
 use TextDraw\Figure\Text\Text;
 use TextDraw\Plane\Point;
 use TextDraw\Screen\Screen;
@@ -24,7 +24,7 @@ class TextBox extends BaseFigure
         parent::__construct();
     }
 
-    public function draw(): Screen
+    public function getScreen(): Screen
     {
         $size = $this->getSize();
 
@@ -41,7 +41,7 @@ class TextBox extends BaseFigure
 
         $this->addFigure(new Text($start, $this->text));
 
-        return parent::draw();
+        return parent::getScreen();
     }
 
     public function getStyle(): TextBoxStyle

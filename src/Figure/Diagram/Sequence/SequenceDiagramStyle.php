@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Diagram\Sequence;
 
-use TextDraw\Figure\Geometry\Rechtangle\RectangleStyle;
+use TextDraw\Figure\Geometry\Rectangle\RectangleStyle;
 use TextDraw\Tests\Figure\Diagram\Elements\TextBox\TextBoxStyle;
 
 class SequenceDiagramStyle

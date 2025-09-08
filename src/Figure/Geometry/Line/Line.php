@@ -24,7 +24,7 @@ class Line extends BaseFigure
         parent::__construct();
     }
 
-    public function draw(): Screen
+    public function getScreen(): Screen
     {
         $x0 = $this->start->getX();
         $x1 = $this->end->getX();
@@ -47,11 +47,11 @@ class Line extends BaseFigure
         }
 
         if (!is_null($this->style->getStartChar())) {
-            $pixels[0]->setChar($this->style->getStartChar());
+            $pixels[0] = $pixels[0]->setChar($this->style->getStartChar());
         }
 
         if (!is_null($this->style->getFinishChar())) {
-            $pixels[count($pixels) - 1]->setChar($this->style->getFinishChar());
+            $pixels[count($pixels) - 1] = $pixels[count($pixels) - 1]->setChar($this->style->getFinishChar());
         }
 
         return new Screen($pixels);

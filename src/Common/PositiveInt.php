@@ -15,7 +15,10 @@ class PositiveInt
 
     public function __construct(int $value)
     {
-        $this->setValue($value);
+        if ($value < 1) {
+            throw new InvalidArgumentException('Value must be positive');
+        }
+        $this->value = $value;
     }
 
     /**
@@ -26,27 +29,14 @@ class PositiveInt
         return $this->value;
     }
 
-    public function setValue(int $value): static
+    public function add(int $value): self
     {
-        if ($value < 1) {
-            throw new InvalidArgumentException('Value must be positive');
-        }
-        $this->value = $value;
-        return $this;
+        return new self($this->value + $value);
     }
 
-    public function add(int $value): static
+    public function sub(int $value): self
     {
-        $that = clone $this;
-        $that->setValue($that->value + $value);
-        return $that;
-    }
-
-    public function sub(int $value): static
-    {
-        $that = clone $this;
-        $that->setValue($that->value - $value);
-        return $that;
+        return new self($this->value - $value);
     }
 
 }

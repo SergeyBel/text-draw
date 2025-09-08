@@ -17,14 +17,14 @@ class BaseFigure implements FigureInterface
     }
 
 
-    public function draw(): Screen
+    public function getScreen(): Screen
     {
         return $this->screen;
     }
 
     protected function addFigure(FigureInterface $figure): static
     {
-        $this->screen->addFigure($figure);
+        $this->screen = $this->screen->addFigure($figure);
         return $this;
     }
 

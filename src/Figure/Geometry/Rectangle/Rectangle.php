@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TextDraw\Figure\Geometry\Rechtangle;
+namespace TextDraw\Figure\Geometry\Rectangle;
 
 use TextDraw\Common\Size;
 use TextDraw\Figure\Base\BaseFigure;
@@ -24,7 +24,7 @@ class Rectangle extends BaseFigure
         parent::__construct();
     }
 
-    public function draw(): Screen
+    public function getScreen(): Screen
     {
 
         $horizontalLineStyle = new LineStyle()
@@ -57,7 +57,7 @@ class Rectangle extends BaseFigure
             ->addFigure($right);
 
 
-        return parent::draw();
+        return parent::getScreen();
     }
 
     public function getStyle(): RectangleStyle

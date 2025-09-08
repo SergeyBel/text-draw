@@ -17,7 +17,7 @@ class Pixel extends BaseFigure
         parent::__construct();
     }
 
-    public function draw(): Screen
+    public function getScreen(): Screen
     {
         return new Screen([$this]);
     }
@@ -29,8 +29,10 @@ class Pixel extends BaseFigure
 
     public function setPoint(Point $point): static
     {
-        $this->point = $point;
-        return $this;
+        $that = clone $this;
+
+        $that->point = $point;
+        return $that;
     }
 
     public function getChar(): string
@@ -40,8 +42,10 @@ class Pixel extends BaseFigure
 
     public function setChar(string $char): static
     {
-        $this->char = $char;
-        return $this;
+        $that = clone $this;
+
+        $that->char = $char;
+        return $that;
     }
 
 

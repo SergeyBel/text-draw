@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace TextDraw\Tests\Figure\Diagram\Elements\TextBox;
 
-use TextDraw\Figure\Geometry\Rechtangle\RectangleStyle;
+use TextDraw\Figure\Geometry\Rectangle\RectangleStyle;
 
 class TextBoxStyle
 {

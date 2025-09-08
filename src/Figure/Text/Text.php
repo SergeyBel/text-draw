@@ -36,7 +36,7 @@ class Text extends BaseFigure
         return $text;
     }
 
-    public function draw(): Screen
+    public function getScreen(): Screen
     {
         $screen = new Screen();
         $start = clone $this->start;
@@ -44,7 +44,7 @@ class Text extends BaseFigure
         $chars = mb_str_split($this->textFrame->getText());
 
         foreach ($chars as $char) {
-            $screen->setPixel(new Pixel($start, $char));
+            $screen = $screen->setPixel(new Pixel($start, $char));
             $start = $start->addX(1);
         }
 
@@ -59,7 +59,7 @@ class Text extends BaseFigure
     public function setStyle(TextStyle $style): static
     {
         $this->style = $style;
-        $this->textFrame
+        $this->textFrame = $this->textFrame
             ->setWidth($style->getWidth())
             ->setAlign($style->getAlign())
             ->setPaddingChar($style->getPaddingChar());

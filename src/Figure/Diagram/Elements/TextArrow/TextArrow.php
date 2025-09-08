@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace TextDraw\Figure\Diagram\Elements\TextArrow;
 
 use TextDraw\Figure\Base\BaseFigure;
-use TextDraw\Figure\Geometry\Arrow\Arrow;
+use TextDraw\Figure\Diagram\Elements\Arrow\Arrow;
 use TextDraw\Figure\Text\Text;
 use TextDraw\Plane\Point;
 use TextDraw\Screen\Screen;
@@ -19,7 +19,7 @@ class TextArrow extends BaseFigure
     ) {
         parent::__construct();
     }
-    public function draw(): Screen
+    public function getScreen(): Screen
     {
         $arrow = new Arrow($this->start, $this->end);
         $this->addFigure(
@@ -36,7 +36,7 @@ class TextArrow extends BaseFigure
         );
 
 
-        return parent::draw();
+        return parent::getScreen();
     }
 
 }

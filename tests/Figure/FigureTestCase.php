@@ -31,7 +31,7 @@ class FigureTestCase extends TestCase
 
     protected function addFigure(FigureInterface $figure): static
     {
-        $this->screen->addFigure($figure);
+        $this->screen = $this->screen->addFigure($figure);
         return $this;
     }
 

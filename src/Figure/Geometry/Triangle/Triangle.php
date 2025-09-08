@@ -19,13 +19,13 @@ class Triangle extends BaseFigure
         parent::__construct();
     }
 
-    public function draw(): Screen
+    public function getScreen(): Screen
     {
         $this
             ->addFigure(new Line($this->vertex1, $this->vertex2))
             ->addFigure(new Line($this->vertex2, $this->vertex3))
             ->addFigure(new Line($this->vertex3, $this->vertex1));
 
-        return parent::draw();
+        return parent::getScreen();
     }
 }

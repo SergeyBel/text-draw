@@ -6,8 +6,8 @@ namespace TextDraw\Tests\Screen;
 
 use TextDraw\Common\Exception\RenderException;
 use TextDraw\Common\Size;
-use TextDraw\Figure\Geometry\Rechtangle\Rectangle;
-use TextDraw\Figure\Geometry\Rechtangle\RectangleStyle;
+use TextDraw\Figure\Geometry\Rectangle\Rectangle;
+use TextDraw\Figure\Geometry\Rectangle\RectangleStyle;
 use TextDraw\Figure\Pixel\Pixel;
 use TextDraw\Plane\Point;
 use TextDraw\Screen\Screen;
@@ -29,7 +29,7 @@ class ScreenTest extends FigureTestCase
         $matrix = new Screen();
         $pixel = new Pixel(new Point(1, 2), '+');
 
-        $matrix->setPixel($pixel);
+        $matrix = $matrix->setPixel($pixel);
 
         $this->assertTrue($matrix->hasPixel(1, 2));
         $this->assertEquals($pixel, $matrix->getPixel(1, 2));
@@ -55,7 +55,7 @@ class ScreenTest extends FigureTestCase
             new Pixel(new Point(1, 2), '+'),
             new Pixel(new Point(3, 4), '+')
         ];
-        $matrix = new Screen()->setPixels($pixels);
+        $matrix = new Screen($pixels);
 
         $this->assertEquals($pixels, $matrix->getPixels());
     }
@@ -67,21 +67,21 @@ class ScreenTest extends FigureTestCase
         $pixel3 = new Pixel(new Point(1, 2), '@');
 
 
-        $matrix1 = new Screen()->setPixel($pixel1);
-        $matrix2 = new Screen()->setPixels([$pixel2, $pixel3]);
+        $matrix1 = new Screen([$pixel1]);
+        $matrix2 = new Screen([$pixel2, $pixel3]);
 
         $pixels = [
             $pixel3,
             $pixel2
         ];
 
+
         $this->assertEquals($pixels, $matrix1->merge($matrix2)->getPixels());
     }
 
     public function testClear(): void
     {
-        $pixel = new Pixel(new Point(1, 2), '+');
-        $matrix = new Screen()->setPixel($pixel);
+        $matrix = new Screen([new Pixel(new Point(1, 2), '+')]);
 
         $this->assertEquals([], $matrix->clear()->getPixels());
     }
@@ -93,7 +93,7 @@ class ScreenTest extends FigureTestCase
             new Pixel(new Point(1, 5), '+'),
             new Pixel(new Point(3, 2), '+'),
         ];
-        $matrix = new Screen()->setPixels($pixels);
+        $matrix = new Screen($pixels);
 
         $size = new Size(4, 6);
         $this->assertEquals($size, $matrix->getSize());
@@ -102,7 +102,7 @@ class ScreenTest extends FigureTestCase
     public function testMinHullZeroPoint(): void
     {
         $pixel = new Pixel(new Point(0, 0), '+');
-        $matrix = new Screen()->setPixel($pixel);
+        $matrix = new Screen([$pixel]);
 
         $size = new Size(1, 1);
         $this->assertEquals($size, $matrix->getSize());
@@ -115,8 +115,10 @@ class ScreenTest extends FigureTestCase
                 new Point(0, 0),
                 new Size(3, 2)
             )->setStyle(new RectangleStyle()->setChar('*')))
-            ->move(1, 2)
+           ->move(1, 2)
         ;
+
+
 
 
         $this->setScreen($screen);
@@ -137,7 +139,8 @@ class ScreenTest extends FigureTestCase
                 new Point(0, 0),
                 new Size(4, 3)
             )->setStyle(new RectangleStyle()->setChar('*')))
-            ->rotate();
+            ->rotate()
+        ;
 
         $this->setScreen($screen);
         $expected = <<<EOD

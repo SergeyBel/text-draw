@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace TextDraw\Screen;
 
 use TextDraw\Figure\Base\FigureInterface;
+use TextDraw\Common\Exception\RenderException;
 
 class ScreenBuilder
 {
     private Screen $screen;
 
-    private ?FigureInterface $currentFigure = null;
+    private ?Screen $currentScreen = null;
 
     public function __construct()
     {
@@ -19,42 +20,44 @@ class ScreenBuilder
 
     public function build(): Screen
     {
-        if (!is_null($this->currentFigure)) {
+        if (!is_null($this->currentScreen)) {
 
-            $this->screen->addFigure($this->currentFigure);
+            $this->screen = $this->screen->merge($this->currentScreen);
         }
 
-        $this->currentFigure = null;
+        $this->currentScreen = null;
+
         return $this->screen;
     }
 
 
     public function addFigure(FigureInterface $figure): self
     {
-        if (!is_null($this->currentFigure)) {
-            $this->screen->addFigure($this->currentFigure);
+        if (!is_null($this->currentScreen)) {
+            $this->screen = $this->screen->merge($this->currentScreen);
         }
 
-        $this->currentFigure = $figure;
+        $this->currentScreen = $figure->getScreen();
         return $this;
     }
 
     public function move(int $deltaX, int $deltaY): self
     {
-        $this->currentFigure->draw()->move($deltaX, $deltaY);
+        if (is_null($this->currentScreen)) {
+            throw new RenderException('No figure to move');
+        }
+
+        $this->currentScreen = $this->currentScreen->move($deltaX, $deltaY);
         return $this;
     }
 
     public function rotate(): self
     {
-        foreach ($this->currentFigure->draw()->getPixels() as $pixel) {
-            dump($pixel->getPoint()->getX() . ',' . $pixel->getPoint()->getY() . '=' . $pixel->getChar());
+        if (is_null($this->currentScreen)) {
+            throw new RenderException('No figure to rotate');
         }
-        dump('-----------------------------------');
-        $this->currentFigure->draw()->rotate();
-        foreach ($this->currentFigure->draw()->getPixels() as $pixel) {
-            dump($pixel->getPoint()->getX() . ',' . $pixel->getPoint()->getY() . '=' . $pixel->getChar());
-        }
+
+        $this->currentScreen = $this->currentScreen->rotate();
         return $this;
     }
 

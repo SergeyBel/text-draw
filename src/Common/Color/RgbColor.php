@@ -13,25 +13,8 @@ class RgbColor
 
     public function __construct(int $red, int $green, int $blue)
     {
-        $this->setRed($red);
-        $this->setGreen($green);
-        $this->setBlue($blue);
-    }
-
-
-    public function setRed(int $red): void
-    {
         $this->red = new Channel($red);
-    }
-
-
-    public function setGreen(int $green): void
-    {
         $this->green = new Channel($green);
-    }
-
-    public function setBlue(int $blue): void
-    {
         $this->blue = new Channel($blue);
     }
 

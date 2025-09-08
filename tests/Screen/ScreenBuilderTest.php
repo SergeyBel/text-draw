@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace TextDraw\Tests\Screen;
 
 use TextDraw\Common\Size;
-use TextDraw\Figure\Geometry\Rechtangle\Rectangle;
-use TextDraw\Figure\Geometry\Rechtangle\RectangleStyle;
+use TextDraw\Figure\Geometry\Rectangle\Rectangle;
+use TextDraw\Figure\Geometry\Rectangle\RectangleStyle;
 use TextDraw\Figure\Pixel\Pixel;
 use TextDraw\Plane\Point;
 use TextDraw\Screen\ScreenBuilder;
@@ -17,6 +17,7 @@ class ScreenBuilderTest extends FigureTestCase
     public function testSeveralFigures(): void
     {
         $builder = new ScreenBuilder();
+
         $screen = $builder
             ->addFigure(new Rectangle(
                 new Point(0, 0),

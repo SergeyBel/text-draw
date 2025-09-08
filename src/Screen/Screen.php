@@ -22,21 +22,23 @@ class Screen
      */
     public function __construct(array $pixels = [])
     {
-        $this->setPixels($pixels);
+        foreach ($pixels as $pixel) {
+            $this->matrix[$pixel->getPoint()->getY()][$pixel->getPoint()->getX()] = $pixel;
+        }
     }
 
 
     public function addFigure(FigureInterface $figure): self
     {
-
-        $this->merge($figure->draw());
-        return $this;
+        return $this->merge($figure->getScreen());
     }
 
-    public function setPixel(Pixel $pixel): static
+    public function setPixel(Pixel $pixel): self
     {
-        $this->matrix[$pixel->getPoint()->getY()][$pixel->getPoint()->getX()] = $pixel;
-        return $this;
+        $that = clone $this;
+
+        $that->matrix[$pixel->getPoint()->getY()][$pixel->getPoint()->getX()] = $pixel;
+        return $that;
     }
 
 
@@ -68,31 +70,15 @@ class Screen
         return $pixels;
     }
 
-
-    /**
-     * @param array<Pixel> $pixels
-     * @return $this
-     */
-    public function setPixels(array $pixels): static
+    public function merge(Screen $screen): self
     {
-        foreach ($pixels as $pixel) {
-            $this->setPixel($pixel);
-        }
-
-        return $this;
-    }
-
-    public function merge(Screen $screen): static
-    {
-        $this->setPixels($screen->getPixels());
-        return $this;
+        return $this->setPixels($screen->getPixels());
     }
 
 
-    public function clear(): static
+    public function clear(): self
     {
-        $this->matrix = [];
-        return $this;
+        return new self([]);
     }
 
     public function getSize(): Size
@@ -116,15 +102,18 @@ class Screen
 
     public function move(int $deltaX, int $deltaY): self
     {
-        $pixels = $this->getPixels();
-        foreach ($pixels as $pixel) {
-            $pixel->setPoint(
+        $newPixels = [];
+
+        foreach ($this->getPixels() as $pixel) {
+            $newPixels[] = new Pixel(
                 $pixel->getPoint()
-                    ->addX($deltaX)
-                    ->addY($deltaY)
+                        ->addX($deltaX)
+                        ->addY($deltaY),
+                $pixel->getChar()
             );
+
         }
-        return $this->setPixels($pixels);
+        return new self($newPixels);
     }
 
     public function rotate(): self
@@ -136,20 +125,31 @@ class Screen
             $x = $pixel->getPoint()->getX();
             $y = $pixel->getPoint()->getY();
 
-            $newPoint = clone $pixel->getPoint();
 
-            $newPoint
-                ->setX($size->getHeight() - $y - 1)
-                ->setY($x);
             $newPixels[] = new Pixel(
-                $newPoint,
+                $pixel->getPoint()
+                    ->setX($size->getHeight() - $y - 1)
+                    ->setY($x),
                 $pixel->getChar()
             );
         }
-        $this->clear()->setPixels($newPixels);
-        return $this;
 
+        return new self($newPixels);
     }
 
+    /**
+     * @param array<Pixel> $pixels
+     * @return $this
+     */
+    public function setPixels(array $pixels): self
+    {
+        $that = clone $this;
+
+        foreach ($pixels as $pixel) {
+            $that->matrix[$pixel->getPoint()->getY()][$pixel->getPoint()->getX()] = $pixel;
+        }
+
+        return $that;
+    }
 
 }

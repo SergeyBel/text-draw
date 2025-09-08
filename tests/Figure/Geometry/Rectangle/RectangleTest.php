@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace TextDraw\Tests\Figure\Geometry\Rechtangle;
+namespace TextDraw\Tests\Figure\Geometry\Rectangle;
 
 use TextDraw\Common\Size;
-use TextDraw\Figure\Geometry\Rechtangle\Rectangle;
+use TextDraw\Figure\Geometry\Rectangle\Rectangle;
 use TextDraw\Plane\Point;
 use TextDraw\Tests\Figure\FigureTestCase;
 

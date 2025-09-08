@@ -16,6 +16,7 @@ class Point
     public function addWidth(int $value): static
     {
         $that = clone $this;
+
         $that->x += $value - 1;
         return $that;
     }
@@ -23,6 +24,7 @@ class Point
     public function addHeight(int $value): static
     {
         $that = clone $this;
+
         $that->y += $value - 1;
         return $that;
     }
@@ -30,6 +32,7 @@ class Point
     public function addY(int $value): static
     {
         $that = clone $this;
+
         $that->y += $value;
         return $that;
     }
@@ -37,6 +40,7 @@ class Point
     public function subY(int $value): static
     {
         $that = clone $this;
+
         $that->y -= $value;
         return $that;
     }
@@ -44,6 +48,7 @@ class Point
     public function addX(int $value): static
     {
         $that = clone $this;
+
         $that->x += $value;
         return $that;
     }
@@ -51,6 +56,7 @@ class Point
     public function subX(int $value): static
     {
         $that = clone $this;
+
         $that->x -= $value;
         return $that;
     }
@@ -62,8 +68,10 @@ class Point
 
     public function setX(int $x): static
     {
-        $this->x = $x;
-        return $this;
+        $that = clone $this;
+
+        $that->x = $x;
+        return $that;
     }
 
     public function getY(): int
@@ -73,8 +81,10 @@ class Point
 
     public function setY(int $y): static
     {
-        $this->y = $y;
-        return $this;
+        $that = clone $this;
+
+        $that->y = $y;
+        return $that;
     }
 
 

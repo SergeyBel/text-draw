@@ -15,7 +15,12 @@ class Channel
 
     public function __construct(int $value)
     {
-        $this->setValue($value);
+
+        if ($value < 0 || $value > 255) {
+            throw new Exception('incorrect color value');
+        }
+
+        $this->value = $value;
     }
 
     /**
@@ -25,17 +30,4 @@ class Channel
     {
         return $this->value;
     }
-
-    public function setValue(int $value): static
-    {
-        if ($value < 0 || $value > 255) {
-            throw new Exception('incorrect color value');
-        }
-        $this->value = $value;
-        return $this;
-    }
-
-
-
-
 }

@@ -53,7 +53,7 @@ class FunctionGraph extends BaseFigure
         return $this;
     }
 
-    public function draw(): Screen
+    public function getScreen(): Screen
     {
         if (count($this->values) === 0) {
             throw new RenderException('No values');
@@ -69,7 +69,7 @@ class FunctionGraph extends BaseFigure
         $this->drawAxes($size);
         $this->drawFunction($size);
 
-        return parent::draw();
+        return parent::getScreen();
     }
 
     private function drawFunction(Size $size): void

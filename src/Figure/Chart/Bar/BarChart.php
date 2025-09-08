@@ -10,7 +10,7 @@ use TextDraw\Common\TextAlign;
 use TextDraw\Figure\Base\BaseFigure;
 use TextDraw\Figure\Geometry\Line\Line;
 use TextDraw\Figure\Geometry\Line\LineStyle;
-use TextDraw\Figure\Geometry\Rechtangle\Rectangle;
+use TextDraw\Figure\Geometry\Rectangle\Rectangle;
 use TextDraw\Figure\Text\Text;
 use TextDraw\Figure\Text\TextStyle;
 use TextDraw\Plane\Point;
@@ -46,7 +46,7 @@ class BarChart extends BaseFigure
 
 
 
-    public function draw(): Screen
+    public function getScreen(): Screen
     {
         $barWidth = $this->style->getBarWidth();
         $unitHeight = $this->style->getUnitHeight();
@@ -62,7 +62,7 @@ class BarChart extends BaseFigure
         $this->drawBars($size, $barWidth, $unitHeight);
 
 
-        return parent::draw();
+        return parent::getScreen();
     }
 
     private function calculateWidth(int $barWidth): int

@@ -14,7 +14,10 @@ class TextFrame
         private TextAlign $align = TextAlign::Left,
         private string $paddingChar = ' ',
     ) {
-        $this->setWidth($width);
+        if (is_null($width)) {
+            $width = mb_strlen($this->text);
+        }
+        $this->width = $width;
     }
 
     public function getText(): string
@@ -28,11 +31,6 @@ class TextFrame
         }
     }
 
-    public function setText(string $text): static
-    {
-        $this->text = $text;
-        return $this;
-    }
 
     public function getWidth(): int
     {
@@ -44,8 +42,10 @@ class TextFrame
         if (is_null($width)) {
             $width = mb_strlen($this->text);
         }
-        $this->width = $width;
-        return $this;
+        $that = clone $this;
+
+        $that->width = $width;
+        return $that;
     }
 
     public function getAlign(): TextAlign
@@ -55,8 +55,10 @@ class TextFrame
 
     public function setAlign(TextAlign $align): static
     {
-        $this->align = $align;
-        return $this;
+        $that = clone $this;
+
+        $that->align = $align;
+        return $that;
     }
 
     public function getPaddingChar(): string
@@ -66,8 +68,10 @@ class TextFrame
 
     public function setPaddingChar(string $paddingChar): static
     {
-        $this->paddingChar = $paddingChar;
-        return $this;
+        $that = clone $this;
+
+        $that->paddingChar = $paddingChar;
+        return $that;
     }
 
     private function align(): string
