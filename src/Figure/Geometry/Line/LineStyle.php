@@ -10,12 +10,12 @@ class LineStyle
     private ?string $startChar = null;
     private ?string $finishChar = null;
 
-    public function getSymbol(): string
+    public function getChar(): string
     {
         return $this->symbol;
     }
 
-    public function setSymbol(string $symbol): self
+    public function setChar(string $symbol): self
     {
         $this->symbol = $symbol;
         return $this;

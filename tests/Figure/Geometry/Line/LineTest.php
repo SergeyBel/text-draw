@@ -13,7 +13,10 @@ class LineTest extends FigureTestCase
 {
     public function testHorizontalLine(): void
     {
-        $this->addFigure(new Line(new Point(0, 0), new Point(2, 0)));
+        $this->addFigure(
+            new Line(new Point(0, 0), new Point(2, 0))
+                    ->setStyle($this->getStyle())
+        );
         $expected = <<<EOD
         ***
         EOD;
@@ -24,7 +27,10 @@ class LineTest extends FigureTestCase
     public function testVerticalLine(): void
     {
 
-        $this->addFigure(new Line(new Point(0, 0), new Point(0, 2)));
+        $this->addFigure(
+            new Line(new Point(0, 0), new Point(0, 2))
+                    ->setStyle($this->getStyle())
+        );
         $expected = <<<EOD
         *
         *
@@ -37,7 +43,10 @@ class LineTest extends FigureTestCase
     public function testDiagonalLine(): void
     {
 
-        $this->addFigure(new Line(new Point(0, 0), new Point(2, 2)));
+        $this->addFigure(
+            new Line(new Point(0, 0), new Point(2, 2))
+                     ->setStyle($this->getStyle())
+        );
         $expected = <<<EOD
         *..
         .*.
@@ -47,10 +56,10 @@ class LineTest extends FigureTestCase
         $this->assertRender($expected);
     }
 
-    public function testStyleSymbol(): void
+    public function testStyleChar(): void
     {
 
-        $style = new LineStyle()->setSymbol('+');
+        $style = $this->getStyle()->setChar('+');
         $this->addFigure(
             new Line(new Point(0, 0), new Point(2, 2))
                 ->setStyle($style)
@@ -67,9 +76,10 @@ class LineTest extends FigureTestCase
     public function testStyleStartFinishSymbol(): void
     {
 
-        $style = new LineStyle()
+        $style = $this->getStyle()
             ->setStartChar('+')
             ->setFinishChar('@');
+
         $this->addFigure(
             new Line(new Point(0, 0), new Point(2, 2))
                 ->setStyle($style)
@@ -81,5 +91,15 @@ class LineTest extends FigureTestCase
         EOD;
 
         $this->assertRender($expected);
+    }
+
+    private function getStyle(): LineStyle
+    {
+        return new LineStyle()
+                        ->setChar('*')
+                        ->setStartChar(null)
+                        ->setFinishChar(null)
+        ;
+
     }
 }

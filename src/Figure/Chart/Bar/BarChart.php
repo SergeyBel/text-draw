@@ -15,6 +15,7 @@ use TextDraw\Figure\Text\Text;
 use TextDraw\Figure\Text\TextStyle;
 use TextDraw\Plane\Point;
 use TextDraw\Screen\Screen;
+use TextDraw\Figure\Geometry\Rectangle\RectangleStyle;
 
 class BarChart extends BaseFigure
 {
@@ -86,12 +87,12 @@ class BarChart extends BaseFigure
             new Line(
                 new Point(0, 0),
                 new Point(0, $size->getHeight())
-            )->setStyle(new LineStyle()->setSymbol('|'))
+            )->setStyle(new LineStyle()->setChar('|'))
         )->addFigure(
             new Line(
                 new Point(0, $size->getHeight())->addX(1),
                 new Point($size->getWidth() - 1, $size->getHeight())
-            )->setStyle(new LineStyle()->setSymbol('_'))
+            )->setStyle(new LineStyle()->setChar('_'))
         )
         ;
     }
@@ -124,10 +125,19 @@ class BarChart extends BaseFigure
 
     private function drawBar(Point $leftDownCorner, Size $size): void
     {
-        $this->addFigure(new Rectangle(
-            $leftDownCorner->subY($size->getHeight()),
-            $size
-        ));
+        $style = new RectangleStyle()
+                        ->setVerticalChar($this->style->getVerticalChar())
+                ->setHorizontalChar($this->style->getHorizontalChar())
+                ->setCrossingChar($this->style->getCrossingChar())
+
+        ;
+
+        $this->addFigure(
+            new Rectangle(
+                $leftDownCorner->subY($size->getHeight()),
+                $size
+            )->setStyle($style)
+        );
     }
 
 }

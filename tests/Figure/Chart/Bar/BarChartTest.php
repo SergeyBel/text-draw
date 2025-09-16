@@ -13,11 +13,9 @@ class BarChartTest extends FigureTestCase
 {
     public function testBarChart(): void
     {
-        $barChart = new BarChart()->setStyle(
-            new BarChartStyle()
-                ->setBarWidth(4)
-                ->setUnitHeight(1)
-        );
+        $barChart = new BarChart()
+                ->setStyle($this->getStyle());
+
         $barChart->addBar(
             new Bar('a', 2)
         )
@@ -38,6 +36,17 @@ class BarChartTest extends FigureTestCase
         EOD;
 
         $this->assertRender($expected);
+    }
+
+
+    private function getStyle(): BarChartStyle
+    {
+        return new BarChartStyle()
+                ->setBarWidth(4)
+                ->setUnitHeight(1)
+                ->setChar('*')
+        ;
+
     }
 
 }

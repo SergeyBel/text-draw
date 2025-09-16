@@ -161,7 +161,7 @@ class SequenceDiagram extends BaseFigure
                     $start,
                     $end
                 )->setStyle(
-                    new LineStyle()->setSymbol('|')
+                    new LineStyle()->setChar('|')
                 )
             );
         }

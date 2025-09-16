@@ -97,12 +97,12 @@ class FunctionGraph extends BaseFigure
             ->addFigure(
                 new Line($zeroPoint, $highYPoint)
                     ->setStyle(
-                        new LineStyle()->setSymbol('|')
+                        new LineStyle()->setChar('|')
                     )
             )
             ->addFigure(
                 new Line($zeroPoint, $highXPoint)->setStyle(
-                    new LineStyle()->setSymbol('-')
+                    new LineStyle()->setChar('-')
                 )
             )
             ->addFigure(new Pixel($zeroPoint, $this->style->getZeroSymbol()))

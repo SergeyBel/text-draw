@@ -30,7 +30,7 @@ class Line extends BaseFigure
         $x1 = $this->end->getX();
         $y0 = $this->start->getY();
         $y1 = $this->end->getY();
-        $symbol = $this->style->getSymbol();
+        $symbol = $this->style->getChar();
 
         if (abs($y1 - $y0) < abs($x1 - $x0)) {
             if ($x0 > $x1) {

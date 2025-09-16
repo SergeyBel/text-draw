@@ -6,9 +6,9 @@ namespace TextDraw\Figure\Geometry\Rectangle;
 
 class RectangleStyle
 {
-    private string $horizontalChar = '*';
-    private string $verticalChar = '*';
-    private string $crossingChar = '*';
+    private string $horizontalChar = '-';
+    private string $verticalChar = '|';
+    private string $crossingChar = '+';
 
     public function getHorizontalChar(): string
     {
