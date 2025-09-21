@@ -34,7 +34,7 @@ class Arrow extends BaseFigure
             if ($this->start->getX() < $this->end->getX()) {
                 $style->setFinishChar('>');
             } else {
-                $style->setStartChar('<');
+                $style->setFinishChar('<');
             }
             $line->setStyle($style);
         } else {
@@ -43,7 +43,7 @@ class Arrow extends BaseFigure
             if ($this->start->getY() < $this->end->getY()) {
                 $style->setFinishChar('v');
             } else {
-                $style->setStartChar('^');
+                $style->setFinishChar('^');
             }
 
             $line->setStyle($style);

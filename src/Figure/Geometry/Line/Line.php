@@ -46,15 +46,17 @@ class Line extends BaseFigure
             }
         }
 
+        $screen = new Screen($pixels);
+
         if (!is_null($this->style->getStartChar())) {
-            $pixels[0] = $pixels[0]->setChar($this->style->getStartChar());
+            $screen = $screen->addFigure(new Pixel($this->start, $this->style->getStartChar()));
         }
 
         if (!is_null($this->style->getFinishChar())) {
-            $pixels[count($pixels) - 1] = $pixels[count($pixels) - 1]->setChar($this->style->getFinishChar());
+            $screen = $screen->addFigure(new Pixel($this->end, $this->style->getFinishChar()));
         }
 
-        return new Screen($pixels);
+        return $screen;
     }
 
     /**

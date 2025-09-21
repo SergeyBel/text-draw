@@ -21,12 +21,12 @@ class FunctionGraphTest extends FigureTestCase
 
 
         $expected = <<<EOD
-        |........*
+        ^........*
         *.......*.
         |*.....*..
         |.*...*...
         |..*.*....
-        0---*-----
+        0---*---->
         EOD;
 
         $this->assertRender($expected);
