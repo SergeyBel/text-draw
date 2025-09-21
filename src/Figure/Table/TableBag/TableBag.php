@@ -40,7 +40,7 @@ class TableBag
                 for ($c = 0; $c < $cell->getColspan(); $c++) {
                     $width += $calculatedSizes[$i][$j];
                 }
-                $row[] = new TextFrame($cell->getText(), $width, $cell->getAlign());
+                $row[] = new TextFrame($cell->getText(), $width, $cell->getStyle()->getAlign());
             }
             $table[] = $row;
         }

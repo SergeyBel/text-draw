@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Table;
 
-use TextDraw\Common\TextAlign;
-
 class TableCell
 {
+    private TableCellStyle $style;
+
     public function __construct(
         private string $text,
         private int $colspan = 1,
-        private TextAlign $align = TextAlign::Left,
     ) {
+        $this->style = new TableCellStyle();
     }
+
 
     public function getText(): string
     {
@@ -37,14 +38,16 @@ class TableCell
         return $this;
     }
 
-    public function getAlign(): TextAlign
+    public function setStyle(TableCellStyle $style): self
     {
-        return $this->align;
-    }
-
-    public function setAlign(TextAlign $align): static
-    {
-        $this->align = $align;
+        $this->style = $style;
         return $this;
     }
+
+    public function getStyle(): TableCellStyle
+    {
+        return $this->style;
+    }
+
+
 }

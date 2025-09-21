@@ -139,7 +139,8 @@ class Table extends BaseFigure
             $header = [];
             foreach ($this->header as $cell) {
                 if (is_string($cell)) {
-                    $header[] = new TableCell($cell, align: $this->style->getHeaderAlign());
+                    $header[] = new TableCell($cell)
+                            ->setStyle(new TableCellStyle()->setAlign($this->style->getHeaderAlign()));
                 } else {
                     $header[] = $cell;
                 }
@@ -152,7 +153,8 @@ class Table extends BaseFigure
             $tableRow = [];
             foreach ($row as $cell) {
                 if (is_string($cell)) {
-                    $tableRow[] = new TableCell($cell, align: $this->style->getAlign());
+                    $tableRow[] = new TableCell($cell)
+                                    ->setStyle(new TableCellStyle()->setAlign($this->style->getAlign()));
                 } else {
                     $tableRow[] = $cell;
                 }
