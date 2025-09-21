@@ -38,6 +38,160 @@ class BarChartTest extends FigureTestCase
         $this->assertRender($expected);
     }
 
+    public function testStyleBarWidth(): void
+    {
+        $style = $this->getStyle()->setBarWidth(3);
+        $barChart = new BarChart()
+                ->setStyle($style);
+
+        $barChart->addBar(
+            new Bar('a', 5)
+        );
+
+        $this->addFigure($barChart);
+
+
+        $expected = <<<EOD
+        |***
+        |*.*
+        |*.*
+        |*.*
+        |***
+        |_a_
+        EOD;
+
+        $this->assertRender($expected);
+    }
+
+
+    public function testStyleUnitHeigh(): void
+    {
+        $style = $this->getStyle()->setUnitHeight(2);
+        $barChart = new BarChart()
+                ->setStyle($style);
+
+        $barChart->addBar(
+            new Bar('a', 2)
+        );
+
+        $this->addFigure($barChart);
+
+
+        $expected = <<<EOD
+        |****
+        |*..*
+        |*..*
+        |****
+        |_a__
+        EOD;
+
+        $this->assertRender($expected);
+    }
+
+    public function testStyleVerticalChar(): void
+    {
+        $style = $this->getStyle()->setVerticalChar('|');
+        $barChart = new BarChart()
+                ->setStyle($style);
+
+        $barChart->addBar(
+            new Bar('a', 5)
+        );
+
+        $this->addFigure($barChart);
+
+
+        $expected = <<<EOD
+        |****
+        ||..|
+        ||..|
+        ||..|
+        |****
+        |_a__
+        EOD;
+
+        $this->assertRender($expected);
+    }
+
+    public function testStyleHorizontalChar(): void
+    {
+        $style = $this->getStyle()->setHorizontalChar('-');
+        $barChart = new BarChart()
+                ->setStyle($style);
+
+        $barChart->addBar(
+            new Bar('a', 5)
+        );
+
+        $this->addFigure($barChart);
+
+
+        $expected = <<<EOD
+        |*--*
+        |*..*
+        |*..*
+        |*..*
+        |*--*
+        |_a__
+        EOD;
+
+        $this->assertRender($expected);
+    }
+
+    public function testStyleGap(): void
+    {
+        $style = $this->getStyle()->setGap(2);
+        $barChart = new BarChart()
+                ->setStyle($style);
+
+        $barChart->addBar(
+            new Bar('a', 2)
+        )
+            ->addBar(
+                new Bar('b', 5)
+            );
+
+        $this->addFigure($barChart);
+
+
+        $expected = <<<EOD
+        |......****
+        |......*..*
+        |......*..*
+        |****..*..*
+        |****..****
+        |_a_____b__
+        EOD;
+
+        $this->assertRender($expected);
+    }
+
+    public function testStyleCrossingChar(): void
+    {
+        $style = $this->getStyle()->setCrossingChar('+');
+        $barChart = new BarChart()
+                ->setStyle($style);
+
+        $barChart->addBar(
+            new Bar('a', 5)
+        );
+
+        $this->addFigure($barChart);
+
+
+        $expected = <<<EOD
+        |+**+
+        |*..*
+        |*..*
+        |*..*
+        |+**+
+        |_a__
+        EOD;
+
+        $this->assertRender($expected);
+    }
+
+
 
     private function getStyle(): BarChartStyle
     {
@@ -45,6 +199,7 @@ class BarChartTest extends FigureTestCase
                 ->setBarWidth(4)
                 ->setUnitHeight(1)
                 ->setChar('*')
+                ->setGap(1)
         ;
 
     }

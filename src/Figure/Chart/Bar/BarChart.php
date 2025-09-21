@@ -53,7 +53,6 @@ class BarChart extends BaseFigure
         $unitHeight = $this->style->getUnitHeight();
 
 
-
         $size = new Size($this->calculateWidth($barWidth), $this->calculateHeight($unitHeight));
 
         $this->drawAxes($size);
@@ -69,7 +68,7 @@ class BarChart extends BaseFigure
     private function calculateWidth(int $barWidth): int
     {
         $count = count($this->bars);
-        return $count * $barWidth + ($count - 1) * 1 + 1;
+        return $count * $barWidth + ($count - 1) * $this->style->getGap() + 1;
     }
 
     private function calculateHeight(int $unitHeight): int
@@ -109,7 +108,7 @@ class BarChart extends BaseFigure
         foreach ($this->bars as $bar) {
             $label = new Text($start, $bar->getLabel())->setStyle($labelStyle);
             $this->addFigure($label);
-            $start = $start->addX($barWidth + 1);
+            $start = $start->addX($barWidth + $this->style->getGap());
         }
     }
 
@@ -119,7 +118,7 @@ class BarChart extends BaseFigure
         foreach ($this->bars as $bar) {
             $barHeight = $unitHeight * $bar->getValue();
             $this->drawBar($start, new Size($barWidth, $barHeight));
-            $start = $start->addX($barWidth + 1);
+            $start = $start->addX($barWidth + $this->style->getGap());
         }
     }
 
@@ -127,9 +126,8 @@ class BarChart extends BaseFigure
     {
         $style = new RectangleStyle()
                         ->setVerticalChar($this->style->getVerticalChar())
-                ->setHorizontalChar($this->style->getHorizontalChar())
-                ->setCrossingChar($this->style->getCrossingChar())
-
+                    ->setHorizontalChar($this->style->getHorizontalChar())
+                    ->setCrossingChar($this->style->getCrossingChar())
         ;
 
         $this->addFigure(

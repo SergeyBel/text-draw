@@ -11,6 +11,7 @@ class BarChartStyle
     private string $horizontalChar = '*';
     private string $verticalChar = '*';
     private string $crossingChar = '*';
+    private int $gap = 1;
 
 
     public function getBarWidth(): int
@@ -76,7 +77,16 @@ class BarChartStyle
             ->setVerticalChar($char);
     }
 
+    public function getGap(): int
+    {
+        return $this->gap;
+    }
 
+    public function setGap(int $gap): self
+    {
+        $this->gap = $gap;
+        return $this;
+    }
 
 
 
