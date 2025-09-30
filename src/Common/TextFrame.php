@@ -11,7 +11,7 @@ class TextFrame
     public function __construct(
         private string $text,
         ?int $width = null,
-        private TextAlign $align = TextAlign::Left,
+        private HorizontalAlign $align = HorizontalAlign::Left,
         private string $paddingChar = ' ',
     ) {
         if (is_null($width)) {
@@ -48,12 +48,12 @@ class TextFrame
         return $that;
     }
 
-    public function getAlign(): TextAlign
+    public function getAlign(): HorizontalAlign
     {
         return $this->align;
     }
 
-    public function setAlign(TextAlign $align): static
+    public function setAlign(HorizontalAlign $align): static
     {
         $that = clone $this;
 
@@ -77,9 +77,9 @@ class TextFrame
     private function align(): string
     {
         $mode = match ($this->align) {
-            TextAlign::Left => STR_PAD_RIGHT,
-            TextAlign::Right => STR_PAD_LEFT,
-            TextAlign::Center => STR_PAD_BOTH,
+            HorizontalAlign::Left => STR_PAD_RIGHT,
+            HorizontalAlign::Right => STR_PAD_LEFT,
+            HorizontalAlign::Center => STR_PAD_BOTH,
         };
 
         return mb_str_pad($this->text, $this->width, $this->paddingChar, $mode);

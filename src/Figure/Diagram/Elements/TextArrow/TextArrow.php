@@ -25,7 +25,7 @@ class TextArrow extends BaseFigure
     }
     public function getScreen(): Screen
     {
-        $arrow = new Arrow($this->start, $this->end);
+        $arrow = new Arrow($this->start, $this->end)->setStyle($this->style->getArrowStyle());
         $this
                 ->addFigure($arrow)
                 ->addFigure(

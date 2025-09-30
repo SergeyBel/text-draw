@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Text;
 
-use TextDraw\Common\TextAlign;
+use TextDraw\Common\HorizontalAlign;
 
 class TextStyle
 {
     private ?int $width = null;
     private string $paddingChar = ' ';
-    private TextAlign $align = TextAlign::Left;
+    private HorizontalAlign $align = HorizontalAlign::Left;
 
 
     public function getWidth(): ?int
@@ -35,12 +35,12 @@ class TextStyle
         return $this;
     }
 
-    public function getAlign(): TextAlign
+    public function getAlign(): HorizontalAlign
     {
         return $this->align;
     }
 
-    public function setAlign(TextAlign $align): static
+    public function setAlign(HorizontalAlign $align): static
     {
         $this->align = $align;
         return $this;

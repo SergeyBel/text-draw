@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace TextDraw\Tests\Figure\Table;
 
-use TextDraw\Common\TextAlign;
+use TextDraw\Common\HorizontalAlign;
 use TextDraw\Figure\Table\Table;
 use TextDraw\Figure\Table\TableCell;
 use TextDraw\Figure\Table\TableStyle;
@@ -79,7 +79,7 @@ class TableTest extends FigureTestCase
 
     public function testStyleHeaderAlignCenter(): void
     {
-        $style = $this->getStyle()->setHeaderAlign(TextAlign::Center);
+        $style = $this->getStyle()->setHeaderAlign(HorizontalAlign::Center);
 
         $table = new Table()
             ->setHeader(['City', 'Value'])
@@ -103,7 +103,7 @@ class TableTest extends FigureTestCase
 
     public function testStyleAlignCenter(): void
     {
-        $style = $this->getStyle()->setAlign(TextAlign::Center);
+        $style = $this->getStyle()->setAlign(HorizontalAlign::Center);
 
         $table = new Table()
             ->setHeader(['City', 'Value'])
@@ -131,8 +131,8 @@ class TableTest extends FigureTestCase
                     ->setHorizontalChar('-')
                 ->setCrossingChar('+')
                 ->setPaddingChar(' ')
-                ->setAlign(TextAlign::Left)
-                ->setHeaderAlign(TextAlign::Left)
+                ->setAlign(HorizontalAlign::Left)
+                ->setHeaderAlign(HorizontalAlign::Left)
         ;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace TextDraw\Common;
 
-enum TextAlign: string
+enum HorizontalAlign: string
 {
     case Left = 'left';
     case Right = 'right';

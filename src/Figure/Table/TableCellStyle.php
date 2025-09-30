@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Table;
 
-use TextDraw\Common\TextAlign;
+use TextDraw\Common\HorizontalAlign;
 
 class TableCellStyle
 {
-    private TextAlign $align = TextAlign::Left;
+    private HorizontalAlign $align = HorizontalAlign::Left;
 
-    public function setAlign(TextAlign $align): self
+    public function setAlign(HorizontalAlign $align): self
     {
         $this->align = $align;
         return $this;
     }
 
-    public function getAlign(): TextAlign
+    public function getAlign(): HorizontalAlign
     {
         return $this->align;
     }

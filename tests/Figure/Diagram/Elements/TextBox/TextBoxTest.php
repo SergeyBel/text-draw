@@ -8,6 +8,8 @@ use TextDraw\Figure\Diagram\Elements\TextBox\TextBox;
 use TextDraw\Plane\Point;
 use TextDraw\Tests\Figure\FigureTestCase;
 use TextDraw\Figure\Diagram\Elements\TextBox\TextBoxStyle;
+use TextDraw\Figure\Geometry\Rectangle\RectangleStyle;
+use TextDraw\Common\Size;
 
 class TextBoxTest extends FigureTestCase
 {
@@ -16,6 +18,7 @@ class TextBoxTest extends FigureTestCase
         $textBox = new TextBox(
             'abc',
             new Point(0, 0),
+            new Size(7, 3)
         )->setStyle($this->getStyle());
 
         $this->addFigure($textBox);
@@ -32,7 +35,15 @@ class TextBoxTest extends FigureTestCase
 
     private function getStyle(): TextBoxStyle
     {
-        return new TextBoxStyle();
+        return new TextBoxStyle()
+                    ->setRectangleStyle(
+                        new RectangleStyle()
+                ->setHorizontalChar('-')
+                ->setVerticalChar('|')
+                ->setCrossingChar('+')
+                    )
+
+        ;
     }
 
 }

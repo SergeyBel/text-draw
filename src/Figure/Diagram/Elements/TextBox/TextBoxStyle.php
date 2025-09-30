@@ -5,15 +5,17 @@ declare(strict_types=1);
 namespace TextDraw\Figure\Diagram\Elements\TextBox;
 
 use TextDraw\Figure\Geometry\Rectangle\RectangleStyle;
+use TextDraw\Common\HorizontalAlign;
+use TextDraw\Common\VerticalAlign;
 
 class TextBoxStyle
 {
     private RectangleStyle $rectangleStyle;
 
-    private int $leftIndentation = 1;
-    private int $rightIndentation = 1;
-    private int $topIndentation = 0;
-    private int $bottomIndentation = 0;
+    private HorizontalAlign $textHorizontalAlign = HorizontalAlign::Center;
+
+    private VerticalAlign $textVerticalAlign = VerticalAlign::Center;
+
 
     public function __construct()
     {
@@ -30,53 +32,34 @@ class TextBoxStyle
         return $this->rectangleStyle;
     }
 
-    public function setRectangleStyle(RectangleStyle $rectangleStyle): static
+    public function setRectangleStyle(RectangleStyle $rectangleStyle): self
     {
         $this->rectangleStyle = $rectangleStyle;
         return $this;
     }
 
-    public function getLeftIndentation(): int
+    public function getTextHorizontalAlign(): HorizontalAlign
     {
-        return $this->leftIndentation;
+        return $this->textHorizontalAlign;
     }
 
-    public function setLeftIndentation(int $leftIndentation): static
+    public function getTextVerticalAlign(): VerticalAlign
     {
-        $this->leftIndentation = $leftIndentation;
+        return $this->textVerticalAlign;
+    }
+
+    public function setTextHorizontalAlign(HorizontalAlign $textHorizontalAlign): void
+    {
+        $this->textHorizontalAlign = $textHorizontalAlign;
+    }
+
+    public function setTextVerticalAlign(VerticalAlign $textVerticalAlign): self
+    {
+        $this->textVerticalAlign = $textVerticalAlign;
         return $this;
     }
 
-    public function getRightIndentation(): int
-    {
-        return $this->rightIndentation;
-    }
 
-    public function setRightIndentation(int $rightIndentation): static
-    {
-        $this->rightIndentation = $rightIndentation;
-        return $this;
-    }
 
-    public function getTopIndentation(): int
-    {
-        return $this->topIndentation;
-    }
 
-    public function setTopIndentation(int $topIndentation): static
-    {
-        $this->topIndentation = $topIndentation;
-        return $this;
-    }
-
-    public function getBottomIndentation(): int
-    {
-        return $this->bottomIndentation;
-    }
-
-    public function setBottomIndentation(int $bottomIndentation): static
-    {
-        $this->bottomIndentation = $bottomIndentation;
-        return $this;
-    }
 }

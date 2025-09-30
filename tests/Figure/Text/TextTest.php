@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace TextDraw\Tests\Figure\Text;
 
-use TextDraw\Common\TextAlign;
+use TextDraw\Common\HorizontalAlign;
 use TextDraw\Figure\Text\Text;
 use TextDraw\Figure\Text\TextStyle;
 use TextDraw\Plane\Point;
@@ -66,7 +66,7 @@ class TextTest extends FigureTestCase
         $text->setStyle(
             $this->getStyle()
                 ->setWidth(7)
-                ->setAlign(TextAlign::Center)
+                ->setAlign(HorizontalAlign::Center)
         );
         $this->addFigure($text);
 
@@ -86,7 +86,7 @@ class TextTest extends FigureTestCase
         $text->setStyle(
             $this->getStyle()
                 ->setWidth(7)
-                ->setAlign(TextAlign::Right)
+                ->setAlign(HorizontalAlign::Right)
         );
         $this->addFigure($text);
         $expected = <<<EOD
@@ -101,7 +101,7 @@ class TextTest extends FigureTestCase
         return new TextStyle()
                     ->setWidth(null)
                     ->setPaddingChar(' ')
-                    ->setAlign(TextAlign::Left)
+                    ->setAlign(HorizontalAlign::Left)
         ;
     }
 }

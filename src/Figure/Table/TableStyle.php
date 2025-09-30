@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Table;
 
-use TextDraw\Common\TextAlign;
+use TextDraw\Common\HorizontalAlign;
 
 class TableStyle
 {
@@ -12,8 +12,8 @@ class TableStyle
     private string $horizontalChar = '-';
     private string $crossingChar = '+';
     private string $paddingChar = ' ';
-    private TextAlign $align = TextAlign::Left;
-    private TextAlign $headerAlign = TextAlign::Left;
+    private HorizontalAlign $align = HorizontalAlign::Left;
+    private HorizontalAlign $headerAlign = HorizontalAlign::Left;
 
     public function getVerticalChar(): string
     {
@@ -60,24 +60,24 @@ class TableStyle
         return $this;
     }
 
-    public function setAlign(TextAlign $align): static
+    public function setAlign(HorizontalAlign $align): static
     {
         $this->align = $align;
         return $this;
     }
 
-    public function setHeaderAlign(TextAlign $headerAlign): static
+    public function setHeaderAlign(HorizontalAlign $headerAlign): static
     {
         $this->headerAlign = $headerAlign;
         return $this;
     }
 
-    public function getHeaderAlign(): TextAlign
+    public function getHeaderAlign(): HorizontalAlign
     {
         return $this->headerAlign;
     }
 
-    public function getAlign(): TextAlign
+    public function getAlign(): HorizontalAlign
     {
         return $this->align;
     }

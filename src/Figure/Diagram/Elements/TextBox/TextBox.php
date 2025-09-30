@@ -18,6 +18,7 @@ class TextBox extends BaseFigure
     public function __construct(
         private string $text,
         private Point $leftUpperCorner,
+        private Size $size,
     ) {
         $this->style = new TextBoxStyle();
         parent::__construct();
@@ -25,7 +26,7 @@ class TextBox extends BaseFigure
 
     public function getScreen(): Screen
     {
-        $size = $this->getSize();
+        $size = $this->size;
 
         $this->addFigure(
             new Rectangle($this->leftUpperCorner, $size)
@@ -43,37 +44,9 @@ class TextBox extends BaseFigure
         return parent::getScreen();
     }
 
-    public function getStyle(): TextBoxStyle
-    {
-        return $this->style;
-    }
-
     public function setStyle(TextBoxStyle $style): static
     {
         $this->style = $style;
         return $this;
     }
-
-    public function getSize(): Size
-    {
-        return new Size(
-            mb_strlen($this->text) + $this->style->getLeftIndentation() + $this->style->getRightIndentation() + 2,
-            $this->style->getTopIndentation() + $this->style->getBottomIndentation() + 3
-        );
-    }
-
-    public function getLeftUpperCorner(): Point
-    {
-        return $this->leftUpperCorner;
-    }
-
-    public function setLeftUpperCorner(Point $leftUpperCorner): void
-    {
-        $this->leftUpperCorner = $leftUpperCorner;
-    }
-
-
-
-
-
 }

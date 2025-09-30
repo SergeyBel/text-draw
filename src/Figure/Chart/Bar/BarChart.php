@@ -6,7 +6,7 @@ namespace TextDraw\Figure\Chart\Bar;
 
 use TextDraw\Common\Exception\RenderException;
 use TextDraw\Common\Size;
-use TextDraw\Common\TextAlign;
+use TextDraw\Common\HorizontalAlign;
 use TextDraw\Figure\Base\BaseFigure;
 use TextDraw\Figure\Geometry\Line\Line;
 use TextDraw\Figure\Geometry\Line\LineStyle;
@@ -103,7 +103,7 @@ class BarChart extends BaseFigure
         $labelStyle = new TextStyle()
             ->setWidth($barWidth)
             ->setPaddingChar('_')
-            ->setAlign(TextAlign::Center);
+            ->setAlign(HorizontalAlign::Center);
 
         foreach ($this->bars as $bar) {
             $label = new Text($start, $bar->getLabel())->setStyle($labelStyle);
