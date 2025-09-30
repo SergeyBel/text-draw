@@ -1,17 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TextDraw\Figure\Diagram\Elements\Arrow;
 
-
-class ArrowStyle {
+class ArrowStyle
+{
     private ?string $char = null;
-    
-    public function getChar(): ?string {
-      
+
+    public function getChar(): ?string
+    {
+
         return $this->char;
     }
 
-    public function setChar(?string $char): self{
+    public function setChar(?string $char): self
+    {
         $this->char = $char;
         return $this;
     }

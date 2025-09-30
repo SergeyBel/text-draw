@@ -19,7 +19,7 @@ class TableTest extends FigureTestCase
             ->addRows([
                 ['London', '12000'],
                 ['New York', '540'],
-            ]);
+            ])->setStyle($this->getStyle());
         $this->addFigure($table);
 
 
@@ -77,9 +77,9 @@ class TableTest extends FigureTestCase
         $this->assertRender($expected);
     }
 
-    public function testHeaderAlignCenter(): void
+    public function testStyleHeaderAlignCenter(): void
     {
-        $style = new TableStyle()->setHeaderAlign(TextAlign::Center);
+        $style = $this->getStyle()->setHeaderAlign(TextAlign::Center);
 
         $table = new Table()
             ->setHeader(['City', 'Value'])
@@ -101,9 +101,9 @@ class TableTest extends FigureTestCase
         $this->assertRender($expected);
     }
 
-    public function testAlignCenter(): void
+    public function testStyleAlignCenter(): void
     {
-        $style = new TableStyle()->setAlign(TextAlign::Center);
+        $style = $this->getStyle()->setAlign(TextAlign::Center);
 
         $table = new Table()
             ->setHeader(['City', 'Value'])
@@ -122,5 +122,17 @@ class TableTest extends FigureTestCase
         EOD;
 
         $this->assertRender($expected);
+    }
+
+    private function getStyle(): TableStyle
+    {
+        return new TableStyle()
+                    ->setVerticalChar('|')
+                    ->setHorizontalChar('-')
+                ->setCrossingChar('+')
+                ->setPaddingChar(' ')
+                ->setAlign(TextAlign::Left)
+                ->setHeaderAlign(TextAlign::Left)
+        ;
     }
 }

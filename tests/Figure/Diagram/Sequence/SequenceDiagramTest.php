@@ -8,13 +8,13 @@ use TextDraw\Figure\Diagram\Sequence\Actor;
 use TextDraw\Figure\Diagram\Sequence\Message;
 use TextDraw\Figure\Diagram\Sequence\SequenceDiagram;
 use TextDraw\Tests\Figure\FigureTestCase;
+use TextDraw\Figure\Diagram\Sequence\SequenceDiagramStyle;
 
 class SequenceDiagramTest extends FigureTestCase
 {
     public function testTwoActorsOneMessage(): void
     {
-        $diagram = new SequenceDiagram(
-        );
+        $diagram = new SequenceDiagram()->setStyle($this->getStyle());
 
         $diagram->addActors(
             [
@@ -44,8 +44,7 @@ class SequenceDiagramTest extends FigureTestCase
 
     public function testWithoutMessages(): void
     {
-        $diagram = new SequenceDiagram(
-        );
+        $diagram = new SequenceDiagram()->setStyle($this->getStyle());
 
         $diagram->addActors(
             [
@@ -71,8 +70,8 @@ class SequenceDiagramTest extends FigureTestCase
 
     public function testSelfMessage(): void
     {
-        $diagram = new SequenceDiagram(
-        );
+
+        $diagram = new SequenceDiagram()->setStyle($this->getStyle());
 
         $diagram->addActors(
             [
@@ -97,6 +96,11 @@ class SequenceDiagramTest extends FigureTestCase
         EOD;
 
         $this->assertRender($expected);
+    }
+
+    private function getStyle(): SequenceDiagramStyle
+    {
+        return new SequenceDiagramStyle();
     }
 
 }

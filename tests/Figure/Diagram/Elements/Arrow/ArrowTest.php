@@ -70,7 +70,7 @@ class ArrowTest extends FigureTestCase
 
         $this->assertRender($expected);
     }
-    
+
     public function testStyleChar(): void
     {
         $this->addFigure(new Arrow(
@@ -84,8 +84,8 @@ class ArrowTest extends FigureTestCase
 
         $this->assertRender($expected);
     }
-    
-    
+
+
     private function getStyle(): ArrowStyle
     {
         return new ArrowStyle()

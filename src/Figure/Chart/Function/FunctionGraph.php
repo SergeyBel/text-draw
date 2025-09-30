@@ -22,6 +22,7 @@ class FunctionGraph extends BaseFigure
 
     private FunctionGraphStyle $style;
 
+
     public function __construct(
     ) {
         $this->style = new FunctionGraphStyle();
@@ -72,6 +73,13 @@ class FunctionGraph extends BaseFigure
         return parent::getScreen();
     }
 
+    public function setStyle(FunctionGraphStyle $style): self
+    {
+        $this->style = $style;
+        return $this;
+    }
+
+
     private function drawFunction(Size $size): void
     {
         $maxY = $size->getHeight() - 1;
@@ -108,6 +116,8 @@ class FunctionGraph extends BaseFigure
             ->addFigure(new Pixel($zeroPoint, $this->style->getZeroSymbol()))
         ;
     }
+
+
 
 
 }

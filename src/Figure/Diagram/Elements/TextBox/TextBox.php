@@ -10,7 +10,6 @@ use TextDraw\Figure\Geometry\Rectangle\Rectangle;
 use TextDraw\Figure\Text\Text;
 use TextDraw\Plane\Point;
 use TextDraw\Screen\Screen;
-use TextDraw\Tests\Figure\Diagram\Elements\TextBox\TextBoxStyle;
 
 class TextBox extends BaseFigure
 {

@@ -12,31 +12,43 @@ use TextDraw\Screen\Screen;
 
 class TextArrow extends BaseFigure
 {
+    private TextArrowStyle $style;
+
     public function __construct(
         private string $text,
         private Point $start,
         private Point $end,
     ) {
+        $this->style = new TextArrowStyle();
+
         parent::__construct();
     }
     public function getScreen(): Screen
     {
         $arrow = new Arrow($this->start, $this->end);
-        $this->addFigure(
-            $arrow
-        )->addFigure(
-            new Text(
-                $arrow->getLine()->getCenter()
+        $this
+                ->addFigure($arrow)
+                ->addFigure(
+                    new Text(
+                        $arrow->getLine()->getCenter()
                     ->subY(1)
                     ->subX(
                         intdiv(mb_strlen($this->text), 2)
                     ),
-                $this->text
-            )
-        );
+                        $this->text
+                    )
+                );
 
 
         return parent::getScreen();
     }
+
+    public function setStyle(TextArrowStyle $style): self
+    {
+        $this->style = $style;
+        return $this;
+    }
+
+
 
 }

@@ -95,13 +95,13 @@ class TextTest extends FigureTestCase
 
         $this->assertRender($expected);
     }
-    
+
     private function getStyle(): TextStyle
     {
         return new TextStyle()
                     ->setWidth(null)
                     ->setPaddingChar(' ')
                     ->setAlign(TextAlign::Left)
-                ;
+        ;
     }
 }

@@ -14,7 +14,7 @@ use TextDraw\Screen\Screen;
 class Arrow extends BaseFigure
 {
     private StraightLine $line;
-    
+
     private ArrowStyle $style;
 
     public function __construct(
@@ -64,7 +64,7 @@ class Arrow extends BaseFigure
     {
         return $this->line;
     }
-    
+
     public function setStyle(ArrowStyle $style): self
     {
         $this->style = $style;

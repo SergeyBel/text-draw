@@ -36,15 +36,12 @@ class SequenceDiagram extends BaseFigure
         parent::__construct();
     }
 
-    public function getStyle(): SequenceDiagramStyle
-    {
-        return $this->style;
-    }
-
-    public function setStyle(SequenceDiagramStyle $style): void
+    public function setStyle(SequenceDiagramStyle $style): self
     {
         $this->style = $style;
+        return $this;
     }
+
 
     /**
      * @param array<Actor> $actors
@@ -63,6 +60,7 @@ class SequenceDiagram extends BaseFigure
         $this->messages = array_merge($this->messages, $messages);
         return $this;
     }
+
 
 
     public function getScreen(): Screen
@@ -191,4 +189,6 @@ class SequenceDiagram extends BaseFigure
 
         return max($lengths);
     }
+
+
 }

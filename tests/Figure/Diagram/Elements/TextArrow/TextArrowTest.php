@@ -7,6 +7,7 @@ namespace TextDraw\Tests\Figure\Diagram\Elements\TextArrow;
 use TextDraw\Figure\Diagram\Elements\TextArrow\TextArrow;
 use TextDraw\Plane\Point;
 use TextDraw\Tests\Figure\FigureTestCase;
+use TextDraw\Figure\Diagram\Elements\TextArrow\TextArrowStyle;
 
 class TextArrowTest extends FigureTestCase
 {
@@ -16,7 +17,7 @@ class TextArrowTest extends FigureTestCase
             'abc',
             new Point(0, 1),
             new Point(4, 1)
-        );
+        )->setStyle($this->getStyle());
 
         $this->addFigure($textArrow);
 
@@ -27,6 +28,11 @@ class TextArrowTest extends FigureTestCase
         EOD;
 
         $this->assertRender($expected);
+    }
+
+    private function getStyle(): TextArrowStyle
+    {
+        return new TextArrowStyle();
     }
 
 }
