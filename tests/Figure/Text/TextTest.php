@@ -17,7 +17,7 @@ class TextTest extends FigureTestCase
         $this->addFigure(new Text(
             new Point(1, 1),
             'hello'
-        ));
+        )->setStyle($this->getStyle()));
         $expected = <<<EOD
         ......
         .hello
@@ -26,13 +26,13 @@ class TextTest extends FigureTestCase
         $this->assertRender($expected);
     }
 
-    public function testWidthLess(): void
+    public function testStyleWidthLess(): void
     {
         $text = new Text(
             new Point(0, 0),
             'hello'
         );
-        $text->setStyle(new TextStyle()->setWidth(3));
+        $text->setStyle($this->getStyle()->setWidth(3));
         $this->addFigure($text);
         $expected = <<<EOD
         hel
@@ -48,7 +48,7 @@ class TextTest extends FigureTestCase
             new Point(0, 0),
             'hello'
         );
-        $text->setStyle(new TextStyle()->setWidth(6));
+        $text->setStyle($this->getStyle()->setWidth(6));
         $this->addFigure($text);
         $expected = <<<EOD
         hello 
@@ -64,7 +64,7 @@ class TextTest extends FigureTestCase
             'hello'
         );
         $text->setStyle(
-            new TextStyle()
+            $this->getStyle()
                 ->setWidth(7)
                 ->setAlign(TextAlign::Center)
         );
@@ -84,7 +84,7 @@ class TextTest extends FigureTestCase
             'hello'
         );
         $text->setStyle(
-            new TextStyle()
+            $this->getStyle()
                 ->setWidth(7)
                 ->setAlign(TextAlign::Right)
         );
@@ -94,5 +94,14 @@ class TextTest extends FigureTestCase
         EOD;
 
         $this->assertRender($expected);
+    }
+    
+    private function getStyle(): TextStyle
+    {
+        return new TextStyle()
+                    ->setWidth(null)
+                    ->setPaddingChar(' ')
+                    ->setAlign(TextAlign::Left)
+                ;
     }
 }
