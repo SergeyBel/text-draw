@@ -14,12 +14,15 @@ use TextDraw\Screen\Screen;
 class Arrow extends BaseFigure
 {
     private StraightLine $line;
+    
+    private ArrowStyle $style;
 
     public function __construct(
         private Point $start,
         private Point $end,
     ) {
         $this->line = new StraightLine($start, $end);
+        $this->style = new ArrowStyle();
 
         parent::__construct();
     }
@@ -29,7 +32,8 @@ class Arrow extends BaseFigure
         $line = new Line($this->start, $this->end);
 
         if ($this->line->isHorizontal()) {
-            $style = new LineStyle()->setChar('-');
+            $char = $this->style->getChar() ?? '-';
+            $style = new LineStyle()->setChar($char);
 
             if ($this->start->getX() < $this->end->getX()) {
                 $style->setFinishChar('>');
@@ -38,7 +42,8 @@ class Arrow extends BaseFigure
             }
             $line->setStyle($style);
         } else {
-            $style = new LineStyle()->setChar('|');
+            $char = $this->style->getChar() ?? '|';
+            $style = new LineStyle()->setChar($char);
 
             if ($this->start->getY() < $this->end->getY()) {
                 $style->setFinishChar('v');
@@ -58,5 +63,11 @@ class Arrow extends BaseFigure
     public function getLine(): StraightLine
     {
         return $this->line;
+    }
+    
+    public function setStyle(ArrowStyle $style): self
+    {
+        $this->style = $style;
+        return $this;
     }
 }

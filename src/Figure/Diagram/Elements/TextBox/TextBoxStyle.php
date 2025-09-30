@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TextDraw\Tests\Figure\Diagram\Elements\TextBox;
+namespace TextDraw\Figure\Diagram\Elements\TextBox;
 
 use TextDraw\Figure\Geometry\Rectangle\RectangleStyle;
 
