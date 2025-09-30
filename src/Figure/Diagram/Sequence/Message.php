@@ -8,7 +8,7 @@ class Message
 {
     public function __construct(
         private string $text,
-        private ?string $from = null,
+        private string $from,
         private ?string $to = null,
     ) {
     }
@@ -23,12 +23,12 @@ class Message
         $this->to = $to;
     }
 
-    public function getFrom(): ?string
+    public function getFrom(): string
     {
         return $this->from;
     }
 
-    public function setFrom(?string $from): void
+    public function setFrom(string $from): void
     {
         $this->from = $from;
     }
@@ -45,7 +45,7 @@ class Message
 
     public function isSelfMessage(): bool
     {
-        return $this->from === $this->to;
+        return $this->to === null;
     }
 
 

@@ -80,7 +80,7 @@ class SequenceDiagramTest extends FigureTestCase
                 new Actor('B', 'b'),
             ]
         )->addMessages([
-            new Message('hi', 'a', 'a')
+            new Message('hi', 'a')
         ])
         ;
 
