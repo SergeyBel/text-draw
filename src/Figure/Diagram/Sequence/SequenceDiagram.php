@@ -12,6 +12,7 @@ use TextDraw\Figure\Geometry\Line\LineStyle;
 use TextDraw\Figure\Text\Text;
 use TextDraw\Plane\Point;
 use TextDraw\Screen\Screen;
+use TextDraw\Common\Size;
 
 class SequenceDiagram extends BaseFigure
 {
@@ -86,19 +87,19 @@ class SequenceDiagram extends BaseFigure
 
     private function drawActor(Point $leftCorner, Actor $actor, int $gap): Point
     {
+        $textBoxSize = new Size(mb_strlen($actor->getText()) + 2, 3);
         $textBox = new TextBox(
             $actor->getText(),
             $leftCorner,
+            $textBoxSize
         )->setStyle(
             $this->style->getActorStyle()
         );
 
         $this->addFigure($textBox);
 
+        $this->actorsBoxes[$actor->getName()] = $textBox;
 
-        if (!is_null($actor->getName())) {
-            $this->actorsBoxes[$actor->getName()] = $textBox;
-        }
 
         return $leftCorner
             ->addX($textBox->getSize()->getWidth())
@@ -124,7 +125,7 @@ class SequenceDiagram extends BaseFigure
     private function drawSelfMessage(Message $message, int $y): int
     {
         $box = $this->actorsBoxes[$message->getFrom()];
-        $start = new Point($box->getLeftUpperCorner()->getX(), $y);
+        $start = $this->getBoxBottomCenter($box)->addX(1)->addY(1);
         $this->addFigure(new Text($start, $message->getText()));
         return $y + 1;
 
@@ -189,6 +190,5 @@ class SequenceDiagram extends BaseFigure
 
         return max($lengths);
     }
-
 
 }

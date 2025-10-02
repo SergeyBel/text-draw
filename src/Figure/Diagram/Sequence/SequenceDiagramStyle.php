@@ -6,6 +6,7 @@ namespace TextDraw\Figure\Diagram\Sequence;
 
 use TextDraw\Figure\Geometry\Rectangle\RectangleStyle;
 use TextDraw\Figure\Diagram\Elements\TextBox\TextBoxStyle;
+use TextDraw\Common\HorizontalAlign;
 
 class SequenceDiagramStyle
 {
@@ -15,12 +16,16 @@ class SequenceDiagramStyle
 
     public function __construct(
     ) {
-        $this->actorStyle = new TextBoxStyle()->setRectangleStyle(
-            new RectangleStyle()
-                ->setHorizontalChar('-')
-                ->setVerticalChar('|')
-                ->setCrossingChar('+')
-        );
+        $this->actorStyle = new TextBoxStyle()
+                ->setTextHorizontalAlign(HorizontalAlign::Center)
+                ->setTextVerticalAlign(\TextDraw\Common\VerticalAlign::Center)
+                ->setRectangleStyle(
+                    new RectangleStyle()
+                        ->setHorizontalChar('-')
+                        ->setVerticalChar('|')
+                        ->setCrossingChar('+')
+                )
+        ;
     }
 
     public function getActorStyle(): TextBoxStyle

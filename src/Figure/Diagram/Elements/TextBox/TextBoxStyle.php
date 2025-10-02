@@ -48,9 +48,10 @@ class TextBoxStyle
         return $this->textVerticalAlign;
     }
 
-    public function setTextHorizontalAlign(HorizontalAlign $textHorizontalAlign): void
+    public function setTextHorizontalAlign(HorizontalAlign $textHorizontalAlign): self
     {
         $this->textHorizontalAlign = $textHorizontalAlign;
+        return $this;
     }
 
     public function setTextVerticalAlign(VerticalAlign $textVerticalAlign): self

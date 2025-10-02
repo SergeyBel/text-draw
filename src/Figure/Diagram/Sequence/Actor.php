@@ -8,7 +8,7 @@ class Actor
 {
     public function __construct(
         private string $text,
-        private ?string $name = null
+        private string $name
     ) {
     }
 
@@ -22,18 +22,14 @@ class Actor
         $this->text = $text;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function setName(?string $name): void
+    public function setName(string $name): self
     {
         $this->name = $name;
+        return $this;
     }
-
-
-
-
-
 }

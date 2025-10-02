@@ -49,4 +49,16 @@ class TextBox extends BaseFigure
         $this->style = $style;
         return $this;
     }
+
+    public function getLeftUpperCorner(): Point
+    {
+        return $this->leftUpperCorner;
+    }
+
+    public function getSize(): Size
+    {
+        return $this->size;
+    }
+
+
 }

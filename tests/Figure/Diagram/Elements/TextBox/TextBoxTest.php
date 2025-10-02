@@ -10,6 +10,8 @@ use TextDraw\Tests\Figure\FigureTestCase;
 use TextDraw\Figure\Diagram\Elements\TextBox\TextBoxStyle;
 use TextDraw\Figure\Geometry\Rectangle\RectangleStyle;
 use TextDraw\Common\Size;
+use TextDraw\Common\HorizontalAlign;
+use TextDraw\Common\VerticalAlign;
 
 class TextBoxTest extends FigureTestCase
 {
@@ -33,14 +35,17 @@ class TextBoxTest extends FigureTestCase
         $this->assertRender($expected);
     }
 
+
     private function getStyle(): TextBoxStyle
     {
         return new TextBoxStyle()
+                    ->setTextHorizontalAlign(HorizontalAlign::Center)
+                    ->setTextVerticalAlign(VerticalAlign::Center)
                     ->setRectangleStyle(
                         new RectangleStyle()
-                ->setHorizontalChar('-')
-                ->setVerticalChar('|')
-                ->setCrossingChar('+')
+                                ->setHorizontalChar('-')
+                                ->setVerticalChar('|')
+                                ->setCrossingChar('+')
                     )
 
         ;
