@@ -46,6 +46,7 @@ class FigureTestCase extends TestCase
     {
         $actual = $this->render->render($this->screen);
 
+
         $message = sprintf(
             "Expected(length=%d):\n%s\n\nActual(length=%d):\n%s\n",
             mb_strlen($expected),

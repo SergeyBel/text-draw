@@ -35,6 +35,140 @@ class TextBoxTest extends FigureTestCase
         $this->assertRender($expected);
     }
 
+    public function testStyleTextVerticalAlignTop(): void
+    {
+        $textBox = new TextBox(
+            'abc',
+            new Point(0, 0),
+            new Size(7, 5)
+        )->setStyle($this->getStyle()->setTextVerticalAlign(VerticalAlign::Top));
+
+        $this->addFigure($textBox);
+
+
+        $expected = <<<EOD
+        +-----+
+        |.abc.|
+        |.....|
+        |.....|
+        +-----+
+        EOD;
+
+
+        $this->assertRender($expected);
+    }
+
+    public function testStyleTextVerticalAlignCenter(): void
+    {
+        $textBox = new TextBox(
+            'abc',
+            new Point(0, 0),
+            new Size(7, 5)
+        )->setStyle($this->getStyle()->setTextVerticalAlign(VerticalAlign::Center));
+
+        $this->addFigure($textBox);
+
+
+        $expected = <<<EOD
+        +-----+
+        |.....|
+        |.abc.|
+        |.....|
+        +-----+
+        EOD;
+
+        $this->assertRender($expected);
+    }
+
+    public function testStyleTextVerticalAlignBottom(): void
+    {
+        $textBox = new TextBox(
+            'abc',
+            new Point(0, 0),
+            new Size(7, 5)
+        )->setStyle($this->getStyle()->setTextVerticalAlign(VerticalAlign::Bottom));
+
+        $this->addFigure($textBox);
+
+
+        $expected = <<<EOD
+        +-----+
+        |.....|
+        |.....|
+        |.abc.|
+        +-----+
+        EOD;
+
+        $this->assertRender($expected);
+    }
+
+
+    public function testStyleTextHorizontalAlignLeft(): void
+    {
+        $textBox = new TextBox(
+            'abc',
+            new Point(0, 0),
+            new Size(7, 5)
+        )->setStyle($this->getStyle()->setTextHorizontalAlign(HorizontalAlign::Left));
+
+        $this->addFigure($textBox);
+
+
+        $expected = <<<EOD
+        +-----+
+        |.....|
+        |abc..|
+        |.....|
+        +-----+
+        EOD;
+
+        $this->assertRender($expected);
+    }
+
+    public function testStyleTextHorizontalAlignCenter(): void
+    {
+        $textBox = new TextBox(
+            'abc',
+            new Point(0, 0),
+            new Size(7, 5)
+        )->setStyle($this->getStyle()->setTextHorizontalAlign(HorizontalAlign::Center));
+
+        $this->addFigure($textBox);
+
+
+        $expected = <<<EOD
+        +-----+
+        |.....|
+        |.abc.|
+        |.....|
+        +-----+
+        EOD;
+
+        $this->assertRender($expected);
+    }
+
+    public function testStyleTextHorizontalAlignRight(): void
+    {
+        $textBox = new TextBox(
+            'abc',
+            new Point(0, 0),
+            new Size(7, 5)
+        )->setStyle($this->getStyle()->setTextHorizontalAlign(HorizontalAlign::Right));
+
+        $this->addFigure($textBox);
+
+
+        $expected = <<<EOD
+        +-----+
+        |.....|
+        |..abc|
+        |.....|
+        +-----+
+        EOD;
+
+        $this->assertRender($expected);
+    }
+
 
     private function getStyle(): TextBoxStyle
     {

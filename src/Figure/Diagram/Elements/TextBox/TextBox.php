@@ -10,6 +10,8 @@ use TextDraw\Figure\Geometry\Rectangle\Rectangle;
 use TextDraw\Figure\Text\Text;
 use TextDraw\Plane\Point;
 use TextDraw\Screen\Screen;
+use TextDraw\Common\VerticalAlign;
+use TextDraw\Common\HorizontalAlign;
 
 class TextBox extends BaseFigure
 {
@@ -33,13 +35,36 @@ class TextBox extends BaseFigure
             ->setStyle($this->style->getRectangleStyle())
         );
 
-        $start = $this->leftUpperCorner
-            ->addX(intdiv($size->getWidth() - mb_strlen($this->text), 2))
-            ->addY(intdiv($size->getHeight(), 2))
+        $start = $this->leftUpperCorner;
 
-        ;
+        switch ($this->style->getTextVerticalAlign()) {
+            case VerticalAlign::Center:
+                $start = $start->addY(intdiv($size->getHeight(), 2));
+                break;
+            case VerticalAlign::Bottom:
+                $start = $start->addY($this->size->getHeight() - 2);
+                break;
+            case VerticalAlign::Top:
+                $start = $start->addY(1);
+                break;
+        }
 
-        $this->addFigure(new Text($start, $this->text));
+        switch ($this->style->getTextHorizontalAlign()) {
+            case HorizontalAlign::Left:
+                $start = $start->addX(1);
+                break;
+            case HorizontalAlign::Center:
+                $start = $start->addX(intdiv($size->getWidth() - mb_strlen($this->text), 2));
+                break;
+            case HorizontalAlign::Right:
+                $start = $start->addWidth($size->getWidth() - mb_strlen($this->text));
+                break;
+        }
+
+
+        $this->addFigure(
+            new Text($start, $this->text)
+        );
 
         return parent::getScreen();
     }
