@@ -4,31 +4,39 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Chart\Function;
 
+use TextDraw\Common\Char;
+
 class FunctionGraphStyle
 {
-    private string $pointSymbol = '*';
-    private string $zeroSymbol = '0';
+    private Char $pointChar;
+    private Char $zeroChar;
 
-
-    public function getPointSymbol(): string
+    public function __construct()
     {
-        return $this->pointSymbol;
+        $this->pointChar = new Char('*');
+        $this->zeroChar = new Char('0');
     }
 
-    public function setPointSymbol(string $pointSymbol): static
+
+    public function getPointChar(): string
     {
-        $this->pointSymbol = $pointSymbol;
+        return $this->pointChar->getChar();
+    }
+
+    public function setPointChar(string $pointChar): static
+    {
+        $this->pointChar = new Char($pointChar);
         return $this;
     }
 
-    public function getZeroSymbol(): string
+    public function getZeroChar(): string
     {
-        return $this->zeroSymbol;
+        return $this->zeroChar->getChar();
     }
 
-    public function setZeroSymbol(string $zeroSymbol): static
+    public function setZeroChar(string $zeroSymbol): static
     {
-        $this->zeroSymbol = $zeroSymbol;
+        $this->zeroChar = new Char($zeroSymbol);
         return $this;
     }
 }

@@ -86,7 +86,7 @@ class FunctionGraph extends BaseFigure
         foreach ($this->values as $value) {
             $x = $value->getX();
             $y = $maxY - $value->getY();
-            $value = new Pixel(new Point($x, $y), $this->style->getPointSymbol());
+            $value = new Pixel(new Point($x, $y), $this->style->getPointChar());
             $this->addFigure($value);
         }
     }
@@ -113,7 +113,7 @@ class FunctionGraph extends BaseFigure
                     new LineStyle()->setChar('-')->setFinishChar('>')
                 )
             )
-            ->addFigure(new Pixel($zeroPoint, $this->style->getZeroSymbol()))
+            ->addFigure(new Pixel($zeroPoint, $this->style->getZeroChar()))
         ;
     }
 

@@ -5,12 +5,18 @@ declare(strict_types=1);
 namespace TextDraw\Figure\Text;
 
 use TextDraw\Common\HorizontalAlign;
+use TextDraw\Common\Char;
 
 class TextStyle
 {
     private ?int $width = null;
-    private string $paddingChar = ' ';
+    private Char $paddingChar;
     private HorizontalAlign $align = HorizontalAlign::Left;
+
+    public function __construct()
+    {
+        $this->paddingChar = new Char(' ');
+    }
 
 
     public function getWidth(): ?int
@@ -26,12 +32,12 @@ class TextStyle
 
     public function getPaddingChar(): string
     {
-        return $this->paddingChar;
+        return $this->paddingChar->getChar();
     }
 
     public function setPaddingChar(string $paddingChar): TextStyle
     {
-        $this->paddingChar = $paddingChar;
+        $this->paddingChar = new Char($paddingChar);
         return $this;
     }
 

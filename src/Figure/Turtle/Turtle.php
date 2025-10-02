@@ -47,50 +47,50 @@ class Turtle extends BaseFigure
         return $this;
     }
 
-    public function paint(string $symbol): static
+    public function paint(string $char): static
     {
-        $this->addFigure(new Pixel($this->position, $symbol));
+        $this->addFigure(new Pixel($this->position, $char));
         return $this;
     }
 
-    public function paintRight(string $symbol, int $value = 1): static
+    public function paintRight(string $char, int $value = 1): static
     {
         for ($i = 0; $i < $value; $i++) {
             $this
-                ->addFigure(new Pixel($this->position, $symbol))
+                ->addFigure(new Pixel($this->position, $char))
                 ->moveRight();
         }
 
         return $this;
     }
 
-    public function paintLeft(string $symbol, int $value = 1): static
+    public function paintLeft(string $char, int $value = 1): static
     {
         for ($i = 0; $i < $value; $i++) {
             $this
-                ->addFigure(new Pixel($this->position, $symbol))
+                ->addFigure(new Pixel($this->position, $char))
                 ->moveLeft();
         }
 
         return $this;
     }
 
-    public function paintUp(string $symbol, int $value = 1): static
+    public function paintUp(string $char, int $value = 1): static
     {
         for ($i = 0; $i < $value; $i++) {
             $this
-                ->addFigure(new Pixel($this->position, $symbol))
+                ->addFigure(new Pixel($this->position, $char))
                 ->moveUp();
         }
 
         return $this;
     }
 
-    public function paintDown(string $symbol, int $value = 1): static
+    public function paintDown(string $char, int $value = 1): static
     {
         for ($i = 0; $i < $value; $i++) {
             $this
-                ->addFigure(new Pixel($this->position, $symbol))
+                ->addFigure(new Pixel($this->position, $char))
                 ->moveDown();
         }
 

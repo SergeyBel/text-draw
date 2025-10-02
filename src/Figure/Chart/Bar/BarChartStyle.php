@@ -4,14 +4,23 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Chart\Bar;
 
+use TextDraw\Common\Char;
+
 class BarChartStyle
 {
     private int $barWidth = 2;
     private int $unitHeight = 1;
-    private string $horizontalChar = '*';
-    private string $verticalChar = '*';
-    private string $crossingChar = '*';
+    private Char $horizontalChar;
+    private Char $verticalChar;
+    private Char $crossingChar;
     private int $gap = 1;
+
+    public function __construct()
+    {
+        $this->horizontalChar = new Char('*');
+        $this->verticalChar = new Char('*');
+        $this->crossingChar = new Char('*');
+    }
 
 
     public function getBarWidth(): int
@@ -38,34 +47,34 @@ class BarChartStyle
 
     public function getHorizontalChar(): string
     {
-        return $this->horizontalChar;
+        return $this->horizontalChar->getChar();
     }
 
     public function setHorizontalChar(string $horizontalChar): static
     {
-        $this->horizontalChar = $horizontalChar;
+        $this->horizontalChar = new Char($horizontalChar);
         return $this;
     }
 
     public function getVerticalChar(): string
     {
-        return $this->verticalChar;
+        return $this->verticalChar->getChar();
     }
 
     public function setVerticalChar(string $verticalChar): static
     {
-        $this->verticalChar = $verticalChar;
+        $this->verticalChar = new Char($verticalChar);
         return $this;
     }
 
     public function getCrossingChar(): string
     {
-        return $this->crossingChar;
+        return $this->crossingChar->getChar();
     }
 
     public function setCrossingChar(string $crossingChar): static
     {
-        $this->crossingChar = $crossingChar;
+        $this->crossingChar = new Char($crossingChar);
         return $this;
     }
 

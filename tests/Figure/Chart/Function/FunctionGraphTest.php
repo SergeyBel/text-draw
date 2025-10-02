@@ -36,8 +36,8 @@ class FunctionGraphTest extends FigureTestCase
     private function getStyle(): FunctionGraphStyle
     {
         return new FunctionGraphStyle()
-                    ->setPointSymbol('*')
-                    ->setZeroSymbol('0');
+                    ->setPointChar('*')
+                    ->setZeroChar('0');
     }
 
 }
