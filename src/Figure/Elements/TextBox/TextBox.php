@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace TextDraw\Figure\Diagram\Elements\TextBox;
+namespace TextDraw\Figure\Elements\TextBox;
 
+use TextDraw\Common\HorizontalAlign;
 use TextDraw\Common\Size;
+use TextDraw\Common\VerticalAlign;
 use TextDraw\Figure\Base\BaseFigure;
 use TextDraw\Figure\Geometry\Rectangle\Rectangle;
 use TextDraw\Figure\Text\Text;
 use TextDraw\Plane\Point;
 use TextDraw\Screen\Screen;
-use TextDraw\Common\VerticalAlign;
-use TextDraw\Common\HorizontalAlign;
 
 class TextBox extends BaseFigure
 {

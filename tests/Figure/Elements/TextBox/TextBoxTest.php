@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace TextDraw\Tests\Figure\Diagram\Elements\TextBox;
+namespace TextDraw\Tests\Figure\Elements\TextBox;
 
-use TextDraw\Figure\Diagram\Elements\TextBox\TextBox;
+use TextDraw\Common\HorizontalAlign;
+use TextDraw\Common\Size;
+use TextDraw\Common\VerticalAlign;
+use TextDraw\Figure\Elements\TextBox\TextBox;
+use TextDraw\Figure\Elements\TextBox\TextBoxStyle;
+use TextDraw\Figure\Geometry\Rectangle\RectangleStyle;
 use TextDraw\Plane\Point;
 use TextDraw\Tests\Figure\FigureTestCase;
-use TextDraw\Figure\Diagram\Elements\TextBox\TextBoxStyle;
-use TextDraw\Figure\Geometry\Rectangle\RectangleStyle;
-use TextDraw\Common\Size;
-use TextDraw\Common\HorizontalAlign;
-use TextDraw\Common\VerticalAlign;
 
 class TextBoxTest extends FigureTestCase
 {

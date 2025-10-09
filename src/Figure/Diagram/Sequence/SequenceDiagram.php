@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Diagram\Sequence;
 
+use TextDraw\Common\Size;
 use TextDraw\Figure\Base\BaseFigure;
-use TextDraw\Figure\Diagram\Elements\TextArrow\TextArrow;
-use TextDraw\Figure\Diagram\Elements\TextBox\TextBox;
+use TextDraw\Figure\Elements\Arrows\TextArrow\TextArrow;
+use TextDraw\Figure\Elements\TextBox\TextBox;
 use TextDraw\Figure\Geometry\Line\Line;
 use TextDraw\Figure\Geometry\Line\LineStyle;
 use TextDraw\Figure\Text\Text;
 use TextDraw\Plane\Point;
 use TextDraw\Screen\Screen;
-use TextDraw\Common\Size;
 
 class SequenceDiagram extends BaseFigure
 {

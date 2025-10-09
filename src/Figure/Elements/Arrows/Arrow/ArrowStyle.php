@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TextDraw\Figure\Diagram\Elements\Arrow;
+namespace TextDraw\Figure\Elements\Arrows\Arrow;
 
 use TextDraw\Common\Char;
 

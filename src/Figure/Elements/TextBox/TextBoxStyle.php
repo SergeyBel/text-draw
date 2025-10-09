@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace TextDraw\Figure\Diagram\Elements\TextBox;
+namespace TextDraw\Figure\Elements\TextBox;
 
-use TextDraw\Figure\Geometry\Rectangle\RectangleStyle;
 use TextDraw\Common\HorizontalAlign;
 use TextDraw\Common\VerticalAlign;
+use TextDraw\Figure\Geometry\Rectangle\RectangleStyle;
 
 class TextBoxStyle
 {

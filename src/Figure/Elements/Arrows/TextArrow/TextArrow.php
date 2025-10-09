@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace TextDraw\Figure\Diagram\Elements\TextArrow;
+namespace TextDraw\Figure\Elements\Arrows\TextArrow;
 
 use TextDraw\Figure\Base\BaseFigure;
-use TextDraw\Figure\Diagram\Elements\Arrow\Arrow;
+use TextDraw\Figure\Elements\Arrows\Arrow\Arrow;
 use TextDraw\Figure\Text\Text;
 use TextDraw\Plane\Point;
 use TextDraw\Screen\Screen;

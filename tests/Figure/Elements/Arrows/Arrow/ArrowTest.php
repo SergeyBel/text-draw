@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace TextDraw\Tests\Figure\Diagram\Elements\Arrow;
+namespace TextDraw\Tests\Figure\Elements\Arrows\Arrow;
 
-use TextDraw\Figure\Diagram\Elements\Arrow\Arrow;
+use TextDraw\Figure\Elements\Arrows\Arrow\Arrow;
+use TextDraw\Figure\Elements\Arrows\Arrow\ArrowStyle;
 use TextDraw\Plane\Point;
 use TextDraw\Tests\Figure\FigureTestCase;
-use TextDraw\Figure\Diagram\Elements\Arrow\ArrowStyle;
 
 class ArrowTest extends FigureTestCase
 {

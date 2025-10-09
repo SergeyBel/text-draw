@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace TextDraw\Figure\Diagram\Elements\TextArrow;
+namespace TextDraw\Figure\Elements\Arrows\TextArrow;
 
-use TextDraw\Figure\Diagram\Elements\Arrow\ArrowStyle;
+use TextDraw\Figure\Elements\Arrows\Arrow\ArrowStyle;
 
 class TextArrowStyle
 {
