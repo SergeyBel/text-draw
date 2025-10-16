@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TextDraw\Figure\Chart\Bar;
+namespace TextDraw\Figure\Chart\BarChart;
 
 use TextDraw\Common\Char;
 

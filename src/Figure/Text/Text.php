@@ -56,6 +56,18 @@ class Text extends BaseFigure
         return $this->style;
     }
 
+    public function getStart(): Point
+    {
+        return $this->start;
+    }
+
+    public function getWidth(): int
+    {
+        return $this->textFrame->getWidth();
+    }
+
+
+
     public function setStyle(TextStyle $style): static
     {
         $this->style = $style;

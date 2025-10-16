@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace TextDraw\Tests\Figure\Chart\Bar;
+namespace TextDraw\Tests\Figure\Chart\BarChart;
 
-use TextDraw\Figure\Chart\Bar\Bar;
-use TextDraw\Figure\Chart\Bar\BarChart;
-use TextDraw\Figure\Chart\Bar\BarChartStyle;
+use TextDraw\Figure\Chart\BarChart\Bar;
+use TextDraw\Figure\Chart\BarChart\BarChart;
+use TextDraw\Figure\Chart\BarChart\BarChartStyle;
 use TextDraw\Tests\Figure\FigureTestCase;
 
 class BarChartTest extends FigureTestCase
