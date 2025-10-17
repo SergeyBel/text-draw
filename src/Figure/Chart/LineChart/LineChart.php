@@ -5,27 +5,49 @@ declare(strict_types=1);
 namespace TextDraw\Figure\Chart\LineChart;
 
 use TextDraw\Common\Exception\RenderException;
-use TextDraw\Common\Size;
 use TextDraw\Figure\Base\BaseFigure;
 use TextDraw\Figure\Geometry\Line\Line;
 use TextDraw\Figure\Geometry\Line\LineStyle;
-use TextDraw\Figure\Pixel\Pixel;
 use TextDraw\Figure\Text\Text;
 use TextDraw\Plane\Point;
 use TextDraw\Screen\Screen;
 
 class LineChart extends BaseFigure
 {
+    /**
+     * @var non-empty-array<string>
+     */
+    private array $labels;
 
     private LineChartStyle $style;
 
+    /**
+     * @var array<array<int|null>>
+     */
     private array $datasets = [];
 
+    /**
+     * @var array<DatasetStyle>
+     */
+    private array $datasetsStyles = [];
+
+    /**
+     * @var array<int>
+     */
     private array $labelsX = [];
 
+    /**
+     * @param array<string> $labels
+     */
     public function __construct(
-        private array $labels
+        array $labels
     ) {
+        if (count($labels) === 0) {
+            throw new RenderException('Labels must not be empty');
+        }
+
+        $this->labels = $labels;
+
         $this->style = new LineChartStyle();
         parent::__construct();
     }
@@ -36,33 +58,45 @@ class LineChart extends BaseFigure
         return $this;
     }
 
-    public function addDataset(array $dataset): self
+    /**
+     * @param array<int|null> $dataset
+     * @return $this
+     * @throws RenderException
+     */
+    public function addDataset(array $dataset, ?DatasetStyle $datasetStyle = null): self
     {
         if (count($dataset) !== count($this->labels)) {
             throw new RenderException('Dataset must same length as labels');
         }
 
         $this->datasets[] = $dataset;
+        $this->datasetsStyles[] = $datasetStyle ?? new DatasetStyle();
         return $this;
     }
 
     public function getScreen(): Screen
     {
+
+
         $maxValue = $this->getMaxValue();
         $minValue = $this->getMinValue();
         $height = $maxValue - $minValue;
 
+
         $this->drawVertical($height);
         $this->drawLabels($height);
 
-        foreach ($this->datasets as $dataset) {
-            $this->drawDataset($dataset, $height, $minValue);
+        foreach ($this->datasets as $key => $dataset) {
+            $this->drawDataset($dataset, $height, $minValue, $this->datasetsStyles[$key]);
         }
 
         return parent::getScreen();
     }
 
-    private function drawDataset(array $dataset, int $height, int $minValue): void
+    /**
+     * @param array<int|null> $dataset
+     */
+    private function drawDataset(array $dataset, int $height, int $minValue, DatasetStyle $style): void
     {
         $previous = null;
         for ($i = 0; $i < count($dataset); $i++) {
@@ -79,6 +113,10 @@ class LineChart extends BaseFigure
 
             $this->addFigure(
                 new Line($previous, $point)
+                    ->setStyle(
+                        new LineStyle()
+                            ->setChar($style->getLineChar())
+                    )
             );
 
             $previous = $point;
@@ -101,7 +139,7 @@ class LineChart extends BaseFigure
             $text = new Text($start, $label);
             $this->addFigure($text);
             $this->labelsX[] = $start->getX();
-            $start = $start->addX($text->getWidth() + 2);
+            $start = $start->addX($text->getWidth() + $this->style->getLabelGap());
         }
 
         $this->addFigure(
@@ -113,9 +151,17 @@ class LineChart extends BaseFigure
 
     private function getMaxValue(): int
     {
+        if (count($this->datasets) === 0) {
+            throw new RenderException('Datasets must not be empty');
+        }
+
         $maxes = [];
         foreach ($this->datasets as $dataset) {
-            $maxes[] = max($dataset);
+            $datasetValues = array_filter($dataset, fn ($value) => !is_null($value));
+            if (count($datasetValues) === 0) {
+                throw new RenderException('Datasets values must not be empty');
+            }
+            $maxes[] = max($datasetValues);
         }
 
         return max($maxes);
@@ -123,9 +169,17 @@ class LineChart extends BaseFigure
 
     private function getMinValue(): int
     {
+        if (count($this->datasets) === 0) {
+            throw new RenderException('Datasets must not be empty');
+        }
+
         $mins = [];
         foreach ($this->datasets as $dataset) {
-            $mins[] = min($dataset);
+            $datasetValues = array_filter($dataset, fn ($value) => !is_null($value));
+            if (count($datasetValues) === 0) {
+                throw new RenderException('Datasets values must not be empty');
+            }
+            $mins[] = min($datasetValues);
         }
 
         return min($mins);
