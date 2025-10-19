@@ -9,6 +9,7 @@ use TextDraw\Common\Char;
 class DatasetStyle
 {
     private Char $lineChar;
+    private ?Char $pointChar = null;
 
     public function __construct()
     {
@@ -23,6 +24,17 @@ class DatasetStyle
     public function setLineChar(string $lineChar): self
     {
         $this->lineChar = new Char($lineChar);
+        return $this;
+    }
+
+    public function getPointChar(): ?string
+    {
+        return $this->pointChar?->getChar();
+    }
+
+    public function setPointChar(string $pointChar): self
+    {
+        $this->pointChar = new Char($pointChar);
         return $this;
     }
 }

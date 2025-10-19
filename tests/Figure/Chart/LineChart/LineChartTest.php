@@ -98,7 +98,7 @@ class LineChartTest extends FigureTestCase
         )->setStyle($this->getStyle()->setLabelGap(2));
 
         $lineChart
-            ->addDataset([0, 3], new DatasetStyle());
+            ->addDataset([0, 3], $this->getDatasetStyle());
 
 
         $this->addFigure($lineChart);
@@ -124,7 +124,7 @@ class LineChartTest extends FigureTestCase
         )->setStyle($this->getStyle());
 
         $lineChart
-            ->addDataset([0, 2], new DatasetStyle()->setLineChar('@'));
+            ->addDataset([0, 2], $this->getDatasetStyle()->setLineChar('@'));
 
 
         $this->addFigure($lineChart);
@@ -133,6 +133,31 @@ class LineChartTest extends FigureTestCase
         $expected = <<<EOD
         |..@
         |.@.
+        -@--
+        .a.b
+        EOD;
+
+        $this->assertRender($expected);
+    }
+
+    public function testDatasetStylePointChar(): void
+    {
+        $labels = ['a', 'b'];
+
+        $lineChart = new LineChart(
+            $labels
+        )->setStyle($this->getStyle());
+
+        $lineChart
+            ->addDataset([0, 2], $this->getDatasetStyle()->setPointChar('@'));
+
+
+        $this->addFigure($lineChart);
+
+
+        $expected = <<<EOD
+        |..@
+        |.*.
         -@--
         .a.b
         EOD;

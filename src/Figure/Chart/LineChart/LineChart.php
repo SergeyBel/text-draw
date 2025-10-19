@@ -111,12 +111,21 @@ class LineChart extends BaseFigure
                 $previous = $point;
             }
 
+            $lineStyle = new LineStyle()
+                ->setChar($style->getLineChar())
+            ;
+
+            if (!is_null($style->getPointChar())) {
+                $lineStyle
+                    ->setStartChar($style->getPointChar())
+                    ->setFinishChar($style->getPointChar())
+                ;
+            }
+
+
             $this->addFigure(
                 new Line($previous, $point)
-                    ->setStyle(
-                        new LineStyle()
-                            ->setChar($style->getLineChar())
-                    )
+                    ->setStyle($lineStyle)
             );
 
             $previous = $point;
