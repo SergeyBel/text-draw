@@ -14,10 +14,13 @@ class TextTest extends FigureTestCase
 {
     public function testText(): void
     {
-        $this->addFigure(new Text(
+        $text = new Text(
             new Point(1, 1),
             'hello'
-        )->setStyle($this->getStyle()));
+        )->setStyle($this->getStyle());
+
+        $this->addFigure($text);
+
         $expected = <<<EOD
         ......
         .hello
@@ -30,9 +33,10 @@ class TextTest extends FigureTestCase
     {
         $text = new Text(
             new Point(0, 0),
-            'hello'
+            'hello',
+            3
         );
-        $text->setStyle($this->getStyle()->setWidth(3));
+        $text->setStyle($this->getStyle());
         $this->addFigure($text);
         $expected = <<<EOD
         hel
@@ -41,17 +45,21 @@ class TextTest extends FigureTestCase
         $this->assertRender($expected);
     }
 
-    public function testWidthMore(): void
-    {
 
+    public function testAlignRight(): void
+    {
         $text = new Text(
             new Point(0, 0),
-            'hello'
+            'hello',
+            7
         );
-        $text->setStyle($this->getStyle()->setWidth(6));
+        $text->setStyle(
+            $this->getStyle()
+                ->setAlign(HorizontalAlign::Right)
+        );
         $this->addFigure($text);
         $expected = <<<EOD
-        hello 
+        ..hello
         EOD;
 
         $this->assertRender($expected);
@@ -59,38 +67,16 @@ class TextTest extends FigureTestCase
 
     public function testAlignCenter(): void
     {
+
         $text = new Text(
             new Point(0, 0),
-            'hello'
+            'hello',
+            7
         );
-        $text->setStyle(
-            $this->getStyle()
-                ->setWidth(7)
-                ->setAlign(HorizontalAlign::Center)
-        );
-        $this->addFigure($text);
-
-        $expected = <<<EOD
-         hello 
-        EOD;
-
-        $this->assertRender($expected);
-    }
-
-    public function testAlignRight(): void
-    {
-        $text = new Text(
-            new Point(1, 0),
-            'hello'
-        );
-        $text->setStyle(
-            $this->getStyle()
-                ->setWidth(7)
-                ->setAlign(HorizontalAlign::Right)
-        );
+        $text->setStyle($this->getStyle()->setPaddingChar('-')->setAlign(HorizontalAlign::Center));
         $this->addFigure($text);
         $expected = <<<EOD
-        .  hello
+        -hello-
         EOD;
 
         $this->assertRender($expected);
@@ -99,8 +85,7 @@ class TextTest extends FigureTestCase
     private function getStyle(): TextStyle
     {
         return new TextStyle()
-                    ->setWidth(null)
-                    ->setPaddingChar(' ')
+                    ->setPaddingChar(null)
                     ->setAlign(HorizontalAlign::Left)
         ;
     }

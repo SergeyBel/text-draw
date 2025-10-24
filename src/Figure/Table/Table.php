@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Table;
 
-use TextDraw\Common\TextFrame;
 use TextDraw\Figure\Base\BaseFigure;
 use TextDraw\Figure\Table\TableBag\TableBag;
+use TextDraw\Figure\Table\TableBag\TextCell;
 use TextDraw\Figure\Text\Text;
+use TextDraw\Figure\Text\TextStyle;
 use TextDraw\Figure\Turtle\Turtle;
 use TextDraw\Plane\Point;
 use TextDraw\Screen\Screen;
@@ -83,17 +84,17 @@ class Table extends BaseFigure
     }
 
     /**
-     * @param array<TextFrame> $row
+     * @param array<TextCell> $row
      */
     private function drawRow(Point $start, array $row): void
     {
         foreach ($row as $element) {
             $this->drawElement($start, $element);
-            $start = $start->addX($element->getWidth() + 1);
+            $start = $start->addX($element->width + 1);
         }
     }
 
-    private function drawElement(Point $start, TextFrame $element): void
+    private function drawElement(Point $start, TextCell $element): void
     {
 
         $turtle = new Turtle()
@@ -108,26 +109,31 @@ class Table extends BaseFigure
         $this->addFigure($turtle);
     }
 
-    private function drawElementBorder(Turtle $turtle, TextFrame $element): Turtle
+    private function drawElementBorder(Turtle $turtle, TextCell $element): Turtle
     {
         $turtle
             ->paintRight($this->style->getCrossingChar())
-            ->paintRight($this->style->getHorizontalChar(), $element->getWidth())
+            ->paintRight($this->style->getHorizontalChar(), $element->width)
             ->paint($this->style->getCrossingChar())
         ;
 
         return $turtle;
     }
 
-    private function drawElementText(Turtle $turtle, TextFrame $element): Turtle
+    private function drawElementText(Turtle $turtle, TextCell $element): Turtle
     {
         $turtle->paintRight($this->style->getVerticalChar());
 
-        $text = Text::fromTextFrame($turtle->getPosition(), $element);
+        $text = new Text($turtle->getPosition(), $element->text, $element->width)
+            ->setStyle(
+                new TextStyle()
+                    ->setAlign($element->align)
+                    ->setPaddingChar($this->style->getPaddingChar())
+            );
         $this->addFigure($text);
 
         $turtle
-            ->moveRight($element->getWidth())
+            ->moveRight($element->width)
             ->paint($this->style->getVerticalChar());
 
         return $turtle;

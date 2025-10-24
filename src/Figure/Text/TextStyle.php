@@ -9,35 +9,18 @@ use TextDraw\Common\Char;
 
 class TextStyle
 {
-    private ?int $width = null;
-    private Char $paddingChar;
+    private ?Char $paddingChar = null;
     private HorizontalAlign $align = HorizontalAlign::Left;
 
-    public function __construct()
+
+    public function getPaddingChar(): ?string
     {
-        $this->paddingChar = new Char(' ');
+        return $this->paddingChar?->getChar();
     }
 
-
-    public function getWidth(): ?int
+    public function setPaddingChar(?string $paddingChar): TextStyle
     {
-        return $this->width;
-    }
-
-    public function setWidth(?int $width): TextStyle
-    {
-        $this->width = $width;
-        return $this;
-    }
-
-    public function getPaddingChar(): string
-    {
-        return $this->paddingChar->getChar();
-    }
-
-    public function setPaddingChar(string $paddingChar): TextStyle
-    {
-        $this->paddingChar = new Char($paddingChar);
+        $this->paddingChar = !is_null($paddingChar) ? new Char($paddingChar) : null;
         return $this;
     }
 

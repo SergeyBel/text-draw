@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Chart\BarChart;
 
-use TextDraw\Common\Exception\RenderException;
 use TextDraw\Common\Size;
 use TextDraw\Common\HorizontalAlign;
 use TextDraw\Figure\Base\BaseFigure;
@@ -19,10 +18,9 @@ use TextDraw\Figure\Geometry\Rectangle\RectangleStyle;
 
 class BarChart extends BaseFigure
 {
-    /**
-     * @var array<Bar>
-     */
-    private array $bars;
+    private array $labels;
+
+    private array $datasets;
 
     private BarChartStyle $style;
 
@@ -32,12 +30,18 @@ class BarChart extends BaseFigure
         parent::__construct();
     }
 
-
-    public function addBar(Bar $bar): static
+    public function setLabels(array $labels): self
     {
-        $this->bars[] = $bar;
+        $this->labels = $labels;
         return $this;
     }
+
+    public function addDataset(array $dataset): self
+    {
+        $this->datasets[] = $dataset;
+        return $this;
+    }
+
 
     public function setStyle(BarChartStyle $style): static
     {
@@ -46,37 +50,40 @@ class BarChart extends BaseFigure
     }
 
 
-
     public function getScreen(): Screen
     {
         $barWidth = $this->style->getBarWidth();
         $unitHeight = $this->style->getUnitHeight();
 
-
         $size = new Size($this->calculateWidth($barWidth), $this->calculateHeight($unitHeight));
 
         $this->drawAxes($size);
 
-        $this->drawLabels($size, $barWidth);
+        $labelWidth = $barWidth;
+        $this->drawLabels($size, $labelWidth);
 
-        $this->drawBars($size, $barWidth, $unitHeight);
-
+        foreach ($this->datasets as $index => $dataset) {
+            $this->drawDataset($size, $dataset, $index, $barWidth, $unitHeight);
+        }
 
         return parent::getScreen();
     }
 
     private function calculateWidth(int $barWidth): int
     {
-        $count = count($this->bars);
-        return $count * $barWidth + ($count - 1) * $this->style->getGap() + 1;
+        $labels = count($this->labels);
+        $bars = count($this->datasets);
+        $gaps = ($labels - 1) * $this->style->getGap();
+
+        return $labels * $bars * $barWidth + $gaps;
     }
 
     private function calculateHeight(int $unitHeight): int
     {
-        if (count($this->bars) === 0) {
-            throw new RenderException('No bars');
+        foreach ($this->datasets as $dataset) {
+            $maxes[] = max($dataset);
         }
-        return max(array_map(fn (Bar $bar) => $bar->getValue(), $this->bars)) * $unitHeight * 1;
+        return max($maxes) * $unitHeight + 1;
     }
 
 
@@ -85,38 +92,37 @@ class BarChart extends BaseFigure
         $this->addFigure(
             new Line(
                 new Point(0, 0),
-                new Point(0, $size->getHeight())
+                new Point(0, 0)->addHeight($size->getHeight()),
             )->setStyle(new LineStyle()->setChar('|'))
-        )->addFigure(
-            new Line(
-                new Point(0, $size->getHeight())->addX(1),
-                new Point($size->getWidth() - 1, $size->getHeight())
-            )->setStyle(new LineStyle()->setChar('_'))
         )
         ;
     }
 
-    private function drawLabels(Size $size, int $barWidth): void
+    private function drawLabels(Size $size, int $labelWidth): void
     {
-        $start = new Point(0, $size->getHeight())->addX(1);
+        $start = new Point(0, 0)->addHeight($size->getHeight())->addX(1);
 
         $labelStyle = new TextStyle()
-            ->setWidth($barWidth)
-            ->setPaddingChar('_')
             ->setAlign(HorizontalAlign::Center);
 
-        foreach ($this->bars as $bar) {
-            $label = new Text($start, $bar->getLabel())->setStyle($labelStyle);
-            $this->addFigure($label);
-            $start = $start->addX($barWidth + $this->style->getGap());
+
+        foreach ($this->labels as $label) {
+            $text = new Text($start, $label, $labelWidth)->setStyle($labelStyle);
+            $this->addFigure($text);
+            $start = $start->addX($labelWidth + $this->style->getGap());
         }
     }
 
-    private function drawBars(Size $size, int $barWidth, int $unitHeight): void
-    {
-        $start = new Point(0, $size->getHeight())->addX(1);
-        foreach ($this->bars as $bar) {
-            $barHeight = $unitHeight * $bar->getValue();
+    private function drawDataset(
+        Size $size,
+        array $dataset,
+        int $index,
+        int $barWidth,
+        int $unitHeight,
+    ): void {
+        $start = new Point(0, 0)->addHeight($size->getHeight())->addX(1);
+        foreach ($dataset as $value) {
+            $barHeight = $unitHeight * $value;
             $this->drawBar($start, new Size($barWidth, $barHeight));
             $start = $start->addX($barWidth + $this->style->getGap());
         }
@@ -137,5 +143,4 @@ class BarChart extends BaseFigure
             )->setStyle($style)
         );
     }
-
 }

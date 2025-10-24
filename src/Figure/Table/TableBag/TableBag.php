@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Table\TableBag;
 
-use TextDraw\Common\TextFrame;
 use TextDraw\Figure\Table\TableCell;
 
 class TableBag
@@ -24,7 +23,7 @@ class TableBag
     }
 
     /**
-     * @return array<array<TextFrame>>
+     * @return array<array<TextCell>>
      */
     public function getTable(): array
     {
@@ -40,7 +39,7 @@ class TableBag
                 for ($c = 0; $c < $cell->getColspan(); $c++) {
                     $width += $calculatedSizes[$i][$j];
                 }
-                $row[] = new TextFrame($cell->getText(), $width, $cell->getStyle()->getAlign());
+                $row[] = new TextCell($cell->getText(), $width, $cell->getStyle()->getAlign());
             }
             $table[] = $row;
         }

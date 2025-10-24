@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace TextDraw\Tests\Figure\Chart\BarChart;
 
-use TextDraw\Figure\Chart\BarChart\Bar;
 use TextDraw\Figure\Chart\BarChart\BarChart;
 use TextDraw\Figure\Chart\BarChart\BarChartStyle;
 use TextDraw\Tests\Figure\FigureTestCase;
@@ -16,15 +15,11 @@ class BarChartTest extends FigureTestCase
         $barChart = new BarChart()
                 ->setStyle($this->getStyle());
 
-        $barChart->addBar(
-            new Bar('a', 2)
-        )
-            ->addBar(
-                new Bar('b', 5)
-            );
+        $barChart
+            ->setLabels(['a', 'b'])
+            ->addDataset([2, 5]);
 
         $this->addFigure($barChart);
-
 
         $expected = <<<EOD
         |.....****
@@ -32,11 +27,12 @@ class BarChartTest extends FigureTestCase
         |.....*..*
         |****.*..*
         |****.****
-        |_a____b__
+        |.a....b..
         EOD;
 
         $this->assertRender($expected);
     }
+
 
     public function testStyleBarWidth(): void
     {
@@ -191,6 +187,7 @@ class BarChartTest extends FigureTestCase
         $this->assertRender($expected);
     }
 
+    
 
 
     private function getStyle(): BarChartStyle

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Text;
 
-use TextDraw\Common\TextFrame;
+use TextDraw\Common\HorizontalAlign;
 use TextDraw\Figure\Base\BaseFigure;
 use TextDraw\Figure\Pixel\Pixel;
 use TextDraw\Plane\Point;
@@ -13,42 +13,58 @@ use TextDraw\Screen\Screen;
 class Text extends BaseFigure
 {
     private TextStyle $style;
-    private TextFrame $textFrame;
+    private int $width;
 
     public function __construct(
         private Point $start,
-        string $text,
+        private string $text,
+        ?int $width = null,
     ) {
         $this->style = new TextStyle();
-        $this->textFrame = new TextFrame($text);
+        if (is_null($width)) {
+            $this->width = mb_strlen($this->text);
+        } else {
+            $this->width = $width;
+        }
         parent::__construct();
-    }
-
-    public static function fromTextFrame(Point $start, TextFrame $textFrame): Text
-    {
-        $text = new self($start, $textFrame->getText());
-        $text->setStyle(
-            new TextStyle()
-                ->setWidth($textFrame->getWidth())
-                ->setPaddingChar($textFrame->getPaddingChar())
-                ->setAlign($textFrame->getAlign())
-        );
-        return $text;
     }
 
     public function getScreen(): Screen
     {
-        $screen = new Screen();
         $start = clone $this->start;
 
-        $chars = mb_str_split($this->textFrame->getText());
+        if (mb_strlen($this->text) >= $this->width) {
+            $text = mb_substr($this->text, 0, $this->width);
+            $chars = mb_str_split($text);
+            foreach ($chars as $char) {
+                $this->addFigure(new Pixel($start, $char));
+                $start = $start->addX(1);
+            }
 
-        foreach ($chars as $char) {
-            $screen = $screen->setPixel(new Pixel($start, $char));
+            return parent::getScreen();
+        }
+
+        $alignedText = $this->align();
+        $startIndex = mb_strpos($alignedText, $this->text);
+        $finishIndex = $startIndex + mb_strlen($this->text) - 1;
+
+        $chars = mb_str_split($alignedText);
+
+        foreach ($chars as $index => $char) {
+            if ($index < $startIndex || $index > $finishIndex) {
+                if (!is_null($this->style->getPaddingChar())) {
+                    $this->addFigure(new Pixel($start, $this->style->getPaddingChar()));
+                }
+            } else {
+                $this->addFigure(new Pixel($start, $char));
+            }
+
             $start = $start->addX(1);
         }
 
-        return $screen;
+
+
+        return parent::getScreen();
     }
 
     public function getStyle(): TextStyle
@@ -63,18 +79,23 @@ class Text extends BaseFigure
 
     public function getWidth(): int
     {
-        return $this->textFrame->getWidth();
+        return $this->width;
     }
-
-
 
     public function setStyle(TextStyle $style): static
     {
         $this->style = $style;
-        $this->textFrame = $this->textFrame
-            ->setWidth($style->getWidth())
-            ->setAlign($style->getAlign())
-            ->setPaddingChar($style->getPaddingChar());
         return $this;
+    }
+
+    private function align(): string
+    {
+        $mode = match ($this->style->getAlign()) {
+            HorizontalAlign::Left => STR_PAD_RIGHT,
+            HorizontalAlign::Right => STR_PAD_LEFT,
+            HorizontalAlign::Center => STR_PAD_BOTH,
+        };
+
+        return mb_str_pad($this->text, $this->width, ' ', $mode);
     }
 }
