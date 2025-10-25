@@ -82,6 +82,23 @@ class TextTest extends FigureTestCase
         $this->assertRender($expected);
     }
 
+    public function testAlignCenterDifferentPaddding(): void
+    {
+
+        $text = new Text(
+            new Point(0, 0),
+            'hello',
+            8
+        );
+        $text->setStyle($this->getStyle()->setPaddingChar('-')->setAlign(HorizontalAlign::Center));
+        $this->addFigure($text);
+        $expected = <<<EOD
+        -hello--
+        EOD;
+
+        $this->assertRender($expected);
+    }
+
     private function getStyle(): TextStyle
     {
         return new TextStyle()

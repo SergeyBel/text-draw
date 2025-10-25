@@ -33,36 +33,42 @@ class Text extends BaseFigure
     {
         $start = clone $this->start;
 
-        if (mb_strlen($this->text) >= $this->width) {
-            $text = mb_substr($this->text, 0, $this->width);
-            $chars = mb_str_split($text);
-            foreach ($chars as $char) {
-                $this->addFigure(new Pixel($start, $char));
-                $start = $start->addX(1);
-            }
-
-            return parent::getScreen();
+        $length = mb_strlen($this->text);
+        if ($this->style->getAlign() === HorizontalAlign::Left) {
+            $paddingBefore = 0;
+            $paddingAfter = max(0, $this->width - $length);
+        } elseif ($this->style->getAlign() === HorizontalAlign::Right) {
+            $paddingBefore = max(0, $this->width - $length);
+            $paddingAfter = 0;
+        } elseif ($this->style->getAlign() === HorizontalAlign::Center) {
+            $paddingAfter = max(0, intdiv($this->width, 2) - intdiv($length, 2));
+            $paddingBefore = max(0, $this->width - $length - $paddingAfter);
         }
 
-        $alignedText = $this->align();
-        $startIndex = mb_strpos($alignedText, $this->text);
-        $finishIndex = $startIndex + mb_strlen($this->text) - 1;
 
-        $chars = mb_str_split($alignedText);
-
-        foreach ($chars as $index => $char) {
-            if ($index < $startIndex || $index > $finishIndex) {
-                if (!is_null($this->style->getPaddingChar())) {
-                    $this->addFigure(new Pixel($start, $this->style->getPaddingChar()));
-                }
-            } else {
-                $this->addFigure(new Pixel($start, $char));
+        for ($i = 0; $i < $paddingBefore; $i++) {
+            if (!is_null($this->style->getPaddingChar())) {
+                $this->addFigure(new Pixel($start, $this->style->getPaddingChar()));
             }
 
             $start = $start->addX(1);
         }
 
+        $chars = mb_str_split($this->text);
 
+        for ($i = 0; $i < $this->width - $paddingBefore - $paddingAfter; $i++) {
+            $this->addFigure(new Pixel($start, $chars[$i]));
+
+            $start = $start->addX(1);
+        }
+
+        for ($i = 0; $i < $paddingAfter; $i++) {
+            if (!is_null($this->style->getPaddingChar())) {
+                $this->addFigure(new Pixel($start, $this->style->getPaddingChar()));
+            }
+
+            $start = $start->addX(1);
+        }
 
         return parent::getScreen();
     }
@@ -86,16 +92,5 @@ class Text extends BaseFigure
     {
         $this->style = $style;
         return $this;
-    }
-
-    private function align(): string
-    {
-        $mode = match ($this->style->getAlign()) {
-            HorizontalAlign::Left => STR_PAD_RIGHT,
-            HorizontalAlign::Right => STR_PAD_LEFT,
-            HorizontalAlign::Center => STR_PAD_BOTH,
-        };
-
-        return mb_str_pad($this->text, $this->width, ' ', $mode);
     }
 }

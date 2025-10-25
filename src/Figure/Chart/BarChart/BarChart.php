@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Chart\BarChart;
 
+use TextDraw\Common\Exception\RenderException;
 use TextDraw\Common\Size;
 use TextDraw\Common\HorizontalAlign;
 use TextDraw\Figure\Base\BaseFigure;
@@ -14,31 +15,58 @@ use TextDraw\Figure\Text\Text;
 use TextDraw\Figure\Text\TextStyle;
 use TextDraw\Plane\Point;
 use TextDraw\Screen\Screen;
-use TextDraw\Figure\Geometry\Rectangle\RectangleStyle;
 
 class BarChart extends BaseFigure
 {
+    /**
+     * @var non-empty-array<string>
+     */
     private array $labels;
 
-    private array $datasets;
+    /**
+     * @var array<array<int>>
+     */
+    private array $datasets = [];
+
+    /**
+     * @var array<DatasetStyle>
+     */
+    private array $datasetsStyles = [];
 
     private BarChartStyle $style;
 
+    /**
+     * @param array<string> $labels
+     * @throws RenderException
+     */
     public function __construct(
+        array $labels
     ) {
+        if (count($labels) === 0) {
+            throw new RenderException('Labels must not be empty');
+        }
+
+        $this->labels = $labels;
+
         $this->style = new BarChartStyle();
         parent::__construct();
     }
 
-    public function setLabels(array $labels): self
-    {
-        $this->labels = $labels;
-        return $this;
-    }
 
-    public function addDataset(array $dataset): self
+    /**
+     * @param array<int> $dataset
+     * @return $this
+     */
+    public function addDataset(array $dataset, ?DatasetStyle $style = null): self
     {
+        if (count($dataset) !== count($this->labels)) {
+            throw new RenderException('Dataset and labels count mismatch');
+        }
         $this->datasets[] = $dataset;
+
+
+        $this->datasetsStyles[] = $style ?? new DatasetStyle();
+
         return $this;
     }
 
@@ -59,8 +87,7 @@ class BarChart extends BaseFigure
 
         $this->drawAxes($size);
 
-        $labelWidth = $barWidth;
-        $this->drawLabels($size, $labelWidth);
+        $this->drawLabels($size, $barWidth * count($this->datasets));
 
         foreach ($this->datasets as $index => $dataset) {
             $this->drawDataset($size, $dataset, $index, $barWidth, $unitHeight);
@@ -80,9 +107,17 @@ class BarChart extends BaseFigure
 
     private function calculateHeight(int $unitHeight): int
     {
+        $maxes = [];
         foreach ($this->datasets as $dataset) {
+            if (count($dataset) === 0) {
+                throw new RenderException('Dataset empty');
+            }
             $maxes[] = max($dataset);
         }
+        if (count($maxes) == 0) {
+            throw new RenderException('Datasets empty');
+        }
+
         return max($maxes) * $unitHeight + 1;
     }
 
@@ -113,6 +148,9 @@ class BarChart extends BaseFigure
         }
     }
 
+    /**
+     * @param array<int> $dataset
+     */
     private function drawDataset(
         Size $size,
         array $dataset,
@@ -120,27 +158,29 @@ class BarChart extends BaseFigure
         int $barWidth,
         int $unitHeight,
     ): void {
-        $start = new Point(0, 0)->addHeight($size->getHeight())->addX(1);
+        $labelWidth = $barWidth * count($this->datasets);
+        $shift = $labelWidth + $this->style->getGap();
+
+        $start = new Point(0, 0)
+                    ->addHeight($size->getHeight())
+                    ->addX(1)
+                    ->addX($barWidth * $index);
+
         foreach ($dataset as $value) {
             $barHeight = $unitHeight * $value;
-            $this->drawBar($start, new Size($barWidth, $barHeight));
-            $start = $start->addX($barWidth + $this->style->getGap());
+            $this->drawBar($start, new Size($barWidth, $barHeight), $this->datasetsStyles[$index]);
+            $start = $start->addX($shift);
         }
     }
 
-    private function drawBar(Point $leftDownCorner, Size $size): void
+    private function drawBar(Point $leftDownCorner, Size $size, DatasetStyle $style): void
     {
-        $style = new RectangleStyle()
-                        ->setVerticalChar($this->style->getVerticalChar())
-                    ->setHorizontalChar($this->style->getHorizontalChar())
-                    ->setCrossingChar($this->style->getCrossingChar())
-        ;
 
         $this->addFigure(
             new Rectangle(
                 $leftDownCorner->subY($size->getHeight()),
                 $size
-            )->setStyle($style)
+            )->setStyle($style->getBarStyle())
         );
     }
 }

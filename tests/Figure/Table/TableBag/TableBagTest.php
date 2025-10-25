@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace TextDraw\Tests\Figure\Table;
+namespace TextDraw\Tests\Figure\Table\TableBag;
 
 use PHPUnit\Framework\TestCase;
-use TextDraw\Common\TextFrame;
+use TextDraw\Common\HorizontalAlign;
 use TextDraw\Figure\Table\TableBag\TableBag;
+use TextDraw\Figure\Table\TableBag\TextCell;
 use TextDraw\Figure\Table\TableCell;
 
 class TableBagTest extends TestCase
@@ -22,8 +23,8 @@ class TableBagTest extends TestCase
                 [new TableCell('111')]
             );
         $expected = [
-            [new TextFrame('11', 3)],
-            [new TextFrame('111', 3)],
+            [new TextCell('11', 3, HorizontalAlign::Left)],
+            [new TextCell('111', 3, HorizontalAlign::Left)],
         ];
         $this->assertEquals($expected, $bag->getTable());
 

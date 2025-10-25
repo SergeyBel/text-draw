@@ -6,18 +6,19 @@ namespace TextDraw\Tests\Figure\Chart\BarChart;
 
 use TextDraw\Figure\Chart\BarChart\BarChart;
 use TextDraw\Figure\Chart\BarChart\BarChartStyle;
+use TextDraw\Figure\Chart\BarChart\DatasetStyle;
+use TextDraw\Figure\Geometry\Rectangle\RectangleStyle;
 use TextDraw\Tests\Figure\FigureTestCase;
 
 class BarChartTest extends FigureTestCase
 {
-    public function testBarChart(): void
+    public function testOneDataset(): void
     {
-        $barChart = new BarChart()
+        $barChart = new BarChart(['a', 'b'])
                 ->setStyle($this->getStyle());
 
         $barChart
-            ->setLabels(['a', 'b'])
-            ->addDataset([2, 5]);
+            ->addDataset([2, 5], $this->getDatasetStyle());
 
         $this->addFigure($barChart);
 
@@ -33,16 +34,35 @@ class BarChartTest extends FigureTestCase
         $this->assertRender($expected);
     }
 
+    public function testTwoDatasets(): void
+    {
+        $barChart = new BarChart(['a', 'b'])
+            ->setStyle($this->getStyle());
+
+        $barChart
+            ->addDataset([1, 2], $this->getDatasetStyle())
+            ->addDataset([3, 4], $this->getDatasetStyle());
+
+        $this->addFigure($barChart);
+
+        $expected = <<<EOD
+        |.............****
+        |....****.....*..*
+        |....*..*.*****..*
+        |********.********
+        |...a........b....
+        EOD;
+
+        $this->assertRender($expected);
+    }
 
     public function testStyleBarWidth(): void
     {
         $style = $this->getStyle()->setBarWidth(3);
-        $barChart = new BarChart()
+        $barChart = new BarChart(['a'])
                 ->setStyle($style);
 
-        $barChart->addBar(
-            new Bar('a', 5)
-        );
+        $barChart->addDataset([3], $this->getDatasetStyle());
 
         $this->addFigure($barChart);
 
@@ -50,25 +70,20 @@ class BarChartTest extends FigureTestCase
         $expected = <<<EOD
         |***
         |*.*
-        |*.*
-        |*.*
         |***
-        |_a_
+        |.a.
         EOD;
 
         $this->assertRender($expected);
     }
-
 
     public function testStyleUnitHeigh(): void
     {
         $style = $this->getStyle()->setUnitHeight(2);
-        $barChart = new BarChart()
+        $barChart = new BarChart(['a'])
                 ->setStyle($style);
 
-        $barChart->addBar(
-            new Bar('a', 2)
-        );
+        $barChart->addDataset([2], $this->getDatasetStyle());
 
         $this->addFigure($barChart);
 
@@ -78,57 +93,7 @@ class BarChartTest extends FigureTestCase
         |*..*
         |*..*
         |****
-        |_a__
-        EOD;
-
-        $this->assertRender($expected);
-    }
-
-    public function testStyleVerticalChar(): void
-    {
-        $style = $this->getStyle()->setVerticalChar('|');
-        $barChart = new BarChart()
-                ->setStyle($style);
-
-        $barChart->addBar(
-            new Bar('a', 5)
-        );
-
-        $this->addFigure($barChart);
-
-
-        $expected = <<<EOD
-        |****
-        ||..|
-        ||..|
-        ||..|
-        |****
-        |_a__
-        EOD;
-
-        $this->assertRender($expected);
-    }
-
-    public function testStyleHorizontalChar(): void
-    {
-        $style = $this->getStyle()->setHorizontalChar('-');
-        $barChart = new BarChart()
-                ->setStyle($style);
-
-        $barChart->addBar(
-            new Bar('a', 5)
-        );
-
-        $this->addFigure($barChart);
-
-
-        $expected = <<<EOD
-        |*--*
-        |*..*
-        |*..*
-        |*..*
-        |*--*
-        |_a__
+        |.a..
         EOD;
 
         $this->assertRender($expected);
@@ -137,18 +102,12 @@ class BarChartTest extends FigureTestCase
     public function testStyleGap(): void
     {
         $style = $this->getStyle()->setGap(2);
-        $barChart = new BarChart()
+        $barChart = new BarChart(['a', 'b'])
                 ->setStyle($style);
 
-        $barChart->addBar(
-            new Bar('a', 2)
-        )
-            ->addBar(
-                new Bar('b', 5)
-            );
+        $barChart->addDataset([2, 5], $this->getDatasetStyle());
 
         $this->addFigure($barChart);
-
 
         $expected = <<<EOD
         |......****
@@ -156,49 +115,55 @@ class BarChartTest extends FigureTestCase
         |......*..*
         |****..*..*
         |****..****
-        |_a_____b__
+        |.a.....b..
         EOD;
 
         $this->assertRender($expected);
     }
 
-    public function testStyleCrossingChar(): void
+    public function testDatasetStyleRectangle(): void
     {
-        $style = $this->getStyle()->setCrossingChar('+');
-        $barChart = new BarChart()
-                ->setStyle($style);
+        $style = $this->getStyle();
+        $barChart = new BarChart(['a'])
+            ->setStyle($style);
 
-        $barChart->addBar(
-            new Bar('a', 5)
+        $barChart->addDataset(
+            [3],
+            $this->getDatasetStyle()->setBarStyle(
+                new RectangleStyle()
+                    ->setVerticalChar('|')
+                    ->setHorizontalChar('-')
+                    ->setCrossingChar('+')
+            )
         );
 
         $this->addFigure($barChart);
 
 
         $expected = <<<EOD
-        |+**+
-        |*..*
-        |*..*
-        |*..*
-        |+**+
-        |_a__
+        |+--+
+        ||..|
+        |+--+
+        |.a..
         EOD;
 
         $this->assertRender($expected);
     }
 
-    
-
-
     private function getStyle(): BarChartStyle
     {
         return new BarChartStyle()
-                ->setBarWidth(4)
-                ->setUnitHeight(1)
-                ->setChar('*')
-                ->setGap(1)
+            ->setBarWidth(4)
+            ->setUnitHeight(1)
+            ->setGap(1)
         ;
+    }
 
+    private function getDatasetStyle(): DatasetStyle
+    {
+        return new DatasetStyle()
+            ->setBarStyle(new RectangleStyle()->setChar('*'))
+        ;
     }
 
 }
