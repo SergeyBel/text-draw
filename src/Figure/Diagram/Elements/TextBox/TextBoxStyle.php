@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TextDraw\Figure\Elements\TextBox;
+namespace TextDraw\Figure\Diagram\Elements\TextBox;
 
 use TextDraw\Common\HorizontalAlign;
 use TextDraw\Common\VerticalAlign;

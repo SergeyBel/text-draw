@@ -2,14 +2,16 @@
 
 declare(strict_types=1);
 
-namespace TextDraw\Figure\Elements\Arrows\CornerArrow;
+namespace TextDraw\Figure\Diagram\Elements\Arrow;
 
 use TextDraw\Common\Char;
+use TextDraw\Common\HorizontalAlign;
 
-class CornerArrowStyle
+class ArrowStyle
 {
     private Char $horizontalChar;
     private Char $verticalChar;
+    private HorizontalAlign $align = HorizontalAlign::Center;
 
     public function __construct()
     {
@@ -38,4 +40,19 @@ class CornerArrowStyle
         $this->verticalChar = new Char($verticalChar);
         return $this;
     }
+
+    public function getAlign(): HorizontalAlign
+    {
+        return $this->align;
+    }
+
+    public function setAlign(HorizontalAlign $align): self
+    {
+        $this->align = $align;
+        return $this;
+    }
+
+
+
+
 }

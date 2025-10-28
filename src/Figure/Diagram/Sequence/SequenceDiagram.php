@@ -6,8 +6,8 @@ namespace TextDraw\Figure\Diagram\Sequence;
 
 use TextDraw\Common\Size;
 use TextDraw\Figure\Base\BaseFigure;
-use TextDraw\Figure\Elements\Arrows\TextArrow\TextArrow;
-use TextDraw\Figure\Elements\TextBox\TextBox;
+use TextDraw\Figure\Diagram\Elements\Arrow\Arrow;
+use TextDraw\Figure\Diagram\Elements\TextBox\TextBox;
 use TextDraw\Figure\Geometry\Line\Line;
 use TextDraw\Figure\Geometry\Line\LineStyle;
 use TextDraw\Figure\Text\Text;
@@ -140,11 +140,7 @@ class SequenceDiagram extends BaseFigure
         $end = new Point($this->getBoxBottomCenter($boxTo)->subX(1)->getX(), $y + 1);
 
         $this->addFigure(
-            new TextArrow(
-                $message->getText(),
-                $start,
-                $end
-            )
+            new Arrow($start, $end, $message->getText())
         );
         return $y + 2;
 

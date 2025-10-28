@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace TextDraw\Figure\Diagram\Sequence;
 
 use TextDraw\Common\HorizontalAlign;
-use TextDraw\Figure\Elements\TextBox\TextBoxStyle;
+use TextDraw\Figure\Diagram\Elements\TextBox\TextBoxStyle;
 use TextDraw\Figure\Geometry\Rectangle\RectangleStyle;
 
 class SequenceDiagramStyle
