@@ -169,6 +169,90 @@ class TextBoxTest extends FigureTestCase
         $this->assertRender($expected);
     }
 
+    public function testGetLeftBottomCorner(): void
+    {
+        $textBox = new TextBox(
+            'test',
+            new Point(0, 0),
+            new Size(2, 5)
+        );
+        $point = $textBox->getLeftBottomCorner();
+        $this->assertEquals(0, $point->getX());
+        $this->assertEquals(4, $point->getY());
+    }
+
+    public function testGetRightUpperCorner(): void
+    {
+        $textBox = new TextBox(
+            'test',
+            new Point(0, 0),
+            new Size(2, 5)
+        );
+        $point = $textBox->getRightUpperCorner();
+        $this->assertEquals(1, $point->getX());
+        $this->assertEquals(0, $point->getY());
+    }
+
+    public function testGetRightBottomCorner(): void
+    {
+        $textBox = new TextBox(
+            'test',
+            new Point(0, 0),
+            new Size(2, 5)
+        );
+        $point = $textBox->getRightBottomCorner();
+        $this->assertEquals(1, $point->getX());
+        $this->assertEquals(4, $point->getY());
+    }
+
+    public function testGetUpperCenter(): void
+    {
+        $textBox = new TextBox(
+            'test',
+            new Point(0, 0),
+            new Size(3, 6)
+        );
+        $point = $textBox->getUpperCenter();
+        $this->assertEquals(1, $point->getX());
+        $this->assertEquals(0, $point->getY());
+    }
+
+    public function testGetBottomCenter(): void
+    {
+        $textBox = new TextBox(
+            'test',
+            new Point(0, 0),
+            new Size(3, 6)
+        );
+        $point = $textBox->getBottomCenter();
+        $this->assertEquals(1, $point->getX());
+        $this->assertEquals(5, $point->getY());
+    }
+
+    public function testGetLeftCenter(): void
+    {
+        $textBox = new TextBox(
+            'test',
+            new Point(0, 0),
+            new Size(3, 6)
+        );
+        $point = $textBox->getLeftCenter();
+        $this->assertEquals(0, $point->getX());
+        $this->assertEquals(2, $point->getY());
+    }
+
+    public function testGetRightCenter(): void
+    {
+        $textBox = new TextBox(
+            'test',
+            new Point(0, 0),
+            new Size(3, 6)
+        );
+        $point = $textBox->getRightCenter();
+        $this->assertEquals(2, $point->getX());
+        $this->assertEquals(2, $point->getY());
+    }
+
 
     private function getStyle(): TextBoxStyle
     {

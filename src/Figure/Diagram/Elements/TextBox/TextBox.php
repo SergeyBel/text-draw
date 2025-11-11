@@ -80,10 +80,55 @@ class TextBox extends BaseFigure
         return $this->leftUpperCorner;
     }
 
+    public function getLeftBottomCorner(): Point
+    {
+        return $this->leftUpperCorner->addHeight($this->size->getHeight());
+    }
+
+    public function getRightUpperCorner(): Point
+    {
+        return $this->getLeftUpperCorner()->addWidth($this->size->getWidth());
+    }
+
+    public function getRightBottomCorner(): Point
+    {
+        return $this->getLeftBottomCorner()->addWidth($this->size->getWidth());
+    }
+
+    public function getUpperCenter(): Point
+    {
+        return new Point(
+            intdiv($this->getLeftUpperCorner()->getX() + $this->getRightUpperCorner()->getX(), 2),
+            $this->getLeftUpperCorner()->getY(),
+        );
+    }
+
+    public function getBottomCenter(): Point
+    {
+        return new Point(
+            intdiv($this->getLeftBottomCorner()->getX() + $this->getRightBottomCorner()->getX(), 2),
+            $this->getLeftBottomCorner()->getY(),
+        );
+    }
+
+    public function getLeftCenter(): Point
+    {
+        return new Point(
+            $this->getLeftBottomCorner()->getX(),
+            intdiv($this->getLeftUpperCorner()->getY() + $this->getLeftBottomCorner()->getY(), 2),
+        );
+    }
+
+    public function getRightCenter(): Point
+    {
+        return new Point(
+            $this->getRightBottomCorner()->getX(),
+            intdiv($this->getRightUpperCorner()->getY() + $this->getRightBottomCorner()->getY(), 2),
+        );
+    }
+
     public function getSize(): Size
     {
         return $this->size;
     }
-
-
 }

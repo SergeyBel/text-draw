@@ -125,7 +125,7 @@ class SequenceDiagram extends BaseFigure
     private function drawSelfMessage(Message $message, int $y): int
     {
         $box = $this->actorsBoxes[$message->getFrom()];
-        $start = $this->getBoxBottomCenter($box)->addX(1)->addY(1);
+        $start = $box->getBottomCenter()->addX(1)->addY(1);
         $this->addFigure(new Text($start, $message->getText()));
         return $y + 1;
 
@@ -136,8 +136,8 @@ class SequenceDiagram extends BaseFigure
         $boxFrom = $this->actorsBoxes[$message->getFrom()];
         $boxTo = $this->actorsBoxes[$message->getTo()];
 
-        $start = new Point($this->getBoxBottomCenter($boxFrom)->addX(1)->getX(), $y + 1);
-        $end = new Point($this->getBoxBottomCenter($boxTo)->subX(1)->getX(), $y + 1);
+        $start = new Point($boxFrom->getBottomCenter()->addX(1)->getX(), $y + 1);
+        $end = new Point($boxTo->getBottomCenter()->subX(1)->getX(), $y + 1);
 
         $this->addFigure(
             new Arrow($start, $end, $message->getText())
@@ -149,7 +149,7 @@ class SequenceDiagram extends BaseFigure
     private function drawLifeLines(int $height): void
     {
         foreach ($this->actorsBoxes as $box) {
-            $start = $this->getBoxBottomCenter($box)->addY(1);
+            $start = $box->getBottomCenter()->addY(1);
             $end = $start->addY($height)->subY($box->getSize()->getHeight());
             $this->addFigure(
                 new Line(
@@ -162,14 +162,6 @@ class SequenceDiagram extends BaseFigure
         }
     }
 
-
-
-    private function getBoxBottomCenter(TextBox $box): Point
-    {
-        return $box->getLeftUpperCorner()
-            ->addX(intdiv($box->getSize()->getWidth(), 2))
-            ->addY($box->getSize()->getHeight() - 1);
-    }
 
     private function calculateBoxGap(): int
     {
