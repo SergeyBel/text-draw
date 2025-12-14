@@ -87,5 +87,10 @@ class Point
         return $that;
     }
 
+    public function equals(Point $other): bool
+    {
+        return $this->x === $other->x && $this->y === $other->y;
+    }
+
 
 }

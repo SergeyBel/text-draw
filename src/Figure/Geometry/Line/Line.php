@@ -59,6 +59,34 @@ class Line extends BaseFigure
         return $screen;
     }
 
+    public function getStart(): Point
+    {
+        return $this->start;
+    }
+
+    public function setStart(Point $start): self
+    {
+        $this->start = $start;
+        return $this;
+    }
+
+    public function getEnd(): Point
+    {
+        return $this->end;
+    }
+
+    public function setEnd(Point $end): self
+    {
+        $this->end = $end;
+        return $this;
+    }
+
+
+
+
+
+
+
     /**
      * @return array<Pixel>
      */

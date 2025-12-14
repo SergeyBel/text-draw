@@ -19,7 +19,8 @@ class Arrow extends BaseFigure
     public function __construct(
         private Point $start,
         private Point $end,
-        private ?string $text = null
+        private ArrowDirection $direction,
+        private ?string $text = null,
     ) {
         $this->style = new ArrowStyle();
 
@@ -28,46 +29,81 @@ class Arrow extends BaseFigure
 
     public function getScreen(): Screen
     {
+        $horizontalLine = null;
+        $verticalLine = null;
 
-        $middlePoint = new Point($this->start->getX(), $this->end->getY());
+        if ($this->direction === ArrowDirection::SIDE) {
+            $middlePoint = new Point($this->start->getX(), $this->end->getY());
 
-        $verticalLine = new Line($this->start, $middlePoint)
-                                ->setStyle(
-                                    new LineStyle()->setChar($this->style->getVerticalChar())
-                                );
+            $horizontalLine = new Line($middlePoint, $this->end);
 
-        $horizontalLine = new Line($middlePoint, $this->end);
-        $horizontalStyle = new LineStyle()
-                            ->setChar($this->style->getHorizontalChar());
+            $horizontalStyle = new LineStyle()
+                ->setChar($this->style->getHorizontalChar());
 
-        $textStart = null;
-        if ($middlePoint->getX() < $this->end->getX()) {
-            $horizontalStyle->setFinishChar('>');
-            $textStart = clone $middlePoint;
-        } elseif ($middlePoint->getX() > $this->end->getX()) {
-            $horizontalStyle->setFinishChar('<');
-            $textStart = clone $this->end;
-        } elseif ($this->start->getY() < $this->end->getY()) {
-            $horizontalStyle->setFinishChar('v');
+            if ($this->start->getX() < $this->end->getX()) {
+                $horizontalStyle->setFinishChar('>');
+            } else {
+                $horizontalStyle->setFinishChar('<');
+            }
+
+            $horizontalLine->setStyle($horizontalStyle);
+
+            if (!$middlePoint->equals($this->start)) {
+                $verticalLine = new Line($this->start, $middlePoint)
+                    ->setStyle(
+                        new LineStyle()->setChar($this->style->getVerticalChar())
+                    );
+            }
+
         } else {
-            $horizontalStyle->setFinishChar('^');
+
+            $middlePoint = new Point($this->end->getX(), $this->start->getY());
+
+
+            $verticalLine = new Line($middlePoint, $this->end);
+
+            $verticalStyle = new LineStyle()
+                ->setChar($this->style->getVerticalChar());
+
+            if ($this->start->getY() < $this->end->getY()) {
+                $verticalStyle->setFinishChar('v');
+            } else {
+                $verticalStyle->setFinishChar('^');
+            }
+
+            $verticalLine->setStyle($verticalStyle);
+
+            if (!$middlePoint->equals($this->start)) {
+                $horizontalLine = new Line($this->start, $middlePoint)
+                    ->setStyle(
+                        new LineStyle()->setChar($this->style->getHorizontalChar())
+                    );
+            }
+
+
+        }
+
+        if (!is_null($verticalLine)) {
+            $this
+                ->addFigure($verticalLine);
+        }
+
+        if (!is_null($horizontalLine)) {
+            $this
+                ->addFigure($horizontalLine);
+
+            if (!is_null($this->text)) {
+                $textStart = $horizontalLine->getStart();
+                $textWidth = abs($horizontalLine->getStart()->getX() - $horizontalLine->getEnd()->getX()) + 1;
+                $this->addFigure(
+                    new Text($textStart->subY(1), $this->text, $textWidth)
+                        ->setStyle(new TextStyle()->setAlign($this->style->getAlign()))
+                );
+            }
         }
 
 
-        $horizontalLine->setStyle($horizontalStyle);
 
-        $this
-            ->addFigure($verticalLine)
-            ->addFigure($horizontalLine)
-        ;
-
-        if (!is_null($this->text) && !is_null($textStart)) {
-            $width = abs($middlePoint->getX() - $this->end->getX()) + 1;
-            $this->addFigure(
-                new Text($textStart->subY(1), $this->text, $width)
-                    ->setStyle(new TextStyle()->setAlign($this->style->getAlign()))
-            );
-        }
 
         return parent::getScreen();
     }
