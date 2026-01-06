@@ -30,7 +30,7 @@ class Screen
 
     public function addFigure(FigureInterface $figure): self
     {
-        return $this->merge($figure->getScreen());
+        return $this->merge($figure->draw());
     }
 
     public function setPixel(Pixel $pixel): self

@@ -66,13 +66,13 @@ class Table extends BaseFigure
     }
 
 
-    public function getScreen(): Screen
+    public function draw(): Screen
     {
         $this->prepareTable();
         $start = new Point(0, 0);
         $this->drawTable($start);
 
-        return parent::getScreen();
+        return parent::draw();
     }
 
     private function drawTable(Point $start): void

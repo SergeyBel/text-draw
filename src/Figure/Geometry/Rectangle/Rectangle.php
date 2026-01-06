@@ -24,19 +24,19 @@ class Rectangle extends BaseFigure
         parent::__construct();
     }
 
-    public function getScreen(): Screen
+    public function draw(): Screen
     {
 
         $horizontalLineStyle = new LineStyle()
                 ->setChar($this->style->getHorizontalChar())
                 ->setStartChar($this->style->getCrossingChar())
-                ->setFinishChar($this->style->getCrossingChar())
+                ->setEndChar($this->style->getCrossingChar())
         ;
 
         $verticalLineStyle = new LineStyle()
             ->setChar($this->style->getVerticalChar())
             ->setStartChar($this->style->getCrossingChar())
-            ->setFinishChar($this->style->getCrossingChar())
+            ->setEndChar($this->style->getCrossingChar())
         ;
 
 
@@ -57,7 +57,7 @@ class Rectangle extends BaseFigure
             ->addFigure($right);
 
 
-        return parent::getScreen();
+        return parent::draw();
     }
 
     public function getStyle(): RectangleStyle

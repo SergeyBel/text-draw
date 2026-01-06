@@ -78,7 +78,7 @@ class BarChart extends BaseFigure
     }
 
 
-    public function getScreen(): Screen
+    public function draw(): Screen
     {
         $barWidth = $this->style->getBarWidth();
         $unitHeight = $this->style->getUnitHeight();
@@ -93,7 +93,7 @@ class BarChart extends BaseFigure
             $this->drawDataset($size, $dataset, $index, $barWidth, $unitHeight);
         }
 
-        return parent::getScreen();
+        return parent::draw();
     }
 
     private function calculateWidth(int $barWidth): int

@@ -27,7 +27,7 @@ class Arrow extends BaseFigure
         parent::__construct();
     }
 
-    public function getScreen(): Screen
+    public function draw(): Screen
     {
         $horizontalLine = null;
         $verticalLine = null;
@@ -41,9 +41,9 @@ class Arrow extends BaseFigure
                 ->setChar($this->style->getHorizontalChar());
 
             if ($this->start->getX() < $this->end->getX()) {
-                $horizontalStyle->setFinishChar('>');
+                $horizontalStyle->setEndChar('>');
             } else {
-                $horizontalStyle->setFinishChar('<');
+                $horizontalStyle->setEndChar('<');
             }
 
             $horizontalLine->setStyle($horizontalStyle);
@@ -66,9 +66,9 @@ class Arrow extends BaseFigure
                 ->setChar($this->style->getVerticalChar());
 
             if ($this->start->getY() < $this->end->getY()) {
-                $verticalStyle->setFinishChar('v');
+                $verticalStyle->setEndChar('v');
             } else {
-                $verticalStyle->setFinishChar('^');
+                $verticalStyle->setEndChar('^');
             }
 
             $verticalLine->setStyle($verticalStyle);
@@ -105,7 +105,7 @@ class Arrow extends BaseFigure
 
 
 
-        return parent::getScreen();
+        return parent::draw();
     }
 
     public function setStyle(ArrowStyle $style): self

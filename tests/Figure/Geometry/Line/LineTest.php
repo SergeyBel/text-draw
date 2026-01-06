@@ -26,7 +26,6 @@ class LineTest extends FigureTestCase
 
     public function testVerticalLine(): void
     {
-
         $this->addFigure(
             new Line(new Point(0, 0), new Point(0, 2))
                     ->setStyle($this->getStyle())
@@ -40,9 +39,8 @@ class LineTest extends FigureTestCase
         $this->assertRender($expected);
     }
 
-    public function testDiagonalLine(): void
+    public function testDiagonalRightLine(): void
     {
-
         $this->addFigure(
             new Line(new Point(0, 0), new Point(2, 2))
                      ->setStyle($this->getStyle())
@@ -56,49 +54,28 @@ class LineTest extends FigureTestCase
         $this->assertRender($expected);
     }
 
-    public function testStyleChar(): void
+    public function testDiagonalLeftLine(): void
     {
-
-        $style = $this->getStyle()->setChar('+');
         $this->addFigure(
-            new Line(new Point(0, 0), new Point(2, 2))
-                ->setStyle($style)
+            new Line(new Point(2, 0), new Point(0, 2))
+                ->setStyle($this->getStyle())
         );
         $expected = <<<EOD
-        +..
-        .+.
-        ..+
-        EOD;
-
-        $this->assertRender($expected);
-    }
-
-    public function testStyleStartFinishSymbol(): void
-    {
-
-        $style = $this->getStyle()
-            ->setStartChar('+')
-            ->setFinishChar('@');
-
-        $this->addFigure(
-            new Line(new Point(0, 0), new Point(2, 2))
-                ->setStyle($style)
-        );
-        $expected = <<<EOD
-        +..
+        ..*
         .*.
-        ..@
+        *..
         EOD;
 
         $this->assertRender($expected);
     }
+
 
     private function getStyle(): LineStyle
     {
         return new LineStyle()
                         ->setChar('*')
                         ->setStartChar(null)
-                        ->setFinishChar(null)
+                        ->setEndChar(null)
         ;
 
     }

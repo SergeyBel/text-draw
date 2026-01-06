@@ -26,7 +26,7 @@ class TextBox extends BaseFigure
         parent::__construct();
     }
 
-    public function getScreen(): Screen
+    public function draw(): Screen
     {
         $size = $this->size;
 
@@ -66,7 +66,7 @@ class TextBox extends BaseFigure
             new Text($start, $this->text)
         );
 
-        return parent::getScreen();
+        return parent::draw();
     }
 
     public function setStyle(TextBoxStyle $style): static

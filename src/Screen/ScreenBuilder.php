@@ -37,7 +37,7 @@ class ScreenBuilder
             $this->screen = $this->screen->merge($this->currentScreen);
         }
 
-        $this->currentScreen = $figure->getScreen();
+        $this->currentScreen = $figure->draw();
         return $this;
     }
 

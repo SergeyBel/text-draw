@@ -74,7 +74,7 @@ class LineChart extends BaseFigure
         return $this;
     }
 
-    public function getScreen(): Screen
+    public function draw(): Screen
     {
 
 
@@ -90,7 +90,7 @@ class LineChart extends BaseFigure
             $this->drawDataset($dataset, $height, $minValue, $this->datasetsStyles[$key]);
         }
 
-        return parent::getScreen();
+        return parent::draw();
     }
 
     /**
@@ -118,7 +118,7 @@ class LineChart extends BaseFigure
             if (!is_null($style->getPointChar())) {
                 $lineStyle
                     ->setStartChar($style->getPointChar())
-                    ->setFinishChar($style->getPointChar())
+                    ->setEndChar($style->getPointChar())
                 ;
             }
 

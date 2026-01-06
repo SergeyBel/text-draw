@@ -29,7 +29,7 @@ class Text extends BaseFigure
         parent::__construct();
     }
 
-    public function getScreen(): Screen
+    public function draw(): Screen
     {
         $start = clone $this->start;
 
@@ -70,7 +70,7 @@ class Text extends BaseFigure
             $start = $start->addX(1);
         }
 
-        return parent::getScreen();
+        return parent::draw();
     }
 
     public function getStyle(): TextStyle

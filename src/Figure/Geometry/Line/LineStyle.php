@@ -10,7 +10,7 @@ class LineStyle
 {
     private Char $char;
     private ?Char $startChar = null;
-    private ?Char $finishChar = null;
+    private ?Char $endChar = null;
 
     public function __construct()
     {
@@ -39,14 +39,14 @@ class LineStyle
         return $this;
     }
 
-    public function getFinishChar(): ?string
+    public function getEndChar(): ?string
     {
-        return $this->finishChar?->getChar();
+        return $this->endChar?->getChar();
     }
 
-    public function setFinishChar(?string $finishChar): LineStyle
+    public function setEndChar(?string $endChar): LineStyle
     {
-        $this->finishChar = !is_null($finishChar) ? new Char($finishChar) : null;
+        $this->endChar = !is_null($endChar) ? new Char($endChar) : null;
         return $this;
     }
 }

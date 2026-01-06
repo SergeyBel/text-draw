@@ -17,7 +17,7 @@ class BaseFigure implements FigureInterface
     }
 
 
-    public function getScreen(): Screen
+    public function draw(): Screen
     {
         return $this->screen;
     }

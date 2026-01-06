@@ -21,7 +21,7 @@ class Circle extends BaseFigure
         parent::__construct();
     }
 
-    public function getScreen(): Screen
+    public function draw(): Screen
     {
         $points = [];
 

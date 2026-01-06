@@ -23,7 +23,7 @@ class Triangle extends BaseFigure
         parent::__construct();
     }
 
-    public function getScreen(): Screen
+    public function draw(): Screen
     {
         $lineStyle = new LineStyle()->setChar($this->style->getChar());
         $this
@@ -31,7 +31,7 @@ class Triangle extends BaseFigure
             ->addFigure(new Line($this->vertex2, $this->vertex3)->setStyle($lineStyle))
             ->addFigure(new Line($this->vertex3, $this->vertex1)->setStyle($lineStyle));
 
-        return parent::getScreen();
+        return parent::draw();
     }
 
     public function setStyle(TriangleStyle $style): self

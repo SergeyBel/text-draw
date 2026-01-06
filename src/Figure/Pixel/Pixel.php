@@ -21,7 +21,7 @@ class Pixel extends BaseFigure
         parent::__construct();
     }
 
-    public function getScreen(): Screen
+    public function draw(): Screen
     {
         return new Screen([$this]);
     }

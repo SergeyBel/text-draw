@@ -65,7 +65,7 @@ class SequenceDiagram extends BaseFigure
 
 
 
-    public function getScreen(): Screen
+    public function draw(): Screen
     {
         $this->drawActors();
         $firstBox = $this->actorsBoxes[array_key_first($this->actorsBoxes)];
@@ -74,7 +74,7 @@ class SequenceDiagram extends BaseFigure
         );
         $this->drawLifeLines($height);
 
-        return parent::getScreen();
+        return parent::draw();
     }
 
     private function drawActors(): void
