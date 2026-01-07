@@ -5,59 +5,32 @@ declare(strict_types=1);
 namespace TextDraw\Figure\Geometry\Rectangle;
 
 use TextDraw\Common\Size;
-use TextDraw\Figure\Base\BaseFigure;
-use TextDraw\Figure\Geometry\Line\Line;
-use TextDraw\Figure\Geometry\Line\LineStyle;
+use TextDraw\Figure\Base\FigureInterface;
 use TextDraw\Plane\Point;
 use TextDraw\Screen\Screen;
 
-class Rectangle extends BaseFigure
+class Rectangle implements FigureInterface
 {
+    private RectangleData $rectangleData;
     private RectangleStyle $style;
 
     public function __construct(
-        private Point $leftUpperCorner,
-        private Size $size,
+        int $x,
+        int $y,
+        int $width,
+        int $height,
     ) {
-        $this->style = new RectangleStyle();
+        $this->rectangleData = new RectangleData(
+            new Point($x, $y),
+            new Size($width, $height),
+        );
 
-        parent::__construct();
+        $this->style = new RectangleStyle();
     }
 
     public function draw(): Screen
     {
-
-        $horizontalLineStyle = new LineStyle()
-                ->setChar($this->style->getHorizontalChar())
-                ->setStartChar($this->style->getCrossingChar())
-                ->setEndChar($this->style->getCrossingChar())
-        ;
-
-        $verticalLineStyle = new LineStyle()
-            ->setChar($this->style->getVerticalChar())
-            ->setStartChar($this->style->getCrossingChar())
-            ->setEndChar($this->style->getCrossingChar())
-        ;
-
-
-        $rightUpperCorner = $this->leftUpperCorner->addWidth($this->size->getWidth());
-        $leftBottomCorner = $this->leftUpperCorner->addHeight($this->size->getHeight());
-        $rightBottomCorner = $rightUpperCorner->addHeight($this->size->getHeight());
-
-
-        $top = new Line($this->leftUpperCorner, $rightUpperCorner)->setStyle($horizontalLineStyle);
-        $right = new Line($rightUpperCorner, $rightBottomCorner)->setStyle($verticalLineStyle);
-        $bottom = new Line($rightBottomCorner, $leftBottomCorner)->setStyle($horizontalLineStyle);
-        $left = new Line($leftBottomCorner, $this->leftUpperCorner)->setStyle($verticalLineStyle);
-
-        $this
-            ->addFigure($top)
-            ->addFigure($bottom)
-            ->addFigure($left)
-            ->addFigure($right);
-
-
-        return parent::draw();
+        return new RectangleDrawer()->draw($this->rectangleData, $this->style);
     }
 
     public function getStyle(): RectangleStyle

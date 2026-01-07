@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Geometry\Line;
 
-use TextDraw\Figure\Base\BaseFigure;
+use TextDraw\Figure\Base\FigureInterface;
 use TextDraw\Plane\Point;
 use TextDraw\Screen\Screen;
 
-class Line extends BaseFigure
+class Line implements FigureInterface
 {
     private LineData $lineData;
     private LineStyle $style;
@@ -19,7 +19,6 @@ class Line extends BaseFigure
     ) {
         $this->lineData = new LineData($start, $end);
         $this->style = new LineStyle();
-        parent::__construct();
     }
 
     public function getLineData(): LineData
