@@ -41,8 +41,7 @@ class Line implements FigureInterface
 
     public function setStyle(LineStyle $style): static
     {
-        $that = clone $this;
-        $that->style = $style;
-        return $that;
+        $this->style = $style;
+        return $this;
     }
 }

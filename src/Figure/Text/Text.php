@@ -11,6 +11,8 @@ use TextDraw\Screen\Screen;
 
 class Text implements FigureInterface
 {
+    private TextData $textData;
+
     private TextStyle $style;
 
     public function __construct(
@@ -19,10 +21,37 @@ class Text implements FigureInterface
         private ?int $width = null,
         private HorizontalAlign $align = HorizontalAlign::Left,
     ) {
+        $this->textData = $this->initTextData();
         $this->style = new TextStyle();
     }
 
     public function draw(): Screen
+    {
+        return new TextDrawer()->draw(
+            $this->textData,
+            $this->style
+        );
+    }
+
+    public function getStyle(): TextStyle
+    {
+        return $this->style;
+    }
+
+    public function setStyle(TextStyle $style): static
+    {
+        $this->style = $style;
+        return $this;
+    }
+
+    public function getTextData(): TextData
+    {
+        return $this->textData;
+    }
+
+
+
+    private function initTextData(): TextData
     {
         $width = is_null($this->width) ? mb_strlen($this->text) : $this->width;
 
@@ -38,27 +67,14 @@ class Text implements FigureInterface
             $paddingBefore = max(0, $width - $length - $paddingAfter);
         }
 
-        return new TextDrawer()->draw(
-            new TextData(
-                $this->start,
-                $this->text,
-                $width,
-                $paddingBefore,
-                $paddingAfter
-            ),
-            $this->style
+        return new TextData(
+            $this->start,
+            $this->text,
+            $width,
+            $paddingBefore,
+            $paddingAfter
         );
     }
 
-    public function getStyle(): TextStyle
-    {
-        return $this->style;
-    }
 
-    public function setStyle(TextStyle $style): static
-    {
-        $that = clone $this;
-        $that->style = $style;
-        return $that;
-    }
 }

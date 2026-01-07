@@ -33,8 +33,7 @@ class Triangle implements FigureInterface
 
     public function setStyle(TriangleStyle $style): self
     {
-        $that = clone $this;
-        $that->style = $style;
-        return $that;
+        $this->style = $style;
+        return $this;
     }
 }
