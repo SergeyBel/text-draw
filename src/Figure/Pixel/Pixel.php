@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Pixel;
 
-use TextDraw\Figure\Base\BaseFigure;
+use TextDraw\Figure\Base\FigureInterface;
 use TextDraw\Plane\Point;
 use TextDraw\Screen\Screen;
 use TextDraw\Common\Char;
 
-class Pixel extends BaseFigure
+class Pixel implements FigureInterface
 {
     private Char $char;
 
@@ -18,7 +18,6 @@ class Pixel extends BaseFigure
         string $char,
     ) {
         $this->char = new Char($char);
-        parent::__construct();
     }
 
     public function draw(): Screen

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Geometry\Triangle;
 
-use TextDraw\Figure\Base\BaseFigure;
+use TextDraw\Figure\Base\FigureInterface;
 use TextDraw\Plane\Point;
 use TextDraw\Screen\Screen;
 
-class Triangle extends BaseFigure
+class Triangle implements FigureInterface
 {
     private TriangleData $triangleData;
     private TriangleStyle $style;
@@ -24,7 +24,6 @@ class Triangle extends BaseFigure
             $vertex3,
         );
         $this->style = new TriangleStyle();
-        parent::__construct();
     }
 
     public function draw(): Screen

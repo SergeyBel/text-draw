@@ -29,15 +29,16 @@ class TextTest extends FigureTestCase
         $this->assertRender($expected);
     }
 
-    public function testStyleWidthLess(): void
+    public function testWidthLess(): void
     {
         $text = new Text(
             new Point(0, 0),
             'hello',
             3
-        );
-        $text->setStyle($this->getStyle());
+        )->setStyle($this->getStyle());
+
         $this->addFigure($text);
+
         $expected = <<<EOD
         hel
         EOD;
@@ -51,13 +52,12 @@ class TextTest extends FigureTestCase
         $text = new Text(
             new Point(0, 0),
             'hello',
-            7
-        );
-        $text->setStyle(
-            $this->getStyle()
-                ->setAlign(HorizontalAlign::Right)
-        );
+            7,
+            HorizontalAlign::Right
+        )->setStyle($this->getStyle());
+
         $this->addFigure($text);
+
         $expected = <<<EOD
         ..hello
         EOD;
@@ -67,14 +67,15 @@ class TextTest extends FigureTestCase
 
     public function testAlignCenter(): void
     {
-
         $text = new Text(
             new Point(0, 0),
             'hello',
-            7
-        );
-        $text->setStyle($this->getStyle()->setPaddingChar('-')->setAlign(HorizontalAlign::Center));
+            7,
+            HorizontalAlign::Center
+        )->setStyle($this->getStyle()->setPaddingChar('-'));
+
         $this->addFigure($text);
+
         $expected = <<<EOD
         -hello-
         EOD;
@@ -88,10 +89,12 @@ class TextTest extends FigureTestCase
         $text = new Text(
             new Point(0, 0),
             'hello',
-            8
-        );
-        $text->setStyle($this->getStyle()->setPaddingChar('-')->setAlign(HorizontalAlign::Center));
+            8,
+            HorizontalAlign::Center
+        )->setStyle($this->getStyle()->setPaddingChar('-'));
+
         $this->addFigure($text);
+
         $expected = <<<EOD
         -hello--
         EOD;
@@ -103,7 +106,6 @@ class TextTest extends FigureTestCase
     {
         return new TextStyle()
                     ->setPaddingChar(null)
-                    ->setAlign(HorizontalAlign::Left)
         ;
     }
 }
