@@ -4,18 +4,25 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Turtle;
 
-use TextDraw\Figure\Base\BaseFigure;
+use TextDraw\Figure\Base\FigureInterface;
 use TextDraw\Figure\Pixel\Pixel;
 use TextDraw\Plane\Point;
+use TextDraw\Screen\Screen;
 
-class Turtle extends BaseFigure
+class Turtle implements FigureInterface
 {
     private Point $position;
+    private Screen $screen;
 
-    public function __construct()
+    public function __construct(
+        ?Point $position = null,
+    ) {
+        $this->position = is_null($position) ? new Point(0, 0) : $position;
+    }
+
+    public function draw(): Screen
     {
-        $this->position = new Point(0, 0);
-        parent::__construct();
+        return $this->screen;
     }
 
     public function moveRight(int $value = 1): static
@@ -49,16 +56,15 @@ class Turtle extends BaseFigure
 
     public function paint(string $char): static
     {
-        $this->addFigure(new Pixel($this->position, $char));
+        $this->screen = $this->screen->addFigure(new Pixel($this->position, $char));
         return $this;
     }
 
     public function paintRight(string $char, int $value = 1): static
     {
         for ($i = 0; $i < $value; $i++) {
-            $this
-                ->addFigure(new Pixel($this->position, $char))
-                ->moveRight();
+            $this->screen = $this->screen->addFigure(new Pixel($this->position, $char));
+            $this->moveRight();
         }
 
         return $this;
@@ -67,9 +73,8 @@ class Turtle extends BaseFigure
     public function paintLeft(string $char, int $value = 1): static
     {
         for ($i = 0; $i < $value; $i++) {
-            $this
-                ->addFigure(new Pixel($this->position, $char))
-                ->moveLeft();
+            $this->screen = $this->screen->addFigure(new Pixel($this->position, $char));
+            $this->moveLeft();
         }
 
         return $this;
@@ -78,9 +83,8 @@ class Turtle extends BaseFigure
     public function paintUp(string $char, int $value = 1): static
     {
         for ($i = 0; $i < $value; $i++) {
-            $this
-                ->addFigure(new Pixel($this->position, $char))
-                ->moveUp();
+            $this->screen = $this->screen->addFigure(new Pixel($this->position, $char));
+            $this->moveUp();
         }
 
         return $this;
@@ -89,9 +93,8 @@ class Turtle extends BaseFigure
     public function paintDown(string $char, int $value = 1): static
     {
         for ($i = 0; $i < $value; $i++) {
-            $this
-                ->addFigure(new Pixel($this->position, $char))
-                ->moveDown();
+            $this->screen = $this->screen->addFigure(new Pixel($this->position, $char));
+            $this->moveDown();
         }
 
         return $this;
