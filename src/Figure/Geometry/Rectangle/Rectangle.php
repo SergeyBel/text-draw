@@ -15,14 +15,12 @@ class Rectangle implements FigureInterface
     private RectangleStyle $style;
 
     public function __construct(
-        int $x,
-        int $y,
-        int $width,
-        int $height,
+        Point $leftUpperCorner,
+        Size $size
     ) {
         $this->rectangleData = new RectangleData(
-            new Point($x, $y),
-            new Size($width, $height),
+            $leftUpperCorner,
+            $size,
         );
 
         $this->style = new RectangleStyle();
@@ -40,8 +38,9 @@ class Rectangle implements FigureInterface
 
     public function setStyle(RectangleStyle $style): static
     {
-        $this->style = $style;
-        return $this;
+        $that = clone $this;
+        $that->style = $style;
+        return $that;
     }
 
 }

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace TextDraw\Tests\Figure\Geometry\Rectangle;
 
+use TextDraw\Common\Size;
 use TextDraw\Figure\Geometry\Rectangle\Rectangle;
+use TextDraw\Plane\Point;
 use TextDraw\Tests\Figure\FigureTestCase;
 use TextDraw\Figure\Geometry\Rectangle\RectangleStyle;
 
@@ -14,10 +16,8 @@ class RectangleTest extends FigureTestCase
     {
         $this->addFigure(
             new Rectangle(
-                1,
-                1,
-                3,
-                4
+                new Point(1, 1),
+                new Size(3, 4)
             )->setStyle($this->getStyle())
         );
         $expected = <<<EOD
@@ -35,10 +35,8 @@ class RectangleTest extends FigureTestCase
     {
         $this->addFigure(
             new Rectangle(
-                1,
-                1,
-                3,
-                4
+                new Point(1, 1),
+                new Size(3, 4)
             )->setStyle($this->getStyle()->setVerticalChar('*'))
         );
         $expected = <<<EOD
@@ -57,10 +55,8 @@ class RectangleTest extends FigureTestCase
     {
         $this->addFigure(
             new Rectangle(
-                1,
-                1,
-                3,
-                4
+                new Point(1, 1),
+                new Size(3, 4)
             )->setStyle($this->getStyle()->setHorizontalChar('*'))
         );
         $expected = <<<EOD
@@ -78,10 +74,8 @@ class RectangleTest extends FigureTestCase
     {
         $this->addFigure(
             new Rectangle(
-                1,
-                1,
-                3,
-                4
+                new Point(1, 1),
+                new Size(3, 4)
             )->setStyle($this->getStyle()->setCrossingChar('*'))
         );
         $expected = <<<EOD
@@ -99,10 +93,8 @@ class RectangleTest extends FigureTestCase
     {
         $this->addFigure(
             new Rectangle(
-                1,
-                1,
-                3,
-                4
+                new Point(1, 1),
+                new Size(3, 4)
             )->setStyle($this->getStyle()->setChar('*'))
         );
         $expected = <<<EOD
