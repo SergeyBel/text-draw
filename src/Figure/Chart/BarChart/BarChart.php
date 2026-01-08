@@ -6,17 +6,10 @@ namespace TextDraw\Figure\Chart\BarChart;
 
 use TextDraw\Common\Exception\RenderException;
 use TextDraw\Common\Size;
-use TextDraw\Common\HorizontalAlign;
-use TextDraw\Figure\Base\BaseFigure;
-use TextDraw\Figure\Geometry\Line\Line;
-use TextDraw\Figure\Geometry\Line\LineStyle;
-use TextDraw\Figure\Geometry\Rectangle\Rectangle;
-use TextDraw\Figure\Text\Text;
-use TextDraw\Figure\Text\TextStyle;
-use TextDraw\Plane\Point;
+use TextDraw\Figure\Base\FigureInterface;
 use TextDraw\Screen\Screen;
 
-class BarChart extends BaseFigure
+class BarChart implements FigureInterface
 {
     /**
      * @var non-empty-array<string>
@@ -49,7 +42,6 @@ class BarChart extends BaseFigure
         $this->labels = $labels;
 
         $this->style = new BarChartStyle();
-        parent::__construct();
     }
 
 
@@ -85,15 +77,27 @@ class BarChart extends BaseFigure
 
         $size = new Size($this->calculateWidth($barWidth), $this->calculateHeight($unitHeight));
 
-        $this->drawAxes($size);
-
-        $this->drawLabels($size, $barWidth * count($this->datasets));
-
-        foreach ($this->datasets as $index => $dataset) {
-            $this->drawDataset($size, $dataset, $index, $barWidth, $unitHeight);
+        $groups = [];
+        for ($i = 0; $i < count($this->labels); $i++) {
+            $column = array_column($this->datasets, $i);
+            $group = [];
+            foreach ($column as $value) {
+                $group[] = new Bar($value, new Size($barWidth, $value * $unitHeight));
+            }
+            $groups[] = new BarGroup($this->labels[$i], $group);
         }
 
-        return parent::draw();
+        $barChartData = new BarChartData(
+            $groups,
+            $size,
+        );
+
+        return new BarChartDrawer()->draw(
+            $barChartData,
+            $this->datasetsStyles,
+            $this->style
+        );
+
     }
 
     private function calculateWidth(int $barWidth): int
@@ -119,68 +123,5 @@ class BarChart extends BaseFigure
         }
 
         return max($maxes) * $unitHeight + 1;
-    }
-
-
-    private function drawAxes(size $size): void
-    {
-        $this->addFigure(
-            new Line(
-                new Point(0, 0),
-                new Point(0, 0)->addHeight($size->getHeight()),
-            )->setStyle(new LineStyle()->setChar('|'))
-        )
-        ;
-    }
-
-    private function drawLabels(Size $size, int $labelWidth): void
-    {
-        $start = new Point(0, 0)->addHeight($size->getHeight())->addX(1);
-
-        $labelStyle = new TextStyle()
-            ->setAlign(HorizontalAlign::Center);
-
-
-        foreach ($this->labels as $label) {
-            $text = new Text($start, $label, $labelWidth)->setStyle($labelStyle);
-            $this->addFigure($text);
-            $start = $start->addX($labelWidth + $this->style->getGap());
-        }
-    }
-
-    /**
-     * @param array<int> $dataset
-     */
-    private function drawDataset(
-        Size $size,
-        array $dataset,
-        int $index,
-        int $barWidth,
-        int $unitHeight,
-    ): void {
-        $labelWidth = $barWidth * count($this->datasets);
-        $shift = $labelWidth + $this->style->getGap();
-
-        $start = new Point(0, 0)
-                    ->addHeight($size->getHeight())
-                    ->addX(1)
-                    ->addX($barWidth * $index);
-
-        foreach ($dataset as $value) {
-            $barHeight = $unitHeight * $value;
-            $this->drawBar($start, new Size($barWidth, $barHeight), $this->datasetsStyles[$index]);
-            $start = $start->addX($shift);
-        }
-    }
-
-    private function drawBar(Point $leftDownCorner, Size $size, DatasetStyle $style): void
-    {
-
-        $this->addFigure(
-            new Rectangle(
-                $leftDownCorner->subY($size->getHeight()),
-                $size
-            )->setStyle($style->getBarStyle())
-        );
     }
 }
