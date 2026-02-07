@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace TextDraw\Figure\Diagram\Sequence;
 
 use TextDraw\Common\Size;
-use TextDraw\Figure\Base\BaseFigure;
+use TextDraw\Figure\Base\BaseFigureDrawer;
 use TextDraw\Figure\Diagram\Elements\Arrow\Arrow;
 use TextDraw\Figure\Diagram\Elements\Arrow\ArrowDirection;
 use TextDraw\Figure\Diagram\Elements\TextBox\TextBox;
@@ -15,7 +15,7 @@ use TextDraw\Figure\Text\Text;
 use TextDraw\Plane\Point;
 use TextDraw\Screen\Screen;
 
-class SequenceDiagram extends BaseFigure
+class SequenceDiagram extends BaseFigureDrawer
 {
     /**
      * @var array<Actor>

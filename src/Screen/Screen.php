@@ -6,7 +6,6 @@ namespace TextDraw\Screen;
 
 use TextDraw\Common\Exception\RenderException;
 use TextDraw\Common\Size;
-use TextDraw\Figure\Base\FigureInterface;
 use TextDraw\Figure\Pixel\Pixel;
 use Exception;
 
@@ -27,11 +26,6 @@ class Screen
         }
     }
 
-
-    public function addFigure(FigureInterface $figure): self
-    {
-        return $this->merge($figure->draw());
-    }
 
     public function setPixel(Pixel $pixel): self
     {
@@ -98,43 +92,6 @@ class Screen
             max($ys) + 1
         );
 
-    }
-
-    public function move(int $deltaX, int $deltaY): self
-    {
-        $newPixels = [];
-
-        foreach ($this->getPixels() as $pixel) {
-            $newPixels[] = new Pixel(
-                $pixel->getPoint()
-                        ->addX($deltaX)
-                        ->addY($deltaY),
-                $pixel->getChar()
-            );
-
-        }
-        return new self($newPixels);
-    }
-
-    public function rotate(): self
-    {
-        $size = $this->getSize();
-        $newPixels = [];
-
-        foreach ($this->getPixels() as $pixel) {
-            $x = $pixel->getPoint()->getX();
-            $y = $pixel->getPoint()->getY();
-
-
-            $newPixels[] = new Pixel(
-                $pixel->getPoint()
-                    ->setX($size->getHeight() - $y - 1)
-                    ->setY($x),
-                $pixel->getChar()
-            );
-        }
-
-        return new self($newPixels);
     }
 
     /**

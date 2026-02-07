@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace TextDraw\Figure\Geometry\Rectangle;
 
 use TextDraw\Common\Size;
-use TextDraw\Figure\Base\FigureInterface;
+use TextDraw\Figure\Base\FigureDrawerInterface;
 use TextDraw\Plane\Point;
 use TextDraw\Screen\Screen;
 
-class Rectangle implements FigureInterface
+class Rectangle implements FigureDrawerInterface
 {
     private RectangleData $rectangleData;
     private RectangleStyle $style;

@@ -6,8 +6,6 @@ namespace TextDraw\Tests\Screen;
 
 use TextDraw\Common\Exception\RenderException;
 use TextDraw\Common\Size;
-use TextDraw\Figure\Geometry\Rectangle\Rectangle;
-use TextDraw\Figure\Geometry\Rectangle\RectangleStyle;
 use TextDraw\Figure\Pixel\Pixel;
 use TextDraw\Plane\Point;
 use TextDraw\Screen\Screen;
@@ -87,7 +85,7 @@ class ScreenTest extends FigureTestCase
     }
 
 
-    public function testMinHull(): void
+    public function testSize(): void
     {
         $pixels = [
             new Pixel(new Point(1, 5), '+'),
@@ -99,7 +97,7 @@ class ScreenTest extends FigureTestCase
         $this->assertEquals($size, $matrix->getSize());
     }
 
-    public function testMinHullZeroPoint(): void
+    public function testSizeZeroPoint(): void
     {
         $pixel = new Pixel(new Point(0, 0), '+');
         $matrix = new Screen([$pixel]);
@@ -107,50 +105,4 @@ class ScreenTest extends FigureTestCase
         $size = new Size(1, 1);
         $this->assertEquals($size, $matrix->getSize());
     }
-
-    public function testMove(): void
-    {
-        $screen = new Screen()
-            ->addFigure(new Rectangle(
-                new Point(0, 0),
-                new Size(3, 2)
-            )->setStyle(new RectangleStyle()->setChar('*')))
-           ->move(1, 2)
-        ;
-
-
-
-
-        $this->setScreen($screen);
-        $expected = <<<EOD
-        ....
-        ....
-        .***
-        .***
-        EOD;
-
-        $this->assertRender($expected);
-    }
-
-    public function testRotate(): void
-    {
-        $screen = new Screen()
-            ->addFigure(new Rectangle(
-                new Point(0, 0),
-                new Size(4, 3)
-            )->setStyle(new RectangleStyle()->setChar('*')))
-            ->rotate()
-        ;
-
-        $this->setScreen($screen);
-        $expected = <<<EOD
-        ***
-        *.*
-        *.*
-        ***
-        EOD;
-
-        $this->assertRender($expected);
-    }
-
 }

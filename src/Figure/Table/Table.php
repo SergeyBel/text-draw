@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Table;
 
-use TextDraw\Figure\Base\BaseFigure;
+use TextDraw\Figure\Base\BaseFigureDrawer;
 use TextDraw\Figure\Table\TableBag\TableBag;
 use TextDraw\Figure\Table\TableBag\TextCell;
 use TextDraw\Figure\Text\Text;
@@ -13,7 +13,7 @@ use TextDraw\Figure\Turtle\Turtle;
 use TextDraw\Plane\Point;
 use TextDraw\Screen\Screen;
 
-class Table extends BaseFigure
+class Table extends BaseFigureDrawer
 {
     private TableStyle $style;
 

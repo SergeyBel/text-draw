@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Diagram\Elements\Arrow;
 
-use TextDraw\Figure\Base\BaseFigure;
+use TextDraw\Figure\Base\BaseFigureDrawer;
 use TextDraw\Figure\Geometry\Line\Line;
 use TextDraw\Figure\Geometry\Line\LineStyle;
 use TextDraw\Figure\Text\Text;
@@ -12,7 +12,7 @@ use TextDraw\Figure\Text\TextStyle;
 use TextDraw\Plane\Point;
 use TextDraw\Screen\Screen;
 
-class Arrow extends BaseFigure
+class Arrow extends BaseFigureDrawer
 {
     private ArrowStyle $style;
 

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Turtle;
 
-use TextDraw\Figure\Base\FigureInterface;
+use TextDraw\Figure\Base\FigureDrawerInterface;
 use TextDraw\Figure\Pixel\Pixel;
 use TextDraw\Plane\Point;
 use TextDraw\Screen\Screen;
 
-class Turtle implements FigureInterface
+class Turtle implements FigureDrawerInterface
 {
     private Point $position;
     private Screen $screen;

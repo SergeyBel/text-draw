@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Geometry\Triangle;
 
-use TextDraw\Figure\Base\FigureInterface;
+use TextDraw\Figure\Base\FigureDrawerInterface;
 use TextDraw\Plane\Point;
 use TextDraw\Screen\Screen;
 
-class Triangle implements FigureInterface
+class Triangle implements FigureDrawerInterface
 {
     private TriangleData $triangleData;
     private TriangleStyle $style;

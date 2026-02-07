@@ -4,44 +4,70 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Geometry\Line;
 
-use TextDraw\Figure\Base\FigureInterface;
+use TextDraw\Common\Exception\RenderException;
 use TextDraw\Plane\Point;
-use TextDraw\Screen\Screen;
 
-class Line implements FigureInterface
+class Line
 {
-    private LineData $lineData;
-    private LineStyle $style;
-
     public function __construct(
-        Point $start,
-        Point $end,
+        private Point $start,
+        private Point $end,
     ) {
-        $this->lineData = new LineData($start, $end);
-        $this->style = new LineStyle();
+        $this->validate();
     }
 
-    public function getLineData(): LineData
+    public function getStart(): Point
     {
-        return $this->lineData;
+        return $this->start;
     }
 
-    public function draw(): Screen
+    public function getEnd(): Point
     {
-        return new LineDrawer()->draw(
-            $this->lineData,
-            $this->style,
-        );
-
-    }
-    public function getStyle(): ?LineStyle
-    {
-        return $this->style;
+        return $this->end;
     }
 
-    public function setStyle(LineStyle $style): static
+    public function isVertical(): bool
     {
-        $this->style = $style;
-        return $this;
+        return $this->start->getX() === $this->end->getX();
     }
+
+    public function isHorizontal(): bool
+    {
+        return $this->start->getY() === $this->end->getY();
+    }
+
+    public function isDiagonal(): bool
+    {
+        return
+            abs($this->start->getX() - $this->end->getX()) ===
+            abs($this->start->getY() - $this->end->getY());
+    }
+
+    public function getMinXPoint(): Point
+    {
+        return $this->start->getX() <= $this->end->getX() ? $this->start : $this->end;
+    }
+
+    public function getMaxXPoint(): Point
+    {
+        return $this->start->getX() >= $this->end->getX() ? $this->start : $this->end;
+    }
+
+    public function getMinYPoint(): Point
+    {
+        return $this->start->getY() <= $this->end->getY() ? $this->start : $this->end;
+    }
+
+    public function getMaxYPoint(): Point
+    {
+        return $this->start->getY() >= $this->end->getY() ? $this->start : $this->end;
+    }
+
+    private function validate(): void
+    {
+        if (! ($this->isHorizontal() || $this->isVertical() || $this->isDiagonal())) {
+            throw new RenderException('Line can be horizontal vertical or diagonal');
+        }
+    }
+
 }

@@ -4,61 +4,44 @@ declare(strict_types=1);
 
 namespace TextDraw\Screen;
 
-use TextDraw\Figure\Base\FigureInterface;
 use TextDraw\Common\Exception\RenderException;
+use TextDraw\Figure\Base\FigureInterface;
+use TextDraw\Figure\Geometry\Line\Line;
+use TextDraw\Figure\Geometry\Line\LineDrawer;
 
 class ScreenBuilder
 {
-    private Screen $screen;
-
-    private ?Screen $currentScreen = null;
+    private array $drawers = [];
 
     public function __construct()
     {
-        $this->screen = new Screen();
+        $this->setDrawer(Line::class, new LineDrawer());
     }
 
-    public function build(): Screen
+    /**
+     * @param array<FigureInterface> $figures
+     * @throws RenderException
+     */
+    public function build(array $figures): Screen
     {
-        if (!is_null($this->currentScreen)) {
-
-            $this->screen = $this->screen->merge($this->currentScreen);
+        $screen = new Screen();
+        foreach ($figures as $figure) {
+            $drawer = $this->getDrawer($figure);
+            $screen->merge($drawer->draw($figure));
         }
-
-        $this->currentScreen = null;
-
-        return $this->screen;
+        return $screen;
     }
 
 
-    public function addFigure(FigureInterface $figure): self
+    public function setDrawer(string $figureClass, object $drawer): self
     {
-        if (!is_null($this->currentScreen)) {
-            $this->screen = $this->screen->merge($this->currentScreen);
-        }
-
-        $this->currentScreen = $figure->draw();
+        $this->drawers[$figureClass] = $drawer;
         return $this;
     }
 
-    public function move(int $deltaX, int $deltaY): self
+    private function getDrawer(object $figure): object
     {
-        if (is_null($this->currentScreen)) {
-            throw new RenderException('No figure to move');
-        }
-
-        $this->currentScreen = $this->currentScreen->move($deltaX, $deltaY);
-        return $this;
-    }
-
-    public function rotate(): self
-    {
-        if (is_null($this->currentScreen)) {
-            throw new RenderException('No figure to rotate');
-        }
-
-        $this->currentScreen = $this->currentScreen->rotate();
-        return $this;
+        return $this->drawers[get_class($figure)] ?? throw new RenderException('Drawer not found');
     }
 
 }

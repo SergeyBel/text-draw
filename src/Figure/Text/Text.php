@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace TextDraw\Figure\Text;
 
 use TextDraw\Common\HorizontalAlign;
-use TextDraw\Figure\Base\FigureInterface;
+use TextDraw\Figure\Base\FigureDrawerInterface;
 use TextDraw\Plane\Point;
 use TextDraw\Screen\Screen;
 
-class Text implements FigureInterface
+class Text implements FigureDrawerInterface
 {
     private TextData $textData;
 

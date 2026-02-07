@@ -10,7 +10,9 @@ use TextDraw\Screen\Screen;
 
 class LineDrawer
 {
-    public function draw(LineData $line, LineStyle $style): Screen
+    private const CHAR = '*';
+
+    public function draw(Line $line): Screen
     {
         if ($line->isHorizontal()) {
             $deltaX = 1;
@@ -47,18 +49,10 @@ class LineDrawer
                 $drawn = false;
             }
 
-            $pixels[] = new Pixel($point, $style->getChar());
+            $pixels[] = new Pixel($point, self::CHAR);
             $point = $point
                 ->addX($deltaX)
                 ->addY($deltaY);
-        }
-
-        if (!is_null($style->getStartChar())) {
-            $pixels[] = new Pixel($line->getStart(), $style->getStartChar());
-        }
-
-        if (!is_null($style->getEndChar())) {
-            $pixels[] = new Pixel($line->getEnd(), $style->getEndChar());
         }
 
 

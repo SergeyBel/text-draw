@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Pixel;
 
-use TextDraw\Figure\Base\FigureInterface;
 use TextDraw\Plane\Point;
 use TextDraw\Screen\Screen;
 use TextDraw\Common\Char;
 
-class Pixel implements FigureInterface
+class Pixel
 {
     private Char $char;
 

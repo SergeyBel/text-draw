@@ -7,13 +7,13 @@ namespace TextDraw\Figure\Diagram\Elements\TextBox;
 use TextDraw\Common\HorizontalAlign;
 use TextDraw\Common\Size;
 use TextDraw\Common\VerticalAlign;
-use TextDraw\Figure\Base\BaseFigure;
+use TextDraw\Figure\Base\BaseFigureDrawer;
 use TextDraw\Figure\Geometry\Rectangle\Rectangle;
 use TextDraw\Figure\Text\Text;
 use TextDraw\Plane\Point;
 use TextDraw\Screen\Screen;
 
-class TextBox extends BaseFigure
+class TextBox extends BaseFigureDrawer
 {
     private TextBoxStyle $style;
 

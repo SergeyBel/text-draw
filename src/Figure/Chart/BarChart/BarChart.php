@@ -6,10 +6,10 @@ namespace TextDraw\Figure\Chart\BarChart;
 
 use TextDraw\Common\Exception\RenderException;
 use TextDraw\Common\Size;
-use TextDraw\Figure\Base\FigureInterface;
+use TextDraw\Figure\Base\FigureDrawerInterface;
 use TextDraw\Screen\Screen;
 
-class BarChart implements FigureInterface
+class BarChart implements FigureDrawerInterface
 {
     /**
      * @var non-empty-array<string>
