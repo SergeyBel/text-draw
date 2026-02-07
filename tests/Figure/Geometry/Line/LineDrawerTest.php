@@ -22,7 +22,7 @@ class LineDrawerTest extends FigureTestCase
         $line = new Line(new Point(0, 0), new Point(2, 0));
 
         $expected = <<<EOD
-        ***
+        ---
         EOD;
 
         $this->assertRender($expected, $this->drawer->draw($line));
@@ -32,9 +32,9 @@ class LineDrawerTest extends FigureTestCase
     {
         $line = new Line(new Point(0, 0), new Point(0, 2));
         $expected = <<<EOD
-        *
-        *
-        *
+        |
+        |
+        |
         EOD;
 
         $this->assertRender($expected, $this->drawer->draw($line));
@@ -45,9 +45,9 @@ class LineDrawerTest extends FigureTestCase
         $line = new Line(new Point(0, 0), new Point(2, 2));
 
         $expected = <<<EOD
-        *..
-        .*.
-        ..*
+        \..
+        .\.
+        ..\
         EOD;
 
         $this->assertRender($expected, $this->drawer->draw($line));
@@ -59,9 +59,9 @@ class LineDrawerTest extends FigureTestCase
             new Line(new Point(2, 0), new Point(0, 2));
 
         $expected = <<<EOD
-        ..*
-        .*.
-        *..
+        ../
+        ./.
+        /..
         EOD;
 
         $this->assertRender($expected, $this->drawer->draw($line));

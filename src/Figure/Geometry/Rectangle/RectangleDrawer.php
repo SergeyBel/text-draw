@@ -21,10 +21,10 @@ class RectangleDrawer
         $lineDrawer = new LineDrawer();
 
         return new Screen()
-            ->merge($lineDrawer->draw(new Line($leftBottomCorner, $leftUpperCorner))->replace('*', '|'))
-            ->merge($lineDrawer->draw(new Line($rightUpperCorner, $rightBottomCorner))->replace('*', '|'))
-            ->merge($lineDrawer->draw(new Line($leftUpperCorner, $rightUpperCorner))->replace('*', '-'))
-            ->merge($lineDrawer->draw(new Line($rightBottomCorner, $leftBottomCorner))->replace('*', '-'))
+            ->merge($lineDrawer->draw(new Line($leftBottomCorner, $leftUpperCorner)))
+            ->merge($lineDrawer->draw(new Line($rightUpperCorner, $rightBottomCorner)))
+            ->merge($lineDrawer->draw(new Line($leftUpperCorner, $rightUpperCorner)))
+            ->merge($lineDrawer->draw(new Line($rightBottomCorner, $leftBottomCorner)))
             ->setPixel(new Pixel($leftUpperCorner, '+'))
             ->setPixel(new Pixel($rightUpperCorner, '+'))
             ->setPixel(new Pixel($leftBottomCorner, '+'))

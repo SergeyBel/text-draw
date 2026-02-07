@@ -17,11 +17,13 @@ class LineDrawer
             $deltaY = 0;
             $start = $line->getMinXPoint();
             $end = $line->getMaxXPoint();
+            $char = '-';
         } elseif ($line->isVertical()) {
             $deltaX = 0;
             $deltaY = 1;
             $start = $line->getMinYPoint();
             $end = $line->getMaxYPoint();
+            $char = '|';
         } elseif ($line->isDiagonal()) {
             $start = $line->getMinYPoint();
             $end = $line->getMaxYPoint();
@@ -29,9 +31,11 @@ class LineDrawer
             if ($start->getX() > $end->getX()) {
                 $deltaX = -1;
                 $deltaY = 1;
+                $char = '/';
             } else {
                 $deltaX = 1;
                 $deltaY = 1;
+                $char = '\\';
             }
         } else {
             throw new RenderException('Unknown line type');
@@ -47,7 +51,7 @@ class LineDrawer
                 $drawn = false;
             }
 
-            $pixels[] = new Pixel($point, '*');
+            $pixels[] = new Pixel($point, $char);
             $point = $point
                 ->addX($deltaX)
                 ->addY($deltaY);
