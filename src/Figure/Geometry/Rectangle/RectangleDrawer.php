@@ -6,7 +6,7 @@ namespace TextDraw\Figure\Geometry\Rectangle;
 
 use TextDraw\Figure\Geometry\Line\Line;
 use TextDraw\Figure\Geometry\Line\LineDrawer;
-use TextDraw\Figure\Pixel\Pixel;
+use TextDraw\Screen\Pixel\Pixel;
 use TextDraw\Screen\Screen;
 
 class RectangleDrawer

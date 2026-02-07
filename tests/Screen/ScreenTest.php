@@ -6,8 +6,8 @@ namespace TextDraw\Tests\Screen;
 
 use TextDraw\Common\Exception\RenderException;
 use TextDraw\Common\Size;
-use TextDraw\Figure\Pixel\Pixel;
 use TextDraw\Plane\Point;
+use TextDraw\Screen\Pixel\Pixel;
 use TextDraw\Screen\Screen;
 use TextDraw\Tests\Figure\FigureTestCase;
 

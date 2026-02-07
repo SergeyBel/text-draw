@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace TextDraw\Figure\Geometry\Line;
 
 use TextDraw\Common\Exception\RenderException;
-use TextDraw\Figure\Pixel\Pixel;
+use TextDraw\Screen\Pixel\Pixel;
 use TextDraw\Screen\Screen;
 
 class LineDrawer

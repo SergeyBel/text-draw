@@ -5,76 +5,43 @@ declare(strict_types=1);
 namespace TextDraw\Figure\Text;
 
 use TextDraw\Common\HorizontalAlign;
-use TextDraw\Figure\Base\FigureDrawerInterface;
 use TextDraw\Plane\Point;
-use TextDraw\Screen\Screen;
 
-class Text implements FigureDrawerInterface
+class Text
 {
-    private TextData $textData;
-
-    private TextStyle $style;
+    private int $width;
 
     public function __construct(
         private Point $start,
         private string $text,
-        private ?int $width = null,
+        ?int $width = null,
         private HorizontalAlign $align = HorizontalAlign::Left,
     ) {
-        $this->textData = $this->initTextData();
-        $this->style = new TextStyle();
+        $this->width = is_null($width) ? mb_strlen($this->text) : $width;
     }
 
-    public function draw(): Screen
+
+    public function getStart(): Point
     {
-        return new TextDrawer()->draw(
-            $this->textData,
-            $this->style
-        );
+        return $this->start;
     }
 
-    public function getStyle(): TextStyle
+    public function getText(): string
     {
-        return $this->style;
+        return $this->text;
     }
 
-    public function setStyle(TextStyle $style): static
+    public function getWidth(): int
     {
-        $this->style = $style;
-        return $this;
+        return $this->width;
     }
 
-    public function getTextData(): TextData
+    public function getAlign(): HorizontalAlign
     {
-        return $this->textData;
+        return $this->align;
     }
 
 
-
-    private function initTextData(): TextData
-    {
-        $width = is_null($this->width) ? mb_strlen($this->text) : $this->width;
-
-        $length = mb_strlen($this->text);
-        if ($this->align === HorizontalAlign::Left) {
-            $paddingBefore = 0;
-            $paddingAfter = max(0, $width - $length);
-        } elseif ($this->align === HorizontalAlign::Right) {
-            $paddingBefore = max(0, $width - $length);
-            $paddingAfter = 0;
-        } elseif ($this->align === HorizontalAlign::Center) {
-            $paddingAfter = max(0, intdiv($width, 2) - intdiv($length, 2));
-            $paddingBefore = max(0, $width - $length - $paddingAfter);
-        }
-
-        return new TextData(
-            $this->start,
-            $this->text,
-            $width,
-            $paddingBefore,
-            $paddingAfter
-        );
-    }
 
 
 }

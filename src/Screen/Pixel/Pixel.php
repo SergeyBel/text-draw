@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-namespace TextDraw\Figure\Pixel;
+namespace TextDraw\Screen\Pixel;
 
-use TextDraw\Plane\Point;
-use TextDraw\Screen\Screen;
 use TextDraw\Common\Char;
+use TextDraw\Plane\Point;
 
 class Pixel
 {
@@ -17,11 +16,6 @@ class Pixel
         string $char,
     ) {
         $this->char = new Char($char);
-    }
-
-    public function draw(): Screen
-    {
-        return new Screen([$this]);
     }
 
     public function getPoint(): Point

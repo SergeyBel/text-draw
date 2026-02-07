@@ -8,7 +8,7 @@ use Exception;
 use GdImage;
 use TextDraw\Common\Color\RgbColor;
 use TextDraw\Common\Size;
-use TextDraw\Figure\Pixel\Pixel;
+use TextDraw\Screen\Pixel\Pixel;
 use TextDraw\Screen\Screen;
 
 class ImageRender

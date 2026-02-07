@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace TextDraw\Screen;
 
+use Exception;
 use TextDraw\Common\Exception\RenderException;
 use TextDraw\Common\Size;
-use TextDraw\Figure\Pixel\Pixel;
-use Exception;
+use TextDraw\Screen\Pixel\Pixel;
 
 class Screen
 {
