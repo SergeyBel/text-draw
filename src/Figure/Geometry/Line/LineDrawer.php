@@ -10,8 +10,6 @@ use TextDraw\Screen\Screen;
 
 class LineDrawer
 {
-    private const CHAR = '*';
-
     public function draw(Line $line): Screen
     {
         if ($line->isHorizontal()) {
@@ -49,7 +47,7 @@ class LineDrawer
                 $drawn = false;
             }
 
-            $pixels[] = new Pixel($point, self::CHAR);
+            $pixels[] = new Pixel($point, '*');
             $point = $point
                 ->addX($deltaX)
                 ->addY($deltaY);

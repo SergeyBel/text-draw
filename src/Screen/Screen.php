@@ -109,4 +109,22 @@ class Screen
         return $that;
     }
 
+    public function replace(string $oldChar, string $newChar): self
+    {
+        $that = clone $this;
+
+        $newPixels = [];
+        foreach ($that->getPixels() as $pixel) {
+            if ($pixel->getChar() === $oldChar) {
+                $newPixel = $pixel->setChar($newChar);
+            } else {
+                $newPixel = $pixel;
+            }
+
+            $newPixels[] = $newPixel;
+        }
+
+        return $that->setPixels($newPixels);
+    }
+
 }

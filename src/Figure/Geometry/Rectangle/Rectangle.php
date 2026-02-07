@@ -5,41 +5,37 @@ declare(strict_types=1);
 namespace TextDraw\Figure\Geometry\Rectangle;
 
 use TextDraw\Common\Size;
-use TextDraw\Figure\Base\FigureDrawerInterface;
 use TextDraw\Plane\Point;
-use TextDraw\Screen\Screen;
 
-class Rectangle implements FigureDrawerInterface
+class Rectangle
 {
-    private RectangleData $rectangleData;
-    private RectangleStyle $style;
-
     public function __construct(
-        Point $leftUpperCorner,
-        Size $size
+        private Point $leftUpperCorner,
+        private Size $size
     ) {
-        $this->rectangleData = new RectangleData(
-            $leftUpperCorner,
-            $size,
-        );
-
-        $this->style = new RectangleStyle();
     }
 
-    public function draw(): Screen
+    public function getLeftUpperCorner(): Point
     {
-        return new RectangleDrawer()->draw($this->rectangleData, $this->style);
+        return $this->leftUpperCorner;
     }
 
-    public function getStyle(): RectangleStyle
+    public function getRightUpperCorner(): Point
     {
-        return $this->style;
+        return $this->leftUpperCorner->addWidth($this->size->getWidth());
     }
-
-    public function setStyle(RectangleStyle $style): static
+    public function getLeftBottomCorner(): Point
     {
-        $this->style = $style;
-        return $this;
+        return $this->leftUpperCorner->addHeight($this->size->getHeight());
     }
 
+    public function getRightBottomCorner(): Point
+    {
+        return $this->getRightUpperCorner()->addHeight($this->size->getHeight());
+    }
+
+    public function getSize(): Size
+    {
+        return $this->size;
+    }
 }
