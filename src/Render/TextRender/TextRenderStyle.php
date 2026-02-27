@@ -4,25 +4,18 @@ declare(strict_types=1);
 
 namespace TextDraw\Render\TextRender;
 
-use TextDraw\Common\Char;
-
 class TextRenderStyle
 {
-    private Char $emptyChar;
-
-    public function __construct()
-    {
-        $this->emptyChar = new Char(' ');
-    }
+    private string $emptyChar = ' ';
 
     public function getEmptyChar(): string
     {
-        return $this->emptyChar->getChar();
+        return $this->emptyChar;
     }
 
     public function setEmptyChar(string $emptyChar): static
     {
-        $this->emptyChar = new Char($emptyChar);
+        $this->emptyChar = $emptyChar;
         return $this;
     }
 }
