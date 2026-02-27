@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace TextDraw\Render\ImageRender;
 
-use TextDraw\Common\Color\RgbColor;
+use TextDraw\Render\ImageRender\Color\RgbColor;
 
 class ImageRenderStyle
 {

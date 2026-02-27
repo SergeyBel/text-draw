@@ -6,8 +6,8 @@ namespace TextDraw\Screen;
 
 use TextDraw\Common\Exception\RenderException;
 use TextDraw\Figure\Base\FigureInterface;
-use TextDraw\Figure\Geometry\Line\Line;
-use TextDraw\Figure\Geometry\Line\LineDrawer;
+use TextDraw\Figure\Elements\Geometry\Line\Line;
+use TextDraw\Figure\Elements\Geometry\Line\LineDrawer;
 
 class ScreenBuilder
 {

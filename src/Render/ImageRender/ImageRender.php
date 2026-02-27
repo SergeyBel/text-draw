@@ -6,8 +6,8 @@ namespace TextDraw\Render\ImageRender;
 
 use Exception;
 use GdImage;
-use TextDraw\Common\Color\RgbColor;
 use TextDraw\Common\Size;
+use TextDraw\Render\ImageRender\Color\RgbColor;
 use TextDraw\Screen\Pixel\Pixel;
 use TextDraw\Screen\Screen;
 
