@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Elements\Label;
 
+use TextDraw\Common\Size;
 use TextDraw\Plane\Point;
 
 class Label
@@ -37,6 +38,14 @@ class Label
     public function getLines(): array
     {
         return $this->lines;
+    }
+
+    public function getSize(): Size
+    {
+        return new Size(
+            max(array_map(fn (string $line) => mb_strlen($line), $this->lines)),
+            count($this->lines)
+        );
     }
 
 
