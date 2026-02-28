@@ -4,84 +4,54 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Diagrams\BarChart;
 
-use TextDraw\Common\HorizontalAlign;
 use TextDraw\Common\Size;
-use TextDraw\Figure\Elements\Geometry\Line\Line;
 use TextDraw\Figure\Elements\Geometry\Rectangle\Rectangle;
-use TextDraw\Figure\Elements\Text\Text;
-use TextDraw\Figure\Geometry\Line\LineStyle;
+use TextDraw\Figure\Elements\Geometry\Rectangle\RectangleDrawer;
+use TextDraw\Figure\Elements\Label\Label;
+use TextDraw\Figure\Elements\Label\LabelDrawer;
 use TextDraw\Plane\Point;
 use TextDraw\Screen\Screen;
 
 class BarChartDrawer
 {
-    private Screen $screen;
-
-    public function __construct()
+    public const BAR_WIDTH = 4;
+    public const BAR_GAP = 1;
+    public function draw(BarChart $barChart): Screen
     {
-        $this->screen = new Screen();
-    }
+        $screen = new Screen();
+        $labelDrawer = new LabelDrawer();
+        $rectangleDrawer = new RectangleDrawer();
 
-    /**
-     * @param array<DatasetStyle> $datasetsStyles
-     */
-    public function draw(
-        BarChartData $barChart,
-        array $datasetsStyles,
-        BarChartStyle $style
-    ): Screen {
-        $size = $barChart->getSize();
-        $this->drawAxes($size);
+        $bottomY = $this->calculateBottomY($barChart);
 
-        $start = new Point(0, 0)
-            ->addHeight($barChart->getSize()->getHeight())
-            ->addX(1)
-        ;
+        $start = new Point(0, $bottomY);
+        foreach ($barChart->getBars() as $bar) {
+            $screen = $screen->merge(
+                $labelDrawer->draw(new Label($start, $bar->getLabel()))
+            );
+            $screen = $screen->merge(
+                $rectangleDrawer->draw(
+                    new Rectangle(
+                        $start->subY($bar->getValue()),
+                        new Size(self::BAR_WIDTH, $bar->getValue())
+                    )
+                )
+            );
 
-        foreach ($barChart->getGroups() as $group) {
-            $this->drawGroup($start, $group, $datasetsStyles);
-            $start = $start->addX($group->getWidth() + $style->getGap());
+            $start = $start->addX(self::BAR_WIDTH + self::BAR_GAP);
         }
-
-        return $this->screen;
+        return $screen;
     }
 
-    private function drawAxes(size $size): void
+    private function calculateBottomY(BarChart $barChart): int
     {
-        $this->screen = $this->screen->addFigure(
-            new Line(
-                new Point(0, 0),
-                new Point(0, 0)->addHeight($size->getHeight()),
-            )->setStyle(new LineStyle()->setChar('|'))
-        )
-        ;
-    }
-
-    /**
-     * @param array<DatasetStyle> $datasetsStyles
-     */
-    private function drawGroup(Point $groupStart, BarGroup $group, array $datasetsStyles): void
-    {
-        $start = clone $groupStart;
-        $label = new Text($start, $group->getLabel(), $group->getWidth(), HorizontalAlign::Center);
-        $this->screen = $this->screen->addFigure($label);
-
-
-        foreach ($group->getBars() as $index => $bar) {
-            $this->drawBar($start, $bar, $datasetsStyles[$index]);
-            $start = $start->addX($bar->getSize()->getWidth());
+        $max = 0;
+        foreach ($barChart->getBars() as $bar) {
+            $max = max($max, $bar->getValue());
         }
-
+        return $max;
     }
 
-    private function drawBar(Point $start, Bar $bar, DatasetStyle $style): void
-    {
-        $this->screen = $this->screen->addFigure(
-            new Rectangle(
-                $start->subY($bar->getSize()->getHeight()),
-                $bar->getSize(),
-            )->setStyle($style->getBarStyle())
-        );
-    }
+
 
 }

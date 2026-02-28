@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace TextDraw\Figure\Diagrams\BarChart;
 
-use TextDraw\Common\Size;
-
 class Bar
 {
     public function __construct(
         private int $value,
-        private Size $size
+        private string $label
     ) {
+
     }
 
     public function getValue(): int
@@ -19,8 +18,11 @@ class Bar
         return $this->value;
     }
 
-    public function getSize(): Size
+    public function getLabel(): string
     {
-        return $this->size;
+        return $this->label;
     }
+
+
+
 }
